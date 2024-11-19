@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import {Table } from 'react-bootstrap';
 
-import Sidebar from '../component/Layout/Sidebar';
+
 import Avtar from "../assets/Avatar.png"
 import Header from './Navbar';
+import Sidebar from './layout/Sidebar';
  function DetailTracking() {
   const [details, setDetails] = useState([
     { id: 1, name: "Evelyn Harper", phoneNumber: "9313876347", date: "20/02/2002", unit: "A", number: "1001", time: "3:45 PM" },

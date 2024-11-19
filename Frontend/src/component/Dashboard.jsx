@@ -1,9 +1,10 @@
 import React from 'react';
-import Sidebar from './Layout/Sidebar';
+
 import Header from './Header';
 import Income from './Income';
 import TotalBalanceChart from './TotalBalanceChart';
 import Complaintlist from './Complaintlist';
+import Sidebar from './layout/Sidebar';
 
 
 function Dashboard() {
@@ -14,8 +15,8 @@ function Dashboard() {
       <Header/>
       <div className="dashboard-bg" style={{ marginLeft: "280px" }}>
         <Income />
-        <TotalBalanceChart />
-        <Complaintlist />
+        {/* <TotalBalanceChart /> */}
+        {/* <Complaintlist /> */}
       </div>
     </div>
   );

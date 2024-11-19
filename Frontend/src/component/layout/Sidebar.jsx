@@ -13,6 +13,7 @@ import { AiFillDollarCircle } from "react-icons/ai";
 import { TbMessage2Cancel } from "react-icons/tb";
 import { BsShieldLockFill } from "react-icons/bs";
 import { RiShieldUserFill } from "react-icons/ri";
+import { MdOutlineSecurity } from "react-icons/md";
 import "../../style.css";
 
 function Sidebar() {
@@ -21,6 +22,7 @@ function Sidebar() {
   const [isComplaintDropdownOpen, setComplaintDropdownOpen] = useState(false);
   const [isSecurityDropdownOpen, setSecurityDropdownOpen] = useState(false);
   const [isFinancialDropdownOpen, setFinancialDropdownOpen] = useState(false);
+  const [isGeneralSecurityDropdownOpen, setGeneralSecurityDropdownOpen] = useState(false);
 
   // Update active item on location change
   useEffect(() => {
@@ -36,6 +38,7 @@ function Sidebar() {
             if (item.key === "complaint-tracking") setComplaintDropdownOpen(true);
             if (item.key === "security-management") setSecurityDropdownOpen(true);
             if (item.key === "financialmanagement") setFinancialDropdownOpen(true);
+            if (item.key === "security") setGeneralSecurityDropdownOpen(true);
             foundActiveItem = true;
           }
         });
@@ -56,14 +59,22 @@ function Sidebar() {
       setComplaintDropdownOpen(!isComplaintDropdownOpen);
       setSecurityDropdownOpen(false);
       setFinancialDropdownOpen(false);
+      setGeneralSecurityDropdownOpen(false);
     } else if (key === "security-management") {
       setSecurityDropdownOpen(!isSecurityDropdownOpen);
       setComplaintDropdownOpen(false);
       setFinancialDropdownOpen(false);
+      setGeneralSecurityDropdownOpen(false);
     } else if (key === "financialmanagement") {
       setFinancialDropdownOpen(!isFinancialDropdownOpen);
       setComplaintDropdownOpen(false);
       setSecurityDropdownOpen(false);
+      setGeneralSecurityDropdownOpen(false);
+    } else if (key === "security") {
+      setGeneralSecurityDropdownOpen(!isGeneralSecurityDropdownOpen);
+      setComplaintDropdownOpen(false);
+      setSecurityDropdownOpen(false);
+      setFinancialDropdownOpen(false);
     }
     setActiveItem(key);
   };
@@ -122,6 +133,15 @@ function Sidebar() {
       icon: <FaBullhorn />,
       path: "/announcement",
     },
+    {
+      key: "security",
+      label: "Security",
+      icon: <MdOutlineSecurity />,
+      subItems: [
+        { key: "visitor-tracking", label: "Visitor Tracking", path: "/visitor-tracking" },
+        { key: "emergency-management", label: "Emergency Management", path: "/emergency-management" },
+      ],
+    },
   ];
 
   return (
@@ -156,7 +176,8 @@ function Sidebar() {
                     </div>
                     {(item.key === "complaint-tracking" && isComplaintDropdownOpen) ||
                     (item.key === "security-management" && isSecurityDropdownOpen) ||
-                    (item.key === "financialmanagement" && isFinancialDropdownOpen) ? (
+                    (item.key === "financialmanagement" && isFinancialDropdownOpen) ||
+                    (item.key === "security" && isGeneralSecurityDropdownOpen) ? (
                       <FaChevronUp />
                     ) : (
                       <FaChevronDown />
@@ -164,7 +185,8 @@ function Sidebar() {
                   </div>
                   {(item.key === "complaint-tracking" && isComplaintDropdownOpen) ||
                   (item.key === "security-management" && isSecurityDropdownOpen) ||
-                  (item.key === "financialmanagement" && isFinancialDropdownOpen) ? (
+                  (item.key === "financialmanagement" && isFinancialDropdownOpen) ||
+                  (item.key === "security" && isGeneralSecurityDropdownOpen) ? (
                     <ul className="list-unstyled ms-4">
                       {item.subItems.map((subItem) => (
                         <li

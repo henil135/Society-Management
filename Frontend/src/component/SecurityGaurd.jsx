@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Table, Modal, Form } from 'react-bootstrap';
 import { FaCamera, FaClock, FaEdit, FaEye, FaFemale, FaImage, FaMale, FaMoon, FaPlus, FaSun, FaTrash, FaUpload } from 'react-icons/fa';
-import Sidebar from '../component/Layout/Sidebar';
+
 import Avtar from "../assets/Avatar.png";
 import { LuImagePlus } from 'react-icons/lu';
 import Header from './Navbar';
+import Sidebar from './layout/Sidebar';
 
  function SecurityGaurd() {
   const [guards, setGuards] = useState([
@@ -190,8 +191,8 @@ import Header from './Navbar';
               Add Security
             </Button>
           </div>
-            <Table striped responsive style={{ width: "1520px",marginLeft:"8px"}}>
-              <thead>
+            <Table striped responsive style={{ width: "1540px",marginLeft:"5px"}}>
+              <thead style={{ background: "rgb(185, 198, 242)", color: "black"}}>
                 <tr>
                   <th
                     style={{
@@ -203,7 +204,7 @@ import Header from './Navbar';
                     Security Guard Name
                   </th>
 
-                  <th style={{ fontSize: "15px" }} className='text-center'>Phone Number</th>
+                  <th style={{ fontSize: "15px"  }} className='text-center'>Phone Number</th>
                   <th style={{ fontSize: "15px" }} className='text-center'>Select Shift</th>
                   <th style={{ fontSize: "15px" }} className='text-center'>Shift Date</th>
                   <th style={{ fontSize: "15px" }} className='text-center'>Shift Time</th>
@@ -214,7 +215,7 @@ import Header from './Navbar';
               <tbody>
                 {guards.map((guard, index) => (
                   <tr key={index}>
-                    <td style={{ verticalAlign: "middle", width: "220px" }}>
+                    <td style={{ verticalAlign: "middle", width: "220px",padding:"15px" }}>
                       <div >
                         <img
                           src={Avtar}
@@ -240,8 +241,8 @@ import Header from './Navbar';
                         </span>
                       </div>
                     </td>
-                    <td className='text-center' style={{ fontFamily: "Poppins", verticalAlign: "middle" }}>{guard.phone}</td>
-                    <td className='text-center' style={{ verticalAlign: "middle" }}>
+                    <td className='text-center' style={{ fontFamily: "Poppins", verticalAlign: "middle",padding:"15px" }}>{guard.phone}</td>
+                    <td className='text-center' style={{ verticalAlign: "middle",padding:"15px" }}>
                       {guard.shift === 'Day' ? (
                         <span
                           style={{
@@ -287,8 +288,8 @@ import Header from './Navbar';
                         </span>
                       )}
                     </td>
-                    <td className='text-center' style={{ fontFamily: "Poppins", verticalAlign: "middle" }}>{guard.date}</td>
-                    <td style={{ verticalAlign: "middle" }} className="text-center">
+                    <td className='text-center' style={{ fontFamily: "Poppins", verticalAlign: "middle",padding:"15px" }}>{guard.date}</td>
+                    <td style={{ verticalAlign: "middle",padding:"15px" }} className="text-center">
                       <div className="d-flex align-items-center justify-content-center gap-2">
                         <div
                           style={{
@@ -307,7 +308,7 @@ import Header from './Navbar';
                         </div>
                       </div>
                     </td>
-                    <td className='text-center' style={{ verticalAlign: "middle" }}>
+                    <td className='text-center' style={{ verticalAlign: "middle",padding:"15px" }}>
                       <span
                         style={{
                           display: "inline-flex",

@@ -22,6 +22,9 @@ import DetailTracking from './component/VisitorsLogs';
 import SecurityProtocols from './component/SecurityProtocols';
 import SecurityGaurd from './component/SecurityGaurd';
 import Announcement from './component/Announcement';
+import VisitorsTracking from './component/VisitorsTracking';
+import EmergencyManagement from './component/EmergencyManagement';
+
 
 function App() {
   return (
@@ -47,7 +50,9 @@ function App() {
           <Route path="/security-protocols" element={<SecurityProtocols/>}/>
           <Route path="/security-guard" element={<SecurityGaurd/>}/>
           <Route path="/announcement" element={<Announcement/>} />
-        </Routes>
+          <Route path='/visitor-tracking' element={<VisitorsTracking/>}/>
+          <Route path='/emergency-management' element={<EmergencyManagement/>}/>
+        </Routes> 
       </BrowserRouter>
     </div>
   );

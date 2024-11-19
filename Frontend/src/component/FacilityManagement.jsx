@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Card, Button, Modal, Form } from "react-bootstrap";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import Sidebar from "./Layout/Sidebar";
+
 import { FaPlus } from "react-icons/fa";
 import Header from "./Navbar";
+import Sidebar from "./layout/Sidebar";
 
 const FacilityCard = ({ title, date, description, onEdit }) => {
     const [showMenu, setShowMenu] = useState(false);
