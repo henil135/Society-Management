@@ -38,8 +38,8 @@ import { useLocation, Link } from 'react-router-dom'; // Import Link from react-
                     <Container fluid>
                         {/* Breadcrumb */}
                         <h5 className='home-routing'>
-                            Home <span className='home-routing-span ms-2'><FaGreaterThan /></span>
-                            <span className="current-page-routing ms-2"> {getPageName(location.pathname)}</span> {/* Display current page */}
+                            Home <span className='home-routing-span'><FaGreaterThan style={{fontSize:"12px"}}/></span>
+                            <span className="current-page-routing"> {getPageName(location.pathname)}</span> {/* Display current page */}
                         </h5>
 
                         {/* Toggle Button for Small Screens */}

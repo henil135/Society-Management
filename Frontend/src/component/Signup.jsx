@@ -6,6 +6,7 @@ import signupimg from '../assets/signup-img.png';
 import { HiMiniEyeSlash } from "react-icons/hi2";
 import { IoEyeSharp } from "react-icons/io5";
 import { Link } from 'react-router-dom';
+import Logo from './Logo';
 
 export default function Signup() {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -41,10 +42,9 @@ export default function Signup() {
             {/* Left Side: Image */}
             <div className="signup-img  d-flex flex-column align-items-left" style={{width:"950px"}}>
 
-                <div className='logo ms-5 mt-3  mb-3 mb-md-0'>
-                    <h1><span>Dash</span>Stack</h1>
-                </div>
-
+              
+                    <Logo/>
+                
                 {/* Center the image vertically in the remaining space */}
                 <div className='d-flex align-items-center justify-content-center flex-grow-1'>
                     <img

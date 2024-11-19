@@ -4,7 +4,8 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { Modal, Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { MdAccessTimeFilled } from "react-icons/md";
-import Sidebar from './Layout/Sidebar';
+import Sidebar from './layout/Sidebar';
+
 
  function Announcement() {
 

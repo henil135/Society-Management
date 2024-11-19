@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Button, Modal, Form, Table } from 'react-bootstrap';
 import { FaEdit, FaEye, FaPlus, FaTrash } from 'react-icons/fa';
-import Sidebar from '../component/Layout/Sidebar';
+
 import Avtar from "../assets/Avatar.png";
 import Header from './Navbar';
+import Sidebar from './layout/Sidebar';
 
  function SecurityProtocols() {
   const [protocols, setProtocols] = useState([
