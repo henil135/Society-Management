@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement } from 'chart.js';
 import { FaPlusSquare } from "react-icons/fa";
-import { FiTrash2, FiEdit } from 'react-icons/fi';
-import { AiOutlinePlus } from 'react-icons/ai';
+
 import { MdEditSquare } from "react-icons/md";
 import { RiDeleteBin5Fill } from "react-icons/ri";
-import { Link } from 'react-router-dom';
+import { Form, Link } from 'react-router-dom';
+import { Modal } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { Button, Modal, Form } from 'react-bootstrap';
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
 

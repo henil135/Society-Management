@@ -4,7 +4,8 @@ import { LuImagePlus } from 'react-icons/lu';
 import { RxAvatar } from 'react-icons/rx';
 import { useNavigate } from 'react-router-dom';
 import Header from './Navbar';
-import Sidebar from './Layout/Sidebar';
+import Sidebar from './layout/Sidebar';
+
 
  function ResidentForm() {
   const navigate = useNavigate();

@@ -8,7 +8,8 @@ import { useForm } from 'react-hook-form';
 import { Button, Modal, Form } from 'react-bootstrap';
 import { MdEditSquare } from "react-icons/md";
 import { FaPlusSquare } from "react-icons/fa";
-import Sidebar from './Layout/Sidebar';
+import Sidebar from './layout/Sidebar';
+
 
  function FinancialManagementExp() {
 
@@ -150,22 +151,22 @@ import Sidebar from './Layout/Sidebar';
                             return (
                               <tr key={index} className='bg-light'>
 
-                                <td style={{ height: '55px' }} className='financial-Pnumber'> {val.title}</td>
+                                <td style={{ height: '55px', verticalAlign: "middle" }} className='financial-Pnumber'> {val.title}</td>
 
 
-                                <td style={{ height: '55px' }} className='financial-Pnumber'>{val.des}</td>
+                                <td style={{ height: '55px', verticalAlign: "middle" }} className='financial-Pnumber'>{val.des}</td>
 
-                                <td style={{ height: '55px' }} className='financial-Pnumber'>{val.date}</td>
+                                <td style={{ height: '55px', verticalAlign: "middle" }} className='financial-Pnumber'>{val.date}</td>
 
 
-                                <td style={{ height: '55px' }} className='financial-Pnumber exp-amt-color'>{val.amt}</td>
+                                <td style={{ height: '55px' , verticalAlign: "middle"}} className='financial-Pnumber exp-amt-color'>{val.amt}</td>
 
-                                <td style={{ height: '55px' }} className='financial-Pnumber'>
+                                <td style={{ height: '55px', verticalAlign: "middle" }} className='financial-Pnumber'>
                                   {val.format === 'JPG' ? <CiImageOn className='me-1 jpg-btn' style={{ fontSize: '20px' }} /> : <BiSolidFilePdf className='me-1 pdf-btn' style={{ fontSize: '20px' }} />}
                                   {val.format}
                                 </td>
 
-                                <td className='d-flex' style={{ height: '55px' }}>
+                                <td className='d-flex' style={{ height: '55px', verticalAlign: "middle" }}>
 
                                   <button className='border-0 bg-light' onClick={() => handleEdit(index)}>
                                     <MdEditSquare className="edit-btn" />

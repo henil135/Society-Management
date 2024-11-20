@@ -3,10 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Button, Modal, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaUser, FaHome, FaTag, FaEye, FaEdit, FaPlus } from 'react-icons/fa'; // Using react-icons as placeholders
-import Sidebar from '../component/Layout/Sidebar';
+
 import '../style.css';
 import Avtar from '../assets/Avatar.png';
 import Header from './Navbar';
+import Sidebar from './layout/Sidebar';
 
 
 

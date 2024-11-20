@@ -12,7 +12,8 @@ import { FaMoneyBill } from "react-icons/fa";
 import { Button, Modal, Form } from 'react-bootstrap';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
-import Sidebar from './Layout/Sidebar';
+import Sidebar from './layout/Sidebar';
+
 
 
 
