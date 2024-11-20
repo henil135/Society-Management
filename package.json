@@ -1,0 +1,17 @@
+{
+  "name": "society-management",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "client": "cd Frontend && npm run dev",
+    "server": "cd Backend && npm start",
+    "dev": "concurrently \"npm run client\" \"npm run server\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "concurrently": "^9.1.0"
+  }
+}

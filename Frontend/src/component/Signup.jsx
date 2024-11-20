@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import '../index.css';
 import signupimg2 from '../assets/signup-img2.png';
@@ -6,6 +6,7 @@ import signupimg from '../assets/signup-img.png';
 import { HiMiniEyeSlash } from "react-icons/hi2";
 import { IoEyeSharp } from "react-icons/io5";
 import { Link } from 'react-router-dom';
+import axios from 'axios'
 
 export default function Signup() {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -15,18 +16,63 @@ export default function Signup() {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [termsAccepted, setTermsAccepted] = useState(false);
     const [showForm, setShowForm] = useState(false);
+    const [societies, setSocieties] = useState([]); // State for societies list
 
     const createnewSociety = () => {
+        console.log("Creating new society...");
         setShowForm(true);
     };
-
-    const onSubmit = data => {
-        console.log(data);
+    const onSubmit = async (data) => {
+        await axios.post('http://localhost:5000/api/v1/Registration', data).then((res) => {
+            console.log(res)
+        })
     };
 
-    const handleNewSocietySubmit = newdata => {
-        console.log(newdata);
+    const handleNewSocietySubmit = async (newdata) => {
+        try {
+            const res = await axios.post('http://localhost:5000/api/societies/create', newdata);
+            console.log('Response:', res.data);
+
+            // Update societies list after successfully creating a new society
+            setSocieties((prevSocieties) => [...prevSocieties, res.data]);
+
+            // Hide the form after success
+            setShowForm(false);
+        } catch (error) {
+            console.error('Error creating society:', error);
+        }
     };
+
+    useEffect(() => {
+        const fetchSocieties = async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/api/societies/');
+                if (Array.isArray(response.data)) {
+                    setSocieties(response.data); // Set societies to the array from the API
+                } else {
+                    console.error('Unexpected response format:', response.data);
+                }
+            } catch (error) {
+                console.error('Error fetching societies:', error);
+                setSocieties([]); // Fallback to an empty array on error
+            }
+        };
+
+        fetchSocieties();
+    }, []);
+    // const fetchSocieties = async () => {
+    //     try {
+    //         const response = await axios.get('http://localhost:5000/api/societies/');
+    //         setSocieties(response.data); // Update based on API structure
+    //         console.log('Societies Response:', response.data);
+    //     } catch (error) {
+    //         console.error('Error fetching societies:', error);
+    //         setSocieties([]); // Ensure societies is always an array
+
+    //     }
+
+    // };
+
 
     const togglePasswordVisibility = () => setShowPassword(!showPassword);
     const toggleConfirmPasswordVisibility = () => setShowConfirmPassword(!showConfirmPassword);
@@ -39,7 +85,7 @@ export default function Signup() {
     return (
         <div className="d-flex flex-column flex-md-row min-vh-100 position-relative">
             {/* Left Side: Image */}
-            <div className="signup-img  d-flex flex-column align-items-left" style={{width:"950px"}}>
+            <div className="signup-img  d-flex flex-column align-items-left" style={{ width: "950px" }}>
 
                 <div className='logo ms-5 mt-3  mb-3 mb-md-0'>
                     <h1><span>Dash</span>Stack</h1>
@@ -57,7 +103,7 @@ export default function Signup() {
             </div>
 
             {/* Right Side: Form */}
-            <div className="signup-form  d-flex align-items-center justify-content-center py-5" style={{ opacity: showForm ? 0.6 : 1 ,width:"950px"}}>
+            <div className="signup-form  d-flex align-items-center justify-content-center py-5" style={{ opacity: showForm ? 0.6 : 1, width: "950px" }}>
                 <div className="form bg-white p-4 rounded shadow">
                     <h2 className="h4 font-weight-bold mb-4 text-left">Registration</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
@@ -69,10 +115,11 @@ export default function Signup() {
                                     <input
                                         type='text'
                                         className="form-control"
+
                                         placeholder='Enter First Name'
-                                        {...register('firstName', { required: 'First Name is required' })}
+                                        {...register('First_Name', { required: 'First Name is required' })}
                                     />
-                                    {errors.firstName && <p className="text-danger">{errors.firstName.message}</p>}
+                                    {errors.First_Name && <p className="text-danger">{errors.First_Name.message}</p>}
                                 </div>
                             </div>
 
@@ -82,10 +129,11 @@ export default function Signup() {
                                     <input
                                         type='text'
                                         className="form-control"
+
                                         placeholder='Enter Last Name'
-                                        {...register('lastName', { required: 'Last Name is required' })}
+                                        {...register('Last_Name', { required: 'Last Name is required' })}
                                     />
-                                    {errors.lastName && <p className="text-danger">{errors.lastName.message}</p>}
+                                    {errors.Last_Name && <p className="text-danger">{errors.Last_Name.message}</p>}
                                 </div>
                             </div>
                         </div>
@@ -97,11 +145,12 @@ export default function Signup() {
                                     <label>Email Address <span className="text-danger">*</span></label>
                                     <input
                                         className="form-control"
+
                                         placeholder='Enter Email Address'
                                         type="email"
-                                        {...register('email', { required: 'Email is required' })}
+                                        {...register('Email_Address', { required: 'Email is required' })}
                                     />
-                                    {errors.email && <p className="text-danger">{errors.email.message}</p>}
+                                    {errors.Email_Address && <p className="text-danger">{errors.Email_Address.message}</p>}
                                 </div>
                             </div>
 
@@ -110,11 +159,12 @@ export default function Signup() {
                                     <label>Phone Number <span className="text-danger">*</span></label>
                                     <input
                                         type='number'
+
                                         className="form-control"
                                         placeholder='Enter Phone Number'
-                                        {...register('phoneNumber', { required: 'Phone Number is required' })}
+                                        {...register('Phone_Number', { required: 'Phone Number is required' })}
                                     />
-                                    {errors.phoneNumber && <p className="text-danger">{errors.phoneNumber.message}</p>}
+                                    {errors.Phone_Number && <p className="text-danger">{errors.Phone_Number.message}</p>}
                                 </div>
                             </div>
                         </div>
@@ -127,10 +177,11 @@ export default function Signup() {
                                     <input
                                         type='text'
                                         className="form-control"
+
                                         placeholder='Enter Country'
-                                        {...register('country', { required: 'Country is required' })}
+                                        {...register('Country', { required: 'Country is required' })}
                                     />
-                                    {errors.country && <p className="text-danger">{errors.country.message}</p>}
+                                    {errors.Country && <p className="text-danger">{errors.Country.message}</p>}
                                 </div>
                             </div>
 
@@ -139,11 +190,12 @@ export default function Signup() {
                                     <label>State <span className="text-danger">*</span></label>
                                     <input
                                         type='text'
+
                                         className="form-control"
                                         placeholder='Enter State'
-                                        {...register('state', { required: 'State is required' })}
+                                        {...register('State', { required: 'State is required' })}
                                     />
-                                    {errors.state && <p className="text-danger">{errors.state.message}</p>}
+                                    {errors.State && <p className="text-danger">{errors.State.message}</p>}
                                 </div>
                             </div>
 
@@ -152,11 +204,12 @@ export default function Signup() {
                                     <label>City <span className="text-danger">*</span></label>
                                     <input
                                         type='text'
+
                                         className="form-control"
                                         placeholder='Enter City'
-                                        {...register('city', { required: 'City is required' })}
+                                        {...register('City', { required: 'City is required' })}
                                     />
-                                    {errors.city && <p className="text-danger">{errors.city.message}</p>}
+                                    {errors.City && <p className="text-danger">{errors.City.message}</p>}
                                 </div>
                             </div>
                         </div>
@@ -177,28 +230,31 @@ export default function Signup() {
 
                         {/* Select Society */}
                         <div className="form-group mt-3">
-                            <label>Select Society <span className="text-danger">*</span></label>
-                            <select
-                                className="form-control form-select"
-                                id='select'
-                                {...register('society', { required: 'Society selection is required' })}
-                                onChange={(e) => {
-                                    if (e.target.value === "") {
-                                        createnewSociety();
-                                    }
-                                }}
-                            >
-                                <option className='option' value="Shantigram residency">Shantigram residency</option>
-                                <option value="Russett House Park">Russett House Park</option>
-                                <option value="Saurya residency">Saurya residency</option>
-                                <option value="Shamruddh Avenyu">Shamruddh Avenyu</option>
-                                <option value="Utsav society">Utsav society</option>
-                                <option value="Murlidhar">Murlidhar</option>
-                                <option value="Shree Sharanam">Shree Sharanam</option>
-                                <option value="vasantnagar township">vasantnagar township</option>
-                                <option value="" className='create-society-btn'>Create Society</option>
-                            </select>
-                            {errors.society && <p className="text-danger">{errors.society.message}</p>}
+                            
+                                <label>Select Society <span className="text-danger">*</span></label>
+                                <select
+                                    className="form-control form-select"
+                                    // name='select_society'
+                                    id='select_society'
+                                    {...register('select_society', { required: 'Society selection is required' })}
+                                    onChange={(e) => {
+                                        console.log("Selected Value:", e.target.value);
+                                        if (e.target.value === "create") {
+                                            createnewSociety();
+                                        }
+                                    }}
+                                >
+                                    {Array.isArray(societies) &&
+                                        societies.map((society) => (
+                                            <option key={society.id} value={society.name}>
+                                                {society.name}
+                                            </option>
+                                        ))}
+
+                                    <option value="create" className='create-society-btn'>Create Society</option>
+                                </select>
+                                {errors.select_society && <p className="text-danger">{errors.select_society.message}</p>}
+                            
                         </div>
 
                         {/* Password */}
@@ -206,9 +262,10 @@ export default function Signup() {
                             <label>Password <span className="text-danger">*</span></label>
                             <input
                                 className="form-control"
+                                // name='Password'
                                 placeholder='Enter Password'
                                 type={showPassword ? "text" : "password"}
-                                {...register('password', { required: 'Password is required' })}
+                                {...register('Password', { required: 'Password is required' })}
                             />
                             <span
                                 className="password-icon translate-middle-y pr-3 cursor-pointer"
@@ -216,7 +273,7 @@ export default function Signup() {
                             >
                                 {showPassword ? <HiMiniEyeSlash /> : <IoEyeSharp />}
                             </span>
-                            {errors.password && <p className="text-danger">{errors.password.message}</p>}
+                            {errors.Password && <p className="text-danger">{errors.Password.message}</p>}
                         </div>
 
                         {/* Confirm Password */}
@@ -224,9 +281,10 @@ export default function Signup() {
                             <label>Confirm Password <span className="text-danger">*</span></label>
                             <input
                                 className="form-control"
+                                // name='Confirm_password'
                                 placeholder='Confirm Password'
                                 type={showConfirmPassword ? "text" : "password"}
-                                {...register('confirmPassword', { required: 'Please confirm your password' })}
+                                {...register('Confirm_password', { required: 'Please confirm your password' })}
                             />
                             <span
                                 className="password-icon translate-middle-y pr-3 cursor-pointer"
@@ -234,7 +292,7 @@ export default function Signup() {
                             >
                                 {showConfirmPassword ? <HiMiniEyeSlash /> : <IoEyeSharp />}
                             </span>
-                            {errors.confirmPassword && <p className="text-danger">{errors.confirmPassword.message}</p>}
+                            {errors.Confirm_password && <p className="text-danger">{errors.Confirm_password.message}</p>}
                         </div>
 
                         {/* Terms and Conditions */}
@@ -264,7 +322,7 @@ export default function Signup() {
             </div>
             {/* Conditional Form Rendering */}
             <div className='position-absolute top-50 start-50 translate-middle'>
-                {showForm && ( 
+                {showForm && (
                     <div className="new-society-form bg-white shadow p-4">
                         <h3 className="h5 mb-4">Create New Society</h3>
 
@@ -276,10 +334,11 @@ export default function Signup() {
                                 <input
                                     type="text"
                                     className="form-control "
+                                    // name='Society_name'
                                     placeholder="Enter Society Name"
-                                    {...registerNewSociety('name', { required: 'Name is required' })}
+                                    {...registerNewSociety('Society_name', { required: 'Name is required' })}
                                 />
-                                {newSocietyErrors.name && <p className="text-danger small">{newSocietyErrors.name.message}</p>}
+                                {newSocietyErrors.Society_name && <p className="text-danger small">{newSocietyErrors.Society_name.message}</p>}
                             </div>
 
                             {/* Society Address */}
@@ -288,10 +347,11 @@ export default function Signup() {
                                 <input
                                     type="text"
                                     className="form-control"
+                                    // name='Society_address'
                                     placeholder="Enter Address"
-                                    {...registerNewSociety('address', { required: 'Address is required' })}
+                                    {...registerNewSociety('Society_address', { required: 'Address is required' })}
                                 />
-                                {newSocietyErrors.address && <p className="text-danger small">{newSocietyErrors.address.message}</p>}
+                                {newSocietyErrors.Society_address && <p className="text-danger small">{newSocietyErrors.Society_address.message}</p>}
                             </div>
 
                             {/* Country and State */}
@@ -300,22 +360,24 @@ export default function Signup() {
                                     <label className="form-label">Country<span className="text-danger">*</span></label>
                                     <input
                                         type="text"
+                                        // name='Country'
                                         className="form-control"
                                         placeholder='Enter Country'
-                                        {...registerNewSociety('country', { required: 'Country is required' })}
+                                        {...registerNewSociety('Country', { required: 'Country is required' })}
                                     />
-                                    {newSocietyErrors.country && <p className="text-danger small">{newSocietyErrors.country.message}</p>}
+                                    {newSocietyErrors.Country && <p className="text-danger small">{newSocietyErrors.Country.message}</p>}
                                 </div>
 
                                 <div className="col-md">
                                     <label className="form-label">State<span className="text-danger">*</span></label>
                                     <input
                                         type="text"
+                                        // name='State'
                                         className="form-control"
                                         placeholder='Enter State'
-                                        {...registerNewSociety('state', { required: 'State is required' })}
+                                        {...registerNewSociety('State', { required: 'State is required' })}
                                     />
-                                    {newSocietyErrors.state && <p className="text-danger small">{newSocietyErrors.state.message}</p>}
+                                    {newSocietyErrors.State && <p className="text-danger small">{newSocietyErrors.State.message}</p>}
                                 </div>
                             </div>
 
@@ -325,22 +387,24 @@ export default function Signup() {
                                     <label className="form-label">City<span className="text-danger">*</span></label>
                                     <input
                                         type="text"
+                                        // name='City'
                                         className="form-control"
                                         placeholder='Enter City'
-                                        {...registerNewSociety('city', { required: 'City is required' })}
+                                        {...registerNewSociety('City', { required: 'City is required' })}
                                     />
-                                    {newSocietyErrors.city && <p className="text-danger small">{newSocietyErrors.city.message}</p>}
+                                    {newSocietyErrors.City && <p className="text-danger small">{newSocietyErrors.City.message}</p>}
                                 </div>
 
                                 <div className="col-md">
                                     <label className="form-label">Zip Code<span className="text-danger">*</span></label>
                                     <input
                                         type="text"
+                                        // name='ZipCode'
                                         className="form-control"
                                         placeholder='Enter Zip Code'
-                                        {...registerNewSociety('zipcode', { required: 'Zip Code is required' })}
+                                        {...registerNewSociety('ZipCode', { required: 'Zip Code is required' })}
                                     />
-                                    {newSocietyErrors.zipcode && <p className="text-danger small">{newSocietyErrors.zipcode.message}</p>}
+                                    {newSocietyErrors.ZipCode && <p className="text-danger small">{newSocietyErrors.ZipCode.message}</p>}
                                 </div>
                             </div>
 
