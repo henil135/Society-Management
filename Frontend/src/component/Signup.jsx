@@ -5,30 +5,103 @@ import signupimg2 from '../assets/signup-img2.png';
 import signupimg from '../assets/signup-img.png';
 import { HiMiniEyeSlash } from "react-icons/hi2";
 import { IoEyeSharp } from "react-icons/io5";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import Logo from './Logo';
+// import { Register } from '../services/authentication';
 
 
 export default function Signup() {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { register: registerNewSociety, handleSubmit: handleNewSubmit, formState: { errors: newSocietyErrors } } = useForm();
+    const [formData, setUserData] = useState({
+        First_Name: "",
+        Last_Name: "",
+        Email_Address: "",
+        Phone_Number: "",
+        Country: "",
+        State: "",
+        City: "",
+        select_society: "",
+        Password: "",
+        Confirm_password: "",
+    })
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setUserData({ ...formData, [name]: value })
+    };
 
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [termsAccepted, setTermsAccepted] = useState(false);
     const [showForm, setShowForm] = useState(false);
-    const [societies, setSocieties] = useState([]); // State for societies list
+    const Navigate = useNavigate()
+    // const [isLoading,setIsLoading] = useState(false)
+    const [societies, setSocieties] = useState({
+        Society_name: "",
+        Society_address: "",
+        Country: "",
+        State: "",
+        City: "",
+        ZipCode: "",
+    }); // State for societies list
+
+    // const handleCreateSociety=async(e)=>{
+    //     e.preventDefault();
+    //     setIsLoading(true);
+    //     try {
+    //         const response= await CreateSociety(societies);
+    //         console.log(response.data.message);
+    //         fetchSocieties();
+    //         setShowModal(true)
+    //     } catch (error) {
+    //         console.log(error.response.message);
+    //     }finally{
+    //         setSocieties({
+    //             Society_name:"",
+    //             Society_address:"",
+    //             Country:"",
+    //             State:"",
+    //             City:"",
+    //             ZipCode:""
+    //         })
+    //         setIsLoading(false)
+    //     }
+
+    // }
+    const societySubmit = async (data) => {
+        try {
+            const response = await axios.post('http://localhost:5000/api/v1/Registration',data);
+            console.log(response.data);
+            Navigate("/login")
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setUserData({
+                First_Name: "",
+                Last_Name: "",
+                Email_Address: "",
+                Phone_Number: "",
+                Country: "",
+                State: "",
+                City: "",
+                select_society: "",
+                Password: "",
+                Confirm_password: "",
+            })
+        }
+    }
 
     const createnewSociety = () => {
         console.log("Creating new society...");
         setShowForm(true);
     };
-    const onSubmit = async (data) => {
-        await axios.post('http://localhost:5000/api/v1/Registration', data).then((res) => {
-            console.log(res)
-        })
-    };
+    // const onSubmit = async (data) => {
+    //     await axios.post('http://localhost:5000/api/v1/Registration', data).then((res) => {
+    //         console.log(res)
+    //     })
+    // };
 
     const handleNewSocietySubmit = async (newdata) => {
         try {
@@ -39,7 +112,7 @@ export default function Signup() {
             setSocieties((prevSocieties) => [...prevSocieties, res.data]);
 
             // Hide the form after success
-            setShowForm(false);
+            setShowForm(true);
         } catch (error) {
             console.error('Error creating society:', error);
         }
@@ -49,17 +122,17 @@ export default function Signup() {
         const fetchSocieties = async () => {
             try {
                 const response = await axios.get('http://localhost:5000/api/societies/');
-                if (Array.isArray(response.data)) {
-                    setSocieties(response.data); // Set societies to the array from the API
+                if (response.data.success) {
+                    setSocieties(response.data.data); // Extract the data array
                 } else {
-                    console.error('Unexpected response format:', response.data);
+                    console.error('API request failed:', response.data);
+                    setSocieties([]);
                 }
             } catch (error) {
                 console.error('Error fetching societies:', error);
-                setSocieties([]); // Fallback to an empty array on error
+                setSocieties([]);
             }
         };
-
         fetchSocieties();
     }, []);
     // const fetchSocieties = async () => {
@@ -70,12 +143,8 @@ export default function Signup() {
     //     } catch (error) {
     //         console.error('Error fetching societies:', error);
     //         setSocieties([]); // Ensure societies is always an array
-
     //     }
-
     // };
-
-
     const togglePasswordVisibility = () => setShowPassword(!showPassword);
     const toggleConfirmPasswordVisibility = () => setShowConfirmPassword(!showConfirmPassword);
     const toggleTermsAccepted = () => setTermsAccepted(!termsAccepted);
@@ -89,9 +158,9 @@ export default function Signup() {
             {/* Left Side: Image */}
             <div className="signup-img  d-flex flex-column align-items-left" style={{ width: "950px" }}>
 
-              
-                    <Logo/>
-                
+
+                <Logo />
+
                 {/* Center the image vertically in the remaining space */}
                 <div className='d-flex align-items-center justify-content-center flex-grow-1'>
                     <img
@@ -107,7 +176,7 @@ export default function Signup() {
             <div className="signup-form  d-flex align-items-center justify-content-center py-5" style={{ opacity: showForm ? 0.6 : 1, width: "950px" }}>
                 <div className="form bg-white p-4 rounded shadow">
                     <h2 className="h4 font-weight-bold mb-4 text-left">Registration</h2>
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    <form onSubmit={handleSubmit(societySubmit)}>
                         {/* First Name, Last Name */}
                         <div className="row">
                             <div className="col">
@@ -116,9 +185,9 @@ export default function Signup() {
                                     <input
                                         type='text'
                                         className="form-control"
-
                                         placeholder='Enter First Name'
                                         {...register('First_Name', { required: 'First Name is required' })}
+                                        onChange={handleChange}
                                     />
                                     {errors.First_Name && <p className="text-danger">{errors.First_Name.message}</p>}
                                 </div>
@@ -130,7 +199,6 @@ export default function Signup() {
                                     <input
                                         type='text'
                                         className="form-control"
-
                                         placeholder='Enter Last Name'
                                         {...register('Last_Name', { required: 'Last Name is required' })}
                                     />
@@ -146,7 +214,6 @@ export default function Signup() {
                                     <label>Email Address <span className="text-danger">*</span></label>
                                     <input
                                         className="form-control"
-
                                         placeholder='Enter Email Address'
                                         type="email"
                                         {...register('Email_Address', { required: 'Email is required' })}
@@ -160,7 +227,6 @@ export default function Signup() {
                                     <label>Phone Number <span className="text-danger">*</span></label>
                                     <input
                                         type='number'
-
                                         className="form-control"
                                         placeholder='Enter Phone Number'
                                         {...register('Phone_Number', { required: 'Phone Number is required' })}
@@ -178,7 +244,6 @@ export default function Signup() {
                                     <input
                                         type='text'
                                         className="form-control"
-
                                         placeholder='Enter Country'
                                         {...register('Country', { required: 'Country is required' })}
                                     />
@@ -231,31 +296,31 @@ export default function Signup() {
 
                         {/* Select Society */}
                         <div className="form-group mt-3">
-                            
-                                <label>Select Society <span className="text-danger">*</span></label>
-                                <select
-                                    className="form-control form-select"
-                                    // name='select_society'
-                                    id='select_society'
-                                    {...register('select_society', { required: 'Society selection is required' })}
-                                    onChange={(e) => {
-                                        console.log("Selected Value:", e.target.value);
-                                        if (e.target.value === "create") {
-                                            createnewSociety();
-                                        }
-                                    }}
-                                >
-                                    {Array.isArray(societies) &&
-                                        societies.map((society) => (
-                                            <option key={society.id} value={society.name}>
-                                                {society.name}
-                                            </option>
-                                        ))}
 
-                                    <option value="create" className='create-society-btn'>Create Society</option>
-                                </select>
-                                {errors.select_society && <p className="text-danger">{errors.select_society.message}</p>}
-                            
+                            <label>Select Society <span className="text-danger">*</span></label>
+                            <select
+                                className="form-control form-select"
+                                // name='select_society'
+                                id='select_society'
+                                {...register('select_society', { required: 'Society selection is required' })}
+                                onChange={(e) => {
+                                    console.log("Selected Value:", e.target.value);
+                                    if (e.target.value === "create") {
+                                        createnewSociety();
+                                    }
+                                }}
+                            >
+                                {Array.isArray(societies) &&
+                                    societies.map((society) => (
+                                        <option key={society._id} value={society._id}>
+                                            {society.Society_name}
+                                        </option>
+                                    ))}
+
+                                <option value="create" className='create-society-btn'>Create Society</option>
+                            </select>
+                            {errors.select_society && <p className="text-danger">{errors.select_society.message}</p>}
+
                         </div>
 
                         {/* Password */}
