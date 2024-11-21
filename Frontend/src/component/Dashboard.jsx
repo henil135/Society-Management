@@ -15,8 +15,8 @@ function Dashboard() {
       <Header/>
       <div className="dashboard-bg" style={{ marginLeft: "280px" }}>
         <Income />
-        {/* <TotalBalanceChart /> */}
-        {/* <Complaintlist /> */}
+        <TotalBalanceChart />
+        <Complaintlist />
       </div>
     </div>
   );

@@ -5,10 +5,17 @@ import { FaPlusSquare } from "react-icons/fa";
 
 import { MdEditSquare } from "react-icons/md";
 import { RiDeleteBin5Fill } from "react-icons/ri";
-import { Form, Link } from 'react-router-dom';
-import { Modal } from 'react-bootstrap';
-import { useForm } from 'react-hook-form';
+import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
+import { useForm } from 'react-hook-form';
+import maintainance1 from '../assets/maintainance1.png';
+import maintainance2 from '../assets/maintainance2.png';
+import maintainance3 from '../assets/maintainance3.png';
+import maintainance4 from '../assets/mainatainance4.png';
+import maintainance5 from '../assets/maintainance5.png';
+import { Link } from 'react-router-dom';
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
 
  function TotalBalanceChart() {
@@ -128,15 +135,14 @@ ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
            handleCloseDeleteModal();
        };
 
-    const [maintenances, setMaintenances] = useState([
-        { img: require('../assets/maintainance1.png'), name: 'Hanna Donin', pandingMonth: '2 Month Pending ' },
-        { img: require('../assets/maintainance2.png'), name: 'Hanna Donin', pandingMonth: '2 Month Pending ' },
-        { img: require('../assets/maintainance3.png'), name: 'Hanna Donin', pandingMonth: '2 Month Pending ' },
-        { img: require('../assets/mainatainance4.png'), name: 'Hanna Donin', pandingMonth: '2 Month Pending ' },
-        { img: require('../assets/maintainance5.png'), name: 'Hanna Donin', pandingMonth: '2 Month Pending ' },
-        // Add more contacts if needed
+       const [maintenances, setMaintenances] = useState([
+        { img: maintainance1, name: 'Hanna Donin', pandingMonth: '2 Month Pending ' },
+        { img: maintainance2, name: 'Hanna Donin', pandingMonth: '2 Month Pending ' },
+        { img: maintainance3, name: 'Hanna Donin', pandingMonth: '2 Month Pending ' },
+        { img: maintainance4, name: 'Hanna Donin', pandingMonth: '2 Month Pending ' },
+        { img: maintainance5, name: 'Hanna Donin', pandingMonth: '2 Month Pending ' },
     ]);
-
+    
     return (
         <div className='container-fluid py-2'>
             <div className='row px-3 py-1'>
@@ -157,12 +163,12 @@ ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
                 </div>
 
                 <div className='col-lg-3 px-1 my-sm-3 my-md-0'>
-                    <div className="important-member py-4 px-2 bg-white rounded-lg shadow-md max-w-md mx-auto" style={{ borderRadius: '12px', overflowY: 'auto' }}>
-                        <div className="d-flex justify-content-between align-items-center mb-2">
-                            <h2>Important Numbers</h2>
-                            <button onClick={handleShow} className='add-btn rounded-2 d-flex align-items-center'>
+                    <div className="important-member  px-2 bg-white rounded-lg shadow-md max-w-md mx-auto" style={{ borderRadius: '12px', overflowY: 'auto' }}>
+                        <div className="d-flex justify-content-between align-items-center ">
+                            <h2 className='mt-4'>Important Numbers</h2>
+                            <Button onClick={handleShow} className='add-btn rounded-2 '>
                                 <FaPlusSquare className="me-1" /> Add
-                            </button>
+                            </Button>
                         </div>
 
                         <div>
@@ -173,10 +179,12 @@ ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
                                         <p><strong>Ph Number:</strong> {contact.phone}</p>
                                         <p><strong>Work:</strong> {contact.work}</p>
                                     </div>
-                                    <button onClick={() => handleShowDeleteModal(index)} className="delete-btn">
+                                   <div className='gap-3 d-flex  '>
+                                   <Button onClick={() => handleShowDeleteModal(index)} className="delete-btn fs-5">
                                         <RiDeleteBin5Fill />
-                                    </button>
-                                    <button className="edit-btn" onClick={() => handleEdit(index)}><MdEditSquare /></button>
+                                    </Button>
+                                    <Button className="edit-btn fs-5" onClick={() => handleEdit(index)}><MdEditSquare /></Button>
+                                   </div>
                                 </div>
                             ))}
                         </div>
@@ -200,71 +208,78 @@ ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
 
                 {/* Modal for the form */}
                 <Modal show={show} onHide={handleClose} centered className="custom-modal">
-                    <Modal.Header>
-                        <Modal.Title className='Modal-Title'>
-                            {editIndex !== null ? 'Edit Important Number' : 'Add Important Number'}
-                        </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Form onSubmit={handleSubmit(onSubmit)}>
-                            <Form.Group className="mb-3" controlId="formFullName">
-                                <Form.Label className='Form-Label'>Full Name<span className="text-danger"> *</span></Form.Label>
-                                <Form.Control
-                                    className='Form-Control'
-                                    type="text"
-                                    placeholder="Enter Full Name"
-                                    {...register('fullName', { required: "Full Name is required" })}
-                                    isInvalid={errors.fullName}
-                                />
-                                <Form.Control.Feedback type="invalid">
-                                    {errors.fullName?.message}
-                                </Form.Control.Feedback>
-                            </Form.Group>
+            <Modal.Header>
+                <Modal.Title className="Modal-Title">
+                    {editIndex !== null ? 'Edit Important Number' : 'Add Important Number'}
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <Form onSubmit={handleSubmit(onSubmit)}>
+                    <Form.Group className="mb-3" controlId="formFullName">
+                        <Form.Label className="Form-Label">
+                            Full Name<span className="text-danger"> *</span>
+                        </Form.Label>
+                        <Form.Control
+                            className="Form-Control"
+                            type="text"
+                            placeholder="Enter Full Name"
+                            {...register('fullName', { required: "Full Name is required" })}
+                            isInvalid={!!errors.fullName}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            {errors.fullName?.message}
+                        </Form.Control.Feedback>
+                    </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="formPhoneNumber">
-                                <Form.Label className='Form-Label'>Phone Number<span className="text-danger"> *</span></Form.Label>
-                                <Form.Control
-                                    className='Form-Control'
-                                    type="tel"
-                                    placeholder="+91"
-                                    {...register('phoneNumber', {
-                                        required: "Phone Number is required",
-                                        pattern: {
-                                            message: "Enter a valid phone number"
-                                        }
-                                    })}
-                                    isInvalid={errors.phoneNumber}
-                                />
-                                <Form.Control.Feedback type="invalid">
-                                    {errors.phoneNumber?.message}
-                                </Form.Control.Feedback>
-                            </Form.Group>
+                    <Form.Group className="mb-3" controlId="formPhoneNumber">
+                        <Form.Label className="Form-Label">
+                            Phone Number<span className="text-danger"> *</span>
+                        </Form.Label>
+                        <Form.Control
+                            className="Form-Control"
+                            type="tel"
+                            placeholder="+91"
+                            {...register('phoneNumber', {
+                                required: "Phone Number is required",
+                                pattern: {
+                                    value: /^[0-9]{10}$/, // Replace with your desired phone validation regex
+                                    message: "Enter a valid phone number",
+                                },
+                            })}
+                            isInvalid={!!errors.phoneNumber}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            {errors.phoneNumber?.message}
+                        </Form.Control.Feedback>
+                    </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="formWork">
-                                <Form.Label className='Form-Label'>Work<span className="text-danger"> *</span></Form.Label>
-                                <Form.Control
-                                    className='Form-Control'
-                                    type="text"
-                                    placeholder="Enter Work"
-                                    {...register('work', { required: "Work is required" })}
-                                    isInvalid={errors.work}
-                                />
-                                <Form.Control.Feedback type="invalid">
-                                    {errors.work?.message}
-                                </Form.Control.Feedback>
-                            </Form.Group>
+                    <Form.Group className="mb-3" controlId="formWork">
+                        <Form.Label className="Form-Label">
+                            Work<span className="text-danger"> *</span>
+                        </Form.Label>
+                        <Form.Control
+                            className="Form-Control"
+                            type="text"
+                            placeholder="Enter Work"
+                            {...register('work', { required: "Work is required" })}
+                            isInvalid={!!errors.work}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            {errors.work?.message}
+                        </Form.Control.Feedback>
+                    </Form.Group>
 
-                            <div className="d-flex justify-content-between">
-                                <Button variant="secondary" onClick={handleClose} className="btn mt-2 cancle">
-                                    Cancel
-                                </Button>
-                                <Button variant="primary" type="submit" className='btn mt-2 save'>
-                                    Save
-                                </Button>
-                            </div>
-                        </Form>
-                    </Modal.Body>
-                </Modal>
+                    <div className="d-flex justify-content-between">
+                        <Button variant="secondary" onClick={handleClose} className="btn mt-2 cancle">
+                            Cancel
+                        </Button>
+                        <Button variant="primary" type="submit" className="btn mt-2 save">
+                            Save
+                        </Button>
+                    </div>
+                </Form>
+            </Modal.Body>
+        </Modal>
 
 
                 <div className='col-lg-3 px-1'>

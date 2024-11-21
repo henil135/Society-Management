@@ -6,7 +6,7 @@ import Avtar from "../assets/Avatar.png";
 import Header from './Navbar';
 import Sidebar from './layout/Sidebar';
 
- function SecurityProtocols() {
+function SecurityProtocols() {
   const [protocols, setProtocols] = useState([
     { id: 1, title: "Physical Security", description: "Providing false information or Providing", date: "2022-05-20", time: "3:45 PM" },
     { id: 2, title: "Cybersecurity", description: "Providing false information or", date: "2022-06-28", time: "3:45 PM" },
@@ -49,7 +49,7 @@ import Sidebar from './layout/Sidebar';
     setProtocolData({ title: "", description: "", date: "", time: "" });
     setDeleteProtocolId(null); // Clear the ID of the protocol to delete
   };
-  
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -81,7 +81,7 @@ import Sidebar from './layout/Sidebar';
     setDeleteProtocolId(null); // Clear the ID of the protocol to delete
     setShowDeleteModal(false); // Close the delete confirmation modal
   };
-  
+
 
   return (
     <div className="d-flex flex-column flex-md-row">
@@ -89,10 +89,10 @@ import Sidebar from './layout/Sidebar';
         <Sidebar />
       </div>
 
-      <div className="flex-grow-1 dashboard-bg" style={{ width:"1640px"}}>
-        <Header/>
+      <div className="flex-grow-1 dashboard-bg" style={{ width: "1640px" }}>
+        <Header />
         <div className="container-fluid  p-4" style={{ marginTop: "10px" }}>
-          
+
 
           {/* Modal for creating or editing a protocol */}
           <Modal show={showModal} onHide={handleClose} centered>
@@ -149,16 +149,16 @@ import Sidebar from './layout/Sidebar';
               </Form>
             </Modal.Body>
             <Modal.Footer style={{ display: "flex", justifyContent: "space-between" }}>
-    <Button style={{ width: "175px", height: "51px", border: "1px solid #202224", padding: "10px 55px 10px 55px", background: "#FFFFFF", color: "#202224", }} variant="secondary" onClick={handleClose}>
-      Cancel
-    </Button>
-    <Button style={{
-            width: "175px", height: "51px", border: "1px", padding: "10px 55px 10px 55px", color: "#202224",
+              <Button style={{ width: "175px", height: "51px", border: "1px solid #202224", padding: "10px 55px 10px 55px", background: "#FFFFFF", color: "#202224", }} variant="secondary" onClick={handleClose}>
+                Cancel
+              </Button>
+              <Button style={{
+                width: "175px", height: "51px", border: "1px", padding: "10px 55px 10px 55px", color: "#202224",
 
-          }} className='mainColor2' onClick={handleSave}>
-      Save 
-    </Button>
-  </Modal.Footer>
+              }} className='mainColor2' onClick={handleSave}>
+                Save
+              </Button>
+            </Modal.Footer>
           </Modal>
 
 
@@ -170,15 +170,16 @@ import Sidebar from './layout/Sidebar';
               <p>Are you sure you want to delete this protocol?</p>
             </Modal.Body>
             <Modal.Footer style={{ display: "flex", justifyContent: "space-between" }}>
-          <Button variant="secondary" onClick={handleClose} style={{ width: "175px", height: "51px", border: "1px solid #202224", padding: "10px 55px 10px 55px", background: "#FFFFFF", color: "#202224", }}>
-            Cancel
-          </Button>
-          <Button  onClick={handleDelete} style={{
-            width: "175px", height: "51px", border: "1px", padding: "10px 55px 10px 55px", color: "#202224",background: "rgba(231, 76, 60, 1)"}}>
-            Delete
-          </Button>
+              <Button variant="secondary" onClick={handleClose} style={{ width: "175px", height: "51px", border: "1px solid #202224", padding: "10px 55px 10px 55px", background: "#FFFFFF", color: "#202224", }}>
+                Cancel
+              </Button>
+              <Button onClick={handleDelete} style={{
+                width: "175px", height: "51px", border: "1px", padding: "10px 55px 10px 55px", color: "#202224", background: "rgba(231, 76, 60, 1)"
+              }}>
+                Delete
+              </Button>
 
-        </Modal.Footer>
+            </Modal.Footer>
           </Modal>
           {/* View-only modal for displaying protocol details */}
           <Modal show={showViewModal} onHide={handleClose} centered>
@@ -186,83 +187,83 @@ import Sidebar from './layout/Sidebar';
               <Modal.Title>View Security Protocols</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <p>Title<br/>
-              <strong style={{
-  fontSize: "16px",
-  fontWeight: "600",
-  lineHeight: "24px",
-  textAlign: "left",
-  textUnderlinePosition: "from-font",
-  textDecorationSkipInk: "none",
-  color: "black",
-}}>
-  {protocolData.title}
-</strong>
+              <p>Title<br />
+                <strong style={{
+                  fontSize: "16px",
+                  fontWeight: "600",
+                  lineHeight: "24px",
+                  textAlign: "left",
+                  textUnderlinePosition: "from-font",
+                  textDecorationSkipInk: "none",
+                  color: "black",
+                }}>
+                  {protocolData.title}
+                </strong>
 
-               </p>
-              <p> Description<br/>
-              <strong style={{
-  fontSize: "16px",
-  fontWeight: "600",
-  lineHeight: "24px",
-  textAlign: "left",
-  textUnderlinePosition: "from-font",
-  textDecorationSkipInk: "none",
-  color: "black",
-}}>{protocolData.description}</strong>
               </p>
-              <div className="d-flex" style={{gap:"70px"}}>
-      <div>
-        <p>Date</p>
-        <strong style={{
+              <p> Description<br />
+                <strong style={{
+                  fontSize: "16px",
+                  fontWeight: "600",
+                  lineHeight: "24px",
+                  textAlign: "left",
+                  textUnderlinePosition: "from-font",
+                  textDecorationSkipInk: "none",
+                  color: "black",
+                }}>{protocolData.description}</strong>
+              </p>
+              <div className="d-flex" style={{ gap: "70px" }}>
+                <div>
+                  <p>Date</p>
+                  <strong style={{
 
-  fontSize: "16px",
-  fontWeight: "600",
-  lineHeight: "24px",
-  textAlign: "left",
-  textUnderlinePosition: "from-font",
-  textDecorationSkipInk: "none",
-  color: "black",
-}}>{protocolData.date}</strong>
-      </div>
-      <div>
-        <p>Time</p>
-        <strong style={{
-  fontSize: "16px",
-  fontWeight: "600",
-  lineHeight: "24px",
-  textAlign: "left",
-  textUnderlinePosition: "from-font",
-  textDecorationSkipInk: "none",
-  color: "black",
-}}>{protocolData.time}</strong>
-      </div>
-    </div>
+                    fontSize: "16px",
+                    fontWeight: "600",
+                    lineHeight: "24px",
+                    textAlign: "left",
+                    textUnderlinePosition: "from-font",
+                    textDecorationSkipInk: "none",
+                    color: "black",
+                  }}>{protocolData.date}</strong>
+                </div>
+                <div>
+                  <p>Time</p>
+                  <strong style={{
+                    fontSize: "16px",
+                    fontWeight: "600",
+                    lineHeight: "24px",
+                    textAlign: "left",
+                    textUnderlinePosition: "from-font",
+                    textDecorationSkipInk: "none",
+                    color: "black",
+                  }}>{protocolData.time}</strong>
+                </div>
+              </div>
             </Modal.Body>
-           
+
           </Modal>
 
           <div className="table-responsive" style={{ border: "1px solid #ddd", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", overflow: "hidden", backgroundColor: "#fff", padding: "20px", marginTop: "20px" }}>
-          <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
-            <h4 className="mb-0">Security Protocols</h4>
-            <Button className="btn mainColor2 d-flex align-items-center justify-content-center" style={{height:"50px",marginBottom: "15px"}} onClick={handleShowCreate}><FaPlus
-    style={{
-      fontSize: "18px",
-      borderRadius: "5px",
-      background: "rgba(255, 255, 255, 1)",
-      color: "#FE512E",
-      marginRight: "8px",
-    }}
-  />Create Protocols</Button>
-          </div>
+            <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
+              <h4 className="mb-0">Security Protocols</h4>
+              <Button className="btn mainColor2 d-flex align-items-center justify-content-center p-2" style={{ height: "50px", marginBottom: "15px", border:"none" }} onClick={handleShowCreate}><FaPlus
+                style={{
+                  fontSize: "18px",
+                  borderRadius: "5px",
+                  background: "rgba(255, 255, 255, 1)",
+                  color: "#FE512E",
+                  marginRight: "8px",
+                }}
+              />Create Protocols</Button>
+            </div>
             <Table hover responsive style={{ width: "1550px" }}>
               <thead style={{ background: "rgb(185, 198, 242)", color: "black" }}>
                 <tr className="text-start">
                   <th style={{ width: "280px" }}>Title</th>
                   <th style={{ width: "350px" }} className="text-start">Description</th>
-                  <th  className="text-center">Date</th>
-                  <th  className="text-center">Time</th>
-                  <th  className="text-center">Actions</th>
+                  <th className="text-center">Date</th>
+                  <th className="text-center">Time</th>
+                  <th className="text-center">Actions</th>
                 </tr>
               </thead>
               <tbody>

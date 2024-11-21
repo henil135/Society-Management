@@ -37,7 +37,7 @@ import { useLocation, Link } from 'react-router-dom'; // Import Link from react-
                 <Navbar expand="sm" className="navbar bg-white  border-bottom p-4" style={{height:"109px"}}>
                     <Container fluid>
                         {/* Breadcrumb */}
-                        <h5 className='home-routing'>
+                        <h5 className='home-routing '>
                             Home <span className='home-routing-span'><FaGreaterThan style={{fontSize:"12px"}}/></span>
                             <span className="current-page-routing"> {getPageName(location.pathname)}</span> {/* Display current page */}
                         </h5>
@@ -46,7 +46,7 @@ import { useLocation, Link } from 'react-router-dom'; // Import Link from react-
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
                         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-                            <Nav className="d-flex align-items-center">
+                            <Nav className="d-flex align-items-center me-3">
                                 {/* Notification Icon */}
                                 <Button
                                     variant="light"

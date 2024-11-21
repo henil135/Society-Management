@@ -3,7 +3,8 @@ import Navbar from './Navbar';
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Modal, Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import Sidebar from './Layout/Sidebar';
+import Sidebar from './layout/Sidebar';
+
 
  function FinancialManagementNote() {
   const [note, setNote] = useState([
@@ -61,12 +62,12 @@ import Sidebar from './Layout/Sidebar';
     </div>
     <div className='dashboard-bg' style={{marginLeft:"270px", width:"1650px"}}>
       <Navbar />
-      <div className='container-fluid'>
+      <div className='container-fluid' >
         <div className='row p-5'>
-          <div className='p-0 bg-light'>
-            <div className='d-flex justify-content-between align-items-center py-3 px-2'>
+          <div className='p-0 bg-light' >
+            <div className='d-flex justify-content-between align-items-center py-3 px-2' style={{marginLeft:"10px"}}>
               <h3 className='mb-0 financial-income-title'>Note</h3>
-              <button className='set-maintainance-btn d-flex align-items-center' onClick={handleShow}>
+              <button className='set-maintainance-btn d-flex align-items-center'  onClick={handleShow}>
                 Create Note
               </button>
             </div>
@@ -81,7 +82,7 @@ import Sidebar from './Layout/Sidebar';
                         <button
                           className="btn btn-light p-0"
                           onClick={() => handleDropdownToggle(index)}
-                          style={{ width: '30px', height: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                          style={{ width: '30px', height: '30px' ,marginBottom:"20px"  }}
                         >
                           <BsThreeDotsVertical />
                         </button>

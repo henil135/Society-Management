@@ -13,7 +13,7 @@
 
 .logo span {
   background: linear-gradient(90deg, #FE512E 0%, #F09619 100%);
-  -webkit-background-clip: text;
+  /* -webkit-background-clip: text; */
   -webkit-text-fill-color: transparent;
   font-size: 50px;
   font-weight: 800;
@@ -340,6 +340,7 @@ input:focus {
   border: none;
   color: white !important;
   background: linear-gradient(90deg, #FE512E 0%, #F09619 100%) !important;
+  border: none !important;  
 }
 
 .important-member p{
@@ -354,10 +355,10 @@ input:focus {
 .delete-btn{
   color: rgba(231, 76, 60, 1) !important;
   background: rgba(246, 248, 251, 1) !important;
-  width: 30px !important;
-  height: 24px;
+  /* width: 30px !important;
+  height: 30px; */
   line-height: 24px;
-  padding:0px  5px 3px ;
+  padding:10px ;
   border: none !important;
   display: flex;
   justify-content: center;
@@ -368,8 +369,8 @@ input:focus {
 .edit-btn{
   color: rgba(57, 151, 61, 1)!important;
   background: rgba(246, 248, 251, 1) !important;
-  width: 30px !important;
-  height: 24px;
+  /* width: 30px !important;
+  height: 24px; */
   line-height: 24px;
   padding:0px  5px 3px;
   display: flex;
@@ -425,7 +426,7 @@ input:focus {
     font-size: 18px;
     font-weight: 600;
     border: none;
-    border: 1px solid rgba(211, 211, 211, 1);
+    border: 1px solid rgba(211, 211, 211, 1) !important;
     padding: 12px 14px;
 }
 
@@ -447,11 +448,9 @@ input:focus {
   width: 30px !important;
   height: 24px;
   line-height: 24px;
-  padding:0px  5px 3px;
+
   border: none !important;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
 }
 
 .priority-btn{
@@ -461,6 +460,7 @@ input:focus {
   font-weight: 500;
   color: white !important;
   border-radius: 20px !important;
+  border: none !important; 
 }
 
 .status-btn{
@@ -469,7 +469,8 @@ input:focus {
   font-size: 14px;
   font-weight: 500;
   border-radius: 20px !important;
-  border: none;
+  border: none !important; 
+  
 }
 
 /* Centered Add Form Modal */
@@ -597,7 +598,7 @@ input:focus {
 
 .set-maintainance-btn{
   background: linear-gradient(90deg, #FE512E 0%, #F09619 100%);
-  padding: 12px 14px;
+
   border-radius: 10px;
   color: white;
   border: 0;
@@ -612,13 +613,13 @@ input:focus {
 }
 
 .financial-status-btn {
-  width: 113px;
+  /* width: 113px; */
   height: 31px !important;
   font-size: 14px !important;
   font-weight: 500 !important;
   border-radius: 20px !important;
   border: none;
-  text-align: center;
+  /* text-align: center; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -661,13 +662,14 @@ input:focus {
 }
 
 .financial-income-title{
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 600;
 }
 
 .financial-maintainance-table{
   max-height: 545px !important;
   overflow-y: auto !important;
+  overflow-x: hidden !important;
 }
 
 .maintainance-income-btn {
@@ -786,6 +788,7 @@ input:focus {
     font-weight: 400 !important;
     color: rgba(167, 167, 167, 1) !important;
     transition: all 0.2s !important;
+    margin-top: 0px !important;
 }
 
 .dropdown-item:hover {

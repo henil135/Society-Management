@@ -140,7 +140,7 @@ function RequestTracking() {
       <div className="table-responsive" style={{ border: "1px solid #ddd", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", overflow: "hidden", backgroundColor: "#fff",padding:"5px", marginTop: "20px" }}>
       <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mt-2 mb-4">
         <h4 className="mb-0" style={{marginLeft:"20px"}}>Request Tracking</h4>
-        <Button className="btn mainColor2 d-flex align-items-center justify-content-center" style={{marginRight:"20px"}} onClick={handleShowCreateModal}>
+        <Button className="btn mainColor2 d-flex align-items-center justify-content-center p-2" style={{marginRight:"20px", border:"none"}} onClick={handleShowCreateModal}>
         <FaPlus
     style={{
       fontSize: "18px",

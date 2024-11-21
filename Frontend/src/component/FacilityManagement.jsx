@@ -133,12 +133,12 @@ const FacilityManagement = () => {
 
             <div className="  dashboard-bg " style={{ marginLeft: "270px", width: "1642px" }}>
                 <Header />
-                <div className="container-fluid bg-white rounded shadow-sm p-5" style={{ marginTop: "55px", width: "1550px", marginLeft: "55px" }}>
+                <div className="container-fluid bg-white rounded shadow-sm p-3" style={{ marginTop: "55px", width: "1550px", marginLeft: "55px" }}>
                     <div className="d-flex align-items-center justify-content-between">
                         <h3>Facility Management</h3>
 
 
-                        <Button className="text-white mainColor2 d-flex gap-2 align-items-center" style={{height:"50px",marginBottom:"15px"}} onClick={() => {
+                        <Button className="text-white mainColor2 d-flex gap-2 align-items-center" style={{height:"50px",marginBottom:"15px", border:"none"}} onClick={() => {
                             setIsEditing(false);
                             handleShowModal();
                         }}> <FaPlus
@@ -147,6 +147,8 @@ const FacilityManagement = () => {
                                     borderRadius: "5px",
                                     background: "rgba(255, 255, 255, 1)",
                                     color: "#FE512E",
+                                   
+
                                 }}
                             />
                             Create Facility
