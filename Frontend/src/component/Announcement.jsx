@@ -117,10 +117,10 @@ import Sidebar from './layout/Sidebar';
                         <div className='p-0'>
                             <div className='bg-light'>
                                 <div className='d-flex justify-content-between align-items-center  py-3 px-2'>
-                                    <h3 className=' mb-0  financial-income-title' style={{marginLeft:"10px"}}>Announcement</h3>
+                                    <h3 className=' mb-0  financial-income-title' style={{marginLeft:"12px"}}>Announcement</h3>
 
                                     <div>
-                                        <button className='set-maintainance-btn d-flex align-items-center other-income-btn' style={{marginRight:"10px"}} onClick={handleShow}> Create Announcement</button>
+                                        <Button className='set-maintainance-btn d-flex align-items-center other-income-btn p-2' style={{marginRight:"10px",marginBottom:"7px", border:"none"}} onClick={handleShow}> Create Announcement</Button>
                                     </div>
                                 </div>
 

@@ -7,8 +7,9 @@ import { RiDeleteBin5Fill } from "react-icons/ri";
 import { useForm } from 'react-hook-form';
 import { Button, Modal, Form } from 'react-bootstrap';
 import { MdEditSquare } from "react-icons/md";
-import { FaPlusSquare } from "react-icons/fa";
+import { FaEdit, FaPlusSquare } from "react-icons/fa";
 import Sidebar from './layout/Sidebar';
+import { FaEye, FaTrash } from 'react-icons/fa6';
 
 
  function FinancialManagementExp() {
@@ -140,9 +141,9 @@ import Sidebar from './layout/Sidebar';
                           <th scope="col">Title</th>
                           <th scope="col">Description</th>
                           <th scope="col" className='text-center'>Date</th>
-                          <th scope="col">Amount</th>
-                          <th scope="col">Bill Format</th>
-                          <th scope="col" className='text-center'>Action</th>
+                          <th scope="col" className='text-center'>Amount</th>
+                          <th scope="col" className='text-center'>Bill Format</th>
+                          <th scope="col" className='text-center' >Action</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -151,34 +152,29 @@ import Sidebar from './layout/Sidebar';
                             return (
                               <tr key={index} className='bg-light'>
 
-                                <td style={{ height: '55px', verticalAlign: "middle" }} className='financial-Pnumber'> {val.title}</td>
+                                <td style={{ height: '55px', verticalAlign: "middle",width:"270px"}} className='financial-Pnumber'> {val.title}</td>
 
 
-                                <td style={{ height: '55px', verticalAlign: "middle" }} className='financial-Pnumber'>{val.des}</td>
+                                <td style={{ height: '55px', verticalAlign: "middle",width:"450px" }} className='financial-Pnumber'>{val.des}</td>
 
-                                <td style={{ height: '55px', verticalAlign: "middle" }} className='financial-Pnumber'>{val.date}</td>
+                                <td style={{ height: '55px', verticalAlign: "middle",width:"250px" }} className='financial-Pnumber text-center'>{val.date}</td>
 
 
-                                <td style={{ height: '55px' , verticalAlign: "middle"}} className='financial-Pnumber exp-amt-color'>{val.amt}</td>
+                                <td style={{ height: '55px' , verticalAlign: "middle" ,width:"200px" }} className='financial-Pnumber exp-amt-color text-center'>{val.amt}</td>
 
-                                <td style={{ height: '55px', verticalAlign: "middle" }} className='financial-Pnumber'>
+                                <td style={{ height: '55px', verticalAlign: "middle",width:"200px"  }} className='financial-Pnumber text-center'>
                                   {val.format === 'JPG' ? <CiImageOn className='me-1 jpg-btn' style={{ fontSize: '20px' }} /> : <BiSolidFilePdf className='me-1 pdf-btn' style={{ fontSize: '20px' }} />}
                                   {val.format}
                                 </td>
 
-                                <td className='d-flex' style={{ height: '55px', verticalAlign: "middle" }}>
+                                <td  style={{ height: '55px', verticalAlign: "middle",width:"200px"  }}>
 
-                                  <button className='border-0 bg-light' onClick={() => handleEdit(index)}>
-                                    <MdEditSquare className="edit-btn" />
-                                  </button>
-
-                                  <button className='border-0 bg-light' onClick={() => handleShowViewModal(index)}>
-                                    <IoEyeSharp className='view-btn' />
-                                  </button>
-
-                                  <button className='border-0 bg-light' onClick={() => handleShowDeleteModal(index)}>
-                                    <RiDeleteBin5Fill className="delete-btn" />
-                                  </button>
+                                <div className="d-flex align-items-center justify-content-center " >
+                    <FaEdit className="text-success me-2 fs-5" style={{ cursor: "pointer",background:" rgb(246, 248, 251)"  }} onClick={() =>handleEdit(index)} />
+                    <FaEye className="text-primary me-2 fs-5" style={{ cursor: "pointer",background:" rgb(246, 248, 251)" }} onClick={() => handleShowViewModal(index)} />
+                    <FaTrash className="text-danger fs-5" style={{ cursor: "pointer",background:" rgb(246, 248, 251)" }} onClick={() => handleShowDeleteModal(index)} />
+                  </div>
+                                                       
 
                                 </td>
                               </tr>

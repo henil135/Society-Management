@@ -4,27 +4,31 @@ import { MdEditSquare } from "react-icons/md";
 import { IoEyeSharp } from "react-icons/io5";
 import { useForm } from 'react-hook-form';
 import { Button, Modal, Form } from 'react-bootstrap';
-
+import SImg from '../assets/S.png';
+import HImg from '../assets/H.png';
+import GImg from '../assets/G.png';
+import NImg from '../assets/N.png';
+import AvatarImg from '../assets/Avatar.png';
+import { FaEdit } from 'react-icons/fa';
+import { FaEye, FaTrash } from 'react-icons/fa6';
  function Complaintlist() {
 
-    const [activity, setactivity] = useState([
-        { img: require('../assets/S.png'), name: 'Society Meeting', time: '8:00 PM To 10:00 PM ', date: '24-09-2024' },
-        { img: require('../assets/H.png'), name: 'Holi Festival', time: '8:00 PM To 10:00 PM ', date: '24-09-2024' },
-        { img: require('../assets/G.png'), name: 'Ganesh Chaturthi', time: '8:00 PM To 10:00 PM ', date: '24-09-2024' },
-        { img: require('../assets/N.png'), name: 'Navratri Festival', time: '8:00 PM To 10:00 PM ', date: '24-09-2024' },
-        { img: require('../assets/S.png'), name: 'Society Meeting', time: '8:00 PM To 10:00 PM ', date: '24-09-2024' },
-        // Add more contacts if needed
+    const [activity, setActivity] = useState([
+        { img: SImg, name: 'Society Meeting', time: '8:00 PM To 10:00 PM ', date: '24-09-2024' },
+        { img: HImg, name: 'Holi Festival', time: '8:00 PM To 10:00 PM ', date: '24-09-2024' },
+        { img: GImg, name: 'Ganesh Chaturthi', time: '8:00 PM To 10:00 PM ', date: '24-09-2024' },
+        { img: NImg, name: 'Navratri Festival', time: '8:00 PM To 10:00 PM ', date: '24-09-2024' },
+        { img: SImg, name: 'Society Meeting', time: '8:00 PM To 10:00 PM ', date: '24-09-2024' },
     ]);
 
     const [complaint, setComplaint] = useState([
-        { img: require('../assets/Avatar.png'), complainer: 'Evelyn Harper', complaint: 'Unethical Behavior', date: '01/02/2024', priority: 'Medium', status: 'Panding' },
-        { img: require('../assets/Avatar.png'), complainer: 'Evelyn Harper', complaint: 'Unethical Behavior', date: '01/02/2024', priority: 'Low', status: 'Open' },
-        { img: require('../assets/Avatar.png'), complainer: 'Evelyn Harper', complaint: 'Unethical Behavior', date: '01/02/2024', priority: 'High', status: 'Open' },
-        { img: require('../assets/Avatar.png'), complainer: 'Evelyn Harper', complaint: 'Unethical Behavior', date: '01/02/2024', priority: 'High', status: 'Open' },
-        { img: require('../assets/Avatar.png'), complainer: 'Evelyn Harper', complaint: 'Unethical Behavior', date: '01/02/2024', priority: 'High', status: 'Open' },
-        { img: require('../assets/Avatar.png'), complainer: 'Evelyn Harper', complaint: 'Unethical Behavior', date: '01/02/2024', priority: 'High', status: 'Open' },
-    ])
-
+        { img: AvatarImg, complainer: 'Evelyn Harper', complaint: 'Unethical Behavior', date: '01/02/2024', priority: 'Medium', status: 'Panding' },
+        { img: AvatarImg, complainer: 'Evelyn Harper', complaint: 'Unethical Behavior', date: '01/02/2024', priority: 'Low', status: 'Open' },
+        { img: AvatarImg, complainer: 'Evelyn Harper', complaint: 'Unethical Behavior', date: '01/02/2024', priority: 'High', status: 'Open' },
+        { img: AvatarImg, complainer: 'Evelyn Harper', complaint: 'Unethical Behavior', date: '01/02/2024', priority: 'High', status: 'Open' },
+        { img: AvatarImg, complainer: 'Evelyn Harper', complaint: 'Unethical Behavior', date: '01/02/2024', priority: 'High', status: 'Open' },
+        { img: AvatarImg, complainer: 'Evelyn Harper', complaint: 'Unethical Behavior', date: '01/02/2024', priority: 'High', status: 'Open' },
+    ]);
 
     // New state for delete confirmation modal
     const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -140,19 +144,15 @@ import { Button, Modal, Form } from 'react-bootstrap';
                                                         <td style={{ height: '55px' }}>{val.complaint}</td>
                                                         <td style={{ height: '55px' }}>{val.date}</td>
 
-                                                        <td style={{ height: '55px' }} ><button className='priority-btn btn btn-sm' style={{ backgroundColor: val.priority === 'Low' ? 'rgba(57, 151, 61, 1)' : val.priority === 'High' ? ' rgba(231, 76, 60, 1)' : 'rgba(86, 120, 233, 1)' }}>{val.priority}</button></td>
+                                                        <td  style={{ textAlign:"center"}} ><Button className='priority-btn btn btn-sm mb-2' style={{ backgroundColor: val.priority === 'Low' ? 'rgba(57, 151, 61, 1)' : val.priority === 'High' ? ' rgba(231, 76, 60, 1)' : 'rgba(86, 120, 233, 1)' }}>{val.priority}</Button></td>
 
-                                                        <td style={{ height: '55px' }}><button className='status-btn' style={{ color: val.status === 'Open' ? 'rgba(86, 120, 233, 1)' : val.status === 'Panding' ? 'rgba(255, 195, 19, 1)' : 'rgba(57, 151, 61, 1)', backgroundColor: val.status === 'Open' ? 'rgba(86, 120, 233, 0.1)' : val.status === 'Panding' ? 'rgba(255, 195, 19, 0.1)' : 'rgba(57, 151, 61, 0.1)' }}>{val.status}</button></td>
-                                                        <td className='d-flex' style={{ height: '55px' }}>
-                                                            <button className='border-0 bg-light' onClick={() => handleEdit(index)}>
-                                                                <MdEditSquare className="edit-btn" />
-                                                            </button>
-                                                            <button className='border-0 bg-light' onClick={() => handleShowViewModal(index)}>
-                                                                <IoEyeSharp className='view-btn' />
-                                                            </button>
-                                                            <button className='border-0 bg-light' onClick={() => handleShowDeleteModal(index)}>
-                                                                <RiDeleteBin5Fill className="delete-btn" />
-                                                            </button>
+                                                        <td style={{ height: '55px',textAlign:"center" }}><Button className='status-btn btn btn-sm mb-2' style={{ color: val.status === 'Open' ? 'rgba(86, 120, 233, 1)' : val.status === 'Panding' ? 'rgba(255, 195, 19, 1)' : 'rgba(57, 151, 61, 1)', backgroundColor: val.status === 'Open' ? 'rgba(86, 120, 233, 0.1)' : val.status === 'Panding' ? 'rgba(255, 195, 19, 0.1)' : 'rgba(57, 151, 61, 0.1)' }}>{val.status}</Button></td>
+                                                        <td className=' text-center' style={{ height: '55px'}}>
+                                                        <div className="d-flex align-items-center justify-content-center" >
+                    <FaEdit className="text-success me-2 fs-5" style={{ cursor: "pointer",background:" rgb(246, 248, 251)"  }} onClick={() =>handleEdit(index)} />
+                    <FaEye className="text-primary me-2 fs-5" style={{ cursor: "pointer",background:" rgb(246, 248, 251)" }} onClick={() => handleShowViewModal(index)} />
+                    <FaTrash className="text-danger fs-5" style={{ cursor: "pointer",background:" rgb(246, 248, 251)" }} onClick={() => handleShowDeleteModal(index.id)} />
+                  </div>
                                                         </td>
                                                     </tr>
                                                 )
@@ -356,15 +356,15 @@ import { Button, Modal, Form } from 'react-bootstrap';
             </div>
 
             <div className='col-lg-3 px-1'>
-                <div className="maintenances py-4 px-2 bg-white rounded-lg shadow-md max-w-md mx-auto" style={{ borderRadius: '12px', overflowY: 'auto' }}>
+                <div className="maintenances  px-2 bg-white rounded-lg shadow-md max-w-md mx-auto" style={{ borderRadius: '12px', overflowY: 'auto' }}>
                     <div className="d-flex justify-content-between align-items-center mb-2">
-                        <h2>Upcoming Activity</h2>
+                        <h2 className='mt-4'>Upcoming Activity</h2>
 
-                        <button
-                            className='month-btn rounded-2 d-flex align-items-center bg-light text-dark'
+                        <Button
+                            className='month-btn rounded-2 p-2 bg-light text-dark'
                         >
                             Month
-                        </button>
+                        </Button>
 
                     </div>
 
