@@ -1,5 +1,5 @@
 // Login.js
-import React from 'react';
+// import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import loginImage from '../assets/login.jpg';
@@ -22,6 +22,10 @@ import Logo from './Logo';
     }
   };
 
+  // const {errors,handleError,clerError} = useForm({
+
+  // })
+
   return (
     <div className="container-fluid d-flex align-items-center min-vh-100">
       <div className="row w-100">
@@ -42,17 +46,17 @@ import Logo from './Logo';
             <h2>Login</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="mb-3">
-                <label htmlFor="email" className="form-label">
+                <label htmlFor="Email" className="form-label">
                   Email or Phone <span className="text-danger">*</span>
                 </label>
                 <input
                   type="text"
                   className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-                  id="email"
+                  id="Email"
                   placeholder="Enter Email or Phone"
-                  {...register('email', { required: 'Email or phone is required' })}
+                  {...register('Email', { required: 'Email or phone is required' })}
                 />
-                {errors.email && <div className="invalid-feedback">{errors.email.message}</div>}
+                {errors.email && <div className="invalid-feedback">{errors.Email.message}</div>}
               </div>
 
               <div className="mb-3">

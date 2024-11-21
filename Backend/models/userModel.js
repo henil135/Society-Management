@@ -32,7 +32,6 @@ const userSchema = mongoose.Schema({
   },
   select_society:{
     type: mongoose.Schema.Types.ObjectId, 
-    required: true, 
     ref: 'Society' 
 
   },
