@@ -75,7 +75,7 @@ import Sidebar from './layout/Sidebar';
             
             <h4>Resident Tenant and Owner Details</h4>
            
-            <Button onClick={handleOpenModal} className="mainColor2 mt-3 mt-md-0 justify-content-center">
+            <Button onClick={handleOpenModal} className="mainColor2 mt-3 mt-md-0 justify-content-center p-2" style={{ border:"none"}}>
               <FaPlus style={{ fontSize: "18px", borderRadius: "5px", background: "rgba(255, 255, 255, 1)", color: "#FE512E", marginRight: "8px" }} />
               Add New Resident Details
             </Button>

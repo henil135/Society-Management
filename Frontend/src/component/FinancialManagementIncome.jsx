@@ -13,35 +13,25 @@ import { Button, Modal, Form } from 'react-bootstrap';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import Sidebar from './layout/Sidebar';
-
+import AvatarImg from '../assets/Avatar.png';
 
 
 
 export default function FinancialManagementIncome() {
     const navigate = useNavigate()
 
-  const [maintenance, setMaintenance] = useState([
-    { img: require('../assets/Avatar.png'), name: 'Evelyn Harper', wing: 'A', Unumber: '1001', date: '01/02/2024', status: 'Tenant', Pnumber: '92524 34522', amt: '₹ 1000', penalty: '--', status1: 'Pending', payment: 'Online' },
-
-    { img: require('../assets/Avatar.png'), name: 'Evelyn', wing: 'B', Unumber: '1002', date: '11/02/2024', status: 'Owner', Pnumber: '92524 12365', amt: '₹ 1000', penalty: '250', status1: 'Done', payment: 'Cash' },
-
-    { img: require('../assets/Avatar.png'), name: 'Evelyn Harper', wing: 'A', Unumber: '1001', date: '01/02/2024', status: 'Tenant', Pnumber: '92524 34522', amt: '₹ 1000', penalty: '--', status1: 'Pending', payment: 'Online' },
-
-    { img: require('../assets/Avatar.png'), name: 'Evelyn', wing: 'B', Unumber: '1002', date: '11/02/2024', status: 'Owner', Pnumber: '92524 12365', amt: '₹ 1000', penalty: '250', status1: 'Done', payment: 'Cash' },
-
-    { img: require('../assets/Avatar.png'), name: 'Evelyn Harper', wing: 'A', Unumber: '1001', date: '01/02/2024', status: 'Tenant', Pnumber: '92524 34522', amt: '₹ 1000', penalty: '--', status1: 'Pending', payment: 'Online' },
-
-    { img: require('../assets/Avatar.png'), name: 'Evelyn', wing: 'B', Unumber: '1002', date: '11/02/2024', status: 'Owner', Pnumber: '92524 12365', amt: '₹ 1000', penalty: '250', status1: 'Done', payment: 'Cash' },
-
-    { img: require('../assets/Avatar.png'), name: 'Evelyn Harper', wing: 'A', Unumber: '1001', date: '01/02/2024', status: 'Tenant', Pnumber: '92524 34522', amt: '₹ 1000', penalty: '--', status1: 'Pending', payment: 'Online' },
-
-    { img: require('../assets/Avatar.png'), name: 'Evelyn', wing: 'B', Unumber: '1002', date: '11/02/2024', status: 'Owner', Pnumber: '92524 12365', amt: '₹ 1000', penalty: '250', status1: 'Done', payment: 'Cash' },
-
-    { img: require('../assets/Avatar.png'), name: 'Evelyn Harper', wing: 'A', Unumber: '1001', date: '01/02/2024', status: 'Tenant', Pnumber: '92524 34522', amt: '₹ 1000', penalty: '--', status1: 'Pending', payment: 'Online' },
-
-    { img: require('../assets/Avatar.png'), name: 'Evelyn', wing: 'B', Unumber: '1002', date: '11/02/2024', status: 'Owner', Pnumber: '92524 12365', amt: '₹ 1000', penalty: '250', status1: 'Done', payment: 'Cash' },
-
-  ])
+    const [maintenance, setMaintenance] = useState([
+      { img: AvatarImg, name: 'Evelyn Harper', wing: 'A', Unumber: '1001', date: '01/02/2024', status: 'Tenant', Pnumber: '92524 34522', amt: '₹ 1000', penalty: '--', status1: 'Pending', payment: 'Online' },
+      { img: AvatarImg, name: 'Evelyn', wing: 'B', Unumber: '1002', date: '11/02/2024', status: 'Owner', Pnumber: '92524 12365', amt: '₹ 1000', penalty: '250', status1: 'Done', payment: 'Cash' },
+      { img: AvatarImg, name: 'Evelyn Harper', wing: 'A', Unumber: '1001', date: '01/02/2024', status: 'Tenant', Pnumber: '92524 34522', amt: '₹ 1000', penalty: '--', status1: 'Pending', payment: 'Online' },
+      { img: AvatarImg, name: 'Evelyn', wing: 'B', Unumber: '1002', date: '11/02/2024', status: 'Owner', Pnumber: '92524 12365', amt: '₹ 1000', penalty: '250', status1: 'Done', payment: 'Cash' },
+      { img: AvatarImg, name: 'Evelyn Harper', wing: 'A', Unumber: '1001', date: '01/02/2024', status: 'Tenant', Pnumber: '92524 34522', amt: '₹ 1000', penalty: '--', status1: 'Pending', payment: 'Online' },
+      { img: AvatarImg, name: 'Evelyn', wing: 'B', Unumber: '1002', date: '11/02/2024', status: 'Owner', Pnumber: '92524 12365', amt: '₹ 1000', penalty: '250', status1: 'Done', payment: 'Cash' },
+      { img: AvatarImg, name: 'Evelyn Harper', wing: 'A', Unumber: '1001', date: '01/02/2024', status: 'Tenant', Pnumber: '92524 34522', amt: '₹ 1000', penalty: '--', status1: 'Pending', payment: 'Online' },
+      { img: AvatarImg, name: 'Evelyn', wing: 'B', Unumber: '1002', date: '11/02/2024', status: 'Owner', Pnumber: '92524 12365', amt: '₹ 1000', penalty: '250', status1: 'Done', payment: 'Cash' },
+      { img: AvatarImg, name: 'Evelyn Harper', wing: 'A', Unumber: '1001', date: '01/02/2024', status: 'Tenant', Pnumber: '92524 34522', amt: '₹ 1000', penalty: '--', status1: 'Pending', payment: 'Online' },
+      { img: AvatarImg, name: 'Evelyn', wing: 'B', Unumber: '1002', date: '11/02/2024', status: 'Owner', Pnumber: '92524 12365', amt: '₹ 1000', penalty: '250', status1: 'Done', payment: 'Cash' },
+  ]);
 
 
   const [showViewModal, setShowViewModal] = useState(false);
@@ -81,9 +71,9 @@ export default function FinancialManagementIncome() {
     <div className='card-row dashboard-bg'  style={{marginLeft:"270px", width:"1620px"}}>
       <Navbar />
       <div className='dashboard-bg'>
-        <div className='container-fluid mt-2' style={{marginLeft:"5px"}}>
+        <div className='container-fluid mt-2' style={{marginLeft:"10px"}}>
 
-          <div className='row justify-content-between align-items-center mb-3 pt-2 bg-light mx-0'>
+          <div className='row justify-content-between align-items-center mb-3 pt-2 bg-light mx-0' >
           <div className="col-lg-8 col-md-12 d-flex flex-wrap" >
             {/* Maintenance Amount Card */}
             <div className="col-lg-4 col-md-6 col-sm-12 py-2 px-1" >
@@ -99,7 +89,7 @@ export default function FinancialManagementIncome() {
             </div>
 
             {/* Penalty Amount Card */}
-            <div className="col-lg-4 col-md-6 col-sm-12 py-2 px-1">
+            <div className="col-lg-4 col-md-6 col-sm-12 py-2 px-1" >
               <div className="card border-0 financial-amt-card-shadow">
                 <div className="card-body d-flex align-items-center">
                   <img src={balanceRactangle} width={8} className="me-2" alt="Icon" />
@@ -113,7 +103,7 @@ export default function FinancialManagementIncome() {
           </div>
 
           {/* Set Maintenance Button */}
-          <div className="col-auto">
+          <div className="col-auto" style={{marginBottom:"20px"}}>
             <button
               className="btn btn-primary set-maintainance-btn border-0 py-3 px-3"
               onClick={handleShowSetMaintenanceModal}
@@ -206,27 +196,27 @@ export default function FinancialManagementIncome() {
           </div>
 
           <div className='row px-3 pb-3'>
-              <div className="table-responsive rounded">
+              <div className="table-responsive rounded" >
 
-              <Link to="/Financial-Maintenance" className="btn btn-sm maintainance-income-btn maintainance-income-btn-bg">Maintenance</Link>
+              <Link to="/Financial-Maintenance" className="btn btn-sm maintainance-income-btn maintainance-income-btn-bg" style={{marginLeft:"10px"}}>Maintenance</Link>
 
 
                 <Link to="/Other-Income" className='btn btn-sm  maintainance-income-btn maintainance-income-btn-withoutbg'>Other Income</Link>
 
-                <div className='bg-light' style={{width:"1600px"}}>
+                <div className='bg-light' style={{width:"1570px",marginLeft:"10px"}}>
                   <h3 className=' mb-0 py-3 ps-2 financial-income-title'>Maintenance  Details</h3>
                   <div className='px-3 financial-maintainance-table '>
-                    <table className="table">
+                    <table className="table ">
 
                       <thead className='table-primary '>
-                        <tr style={{ height: '55px' }}>
+                        <tr style={{ height: '70px' }}>
                           <th scope="col">Name</th>
                           <th scope="col">Unit Number</th>
                           <th scope="col" className='text-center'>Date</th>
                           <th scope="col" className='text-center'>Status</th>
-                          <th scope="col">Phone Number</th>
+                          <th scope="col" className='text-center'>Phone Number</th>
                           <th scope="col">Amount</th>
-                          <th scope="col">Penalty</th>
+                          <th scope="col" className='text-center'>Penalty</th>
                           <th scope="col" className='text-center'>Status</th>
                           <th scope="col" className='text-center'>Payment</th>
                           <th scope="col">Action</th>
@@ -243,7 +233,7 @@ export default function FinancialManagementIncome() {
 
                                 <td style={{ height: '55px' }} className='financial-Pnumber'><span className='wing-name'>{val.wing}</span> {val.Unumber}</td>
 
-                                <td style={{ height: '55px' }} className='financial-Pnumber'>{val.date}</td>
+                                <td style={{ height: '55px',textAlign:"center" }} className='financial-Pnumber'>{val.date}</td>
 
                                 <td
                                   style={{
@@ -260,13 +250,13 @@ export default function FinancialManagementIncome() {
                                 </td>
 
 
-                                <td style={{ height: '55px' }} className='financial-Pnumber'>{val.Pnumber}</td>
+                                <td style={{ height: '55px',textAlign:"center" }} className='financial-Pnumber'>{val.Pnumber}</td>
 
                                 <td style={{ height: '55px' }} className='amt'>{val.amt}</td>
 
-                                <td style={{ height: '55px' }}>
+                                <td style={{ height: '55px',textAlign:"center" }}>
                                   <span
-                                    className='financial-penalty-btn btn btn-sm d-flex justify-content-center align-items-center'
+                                    className='financial-penalty-btn btn btn-sm r'
                                     style={{
                                       backgroundColor: val.penalty === '--' ? 'rgba(246, 248, 251, 1)' : 'rgba(231, 76, 60, 1)',
                                       color: val.penalty === '--' ? 'rgba(79, 79, 79, 1)' : 'rgba(255, 255, 255, 1)',
@@ -276,9 +266,9 @@ export default function FinancialManagementIncome() {
                                   </span>
                                 </td>
 
-                                <td style={{ height: '55px' }} >
+                                <td style={{ height: '55px',textAlign:"center" }} >
                                   <span
-                                    className='financial-status-btn btn btn-sm d-flex justify-content-center align-items-center'
+                                    className='financial-status-btn btn btn-sm '
                                     style={{
                                       backgroundColor: val.status1 === 'Pending' ? 'rgba(255, 195, 19, 0.1)' : 'rgba(57, 151, 61, 0.1)',
                                       color: val.status1 === 'Pending' ? 'rgba(255, 195, 19, 1)' : 'rgba(57, 151, 61, 1)',
@@ -289,9 +279,9 @@ export default function FinancialManagementIncome() {
                                   </span>
                                 </td>
 
-                                <td style={{ height: '55px' }}>
+                                <td style={{ height: '55px',textAlign:"center" }}>
                                   <span
-                                    className='financial-status-btn btn btn-sm d-flex justify-content-center align-items-center'
+                                    className='financial-status-btn btn btn-sm '
                                     style={{
                                       backgroundColor: val.payment === 'Online' ? 'rgba(86, 120, 233, 0.1)' : 'rgba(32, 34, 36, 0.05)',
                                       color: val.payment === 'Online' ? 'rgba(86, 120, 233, 1)' : 'rgba(32, 34, 36, 1)',
@@ -302,13 +292,13 @@ export default function FinancialManagementIncome() {
                                   </span>
                                 </td>
 
-                                <td className='d-flex' style={{ height: '55px' }}>
-
-                                  <button className='border-0 bg-light' onClick={() => handleShowViewModal(index)}>
-                                    <IoEyeSharp className='view-btn' />
-                                  </button>
-
-                                </td>
+                                <td style={{  textAlign: "center", verticalAlign: "middle" }}>
+                  <div className="d-flex align-items-center justify-content-center">
+                   
+                    <FaEye className="text-primary me-2" style={{ cursor: "pointer" }} onClick={() => handleShowViewModal(index)} />
+                   
+                  </div>
+                </td>
                               </tr>
                             )
                           })

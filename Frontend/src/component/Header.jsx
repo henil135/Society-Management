@@ -20,10 +20,10 @@ import { Link } from 'react-router-dom';
 
     return (
         <div className="header" style={{ marginLeft: "270px",width:"1631px"}}>
-            <Navbar expand="lg" className="navbar bg-white border-bottom" style={{height:"100%"}}>
+            <Navbar expand="lg" className="navbar bg-white border-bottom" style={{height:"109px"}}>
                 <Container fluid>
                     {/* Search Bar for Large Screens */}
-                    <Navbar.Brand className="d-none d-lg-block w-20">
+                    <Navbar.Brand className="d-none d-lg-block w-20 ms-4">
                         <InputGroup className="align-items-center search-bar rounded-2 px-3 py-2">
                             <FiSearch className="search-icon" />
                             <FormControl
@@ -35,7 +35,7 @@ import { Link } from 'react-router-dom';
                     </Navbar.Brand>
 
                     {/* Right-aligned Icons (Always Visible) */}
-                    <Nav className="ms-auto d-flex align-items-center justify-content-end flex-row py-sm-2 py-md-0">
+                    <Nav className="ms-auto d-flex align-items-center justify-content-end flex-row py-sm-2 py-md-0 me-3" >
                         {/* Search Icon for Small Screens */}
                         <div className="d-lg-none me-3">
                             <FiSearch className="fs-4 text-dark" />

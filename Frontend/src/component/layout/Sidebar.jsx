@@ -15,6 +15,7 @@ import { BsShieldLockFill } from "react-icons/bs";
 import { RiShieldUserFill } from "react-icons/ri";
 import { MdOutlineSecurity } from "react-icons/md";
 import "../../style.css";
+import { FaAddressCard } from "react-icons/fa6";
 
 function Sidebar() {
   const location = useLocation();
@@ -141,6 +142,12 @@ function Sidebar() {
         { key: "visitor-tracking", label: "Visitor Tracking", path: "/visitor-tracking" },
         { key: "emergency-management", label: "Emergency Management", path: "/emergency-management" },
       ],
+    },
+    {
+      key: "personal-details",
+      label: "Personal Details",
+      icon:<FaAddressCard />,// Use any icon of your choice
+      path: "/personal-details",
     },
   ];
 

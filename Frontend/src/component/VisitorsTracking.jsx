@@ -104,8 +104,8 @@ function VisitorsTracking() {
                 </select>
 
                 <Button
-                  className="btn mainColor2 d-flex align-items-center justify-content-center"
-                  style={{ height: "50px", marginBottom: "5px" }}
+                  className="btn mainColor2 d-flex align-items-center justify-content-center p-2"
+                  style={{ height: "50px", marginBottom: "5px", border:"none" }}
                   onClick={handleOpenModal}
                 >
                   <FaPlus

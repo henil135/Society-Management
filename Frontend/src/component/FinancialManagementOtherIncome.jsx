@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Button, Modal, Form } from 'react-bootstrap';
-import Sidebar from './Layout/Sidebar';
+import Sidebar from './layout/Sidebar';
+
 
 
 function FinancialManagementOtherIncome() {
@@ -106,7 +107,7 @@ function FinancialManagementOtherIncome() {
                         <div className='p-0'>
                             <div className="table-responsive rounded pb-3">
 
-                                <Link to="/Financial-Maintenanace" className='btn btn-sm  maintainance-income-btn  maintainance-income-btn-withoutbg'>Maintenance</Link>
+                                <Link to="/Financial-Maintenance" className='btn btn-sm  maintainance-income-btn  maintainance-income-btn-withoutbg'>Maintenance</Link>
 
 
                                 <Link to="/Other-Income" className='btn btn-sm  maintainance-income-btn maintainance-income-btn-bg '>Other Income</Link>
@@ -116,7 +117,7 @@ function FinancialManagementOtherIncome() {
                                     <div className='d-flex justify-content-between align-items-center  py-3 px-2'>
                                         <h3 className=' mb-0  financial-income-title'>Other Income</h3>
 
-                                        <div>
+                                        <div style={{marginBottom:"20px"}}>
                                             <button className='set-maintainance-btn d-flex align-items-center other-income-btn' onClick={handleShow}> Create Other Income </button>
                                         </div>
                                     </div>
