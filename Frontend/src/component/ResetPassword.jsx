@@ -1,27 +1,50 @@
 // ResetPassword.js
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 import ResetImage from '../assets/forgotpassword.jpg'; // Use your own image path
 import '../style.css';
+import toast from "react-hot-toast"
 import Logo from './Logo';
+import axios from 'axios';
 
- function ResetPassword() {
+
+function ResetPassword() {
   const navigate = useNavigate(); // Hook to handle redirection
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const onSubmit = (data) => {
-    console.log('Form Data:', data);
-    // Simulate password reset logic, replace this with real API call
-    setTimeout(() => {
-      alert('Password reset successful!');
-      navigate('/'); // Redirect to login page
-    }, 1000);
+  // const onSubmit = (data) => {
+  //   console.log('Form Data:', data);
+  //   // Simulate password reset logic, replace this with real API call
+  //   setTimeout(() => {
+  //     alert('Password reset successful!');
+  //     navigate('/'); // Redirect to login page
+  //   }, 1000);
+  // };
+  const getLocalEmailOrPhone = () => {
+    // Replace with your logic to retrieve email/phone from local storage
+    const EmailOrPhone = localStorage.getItem('forgotPasswordEmailOrPhone');
+    return EmailOrPhone;
   };
+  const onSubmit = async (data) => {
+    try {
+      const EmailOrPhone = getLocalEmailOrPhone(); 
+      const response = await axios.post("http://localhost:5000/api/v1/reset-password", {...data,EmailOrPhone}); // Replace with your API endpoint
 
+      if (response.data.success) {
+        toast.success('Password reset successful!');
+        navigate('/login');
+      } else {
+        toast.error(response.data.message || 'Password reset failed. Please try again.');
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error('An error occurred. Please try again.');
+    }
+  };
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
   const toggleConfirmPasswordVisibility = () => setShowConfirmPassword((prev) => !prev);
 
@@ -30,9 +53,9 @@ import Logo from './Logo';
       <div className="row w-100">
         {/* Left Section - Illustration */}
         <div className=" left-side col-lg-6 d-flex justify-content-center align-items-center bg-light">
-            <div>
-                <Logo/>
-          <img src={ResetImage} alt="Reset Password" className="ResetPassword-image mx-5 mt-5" style={{ maxWidth: '80%' }} />
+          <div>
+            <Logo />
+            <img src={ResetImage} alt="Reset Password" className="ResetPassword-image mx-5 mt-5" style={{ maxWidth: '80%' }} />
           </div>
         </div>
 

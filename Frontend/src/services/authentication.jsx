@@ -9,17 +9,20 @@ export const GetAllSocieties = async () =>
   await api.get("http://localhost:5000/api/societies/");
 
 // Register
-export const Register = async (data) => 
-  await api.post("http://localhost:5000/api/v1//Registration", data);
+export const Register = async (data) =>
+  await api.post("http://localhost:5000/api/v1/Registration", data);
 
 // Login
-export const login = async (data) => await api.post("http://localhost:5000/api/v1/login", data);
+export const login = async (data) =>
+  await api.post("http://localhost:5000/api/v1/login", data);
 
 // Logout
-export const logout = async () => await api.get("http://localhost:5000/api/v1/logout");
+export const logout = async () =>
+  await api.get("http://localhost:5000/api/v1/logout");
 
 // Send otp
-export const SendOtp = async (data) => await api.post("http://localhost:5000/api/v1/send-otp", data);
+export const SendOtp = async (data) =>
+  await api.post("http://localhost:5000/api/v1/send-otp", data);
 
 // Verify otp
 export const verifyOtp = async (data) =>
