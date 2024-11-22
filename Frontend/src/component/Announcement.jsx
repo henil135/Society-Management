@@ -4,7 +4,8 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { Modal, Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { MdAccessTimeFilled } from "react-icons/md";
-import Sidebar from './layout/Sidebar';
+import Sidebar from "../component/Layout/Sidebar";
+import { FaPlus } from 'react-icons/fa6';
 
 
  function Announcement() {
@@ -120,7 +121,16 @@ import Sidebar from './layout/Sidebar';
                                     <h3 className=' mb-0  financial-income-title' style={{marginLeft:"12px"}}>Announcement</h3>
 
                                     <div>
-                                        <Button className='set-maintainance-btn d-flex align-items-center other-income-btn p-2' style={{marginRight:"10px",marginBottom:"7px", border:"none"}} onClick={handleShow}> Create Announcement</Button>
+                                        <Button className='set-maintainance-btn d-flex align-items-center other-income-btn p-2'  style={{marginRight:"10px" ,border:"none"}} onClick={handleShow}><FaPlus
+    style={{
+      fontSize: "18px",
+      borderRadius: "5px",
+      background: "rgba(255, 255, 255, 1)",
+      color: "#FE512E",
+      marginRight: "8px",
+    }}
+
+  /> Create Announcement</Button>
                                     </div>
                                 </div>
 

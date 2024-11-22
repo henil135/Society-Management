@@ -8,9 +8,11 @@ import { useForm } from 'react-hook-form';
 import { Button, Modal, Form } from 'react-bootstrap';
 import { MdEditSquare } from "react-icons/md";
 import { FaEdit, FaPlusSquare } from "react-icons/fa";
-import Sidebar from './layout/Sidebar';
+import Sidebar from "../component/Layout/Sidebar";
 import { FaEye, FaTrash } from 'react-icons/fa6';
-
+import viewICon from '../Icons/view.png'
+import deleteIcon from '../Icons/delete.png'
+import editIcon from '../Icons/Edit.png'
 
  function FinancialManagementExp() {
 
@@ -137,7 +139,7 @@ import { FaEye, FaTrash } from 'react-icons/fa6';
                     <table className="table">
 
                       <thead className='table-primary '>
-                        <tr style={{ height: '55px' }}>
+                        <tr style={{ height: '70px' }}>
                           <th scope="col">Title</th>
                           <th scope="col">Description</th>
                           <th scope="col" className='text-center'>Date</th>
@@ -150,7 +152,7 @@ import { FaEye, FaTrash } from 'react-icons/fa6';
                         {
                           exp.map((val, index) => {
                             return (
-                              <tr key={index} className='bg-light'>
+                              <tr key={index} className='bg-light' style={{ height: '70px' }}>
 
                                 <td style={{ height: '55px', verticalAlign: "middle",width:"270px"}} className='financial-Pnumber'> {val.title}</td>
 
@@ -170,9 +172,9 @@ import { FaEye, FaTrash } from 'react-icons/fa6';
                                 <td  style={{ height: '55px', verticalAlign: "middle",width:"200px"  }}>
 
                                 <div className="d-flex align-items-center justify-content-center " >
-                    <FaEdit className="text-success me-2 fs-5" style={{ cursor: "pointer",background:" rgb(246, 248, 251)"  }} onClick={() =>handleEdit(index)} />
-                    <FaEye className="text-primary me-2 fs-5" style={{ cursor: "pointer",background:" rgb(246, 248, 251)" }} onClick={() => handleShowViewModal(index)} />
-                    <FaTrash className="text-danger fs-5" style={{ cursor: "pointer",background:" rgb(246, 248, 251)" }} onClick={() => handleShowDeleteModal(index)} />
+                                <img src={editIcon} className="text-success me-2" style={{ cursor: "pointer" }} onClick={() => handleEdit(index)} />
+                                            <img src={viewICon} className="text-primary me-2" style={{ cursor: "pointer" }} onClick={() => handleShowViewModal(index)} />
+                                            <img src={deleteIcon} className="text-danger" style={{ cursor: "pointer" }} onClick={() => handleCloseDeleteModal(index)} />
                   </div>
                                                        
 

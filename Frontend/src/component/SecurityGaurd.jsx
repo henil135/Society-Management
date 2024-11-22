@@ -5,8 +5,10 @@ import { FaCamera, FaClock, FaEdit, FaEye, FaFemale, FaImage, FaMale, FaMoon, Fa
 import Avtar from "../assets/Avatar.png";
 import { LuImagePlus } from 'react-icons/lu';
 import Header from './Navbar';
-import Sidebar from './layout/Sidebar';
-
+import Sidebar from "../component/Layout/Sidebar";
+import viewICon from '../Icons/view.png'
+import deleteIcon from '../Icons/delete.png'
+import editIcon from '../Icons/Edit.png'
  function SecurityGaurd() {
   const [guards, setGuards] = useState([
     { id: 1, name: 'Brooklyn Simmons ', phone: '94564 96321', shift: 'Day', date: '2024-11-28', time: '2:45 PM', gender: 'Male' },
@@ -176,7 +178,7 @@ import Sidebar from './layout/Sidebar';
 
 
           <div className="table-responsive" style={{ border: "1px solid #ddd", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", overflow: "hidden", backgroundColor: "#fff", padding: "20px", marginTop: "20px" }}>
-          <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
+          <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3">
             <h4 className="mb-0">Security Guard Details</h4>
             <Button className="btn mainColor2 d-flex align-items-center justify-content-center p-2" style={{ border:"none"}} onClick={() => setShowModal(true)}>
               <FaPlus
@@ -193,7 +195,7 @@ import Sidebar from './layout/Sidebar';
           </div>
             <Table striped responsive style={{ width: "1550px"}}>
               <thead style={{ background: "rgb(185, 198, 242)", color: "black"}}>
-                <tr>
+                <tr style={{ height: '70px' }}>
                   <th
                     style={{
                       fontSize: "15px",
@@ -214,7 +216,7 @@ import Sidebar from './layout/Sidebar';
               </thead>
               <tbody>
                 {guards.map((guard, index) => (
-                  <tr key={index}>
+                  <tr key={index} style={{ height: '70px' }}>
                     <td style={{ verticalAlign: "middle", width: "220px",padding:"15px" }}>
                       <div >
                         <img
@@ -334,9 +336,9 @@ import Sidebar from './layout/Sidebar';
                     </td>
                     <td className='text-center' style={{ verticalAlign: "middle" }}>
                       <div className="d-flex align-items-center justify-content-center">
-                        <FaEdit className="text-success me-2" style={{ cursor: "pointer" }} onClick={() => handleShowEdit(guard)} />
-                        <FaEye className="text-primary me-2" style={{ cursor: "pointer" }} onClick={() => handleShowView(guard)} />
-                        <FaTrash className="text-danger" style={{ cursor: "pointer" }} onClick={() => handleShowDelete(guard.id)} />
+                      <img src={editIcon} className="text-success me-2" style={{ cursor: "pointer" }} onClick={() => handleShowEdit(guard)} />
+                  <img src={viewICon} className="text-primary me-2" style={{ cursor: "pointer" }} onClick={() => handleShowView(guard)} />
+                  <img src={deleteIcon} className="text-danger" style={{ cursor: "pointer" }} onClick={() => handleShowDelete(guard.id)} />
                       </div>
                     </td>
                   </tr>

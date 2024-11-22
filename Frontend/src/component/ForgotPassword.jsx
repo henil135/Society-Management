@@ -21,8 +21,11 @@ import '../style.css'
       <div className="row w-100">
         {/* Left Section */}
         <div className="left-side col-lg-6 col-md-6 col-sm-12 align-items-center d-flex flex-column justify-content-center">
-            <div>
+            <div >
+              <div className='stack mt-5 '>
+
               <Logo/>
+              </div>
           <img
             className="ForgotPassword-image mx-5 mt-5"
             src={ForgotPasswordImage}

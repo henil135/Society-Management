@@ -4,8 +4,10 @@ import { FaEdit, FaEye, FaPlus, FaTrash } from 'react-icons/fa';
 
 import Avtar from "../assets/Avatar.png"
 import Header from './Navbar';
-import Sidebar from './layout/Sidebar';
-
+import Sidebar from "../component/Layout/Sidebar";
+import viewICon from '../Icons/view.png'
+import deleteIcon from '../Icons/delete.png'
+import editIcon from '../Icons/Edit.png'
  function ComplaintTracking() {
   const [complaints, setComplaints] = useState([
     { id: 1, name: "Evelyn Harper", type: "Unethical Behavior", description: "Providing false information or  ", unit: "A", number: "1001", priority: "Medium", status: "Pending" },
@@ -142,8 +144,8 @@ import Sidebar from './layout/Sidebar';
          
 
           <div className="table-responsive" style={{ border: "1px solid #ddd", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", overflow: "hidden", backgroundColor: "#fff", padding: "20px", marginTop: "20px" }}>
-          <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
-            <h4 className="mb-0">Complaint Tracking</h4>
+          <div className="d-flex flex-column flex-md-row justify-content-between align-items-center ">
+            <h4 className="mb-0" >Complaint Tracking</h4>
             <Button className="btn mainColor2 d-flex align-items-center justify-content-center p-2" style={{ border:"none"}} onClick={handleShowCreateModal}><FaPlus
     style={{
       fontSize: "18px",
@@ -152,11 +154,12 @@ import Sidebar from './layout/Sidebar';
       color: "#FE512E",
       marginRight: "8px",
     }}
+
   />Create Complaint</Button>
           </div>
             <Table striped hover responsive className="mt-3" style={{ width: "1550px" }}>
               <thead className="bg-light">
-                <tr className="rmHead">
+                <tr className="rmHead" style={{ height: '70px' }}>
                   <th className="text-start" style={{ padding: "10px",background:"rgb(185, 198, 242)" }}>Complainer Name</th>
                   <th className="text-start" style={{ padding: "10px",background:"rgb(185, 198, 242)" }}>Complaint Name</th>
                   <th className="text-center" style={{ padding: "10px",background:"rgb(185, 198, 242)" }}>Description</th>
@@ -168,7 +171,7 @@ import Sidebar from './layout/Sidebar';
               </thead>
               <tbody>
                 {complaints.map((complaint) => (
-                  <tr key={complaint.id}>
+                  <tr key={complaint.id} style={{ height: '70px' }}>
                     <td style={tableColumnStyle}>
                       <div style={imageColumnStyle} className="text-center">
                         <img
@@ -237,9 +240,9 @@ import Sidebar from './layout/Sidebar';
                     </td>
                     <td style={{ padding: "15px", textAlign: "center", verticalAlign: "middle" }}>
                       <div className="d-flex align-items-center justify-content-center">
-                        <FaEdit className="text-success me-2" style={{ cursor: "pointer" }} onClick={() => handleEdit(complaint)} />
-                        <FaEye className="text-primary me-2" style={{ cursor: "pointer" }} onClick={() => handleView(complaint)} />
-                        <FaTrash className="text-danger" style={{ cursor: "pointer" }} onClick={() => handleDelete(complaint.id)} />
+                      <img src={editIcon} className="text-success me-2" style={{ cursor: "pointer" }} onClick={() => handleEdit(complaint)} />
+                  <img src={viewICon} className="text-primary me-2" style={{ cursor: "pointer" }} onClick={() => handleView(complaint)} />
+                  <img src={deleteIcon} className="text-danger" style={{ cursor: "pointer" }} onClick={() => handleDelete(complaint.id)} />
                       </div>
                     </td>
                   </tr>

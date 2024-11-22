@@ -12,9 +12,9 @@ import { FaMoneyBill } from "react-icons/fa";
 import { Button, Modal, Form } from 'react-bootstrap';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
-import Sidebar from './layout/Sidebar';
+import Sidebar from "../component/Layout/Sidebar";
 import AvatarImg from '../assets/Avatar.png';
-
+import viewicon from '../Icons/view.png'
 
 
 export default function FinancialManagementIncome() {
@@ -26,11 +26,7 @@ export default function FinancialManagementIncome() {
       { img: AvatarImg, name: 'Evelyn Harper', wing: 'A', Unumber: '1001', date: '01/02/2024', status: 'Tenant', Pnumber: '92524 34522', amt: '₹ 1000', penalty: '--', status1: 'Pending', payment: 'Online' },
       { img: AvatarImg, name: 'Evelyn', wing: 'B', Unumber: '1002', date: '11/02/2024', status: 'Owner', Pnumber: '92524 12365', amt: '₹ 1000', penalty: '250', status1: 'Done', payment: 'Cash' },
       { img: AvatarImg, name: 'Evelyn Harper', wing: 'A', Unumber: '1001', date: '01/02/2024', status: 'Tenant', Pnumber: '92524 34522', amt: '₹ 1000', penalty: '--', status1: 'Pending', payment: 'Online' },
-      { img: AvatarImg, name: 'Evelyn', wing: 'B', Unumber: '1002', date: '11/02/2024', status: 'Owner', Pnumber: '92524 12365', amt: '₹ 1000', penalty: '250', status1: 'Done', payment: 'Cash' },
-      { img: AvatarImg, name: 'Evelyn Harper', wing: 'A', Unumber: '1001', date: '01/02/2024', status: 'Tenant', Pnumber: '92524 34522', amt: '₹ 1000', penalty: '--', status1: 'Pending', payment: 'Online' },
-      { img: AvatarImg, name: 'Evelyn', wing: 'B', Unumber: '1002', date: '11/02/2024', status: 'Owner', Pnumber: '92524 12365', amt: '₹ 1000', penalty: '250', status1: 'Done', payment: 'Cash' },
-      { img: AvatarImg, name: 'Evelyn Harper', wing: 'A', Unumber: '1001', date: '01/02/2024', status: 'Tenant', Pnumber: '92524 34522', amt: '₹ 1000', penalty: '--', status1: 'Pending', payment: 'Online' },
-      { img: AvatarImg, name: 'Evelyn', wing: 'B', Unumber: '1002', date: '11/02/2024', status: 'Owner', Pnumber: '92524 12365', amt: '₹ 1000', penalty: '250', status1: 'Done', payment: 'Cash' },
+      
   ]);
 
 
@@ -226,7 +222,7 @@ export default function FinancialManagementIncome() {
                         {
                           maintenance.map((val, index) => {
                             return (
-                              <tr key={index} className='bg-light'>
+                              <tr key={index} className='bg-light'  style={{ height: '70px' }}>
 
                                 <td style={{ height: '55px' }} className='financial-Pnumber'><img src={val.img} className='me-2' height={40} />{val.name}</td>
 
@@ -295,7 +291,7 @@ export default function FinancialManagementIncome() {
                                 <td style={{  textAlign: "center", verticalAlign: "middle" }}>
                   <div className="d-flex align-items-center justify-content-center">
                    
-                    <FaEye className="text-primary me-2" style={{ cursor: "pointer" }} onClick={() => handleShowViewModal(index)} />
+                     <img src={viewicon} className="text-success me-2" style={{ cursor: "pointer" }}  onClick={() => handleShowViewModal(index)}/>
                    
                   </div>
                 </td>

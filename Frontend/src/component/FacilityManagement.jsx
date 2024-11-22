@@ -5,7 +5,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 
 import { FaPlus } from "react-icons/fa";
 import Header from "./Navbar";
-import Sidebar from "./layout/Sidebar";
+import Sidebar from "../component/Layout/Sidebar";
 
 const FacilityCard = ({ title, date, description, onEdit }) => {
     const [showMenu, setShowMenu] = useState(false);
@@ -135,21 +135,21 @@ const FacilityManagement = () => {
                 <Header />
                 <div className="container-fluid bg-white rounded shadow-sm p-3" style={{ marginTop: "55px", width: "1550px", marginLeft: "55px" }}>
                     <div className="d-flex align-items-center justify-content-between">
-                        <h3>Facility Management</h3>
+                        <h4 className="mb-0" >Facility Management</h4>
 
 
-                        <Button className="text-white mainColor2 d-flex gap-2 align-items-center" style={{height:"50px",marginBottom:"15px", border:"none"}} onClick={() => {
+                        <Button className="btn mainColor2 d-flex align-items-center justify-content-center p-2" style={{ border:"none"}}  onClick={() => {
                             setIsEditing(false);
                             handleShowModal();
                         }}> <FaPlus
-                                style={{
-                                    fontSize: "18px",
-                                    borderRadius: "5px",
-                                    background: "rgba(255, 255, 255, 1)",
-                                    color: "#FE512E",
-                                   
-
-                                }}
+                        style={{
+                            fontSize: "18px",
+                            borderRadius: "5px",
+                            background: "rgba(255, 255, 255, 1)",
+                            color: "#FE512E",
+                            marginRight: "8px",
+                          }}
+                      
                             />
                             Create Facility
                         </Button>

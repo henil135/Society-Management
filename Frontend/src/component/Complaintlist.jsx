@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-import { RiDeleteBin5Fill } from "react-icons/ri";
-import { MdEditSquare } from "react-icons/md";
-import { IoEyeSharp } from "react-icons/io5";
+
 import { useForm } from 'react-hook-form';
 import { Button, Modal, Form } from 'react-bootstrap';
 import SImg from '../assets/S.png';
@@ -9,8 +7,9 @@ import HImg from '../assets/H.png';
 import GImg from '../assets/G.png';
 import NImg from '../assets/N.png';
 import AvatarImg from '../assets/Avatar.png';
-import { FaEdit } from 'react-icons/fa';
-import { FaEye, FaTrash } from 'react-icons/fa6';
+import viewICon from '../Icons/view.png'
+import deleteIcon from '../Icons/delete.png'
+import editIcon from '../Icons/Edit.png'
  function Complaintlist() {
 
     const [activity, setActivity] = useState([
@@ -120,7 +119,7 @@ import { FaEye, FaTrash } from 'react-icons/fa6';
                 <div className='col-lg-9 py-0 px-1 bg-light'>
                     <div className="table-responsive Complaint-table rounded">
 
-                        <div className='bg-light'>
+                        <div >
                             <h3 className=' mb-0 py-3 ps-2  financial-income-title'>Maintenance  Details</h3>
                             <div className='px-3 financial-maintainance-table '>
 
@@ -139,7 +138,7 @@ import { FaEye, FaTrash } from 'react-icons/fa6';
                                         {
                                             complaint.map((val, index) => {
                                                 return (
-                                                    <tr key={index} className='bg-light'>
+                                                    <tr key={index} >
                                                         <td style={{ height: '55px' }}><img src={val.img} className='me-2' height={40} />{val.complainer}</td>
                                                         <td style={{ height: '55px' }}>{val.complaint}</td>
                                                         <td style={{ height: '55px' }}>{val.date}</td>
@@ -147,13 +146,13 @@ import { FaEye, FaTrash } from 'react-icons/fa6';
                                                         <td  style={{ textAlign:"center"}} ><Button className='priority-btn btn btn-sm mb-2' style={{ backgroundColor: val.priority === 'Low' ? 'rgba(57, 151, 61, 1)' : val.priority === 'High' ? ' rgba(231, 76, 60, 1)' : 'rgba(86, 120, 233, 1)' }}>{val.priority}</Button></td>
 
                                                         <td style={{ height: '55px',textAlign:"center" }}><Button className='status-btn btn btn-sm mb-2' style={{ color: val.status === 'Open' ? 'rgba(86, 120, 233, 1)' : val.status === 'Panding' ? 'rgba(255, 195, 19, 1)' : 'rgba(57, 151, 61, 1)', backgroundColor: val.status === 'Open' ? 'rgba(86, 120, 233, 0.1)' : val.status === 'Panding' ? 'rgba(255, 195, 19, 0.1)' : 'rgba(57, 151, 61, 0.1)' }}>{val.status}</Button></td>
-                                                        <td className=' text-center' style={{ height: '55px'}}>
-                                                        <div className="d-flex align-items-center justify-content-center" >
-                    <FaEdit className="text-success me-2 fs-5" style={{ cursor: "pointer",background:" rgb(246, 248, 251)"  }} onClick={() =>handleEdit(index)} />
-                    <FaEye className="text-primary me-2 fs-5" style={{ cursor: "pointer",background:" rgb(246, 248, 251)" }} onClick={() => handleShowViewModal(index)} />
-                    <FaTrash className="text-danger fs-5" style={{ cursor: "pointer",background:" rgb(246, 248, 251)" }} onClick={() => handleShowDeleteModal(index.id)} />
-                  </div>
-                                                        </td>
+                                                        <td style={{ height: '55px',  textAlign: "center", verticalAlign: "middle"}}>
+                                        <div className="d-flex align-items-center justify-content-center">
+                                            <img src={editIcon} className="text-success me-2" style={{ cursor: "pointer" }} onClick={() => handleEdit(complaint)} />
+                                            <img src={viewICon} className="text-primary me-2" style={{ cursor: "pointer" }} onClick={() => handleView(complaint)} />
+                                            <img src={deleteIcon} className="text-danger" style={{ cursor: "pointer" }} onClick={() => handleDelete(index)} />
+                                        </div>
+                                    </td>
                                                     </tr>
                                                 )
                                             })

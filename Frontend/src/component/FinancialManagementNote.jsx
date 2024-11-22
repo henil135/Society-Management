@@ -3,7 +3,7 @@ import Navbar from './Navbar';
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Modal, Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import Sidebar from './layout/Sidebar';
+import Sidebar from "../component/Layout/Sidebar";
 
 
  function FinancialManagementNote() {
