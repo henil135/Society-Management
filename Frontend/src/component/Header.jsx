@@ -83,7 +83,7 @@ import { Link } from 'react-router-dom';
 
                         {/* User Profile */}
                         <div className="d-flex align-items-center">
-                            <Link to="/home/profile" className="d-flex align-items-center text-decoration-none">
+                            <Link to="/profile" className="d-flex align-items-center text-decoration-none">
                                 <img
                                     src={avtar}
                                     alt="User"

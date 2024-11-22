@@ -4,8 +4,10 @@ import { FaEdit, FaEye, FaPlus, FaTrash } from 'react-icons/fa';
 
 import Avtar from "../assets/Avatar.png";
 import Header from './Navbar';
-import Sidebar from './layout/Sidebar';
-
+import Sidebar from "../component/Layout/Sidebar";
+import viewICon from '../Icons/view.png'
+import deleteIcon from '../Icons/delete.png'
+import editIcon from '../Icons/Edit.png'
 function SecurityProtocols() {
   const [protocols, setProtocols] = useState([
     { id: 1, title: "Physical Security", description: "Providing false information or Providing", date: "2022-05-20", time: "3:45 PM" },
@@ -244,21 +246,22 @@ function SecurityProtocols() {
           </Modal>
 
           <div className="table-responsive" style={{ border: "1px solid #ddd", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", overflow: "hidden", backgroundColor: "#fff", padding: "20px", marginTop: "20px" }}>
-            <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
-              <h4 className="mb-0">Security Protocols</h4>
-              <Button className="btn mainColor2 d-flex align-items-center justify-content-center p-2" style={{ height: "50px", marginBottom: "15px", border:"none" }} onClick={handleShowCreate}><FaPlus
-                style={{
+            <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3">
+              <h4 className="mb-0" >Security Protocols</h4>
+              <Button className="btn mainColor2 d-flex align-items-center justify-content-center p-2" style={{ border:"none"}} onClick={handleShowCreate}><FaPlus
+                 style={{
                   fontSize: "18px",
                   borderRadius: "5px",
                   background: "rgba(255, 255, 255, 1)",
                   color: "#FE512E",
                   marginRight: "8px",
                 }}
+            
               />Create Protocols</Button>
             </div>
             <Table hover responsive style={{ width: "1550px" }}>
               <thead style={{ background: "rgb(185, 198, 242)", color: "black" }}>
-                <tr className="text-start">
+                <tr className="text-start" style={{ height: '70px' }}>
                   <th style={{ width: "280px" }}>Title</th>
                   <th style={{ width: "350px" }} className="text-start">Description</th>
                   <th className="text-center">Date</th>
@@ -268,7 +271,7 @@ function SecurityProtocols() {
               </thead>
               <tbody>
                 {protocols.map((protocol) => (
-                  <tr key={protocol.id} className="text-start">
+                  <tr key={protocol.id} className="text-start" style={{ height: '70px' }}>
                     <td style={{ padding: "15px" }}>
                       <div style={{ display: "flex", alignItems: "center", justifyContent: "start" }}>
                         {protocol.title}
@@ -296,17 +299,9 @@ function SecurityProtocols() {
                     </td>
                     <td style={{ padding: "15px", textAlign: "center", verticalAlign: "middle" }}>
                       <div className="d-flex align-items-center justify-content-center">
-                        <FaEdit
-                          className="text-success me-2"
-                          style={{ cursor: "pointer" }}
-                          onClick={() => handleShowEdit(protocol)}
-                        />
-                        <FaEye
-                          className="text-primary me-2"
-                          style={{ cursor: "pointer" }}
-                          onClick={() => handleShowView(protocol)}
-                        />
-                        <FaTrash className="text-danger" style={{ cursor: "pointer" }} onClick={() => handleShowDelete(protocol.id)} />
+                      <img src={editIcon} className="text-success me-2" style={{ cursor: "pointer" }} onClick={() => handleShowEdit(protocol)} />
+                  <img src={viewICon} className="text-primary me-2" style={{ cursor: "pointer" }} onClick={() => handleShowView(protocol)} />
+                  <img src={deleteIcon} className="text-danger" style={{ cursor: "pointer" }} onClick={() => handleShowDelete(protocol.id)} />
                       </div>
                     </td>
                   </tr>

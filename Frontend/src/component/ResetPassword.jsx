@@ -31,7 +31,10 @@ import Logo from './Logo';
         {/* Left Section - Illustration */}
         <div className=" left-side col-lg-6 d-flex justify-content-center align-items-center bg-light">
             <div>
+              <div className='stack mt-5 '>
+
                 <Logo/>
+              </div>
           <img src={ResetImage} alt="Reset Password" className="ResetPassword-image mx-5 mt-5" style={{ maxWidth: '80%' }} />
           </div>
         </div>
@@ -55,7 +58,7 @@ import Logo from './Logo';
                     type="button"
                     className="btn btn-outline-secondary"
                     onClick={togglePasswordVisibility}
-                  >
+                    >
                     {showPassword ? <FaEyeSlash /> : <FaEye />}
                   </button>
                 </div>

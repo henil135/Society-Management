@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Sidebar from "./layout/Sidebar";
+import Sidebar from "../component/Layout/Sidebar";
 import Header from "./Navbar";
 import { Button, Table, Form, Modal } from "react-bootstrap";
 import Avtar from "../assets/Avatar.png";
@@ -91,7 +91,7 @@ function VisitorsTracking() {
               marginTop: "20px",
             }}
           >
-            <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
+            <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3">
               <h4 className="mb-0">Visitors Tracking</h4>
               <div className="d-flex gap-3 align-items-center">
                 <select
@@ -105,7 +105,7 @@ function VisitorsTracking() {
 
                 <Button
                   className="btn mainColor2 d-flex align-items-center justify-content-center p-2"
-                  style={{ height: "50px", marginBottom: "5px", border:"none" }}
+                  style={{ height: "45px", marginBottom: "5px", border:"none" }}
                   onClick={handleOpenModal}
                 >
                   <FaPlus
@@ -123,7 +123,7 @@ function VisitorsTracking() {
             </div>
             <Table hover responsive>
               <thead style={{ background: "rgb(185, 198, 242)", color: "black" }}>
-                <tr className="text-start">
+                <tr className="text-start" style={{ height: '70px' }}>
                   <th >Visitor Name</th>
                   <th>Phone Number</th>
                   <th>Date</th>
@@ -133,7 +133,7 @@ function VisitorsTracking() {
               </thead>
               <tbody>
                 {details.map((details) => (
-                  <tr key={details.id} className="text-start">
+                  <tr key={details.id} className="text-start" style={{ height: '70px' }}>
                     <td style={{ paddingTop: "15px", paddingBottom: "15px" }}>
                       <div
                         style={{

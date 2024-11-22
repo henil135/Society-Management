@@ -4,7 +4,7 @@ import {Table } from 'react-bootstrap';
 
 import Avtar from "../assets/Avatar.png"
 import Header from './Navbar';
-import Sidebar from './layout/Sidebar';
+import Sidebar from "../component/Layout/Sidebar";
  function DetailTracking() {
   const [details, setDetails] = useState([
     { id: 1, name: "Evelyn Harper", phoneNumber: "9313876347", date: "20/02/2002", unit: "A", number: "1001", time: "3:45 PM" },
@@ -29,7 +29,7 @@ import Sidebar from './layout/Sidebar';
           </div>
             <Table hover responsive style={{ width: "1550px" }}>
               <thead style={{background:"rgb(185, 198, 242)", color: "black" }}>
-                <tr className="text-start">
+                <tr className="text-start" style={{ height: '70px' }}>
                   <th style={{width:"300px"}}>Visitor Name</th>
                   <th style={{width:"350px"}} className='text-center'>Phone Number</th>
                   <th style={{width:"350px"}} className="text-center">Date</th>
@@ -39,7 +39,7 @@ import Sidebar from './layout/Sidebar';
               </thead>
               <tbody >
                 {details.map((details) => (
-                  <tr key={details.id} className="text-start">
+                  <tr key={details.id} className="text-start" style={{ height: '70px' }}>
                     <td style={{ padding: "15px" }}>
                       <div style={{ display: "flex", alignItems: "center", justifyContent: "start" }}>
                         <img

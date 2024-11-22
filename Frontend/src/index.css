@@ -352,32 +352,33 @@ input:focus {
   color: black;
 }
 
-.delete-btn{
+/* .delete-btn{
   color: rgba(231, 76, 60, 1) !important;
   background: rgba(246, 248, 251, 1) !important;
-  /* width: 30px !important;
-  height: 30px; */
+  width: 30px !important;
+  height: 30px;
   line-height: 24px;
-  padding:10px ;
+  padding:0px  5px 3px;
+
   border: none !important;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 24px;
-}
+} */
 
-.edit-btn{
+/* .edit-btn{
   color: rgba(57, 151, 61, 1)!important;
   background: rgba(246, 248, 251, 1) !important;
-  /* width: 30px !important;
-  height: 24px; */
+  width: 30px !important;
+  height: 24px;
   line-height: 24px;
   padding:0px  5px 3px;
   display: flex;
   justify-content: center;
   align-items: center;
   border: none !important;
-}
+} */
 
 /* maintenances start */
 
@@ -442,16 +443,19 @@ input:focus {
   vertical-align: middle;
 }
 
-.view-btn{
+/* .view-btn{
   color: rgba(86, 120, 233, 1) !important;
   background: rgba(246, 248, 251, 1) !important;
   width: 30px !important;
   height: 24px;
   line-height: 24px;
-
+  padding:0px  5px 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: none !important;
 
-}
+} */
 
 .priority-btn{
   width: 100px;
@@ -742,7 +746,7 @@ input:focus {
 .profile-btn{
   background: linear-gradient(90deg, #FE512E 0%, #F09619 100%);
   color: white !important;
-  padding: 12px 15px !important;
+  /* padding: 12px 15px !important; */
   font-size: 18px !important;
   font-weight: 600 !important;
   border-radius: 10px !important;
@@ -825,4 +829,24 @@ input:focus {
 .anouncement-view-p{
   font-size: 18px;
   font-weight: 400 !important;
+}
+
+
+/* personal details */
+.text-gray{
+  color: #A7A7A7;
+  font-weight: 400;
+}
+
+
+.Owner1{
+  background: #FFFFFF1A;
+  color: #ffffff;
+}
+.badge1 {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  text-align: center; /* Center text within badge */
 }
