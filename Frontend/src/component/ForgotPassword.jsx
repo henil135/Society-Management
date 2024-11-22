@@ -1,26 +1,49 @@
 // ForgotPassword.js
-import React from 'react';
+// import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import ForgotPasswordImage from '../assets/forgotpassword.jpg'; // Use the correct path for your image
 import Logo from './Logo';
 import '../style.css'
+import toast from "react-hot-toast"
+import axios from 'axios';
 
- function ForgotPassword() {
+function ForgotPassword() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    console.log('Forgot Password Submitted:', data);
-    // Navigate to EnterOtp page with emailOrPhone as state
-    navigate('/enter-otp', { state: { emailOrPhone: data.emailOrPhone } });
+  // const onSubmit = (data) => {
+  //   console.log('Forgot Password Submitted:', data);
+  //   // Navigate to EnterOtp page with emailOrPhone as state
+  //   navigate('/enter-otp', { state: { EmailOrPhone: data.EmailOrPhone } });
+  // };
+
+  const onSubmit = async (data) => {
+    try {
+      localStorage.setItem('forgotPasswordEmailOrPhone', data.EmailOrPhone);
+
+      const response = await axios.post("http://localhost:5000/api/v1/send-otp",
+        data); // Replace with your API endpoint
+
+      if (response.data.success) {
+        toast.success('OTP sent successfully. Please check your email or phone.');
+        navigate('/enter-otp', { state: { EmailOrPhone: data.EmailOrPhone } });
+      } else {
+        toast.error(response.data.message || 'An error occurred. Please try again.');
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error('An error occurred. Please try again.');
+    }
   };
+
 
   return (
     <div className="container-fluid d-flex align-items-center min-vh-100">
       <div className="row w-100">
         {/* Left Section */}
         <div className="left-side col-lg-6 col-md-6 col-sm-12 align-items-center d-flex flex-column justify-content-center">
+
             <div >
               <div className='stack mt-5 '>
 
@@ -48,9 +71,9 @@ import '../style.css'
                 <input
                   type="text"
                   className={`form-control ${errors.emailOrPhone ? 'is-invalid' : ''}`}
-                  id="emailOrPhone"
+                  id="EmailOrPhone"
                   placeholder="Enter Email or Phone"
-                  {...register('emailOrPhone', {
+                  {...register('EmailOrPhone', {
                     required: 'Email or phone is required',
                     pattern: {
                       value: /^[^\s@]+@[^\s@]+\.[^\s@]+$|^\d{10}$/,
@@ -58,8 +81,8 @@ import '../style.css'
                     },
                   })}
                 />
-                {errors.emailOrPhone && (
-                  <div className="invalid-feedback">{errors.emailOrPhone.message}</div>
+                {errors.EmailOrPhone && (
+                  <div className="invalid-feedback">{errors.EmailOrPhone.message}</div>
                 )}
               </div>
 
