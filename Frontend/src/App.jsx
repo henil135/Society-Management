@@ -24,8 +24,11 @@ import SecurityGaurd from './component/SecurityGaurd';
 import Announcement from './component/Announcement';
 import VisitorsTracking from './component/VisitorsTracking';
 import EmergencyManagement from './component/EmergencyManagement';
+import Profile from './component/Profile';
 
-
+import EditProfile from './component/EditProfile'
+import PersonalDetail from './component/PersonalDetail';
+import TenantPersonalDetails from './component/TenantPersonalDetails';
 function App() {
   return (
     <div className="d-flex">
@@ -52,6 +55,10 @@ function App() {
           <Route path="/announcement" element={<Announcement/>} />
           <Route path='/visitor-tracking' element={<VisitorsTracking/>}/>
           <Route path='/emergency-management' element={<EmergencyManagement/>}/>
+          <Route path='/profile' element={<Profile/>}/>
+          <Route path='/EditProfile' element={<EditProfile/>}/>
+          <Route element={<PersonalDetail/>} path='/personal-details' />
+            <Route element={<TenantPersonalDetails/>} path='/personal-details-tenant' />
         </Routes> 
       </BrowserRouter>
     </div>

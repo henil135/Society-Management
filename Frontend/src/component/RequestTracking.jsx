@@ -4,7 +4,10 @@ import { FaEdit, FaEye, FaPlus, FaTrash } from 'react-icons/fa';
 
 import Avtar from "../assets/Avatar.png"
 import Header from './Navbar';
-import Sidebar from './layout/Sidebar';
+import Sidebar from "../component/Layout/Sidebar";
+import viewICon from '../Icons/view.png'
+import deleteIcon from '../Icons/delete.png'
+import editIcon from '../Icons/Edit.png'
 
 function RequestTracking() {
   const [requests, setRequests] = useState([
@@ -142,18 +145,19 @@ function RequestTracking() {
         <h4 className="mb-0" style={{marginLeft:"20px"}}>Request Tracking</h4>
         <Button className="btn mainColor2 d-flex align-items-center justify-content-center p-2" style={{marginRight:"20px", border:"none"}} onClick={handleShowCreateModal}>
         <FaPlus
-    style={{
+     style={{
       fontSize: "18px",
       borderRadius: "5px",
       background: "rgba(255, 255, 255, 1)",
       color: "#FE512E",
       marginRight: "8px",
     }}
+
   />Create Request</Button>
       </div>
         <Table striped hover responsive style={{ width: "1550px",marginLeft:"15px" }}>
           <thead className="bg-light">
-            <tr className="rmHead ">
+            <tr className="rmHead " style={{ height: '70px' }}>
               <th className="text-start" style={{ padding: "5px",fontSize:"14px",paddingLeft:"20px",background:"rgb(185, 198, 242)"}}>Requester Name</th>
               <th className="text-start" style={{ padding: "8px",fontSize:"14px",background:"rgb(185, 198, 242)" }}>Request Name</th>
               <th className="text-start" style={{ padding: "8px",fontSize:"14px",background:"rgb(185, 198, 242)" }}>Description</th>
@@ -166,7 +170,7 @@ function RequestTracking() {
           </thead>
           <tbody>
             {requests.map((request) => (
-              <tr key={request.id}>
+              <tr key={request.id} style={{ height: '70px' }}>
                 <td style={tableColumnStyle}>
                   <div style={imageColumnStyle} className="text-center">
                     <img
@@ -234,9 +238,9 @@ function RequestTracking() {
                 </td>
                 <td style={{ padding: "15px", textAlign: "center", verticalAlign: "middle" }}>
                   <div className="d-flex align-items-center justify-content-center">
-                    <FaEdit className="text-success me-2" style={{ cursor: "pointer" }} onClick={() => handleEdit(request)} />
-                    <FaEye className="text-primary me-2" style={{ cursor: "pointer" }} onClick={() => handleView(request)} />
-                    <FaTrash className="text-danger" style={{ cursor: "pointer" }} onClick={() => handleDelete(request.id)} />
+                  <img src={editIcon} className="text-success me-2" style={{ cursor: "pointer" }} onClick={() => handleEdit(request)} />
+                  <img src={viewICon} className="text-primary me-2" style={{ cursor: "pointer" }} onClick={() => handleView(request)} />
+                  <img src={deleteIcon} className="text-danger" style={{ cursor: "pointer" }} onClick={() => handleDelete(request.id)} />
                   </div>
                 </td>
               </tr>

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Button, Modal, Form } from 'react-bootstrap';
-import Sidebar from './layout/Sidebar';
+import Sidebar from "../component/Layout/Sidebar";
 
 
 

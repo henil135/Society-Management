@@ -31,6 +31,9 @@ import { useLocation, Link } from 'react-router-dom'; // Import Link from react-
         setShowNotifications(false);
     };
 
+
+    
+  
     return (
         <>
             <div className='header'  >
@@ -89,7 +92,7 @@ import { useLocation, Link } from 'react-router-dom'; // Import Link from react-
 
                                 {/* User Profile as a Link */}
                                 <Dropdown align="center" className="d-flex align-items-center profile">
-                                    <Link to="/home/profile" className="d-flex align-items-center text-decoration-none">
+                                    <Link to="/profile" className="d-flex align-items-center text-decoration-none">
                                         <img
                                             src={avtar}
                                             alt="User"

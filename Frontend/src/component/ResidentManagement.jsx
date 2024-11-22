@@ -7,9 +7,10 @@ import { FaUser, FaHome, FaTag, FaEye, FaEdit, FaPlus } from 'react-icons/fa'; /
 import '../style.css';
 import Avtar from '../assets/Avatar.png';
 import Header from './Navbar';
-import Sidebar from './layout/Sidebar';
+import Sidebar from "../component/Layout/Sidebar";
 
-
+import editIcon from '../Icons/Edit.png'
+import viewicon from '../Icons/view.png'
 
 
  function ResidentManagement() {
@@ -84,14 +85,13 @@ import Sidebar from './layout/Sidebar';
             <table className="table striped hover responsive">
               
               <thead>
-                <tr className="rmHead">
+                <tr className="rmHead"  style={{ height: '70px' }}>
                   <th
                     className="text-start"
                     style={{
                       padding: "10px",
                       width: "200px",
                       background: "rgb(185, 198, 242)",
-                      fontFamily: "Poppins, sans-serif",
                       fontSize: "14px",
                       fontWeight: 600,
                       lineHeight: "21px",
@@ -104,7 +104,7 @@ import Sidebar from './layout/Sidebar';
                   </th>
 
                   <th className="text-center" style={{
-                    padding: "10px", width: "150px", background: "rgb(185, 198, 242)", fontFamily: "Poppins, sans-serif",
+                    padding: "10px", width: "150px", background: "rgb(185, 198, 242)", 
                     fontSize: "14px",
                     fontWeight: 600,
                     lineHeight: "21px",
@@ -113,7 +113,7 @@ import Sidebar from './layout/Sidebar';
                     textDecorationSkipInk: "none",
                   }}>Unit Number</th>
                   <th className="text-center" style={{
-                    padding: "10px", width: "150px", background: "rgb(185, 198, 242)", fontFamily: "Poppins, sans-serif",
+                    padding: "10px", width: "150px", background: "rgb(185, 198, 242)",
                     fontSize: "14px",
                     fontWeight: 600,
                     lineHeight: "21px",
@@ -122,7 +122,7 @@ import Sidebar from './layout/Sidebar';
                     textDecorationSkipInk: "none",
                   }}>Unit Status</th>
                   <th className="text-center" style={{
-                    padding: "10px", width: "150px", background: "rgb(185, 198, 242)", fontFamily: "Poppins, sans-serif",
+                    padding: "10px", width: "150px", background: "rgb(185, 198, 242)", 
                     fontSize: "14px",
                     fontWeight: 600,
                     lineHeight: "21px",
@@ -131,7 +131,7 @@ import Sidebar from './layout/Sidebar';
                     textDecorationSkipInk: "none",
                   }}>Resident Status</th>
                   <th className="text-center" style={{
-                    padding: "10px", width: "150px", background: "rgb(185, 198, 242)", fontFamily: "Poppins, sans-serif",
+                    padding: "10px", width: "150px", background: "rgb(185, 198, 242)", 
                     fontSize: "14px",
                     fontWeight: 600,
                     lineHeight: "21px",
@@ -140,7 +140,7 @@ import Sidebar from './layout/Sidebar';
                     textDecorationSkipInk: "none",
                   }}>Phone Number</th>
                   <th className="text-center" style={{
-                    padding: "10px", width: "130px", background: "rgb(185, 198, 242)", fontFamily: "Poppins, sans-serif",
+                    padding: "10px", width: "130px", background: "rgb(185, 198, 242)", 
                     fontSize: "14px",
                     fontWeight: 600,
                     lineHeight: "21px",
@@ -149,7 +149,7 @@ import Sidebar from './layout/Sidebar';
                     textDecorationSkipInk: "none",
                   }}>Members</th>
                   <th className="text-center" style={{
-                    padding: "10px", width: "130px", background: "rgb(185, 198, 242)", fontFamily: "Poppins, sans-serif",
+                    padding: "10px", width: "130px", background: "rgb(185, 198, 242)", 
                     fontSize: "14px",
                     fontWeight: 600,
                     lineHeight: "21px",
@@ -158,7 +158,7 @@ import Sidebar from './layout/Sidebar';
                     textDecorationSkipInk: "none",
                   }}>Vehicle</th>
                   <th className="text-center" style={{
-                    padding: "10px", width: "150px", background: "rgb(185, 198, 242)", fontFamily: "Poppins, sans-serif",
+                    padding: "10px", width: "150px", background: "rgb(185, 198, 242)", 
                     fontSize: "14px",
                     fontWeight: 600,
                     lineHeight: "21px",
@@ -170,7 +170,7 @@ import Sidebar from './layout/Sidebar';
               </thead>
               <tbody>
                 {residents.map((resident, index) => (
-                  <tr key={index} className="align-middle">
+                  <tr key={index} className="align-middle"  style={{ height: '70px' }}>
                     <td className="px-3">
                       <div style={imageColumnStyle} className="text-center">
                         <img
@@ -238,8 +238,9 @@ import Sidebar from './layout/Sidebar';
                     <td className="text-center"
                     style={{ verticalAlign: "middle" }}>
                       <div className="d-flex align-items-center justify-content-center">
-                        <FaEdit className="text-success me-2" onClick={handleOpenModal} style={{ cursor: "pointer", width: "20px" }}  />
-                        <FaEye className="text-primary me-2"  style={{ cursor: "pointer", width: "20px" }} />
+                        <img src={editIcon} className="text-success me-2" style={{ cursor: "pointer" }}  onClick={handleOpenModal} />
+                        <img src={viewicon} className="text-success me-2" style={{ cursor: "pointer" }}  />
+                        
                       </div>
                     </td>
                   </tr>

@@ -2,21 +2,25 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, useLocation } from "react-router-dom";
 import {
-  FaTh,
-  FaBullhorn,
+  
   FaSignOutAlt,
   FaChevronDown,
   FaChevronUp,
 } from "react-icons/fa";
-import { PiBuildingOfficeBold, PiMoneyWavyFill } from "react-icons/pi";
-import { AiFillDollarCircle } from "react-icons/ai";
-import { TbMessage2Cancel } from "react-icons/tb";
-import { BsShieldLockFill } from "react-icons/bs";
-import { RiShieldUserFill } from "react-icons/ri";
-import { MdOutlineSecurity } from "react-icons/md";
-import "../../style.css";
-import { FaAddressCard } from "react-icons/fa6";
 
+import "../../style.css";
+
+import dashboardIcon from '../../Icons/image.png'; 
+import residentIcon from '../../Icons/money.png';
+import financialIcon from '../../Icons/dollar-square.png';
+import facalityIcon from '../../Icons/building.png';
+import complainrtrackingIcon from '../../Icons/sms-tracking.png'
+import securitymanagementIcon from '../../Icons/shield-security.png'
+import securityguardIcon from '../../Icons/security-user.png'
+import announcementIcon from '../../Icons/Announcement.png'
+import personaldetailsIcon from '../../Icons/personalcard.png'
+import securityIcon from '../../Icons/security.png'
+import Logo from "../Logo";
 function Sidebar() {
   const location = useLocation();
   const [activeItem, setActiveItem] = useState("");
@@ -81,17 +85,22 @@ function Sidebar() {
   };
 
   const menuItems = [
-    { key: "dashboard", label: "Dashboard", icon: <FaTh />, path: "/dashboard" },
+    {
+      key: "dashboard",
+      label: "Dashboard",
+      icon: <img src={dashboardIcon}  />,
+      path: "/dashboard"
+    },
     {
       key: "residentmanagement",
       label: "Resident Management",
-      icon: <PiMoneyWavyFill />,
+      icon: <img src={residentIcon}  />,
       path: "/residentmanagement",
     },
     {
       key: "financialmanagement",
       label: "Financial Management",
-      icon: <AiFillDollarCircle />,
+      icon: <img src={financialIcon}  />,
       subItems: [
         { key: "income", label: "Income", path: "/Financial-Maintenance" },
         { key: "expenses", label: "Expenses", path: "/expense" },
@@ -101,13 +110,13 @@ function Sidebar() {
     {
       key: "facility-management",
       label: "Facility Management",
-      icon: <PiBuildingOfficeBold />,
+      icon: <img src={facalityIcon}  />,
       path: "/facility-management",
     },
     {
       key: "complaint-tracking",
       label: "Complaint Tracking",
-      icon: <TbMessage2Cancel />,
+      icon: <img src={complainrtrackingIcon}  />,
       subItems: [
         { key: "request-tracking", label: "Request Tracking", path: "/request-tracking" },
         { key: "create-complaint", label: "Create Complaint", path: "/create-complaint" },
@@ -116,7 +125,7 @@ function Sidebar() {
     {
       key: "security-management",
       label: "Security Management",
-      icon: <BsShieldLockFill />,
+      icon: <img src={securitymanagementIcon}  />,
       subItems: [
         { key: "visitors-log", label: "Visitors Log", path: "/visitors-log" },
         { key: "security-protocols", label: "Security Protocols", path: "/security-protocols" },
@@ -125,19 +134,19 @@ function Sidebar() {
     {
       key: "security-guard",
       label: "Security Guard",
-      icon: <RiShieldUserFill />,
+      icon: <img src={securityguardIcon}  />,
       path: "/security-guard",
     },
     {
       key: "announcement",
       label: "Announcement",
-      icon: <FaBullhorn />,
+      icon: <img src={announcementIcon}  />,
       path: "/announcement",
     },
     {
       key: "security",
       label: "Security",
-      icon: <MdOutlineSecurity />,
+      icon: <img src={securityIcon}  />,
       subItems: [
         { key: "visitor-tracking", label: "Visitor Tracking", path: "/visitor-tracking" },
         { key: "emergency-management", label: "Emergency Management", path: "/emergency-management" },
@@ -146,9 +155,11 @@ function Sidebar() {
     {
       key: "personal-details",
       label: "Personal Details",
-      icon:<FaAddressCard />,// Use any icon of your choice
+      icon: <img src={personaldetailsIcon}  />,
       path: "/personal-details",
     },
+
+    
   ];
 
   return (
@@ -161,8 +172,8 @@ function Sidebar() {
         data-bs-backdrop="false"
       >
         <div className="offcanvas-header justify-content-center">
-          <h1 className="offcanvas-title mainColor mx-5" id="offcanvasExampleLabel">
-            Dash<span className="text-dark">Stack</span>
+          <h1 className="offcanvas-title mainColor " id="offcanvasExampleLabel">
+           <Logo/>
           </h1>
         </div>
         <hr />
@@ -234,10 +245,10 @@ function Sidebar() {
             )}
           </ul>
         </div>
-        <hr />
+ 
 
         <div className="p-3">
-          <Link to="/" className="d-flex align-items-center text-danger" style={{ textDecoration: "none" }}>
+          <Link to="/login" className="d-flex align-items-center text-danger" style={{ textDecoration: "none" }}>
             <FaSignOutAlt className="me-3" />
             <span>Logout</span>
           </Link>

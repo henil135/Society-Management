@@ -77,7 +77,10 @@ import { verifyOtp } from '../services/authentication';
       <div className="row w-100">
         <div className="left-side col-lg-6 d-flex justify-content-center align-items-center bg-light">
           <div>
+            <div className='stack mt-5 '>
+
             <Logo />
+            </div>
             <img
               src={OTPImage}
               alt="Reset Password Illustration"

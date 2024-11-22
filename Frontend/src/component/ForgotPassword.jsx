@@ -43,14 +43,18 @@ function ForgotPassword() {
       <div className="row w-100">
         {/* Left Section */}
         <div className="left-side col-lg-6 col-md-6 col-sm-12 align-items-center d-flex flex-column justify-content-center">
-          <div>
-            <Logo />
-            <img
-              className="ForgotPassword-image mx-5 mt-5"
-              src={ForgotPasswordImage}
-              alt="Forgot Password Illustration"
-              style={{ maxWidth: '80%' }}
-            />
+
+            <div >
+              <div className='stack mt-5 '>
+
+              <Logo/>
+              </div>
+          <img
+            className="ForgotPassword-image mx-5 mt-5"
+            src={ForgotPasswordImage}
+            alt="Forgot Password Illustration"
+            style={{ maxWidth: '80%' }}
+          />
           </div>
         </div>
 

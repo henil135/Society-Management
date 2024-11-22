@@ -48,7 +48,11 @@ function Login() {
     <div className="container-fluid d-flex align-items-center min-vh-100">
       <div className="row w-100">
         <div className="left-side col-lg-6 col-md-6 col-sm-12 justify-content-center align-items-center d-flex flex-column">
-          <Logo />
+          <div className='stack mt-5 '>
+
+            <Logo />
+          </div>
+
           <div>
             <img
               className="login-image mx-5 mt-5"
