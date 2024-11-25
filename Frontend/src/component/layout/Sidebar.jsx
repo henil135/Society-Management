@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, useLocation } from "react-router-dom";
 import {
-  
   FaSignOutAlt,
   FaChevronDown,
   FaChevronUp,
@@ -10,7 +9,7 @@ import {
 
 import "../../style.css";
 
-import dashboardIcon from '../../Icons/image.png'; 
+import dashboardIcon from '../../Icons/image.png';
 import residentIcon from '../../Icons/money.png';
 import financialIcon from '../../Icons/dollar-square.png';
 import facalityIcon from '../../Icons/building.png';
@@ -28,6 +27,8 @@ function Sidebar() {
   const [isSecurityDropdownOpen, setSecurityDropdownOpen] = useState(false);
   const [isFinancialDropdownOpen, setFinancialDropdownOpen] = useState(false);
   const [isGeneralSecurityDropdownOpen, setGeneralSecurityDropdownOpen] = useState(false);
+  const [isPaymentPortalDropdownOpen, setPaymentPortalDropdownOpen] = useState(false);
+
 
   // Update active item on location change
   useEffect(() => {
@@ -80,6 +81,12 @@ function Sidebar() {
       setComplaintDropdownOpen(false);
       setSecurityDropdownOpen(false);
       setFinancialDropdownOpen(false);
+    } else if (key === "payment-portal") {
+      setFinancialDropdownOpen(false);
+      setComplaintDropdownOpen(false);
+      setSecurityDropdownOpen(false);
+      setGeneralSecurityDropdownOpen(false);
+      setPaymentPortalDropdownOpen(!isPaymentPortalDropdownOpen);
     }
     setActiveItem(key);
   };
@@ -88,19 +95,19 @@ function Sidebar() {
     {
       key: "dashboard",
       label: "Dashboard",
-      icon: <img src={dashboardIcon}  />,
+      icon: <img src={dashboardIcon} />,
       path: "/dashboard"
     },
     {
       key: "residentmanagement",
       label: "Resident Management",
-      icon: <img src={residentIcon}  />,
+      icon: <img src={residentIcon} />,
       path: "/residentmanagement",
     },
     {
       key: "financialmanagement",
       label: "Financial Management",
-      icon: <img src={financialIcon}  />,
+      icon: <img src={financialIcon} />,
       subItems: [
         { key: "income", label: "Income", path: "/Financial-Maintenance" },
         { key: "expenses", label: "Expenses", path: "/expense" },
@@ -110,13 +117,13 @@ function Sidebar() {
     {
       key: "facility-management",
       label: "Facility Management",
-      icon: <img src={facalityIcon}  />,
+      icon: <img src={facalityIcon} />,
       path: "/facility-management",
     },
     {
       key: "complaint-tracking",
       label: "Complaint Tracking",
-      icon: <img src={complainrtrackingIcon}  />,
+      icon: <img src={complainrtrackingIcon} />,
       subItems: [
         { key: "request-tracking", label: "Request Tracking", path: "/request-tracking" },
         { key: "create-complaint", label: "Create Complaint", path: "/create-complaint" },
@@ -125,7 +132,7 @@ function Sidebar() {
     {
       key: "security-management",
       label: "Security Management",
-      icon: <img src={securitymanagementIcon}  />,
+      icon: <img src={securitymanagementIcon} />,
       subItems: [
         { key: "visitors-log", label: "Visitors Log", path: "/visitors-log" },
         { key: "security-protocols", label: "Security Protocols", path: "/security-protocols" },
@@ -134,19 +141,19 @@ function Sidebar() {
     {
       key: "security-guard",
       label: "Security Guard",
-      icon: <img src={securityguardIcon}  />,
+      icon: <img src={securityguardIcon} />,
       path: "/security-guard",
     },
     {
       key: "announcement",
       label: "Announcement",
-      icon: <img src={announcementIcon}  />,
+      icon: <img src={announcementIcon} />,
       path: "/announcement",
     },
     {
       key: "security",
       label: "Security",
-      icon: <img src={securityIcon}  />,
+      icon: <img src={securityIcon} />,
       subItems: [
         { key: "visitor-tracking", label: "Visitor Tracking", path: "/visitor-tracking" },
         { key: "emergency-management", label: "Emergency Management", path: "/emergency-management" },
@@ -155,11 +162,30 @@ function Sidebar() {
     {
       key: "personal-details",
       label: "Personal Details",
-      icon: <img src={personaldetailsIcon}  />,
+      icon: <img src={personaldetailsIcon} />,
       path: "/personal-details",
     },
-
-    
+    {
+      key: "service-and-complaint",
+      label: "Service And Complaint",
+      icon: <img src={personaldetailsIcon} />,
+      path: "/service-and-complaint",
+    },
+    {
+      key: "events-and-participation",
+      label: "Events Participation",
+      icon: <img src={personaldetailsIcon} />,
+      path: "/events-and-participation",
+    },
+    {
+      key: "payment-portal",
+      label: "Payment Portal",
+      icon: <img src={securityIcon} />,
+      subItems: [
+        { key: "maintenance-invoices", label: "Maintenance Invoices", path: "/maintenance-invoices" },
+        { key: "other-income-nvoice", label: "Other Income Invoice", path: "/other-income-nvoice" },
+      ],
+    },
   ];
 
   return (
@@ -173,7 +199,7 @@ function Sidebar() {
       >
         <div className="offcanvas-header justify-content-center">
           <h1 className="offcanvas-title mainColor " id="offcanvasExampleLabel">
-           <Logo/>
+            <Logo />
           </h1>
         </div>
         <hr />
@@ -193,18 +219,19 @@ function Sidebar() {
                       <span className="ms-3">{item.label}</span>
                     </div>
                     {(item.key === "complaint-tracking" && isComplaintDropdownOpen) ||
-                    (item.key === "security-management" && isSecurityDropdownOpen) ||
-                    (item.key === "financialmanagement" && isFinancialDropdownOpen) ||
-                    (item.key === "security" && isGeneralSecurityDropdownOpen) ? (
+                      (item.key === "security-management" && isSecurityDropdownOpen) ||
+                      (item.key === "financialmanagement" && isFinancialDropdownOpen) ||
+                      (item.key === "security" && isGeneralSecurityDropdownOpen) ? (
                       <FaChevronUp />
                     ) : (
                       <FaChevronDown />
                     )}
                   </div>
                   {(item.key === "complaint-tracking" && isComplaintDropdownOpen) ||
-                  (item.key === "security-management" && isSecurityDropdownOpen) ||
-                  (item.key === "financialmanagement" && isFinancialDropdownOpen) ||
-                  (item.key === "security" && isGeneralSecurityDropdownOpen) ? (
+                    (item.key === "security-management" && isSecurityDropdownOpen) ||
+                    (item.key === "financialmanagement" && isFinancialDropdownOpen) ||
+                    (item.key === "security" && isGeneralSecurityDropdownOpen) ||
+                    (item.key === "payment-portal" && isPaymentPortalDropdownOpen) ? (
                     <ul className="list-unstyled ms-4">
                       {item.subItems.map((subItem) => (
                         <li
@@ -225,6 +252,7 @@ function Sidebar() {
                       ))}
                     </ul>
                   ) : null}
+
                 </li>
               ) : (
                 <li key={item.key} className={`p-3 rounded ${activeItem === item.key ? "mainColor2" : ""}`}>
@@ -245,7 +273,7 @@ function Sidebar() {
             )}
           </ul>
         </div>
- 
+
 
         <div className="p-3">
           <Link to="/login" className="d-flex align-items-center text-danger" style={{ textDecoration: "none" }}>

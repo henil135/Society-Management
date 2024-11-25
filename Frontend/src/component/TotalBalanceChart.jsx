@@ -16,10 +16,7 @@ import maintainance3 from '../assets/maintainance3.png';
 import maintainance4 from '../assets/mainatainance4.png';
 import maintainance5 from '../assets/maintainance5.png';
 import { Link } from 'react-router-dom';
-
-import editIcon from '../Icons/Edit.png'
-import deleteIcon from '../Icons/delete.png'
-
+// import axios from 'axios';
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
 
 function TotalBalanceChart() {
@@ -287,14 +284,8 @@ function TotalBalanceChart() {
                                             <Button className="edit-btn fs-5" onClick={() => handleEdit(index)}><MdEditSquare /></Button>
                                         </div>
                                     </div>
-
-                                   <div className='gap-1   '>
-                                   <img src={editIcon} className="text-success me-2" style={{ cursor: "pointer" }} onClick={() => handleEdit(complaint)} />
-                                            <img src={deleteIcon} className="text-danger" style={{ cursor: "pointer" }} onClick={() => handleDelete(index)} />
-                                   </div>
-                                </div>
-                            ))}
-                        </div>
+                                ))}
+                            </div>
 
                             {/* Delete Confirmation Modal */}
                             <Modal className='custom-modal' show={showDeleteModal} onHide={handleCloseDeleteModal} centered>

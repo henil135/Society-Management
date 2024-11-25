@@ -29,6 +29,12 @@ import Profile from './component/Profile';
 import EditProfile from './component/EditProfile'
 import PersonalDetail from './component/PersonalDetail';
 import TenantPersonalDetails from './component/TenantPersonalDetails';
+import ServiceComplaint from './component/ServiceComplaint.jsx';
+import RequestSubmission from './component/RequestSubmission.jsx';
+import EventParticipation from './component/EventParticipation.jsx';
+import ActivityParticipation from './component/ActivityParticipation.jsx';
+import MaintenanceInvoices from './component/MaintenanceInvoices.jsx';
+
 function App() {
   return (
     <div className="d-flex">
@@ -57,8 +63,14 @@ function App() {
           <Route path='/emergency-management' element={<EmergencyManagement/>}/>
           <Route path='/profile' element={<Profile/>}/>
           <Route path='/EditProfile' element={<EditProfile/>}/>
-          <Route element={<PersonalDetail/>} path='/personal-details' />
-            <Route element={<TenantPersonalDetails/>} path='/personal-details-tenant' />
+          <Route path='/personal-details' element={<PersonalDetail/>} />
+          <Route path='/personal-details-tenant' element={<TenantPersonalDetails/>} />
+          <Route path='/service-and-complaint' element={<ServiceComplaint/>} />
+          <Route path='/request-and-submission' element={<RequestSubmission/>} />
+          <Route path='/events-and-participation' element={<EventParticipation/>} />
+          <Route path='/activity-and-participation' element={<ActivityParticipation/>} />
+          <Route path='/maintenance-invoices' element={<MaintenanceInvoices/>} />
+
         </Routes> 
       </BrowserRouter>
     </div>
