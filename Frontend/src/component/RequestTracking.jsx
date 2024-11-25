@@ -131,14 +131,14 @@ function RequestTracking() {
 
   return (
     <div className="d-flex flex-column flex-md-row">
-  <div className="flex-shrink-0" style={{ width: "280px" }}>
+  <div className="flex-shrink-0" >
     <Sidebar />
   </div>
 
-  <div className="flex-grow-1 dashboard-bg" style={{ width:"1640px"}}>
+  <div className="flex-grow-1 dashboard-bg" style={{width:"1920px"}}>
     <Header/>
-    <div className="container-fluid  p-4" style={{ marginTop: "10px" }}>
-     
+    <div className="container-fluid  p-4" style={{ marginTop: "10px",marginLeft:"295px",width:"1625px" }}>
+    
 
       <div className="table-responsive" style={{ border: "1px solid #ddd", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", overflow: "hidden", backgroundColor: "#fff",padding:"5px", marginTop: "20px" }}>
       <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mt-2 mb-4">
@@ -155,9 +155,9 @@ function RequestTracking() {
 
   />Create Request</Button>
       </div>
-        <Table striped hover responsive style={{ width: "1550px",marginLeft:"15px" }}>
+        <Table striped hover responsive style={{ width: "1540px",marginLeft:"15px" }}>
           <thead className="bg-light">
-            <tr className="rmHead " style={{ height: '70px' }}>
+            <tr className="rmHead " >
               <th className="text-start" style={{ padding: "5px",fontSize:"14px",paddingLeft:"20px",background:"rgb(185, 198, 242)"}}>Requester Name</th>
               <th className="text-start" style={{ padding: "8px",fontSize:"14px",background:"rgb(185, 198, 242)" }}>Request Name</th>
               <th className="text-start" style={{ padding: "8px",fontSize:"14px",background:"rgb(185, 198, 242)" }}>Description</th>
@@ -170,7 +170,7 @@ function RequestTracking() {
           </thead>
           <tbody>
             {requests.map((request) => (
-              <tr key={request.id} style={{ height: '70px' }}>
+              <tr key={request.id} >
                 <td style={tableColumnStyle}>
                   <div style={imageColumnStyle} className="text-center">
                     <img
@@ -254,8 +254,8 @@ function RequestTracking() {
 
 
       {/* Create Complaint Modal */}
-      <Modal show={showCreateModal} onHide={handleCloseCreateModal}>
-  <Modal.Header closeButton>
+      <Modal show={showCreateModal} onHide={handleCloseCreateModal} className='Round-modal'>
+  <Modal.Header >
     <Modal.Title>Create Request</Modal.Title>
   </Modal.Header>
   <Modal.Body>
@@ -314,11 +314,12 @@ function RequestTracking() {
           </Form.Group>
         </Form>
       </Form.Group>
-      <Form.Group className='mt-2'>
+      <Form.Group className='mt-2 '>
         <Form.Label>Priority<span className="text-danger">*</span></Form.Label>
-        <div className="d-flex justify-content-around">
+        <div className="d-flex justify-content-around ">
           <div style={{ width: "113px", height: "41px", border: "1px solid #ccc", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "5px", paddingTop: "10px", paddingRight: "15px", paddingBottom: "10px", paddingLeft: "15px" }}>
             <Form.Check
+            className='radio-group'
               type="radio"
               label="High"
               name="priority"
@@ -329,6 +330,7 @@ function RequestTracking() {
           </div>
           <div style={{ width: "113px", height: "41px", border: "1px solid #ccc", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "5px", paddingTop: "10px", paddingRight: "15px", paddingBottom: "10px", paddingLeft: "15px" }}>
             <Form.Check
+            className='radio-group'
               type="radio"
               label="Medium"
               name="priority"
@@ -339,6 +341,7 @@ function RequestTracking() {
           </div>
           <div style={{ width: "113px", height: "41px", border: "1px solid #ccc", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "5px", paddingTop: "10px", paddingRight: "15px", paddingBottom: "10px", paddingLeft: "15px" }}>
             <Form.Check
+            className='radio-group'
               type="radio"
               label="Low"
               name="priority"
@@ -355,6 +358,7 @@ function RequestTracking() {
         <div className="d-flex justify-content-around">
           <div style={{ width: "113px", height: "41px", border: "1px solid #ccc", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "5px", paddingTop: "10px", paddingRight: "15px", paddingBottom: "10px", paddingLeft: "15px" }}>
             <Form.Check
+            className='radio-group'
               type="radio"
               label="Open"
               name="status"
@@ -365,6 +369,7 @@ function RequestTracking() {
           </div>
           <div style={{ width: "113px", height: "41px", border: "1px solid #ccc", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "5px", paddingTop: "10px", paddingRight: "15px", paddingBottom: "10px", paddingLeft: "15px" }}>
             <Form.Check
+            className='radio-group'
               type="radio"
               label="Pending"
               name="status"
@@ -375,6 +380,7 @@ function RequestTracking() {
           </div>
           <div style={{ width: "113px", height: "41px", border: "1px solid #ccc", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "5px", paddingTop: "10px", paddingRight: "15px", paddingBottom: "10px", paddingLeft: "15px" }}>
             <Form.Check
+            className='radio-group'
               type="radio"
               label="Solved"
               name="status"
@@ -388,10 +394,10 @@ function RequestTracking() {
     </Form>
   </Modal.Body>
   <Modal.Footer style={{ display: "flex", justifyContent: "space-between" }}>
-    <Button variant="secondary" onClick={handleCloseCreateModal} style={{ width: "175px", height: "51px", border: "1px solid #202224", padding: "10px 55px 10px 55px", background: "#FFFFFF", color: "#202224" }}>
+    <Button className='cancle' onClick={handleCloseCreateModal} style={{ width: "175px", height: "51px", border: "1px solid #202224", padding: "10px 55px 10px 55px", background: "#FFFFFF", color: "#202224" }}>
       Cancel
     </Button>
-    <Button className="mainColor2" onClick={handleCreateRequest} style={{
+    <Button className="save" onClick={handleCreateRequest} style={{
       width: "175px", height: "51px", border: "1px", padding: "10px 55px 10px 55px", color: "#202224"
     }}>
       Create
@@ -635,10 +641,13 @@ function RequestTracking() {
 </Modal>
 
 
+
+
+
       {/* edit model */}
 
-      <Modal show={showModal} onHide={handleCloseModal}>
-  <Modal.Header closeButton>
+      <Modal show={showModal} onHide={handleCloseModal} className='Round-modal'>
+  <Modal.Header >
     <Modal.Title>Edit Request</Modal.Title>
   </Modal.Header>
   <Modal.Body>
@@ -729,6 +738,7 @@ function RequestTracking() {
         <div className="d-flex justify-content-around">
           {["High", "Medium", "Low"].map((priority) => (
             <Form.Check
+            className='radio-group'
               type="radio"
               style={{ border: "1px solid rgba(211, 211, 211, 1)", paddingLeft: "30px",paddingTop:"8px",paddingBottom: "8px", paddingRight: "30px", borderRadius: "5px" }}
               label={priority}
@@ -751,6 +761,7 @@ function RequestTracking() {
         <div className="d-flex justify-content-around">
           {["Open", "Pending", "Resolved"].map((status) => (
             <Form.Check
+            className='radio-group'
               type="radio"
                style={{ border: "1px solid rgba(211, 211, 211, 1)", paddingLeft: "30px",paddingTop:"8px",paddingBottom: "8px", paddingRight: "30px", borderRadius: "5px" }}
               label={status}
@@ -771,10 +782,10 @@ function RequestTracking() {
     </Form>
   </Modal.Body>
   <Modal.Footer style={{ display: "flex", justifyContent: "space-between" }}>
-    <Button style={{ width: "175px", height: "51px", border: "1px solid #202224", padding: "10px 55px", background: "#FFFFFF", color: "#202224" }} variant="secondary" onClick={handleCloseModal}>
+    <Button className='cancle' style={{ width: "175px", height: "51px", border: "1px solid #202224", padding: "10px 55px", background: "#FFFFFF", color: "#202224" }}  onClick={handleCloseModal}>
       Cancel
     </Button>
-    <Button style={{ width: "175px", height: "51px", padding: "10px 55px", color: "#202224" }} className="mainColor2" onClick={handleSave}>
+    <Button style={{ width: "175px", height: "51px", padding: "10px 55px", color: "#202224" }} className="save" onClick={handleSave}>
       Save 
     </Button>
   </Modal.Footer>

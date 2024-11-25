@@ -21,12 +21,12 @@ const EmergencyManagement = () => {
   return (
     <div className="d-flex flex-column flex-md-row dashboard-bg h-100">
       {/* Sidebar Section */}
-      <div className="flex-shrink-0" style={{ width: "280px" }}>
+      <div className="flex-shrink-0" >
         <Sidebar />
       </div>
 
       {/* Main Content Section */}
-      <div className="flex-grow-1" style={{ width: "1640px" }}>
+      <div className="flex-grow-1" style={{ width: "1910px" }}>
         <Header />
         
         {/* Alert Form Section */}
@@ -83,7 +83,7 @@ const styles = {
     borderRadius: "10px",
     boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
      width:"630px",
-    left: "500px",
+    left: "800px",
     padding: "50px",
     gap: "10px",
 

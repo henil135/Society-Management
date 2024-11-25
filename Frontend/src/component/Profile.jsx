@@ -34,9 +34,9 @@ export default function Profile() {
         <div className="flex-shrink-0" >
           <Sidebar />
         </div>
-        <div className="profile-dashboard-bg dashboard-bg" style={{marginLeft:"270px",width:"1650px"}}>
+        <div className="profile-dashboard-bg dashboard-bg" style={{width:"1910px"}}>
             <Navbar />
-            <div className=" ">
+            <div className="" style={{marginLeft:"280px"}}>
                 <div className="d-flex justify-content-center profile-bg">
                     <div className="col-lg-8">
                         <div className="d-flex align-items-center justify-content-between">
