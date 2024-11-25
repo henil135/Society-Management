@@ -64,16 +64,16 @@ export default function FinancialManagementIncome() {
     <div className="flex-shrink-0" >
       <Sidebar />
     </div>
-    <div className='card-row dashboard-bg'  style={{marginLeft:"270px", width:"1620px"}}>
+    <div className='card-row dashboard-bg'  style={{ width:"1920px"}}>
       <Navbar />
-      <div className='dashboard-bg'>
-        <div className='container-fluid mt-2' style={{marginLeft:"10px"}}>
+      <div  style={{marginLeft:"290px"}}>
+        <div className='container-fluid mt-2' style={{marginLeft:"30px"}}>
 
-          <div className='row justify-content-between align-items-center mb-3 pt-2 bg-light mx-0' >
+          <div className='row justify-content-between align-items-center mb-3 pt-2 bg-light '  style={{marginRight:"60px",borderRadius:"8px"}}>
           <div className="col-lg-8 col-md-12 d-flex flex-wrap" >
             {/* Maintenance Amount Card */}
-            <div className="col-lg-4 col-md-6 col-sm-12 py-2 px-1" >
-              <div className="card border-0 financial-amt-card-shadow">
+            <div className="col-lg-4 col-md-6 col-sm-12 py-2 px-1 ms-2" >
+              <div className="card border-0 financial-amt-card-shadow" >
                 <div className="card-body d-flex align-items-center">
                   <img src={incomeRactangle} width={8} className="me-2" alt="Icon" />
                   <div>
@@ -99,7 +99,7 @@ export default function FinancialManagementIncome() {
           </div>
 
           {/* Set Maintenance Button */}
-          <div className="col-auto" style={{marginBottom:"20px"}}>
+          <div className="col-auto" style={{marginBottom:"20px",marginRight:"20px"}}>
             <button
               className="btn btn-primary set-maintainance-btn border-0 py-3 px-3"
               onClick={handleShowSetMaintenanceModal}
@@ -157,7 +157,7 @@ export default function FinancialManagementIncome() {
               </Modal.Header>
               <Modal.Body>
                 <Form>
-                  <div className='d-flex'>
+                  <div className='d-flex' >
                   <Form.Group controlId="formName" className='me-3'>
                     <Form.Label className='Form-Label'>Maintenance Amount</Form.Label>
                     <Form.Control className='Form-Control' type="text" placeholder="₹ 0000" required />
@@ -191,21 +191,21 @@ export default function FinancialManagementIncome() {
 
           </div>
 
-          <div className='row px-3 pb-3'>
-              <div className="table-responsive rounded" >
+          <div className='row px-3 pb-3'  >
+              <div className="table-responsive ">
 
-              <Link to="/Financial-Maintenance" className="btn btn-sm maintainance-income-btn maintainance-income-btn-bg" style={{marginLeft:"10px"}}>Maintenance</Link>
+              <Link to="/Financial-Maintenance" className="btn btn-sm maintainance-income-btn maintainance-income-btn-bg" style={{marginLeft:"15px"}}>Maintenance</Link>
 
 
                 <Link to="/Other-Income" className='btn btn-sm  maintainance-income-btn maintainance-income-btn-withoutbg'>Other Income</Link>
 
-                <div className='bg-light' style={{width:"1570px",marginLeft:"10px"}}>
+                <div className='bg-light' style={{width:"1570px",marginLeft:"15px",borderRadius:"8px"}}>
                   <h3 className=' mb-0 py-3 ps-2 financial-income-title'>Maintenance  Details</h3>
                   <div className='px-3 financial-maintainance-table '>
                     <table className="table ">
 
                       <thead className='table-primary '>
-                        <tr style={{ height: '70px' }}>
+                        <tr >
                           <th scope="col">Name</th>
                           <th scope="col">Unit Number</th>
                           <th scope="col" className='text-center'>Date</th>
@@ -222,18 +222,18 @@ export default function FinancialManagementIncome() {
                         {
                           maintenance.map((val, index) => {
                             return (
-                              <tr key={index} className='bg-light'  style={{ height: '70px' }}>
+                              <tr key={index} className='bg-light'  >
 
-                                <td style={{ height: '55px' }} className='financial-Pnumber'><img src={val.img} className='me-2' height={40} />{val.name}</td>
+                                <td className='financial-Pnumber'><img src={val.img} className='me-2' height={40} />{val.name}</td>
 
 
-                                <td style={{ height: '55px' }} className='financial-Pnumber'><span className='wing-name'>{val.wing}</span> {val.Unumber}</td>
+                                <td  className='financial-Pnumber'><span className='wing-name'>{val.wing}</span> {val.Unumber}</td>
 
-                                <td style={{ height: '55px',textAlign:"center" }} className='financial-Pnumber'>{val.date}</td>
+                                <td style={{ textAlign:"center" }} className='financial-Pnumber'>{val.date}</td>
 
                                 <td
                                   style={{
-                                    height: '55px'
+                                    
                                   }}
                                 >
                                   <span className='financial-status-btn' style={{
@@ -246,11 +246,11 @@ export default function FinancialManagementIncome() {
                                 </td>
 
 
-                                <td style={{ height: '55px',textAlign:"center" }} className='financial-Pnumber'>{val.Pnumber}</td>
+                                <td style={{ textAlign:"center" }} className='financial-Pnumber'>{val.Pnumber}</td>
 
-                                <td style={{ height: '55px' }} className='amt'>{val.amt}</td>
+                                <td  className='amt'>{val.amt}</td>
 
-                                <td style={{ height: '55px',textAlign:"center" }}>
+                                <td style={{textAlign:"center" }}>
                                   <span
                                     className='financial-penalty-btn btn btn-sm r'
                                     style={{
@@ -262,7 +262,7 @@ export default function FinancialManagementIncome() {
                                   </span>
                                 </td>
 
-                                <td style={{ height: '55px',textAlign:"center" }} >
+                                <td style={{ textAlign:"center" }} >
                                   <span
                                     className='financial-status-btn btn btn-sm '
                                     style={{
@@ -275,7 +275,7 @@ export default function FinancialManagementIncome() {
                                   </span>
                                 </td>
 
-                                <td style={{ height: '55px',textAlign:"center" }}>
+                                <td style={{ textAlign:"center" }}>
                                   <span
                                     className='financial-status-btn btn btn-sm '
                                     style={{

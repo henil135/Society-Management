@@ -71,14 +71,14 @@ function VisitorsTracking() {
 
   return (
     <div className="d-flex flex-column flex-md-row dashboard-bg">
-      <div className="flex-shrink-0" style={{ width: "280px" }}>
+      <div className="flex-shrink-0">
         <Sidebar />
       </div>
 
-      <div className="flex-grow-1" style={{ width: "1640px" }}>
+      <div className="flex-grow-1" style={{ width: "1910px" }}>
         <Header />
 
-        <div className="container-fluid p-4" style={{ marginTop: "10px" }}>
+        <div className="container-fluid p-4" style={{ marginTop: "10px",width: "1610px",marginLeft:"300px" }}>
           <div
             className="table-responsive"
             style={{
@@ -123,7 +123,7 @@ function VisitorsTracking() {
             </div>
             <Table hover responsive>
               <thead style={{ background: "rgb(185, 198, 242)", color: "black" }}>
-                <tr className="text-start" style={{ height: '70px' }}>
+                <tr className="text-start" >
                   <th >Visitor Name</th>
                   <th>Phone Number</th>
                   <th>Date</th>
@@ -133,7 +133,7 @@ function VisitorsTracking() {
               </thead>
               <tbody>
                 {details.map((details) => (
-                  <tr key={details.id} className="text-start" style={{ height: '70px' }}>
+                  <tr key={details.id} className="text-start">
                     <td style={{ paddingTop: "15px", paddingBottom: "15px" }}>
                       <div
                         style={{
@@ -198,7 +198,7 @@ function VisitorsTracking() {
       </div>
       {/* Modal Component */}
       <Modal show={showModal} onHide={handleCloseModal} centered className="square-modal">
-        <Modal.Header style={{ border: "none" }} closeButton>
+        <Modal.Header style={{ border: "none" }} >
           <Modal.Title>Add Visitor Details</Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -308,11 +308,12 @@ function VisitorsTracking() {
               color: "#202224",
             }}
             onClick={handleCloseModal}
-            variant="secondary"
+            className="cancle"
           >
             Cancel
           </Button>
           <Button
+          className="save"
             style={{
               width: "175px",
               height: "51px",

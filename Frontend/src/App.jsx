@@ -29,6 +29,7 @@ import Profile from './component/Profile';
 import EditProfile from './component/EditProfile'
 import PersonalDetail from './component/PersonalDetail';
 import TenantPersonalDetails from './component/TenantPersonalDetails';
+import SecurityProtocolsResident from './component/SecurityProtocolsResident';
 function App() {
   return (
     <div className="d-flex">
@@ -59,6 +60,7 @@ function App() {
           <Route path='/EditProfile' element={<EditProfile/>}/>
           <Route element={<PersonalDetail/>} path='/personal-details' />
             <Route element={<TenantPersonalDetails/>} path='/personal-details-tenant' />
+            <Route path='/Resident-Protocols' element={<SecurityProtocolsResident/>}/>
         </Routes> 
       </BrowserRouter>
     </div>

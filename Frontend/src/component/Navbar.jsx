@@ -38,7 +38,7 @@ import { useLocation, Link } from 'react-router-dom'; // Import Link from react-
         <>
             <div className='header'  >
                 <Navbar expand="sm" className="navbar bg-white  border-bottom p-4" style={{height:"109px"}}>
-                    <Container fluid>
+                    <Container fluid style={{marginLeft:"300px"}}>
                         {/* Breadcrumb */}
                         <h5 className='home-routing '>
                             Home <span className='home-routing-span'><FaGreaterThan style={{fontSize:"12px"}}/></span>

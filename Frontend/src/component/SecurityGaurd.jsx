@@ -167,13 +167,13 @@ import editIcon from '../Icons/Edit.png'
   };
   return (
     <div className="d-flex flex-column flex-md-row">
-      <div className="flex-shrink-0" style={{ width: "280px" }}>
+      <div className="flex-shrink-0">
         <Sidebar />
       </div>
 
-      <div className="flex-grow-1 dashboard-bg"  style={{ width:"1640px"}}>
+      <div className="flex-grow-1 dashboard-bg"  style={{ width:"1910px"}}>
         <Header/>
-        <div className="container-fluid  p-4" style={{ marginTop: "10px" }}>
+        <div className="container-fluid  p-4" style={{ marginTop: "10px",width:"1610px",marginLeft:"300px" }}>
           
 
 
@@ -193,9 +193,9 @@ import editIcon from '../Icons/Edit.png'
               Add Security
             </Button>
           </div>
-            <Table striped responsive style={{ width: "1550px"}}>
+            <Table striped responsive style={{ width: "1520px"}}>
               <thead style={{ background: "rgb(185, 198, 242)", color: "black"}}>
-                <tr style={{ height: '70px' }}>
+                <tr>
                   <th
                     style={{
                       fontSize: "15px",
@@ -216,7 +216,7 @@ import editIcon from '../Icons/Edit.png'
               </thead>
               <tbody>
                 {guards.map((guard, index) => (
-                  <tr key={index} style={{ height: '70px' }}>
+                  <tr key={index} >
                     <td style={{ verticalAlign: "middle", width: "220px",padding:"15px" }}>
                       <div >
                         <img
@@ -346,7 +346,7 @@ import editIcon from '../Icons/Edit.png'
               </tbody>
             </Table>
 
-            <Modal show={showViewGuard} onHide={handleClose} centered>
+            <Modal show={showViewGuard} onHide={handleClose} centered className='Round-modal'>
               <Modal.Header closeButton>
                 <Modal.Title style={{
                   width: "371px",
@@ -498,8 +498,8 @@ import editIcon from '../Icons/Edit.png'
             </Modal>
 
 
-            <Modal show={showDeleteGuard} onHide={handleClose} centered>
-              <Modal.Header closeButton>
+            <Modal show={showDeleteGuard} onHide={handleClose} centered className='Round-modal'>
+              <Modal.Header >
                 <Modal.Title>Delete Protocol?</Modal.Title>
               </Modal.Header>
               <Modal.Body>
@@ -519,8 +519,8 @@ import editIcon from '../Icons/Edit.png'
             </Modal>
 
             {/* Add Security Modal */}
-            <Modal show={showModal} onHide={handleClose} centered>
-        <Modal.Header closeButton>
+            <Modal show={showModal} onHide={handleClose} centered className='Round-modal'>
+        <Modal.Header >
           <Modal.Title>{isEdit ? 'Edit Security' : 'Add Security'}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -599,7 +599,7 @@ import editIcon from '../Icons/Edit.png'
               />
             </Form.Group>
 
-            <div className="d-flex justify-content-between mb-3">
+            <div className="d-flex justify-content-between mb-3 gap-2">
               <Form.Group controlId="formGender" style={{ width: "210px" }}>
                 <Form.Label>Gender<span className="text-danger">*</span></Form.Label>
                 <Form.Select
@@ -625,7 +625,7 @@ import editIcon from '../Icons/Edit.png'
               </Form.Group>
             </div>
 
-            <div className="d-flex mb-3" style={{ justifyContent: 'space-between' }}>
+            <div className="d-flex mb-3 gap-2" style={{ justifyContent: 'space-between' }}>
               <Form.Group controlId="formDate" style={{ width: "210px" }}>
                 <Form.Label>Shift Date<span className="text-danger">*</span></Form.Label>
                 <Form.Control
@@ -706,13 +706,13 @@ import editIcon from '../Icons/Edit.png'
           </Form>
         </Modal.Body>
         <Modal.Footer style={{ display: "flex", justifyContent: "space-between" }}>
-          <Button style={{ width: "175px", height: "51px", border: "1px solid #202224", padding: "10px 55px 10px 55px", background: "#FFFFFF", color: "#202224", }} variant="secondary" onClick={handleClose}>
+          <Button style={{ width: "175px", height: "51px", border: "1px solid #202224", padding: "10px 55px 10px 55px", background: "#FFFFFF", color: "#202224", }} className='cancle' onClick={handleClose}>
             Cancel
           </Button>
           <Button style={{
             width: "175px", height: "51px", border: "1px", padding: "10px 55px 10px 55px", color: "#202224",
 
-          }} className='mainColor2' onClick={handleSave}>
+          }} className='save' onClick={handleSave}>
             {isEdit ? 'Create' : 'Create'}
           </Button>
         </Modal.Footer>

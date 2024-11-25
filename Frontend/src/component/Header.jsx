@@ -5,7 +5,7 @@ import avtar from '../assets/Avatar.png';
 import { FaBell } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 
- function Header() {
+function Header() {
     const [notifications, setNotifications] = useState([
         'New habit reminder',
         'Goal achieved!',
@@ -19,12 +19,15 @@ import { Link } from 'react-router-dom';
     };
 
     return (
-        <div className="header" style={{ marginLeft: "270px",width:"1631px"}}>
-            <Navbar expand="lg" className="navbar bg-white border-bottom" style={{height:"109px"}}>
+        <div className="header " style={{width:"1900px"}}>
+            <Navbar expand="lg" className="navbar bg-white border-bottom" style={{ height: "109px" }}>
                 <Container fluid>
                     {/* Search Bar for Large Screens */}
                     <Navbar.Brand className="d-none d-lg-block w-20 ms-4">
-                        <InputGroup className="align-items-center search-bar rounded-2 px-3 py-2">
+                        <InputGroup
+                            className="align-items-center search-bar rounded-2 px-3 py-2"
+                            style={{ marginLeft: "290px", width: "300px" }}
+                        >
                             <FiSearch className="search-icon" />
                             <FormControl
                                 className="border-0"
@@ -35,7 +38,7 @@ import { Link } from 'react-router-dom';
                     </Navbar.Brand>
 
                     {/* Right-aligned Icons (Always Visible) */}
-                    <Nav className="ms-auto d-flex align-items-center justify-content-end flex-row py-sm-2 py-md-0 me-3" >
+                    <Nav className="ms-auto d-flex align-items-center justify-content-end flex-row py-sm-2 py-md-0 me-3">
                         {/* Search Icon for Small Screens */}
                         <div className="d-lg-none me-3">
                             <FiSearch className="fs-4 text-dark" />
@@ -58,12 +61,23 @@ import { Link } from 'react-router-dom';
                         {/* Notification Dropdown */}
                         {showNotifications && (
                             <div
-                                className="notification-dropdown position-absolute bg-white border shadow-sm p-2"
-                                style={{ right: '60px', top: '50px', width: '280px', zIndex: 1000 }}
+                                className="notification-dropdown bg-white border shadow-sm p-2 rounded"
+                                style={{
+                                    position: 'absolute',
+                                    right: '15px',
+                                    top: '70px',
+                                    width: '280px',
+                                    zIndex: 1000
+                                }}
                             >
                                 <div className="d-flex justify-content-between align-items-center mb-2">
                                     <h6 className="mb-0">Notifications</h6>
-                                    <Button variant="link" size="sm" onClick={clearNotifications} className="text-primary">
+                                    <Button
+                                        variant="link"
+                                        size="sm"
+                                        onClick={clearNotifications}
+                                        className="text-primary"
+                                    >
                                         Clear All
                                     </Button>
                                 </div>
@@ -104,4 +118,5 @@ import { Link } from 'react-router-dom';
         </div>
     );
 }
+
 export default Header;
