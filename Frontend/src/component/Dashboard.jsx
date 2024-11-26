@@ -14,6 +14,7 @@ function Dashboard() {
         <Sidebar />
       <Header/>
       <div className="dashboard-bg" style={{ marginLeft: "300px" }}>
+
         <Income />
         <TotalBalanceChart />
         <Complaintlist />

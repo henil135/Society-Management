@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Sidebar from "../component/Layout/Sidebar";
+import Sidebar from "../component/layout/Sidebar";
 import Navbar from './Navbar';
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Link } from 'react-router-dom';
@@ -51,8 +51,8 @@ const TenantPersonalDetails = () => {
             <Sidebar />
             <Navbar />
             <div>
-                <div className='container income'>
-                    <div className='row p-3'>
+                <div className='container-fluid income'>
+                    <div className='row pt-3 pb-0 pe-3 ps-4'>
                         <div className='p-0'>
                             <div className="table-responsive rounded pb-3">
 
@@ -60,7 +60,7 @@ const TenantPersonalDetails = () => {
 
                                 <Link to="/personal-details-tenant" className='btn btn-sm  maintainance-income-btn  maintainance-income-btn-bg'>Tenant</Link>
 
-                                <div className='container'>
+                                <div className='container-fluid'>
 
                                     <div className="row card-row rounded mb-3">
                                         <div className="p-0 bg-light rounded d-md-flex">
@@ -167,7 +167,7 @@ const TenantPersonalDetails = () => {
 
 
                                     <div className='row py-3 card-row rounded'>
-                                        <div className='p-0 bg-light'>
+                                        <div className='pe-0 bg-light'>
                                             <div className=' py-3 px-3'>
                                                 <h3 className='mb-0 financial-income-title'>Member : (04)</h3>
                                             </div>
@@ -175,7 +175,7 @@ const TenantPersonalDetails = () => {
                                                 {note.map((val, index) => (
                                                     <div className="col-lg-3 mb-3 " key={val.id}>
                                                         <div className="card">
-                                                            <div className="card-header card-title text-light d-flex align-items-center justify-content-between">
+                                                            <div className="card-header card-title text-light d-flex align-items-center justify-content-between py-3" style={{ background: "rgba(86, 120, 233, 1)" }}>
                                                                 {val.title}
                                                             </div>
                                                             <div className="card-body">
@@ -208,7 +208,7 @@ const TenantPersonalDetails = () => {
                                     </div>
 
                                     <div className='row py-3 card-row rounded'>
-                                        <div className='p-0 bg-light'>
+                                        <div className='pe-0 bg-light'>
                                             <div className=' py-3 px-3'>
                                                 <h3 className='mb-0 financial-income-title'>Vehicle : (04)</h3>
                                             </div>
@@ -216,7 +216,7 @@ const TenantPersonalDetails = () => {
                                                 {vehicle.map((val, index) => (
                                                     <div className="col-lg-3 mb-3 " key={val.id}>
                                                         <div className="card">
-                                                            <div className="card-header card-title text-light d-flex align-items-center justify-content-between">
+                                                            <div className="card-header card-title text-light d-flex align-items-center justify-content-between py-3" style={{ background: "rgba(86, 120, 233, 1)" }}>
                                                                 {val.title}
                                                             </div>
                                                             <div className="card-body">
@@ -236,31 +236,33 @@ const TenantPersonalDetails = () => {
                                         </div>
                                     </div>
 
-                                    <div className="row  py-3 card-row bg-light rounded">
+                                    <div className="row py-3 card-row bg-light rounded">
                                         <div className='align-items-center d-flex'>
-                                            <div>
+                                            <div className='col-12 col-sm-6 col-md-3'>
                                                 <h3 className="mb-0 financial-income-title p-3">Show Maintenance Details</h3>
                                             </div>
-                                            {/* Maintenance Amount Card */}
-                                            <div className="col-12 col-sm-6 col-md-3 pt-3 px-1">
-                                                <div className="card">
-                                                    <div className="card-body d-flex justify-content-between align-items-center px-4 py-3">
-                                                        <img src={incomeRactangle} width={8} className="position-absolute start-0" />
-                                                        <div>
-                                                            <h6 className="card-subtitle mb-1">Maintenance Amount</h6>
-                                                            <p className="mb-0 text-success">₹ 1,500</p>
+                                            <div className='d-flex w-100 justify-content-end'>
+                                                {/* Maintenance Amount Card */}
+                                                <div className="col-12 col-sm-6 col-md-3 pt-3 px-1">
+                                                    <div className="card">
+                                                        <div className="card-body d-flex justify-content-between align-items-center px-4 py-3">
+                                                            <img src={incomeRactangle} width={8} className="position-absolute start-0" />
+                                                            <div>
+                                                                <h6 className="card-subtitle mb-1">Maintenance Amount</h6>
+                                                                <p className="mb-0 text-success">₹ 1,500</p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            {/* Penalty Amount Card */}
-                                            <div className="col-12 col-sm-6 col-md-3 pt-3 px-1">
-                                                <div className="card">
-                                                    <div className="card-body d-flex justify-content-between align-items-center px-4 py-3">
-                                                        <img src={balanceRactangle} width={8} className="position-absolute start-0" />
-                                                        <div>
-                                                            <h6 className="card-subtitle mb-1">Penalty Amount</h6>
-                                                            <p className="mb-0 text-danger">₹ 500</p>
+                                                {/* Penalty Amount Card */}
+                                                <div className="col-12 col-sm-6 col-md-3 pt-3 px-1">
+                                                    <div className="card">
+                                                        <div className="card-body d-flex justify-content-between align-items-center px-4 py-3">
+                                                            <img src={balanceRactangle} width={8} className="position-absolute start-0" />
+                                                            <div>
+                                                                <h6 className="card-subtitle mb-1">Penalty Amount</h6>
+                                                                <p className="mb-0 text-danger">₹ 500</p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -269,7 +271,7 @@ const TenantPersonalDetails = () => {
                                     </div>
 
                                     <div className='row py-3 card-row rounded'>
-                                        <div className='p-0 bg-light'>
+                                        <div className='pe-0 bg-light'>
                                             <div className=' py-3 px-3'>
                                                 <h3 className='mb-0 financial-income-title'>Pending Maintanance</h3>
                                             </div>
@@ -277,7 +279,7 @@ const TenantPersonalDetails = () => {
                                                 {maintainace.map((val, index) => (
                                                     <div className="col-lg-3 mb-3 " key={val.id}>
                                                         <div className="card">
-                                                            <div className="card-header card-title text-light d-flex align-items-center justify-content-between">
+                                                            <div className="card-header card-title text-light d-flex align-items-center justify-content-between py-3" style={{ background: "rgba(86, 120, 233, 1)" }}>
                                                                 <h5 className="mb-0" style={{ fontSize: "14px" }}>
                                                                     {val.title}
                                                                 </h5>
@@ -315,7 +317,7 @@ const TenantPersonalDetails = () => {
                                     </div>
 
                                     <div className='row py-3 card-row rounded'>
-                                        <div className='p-0 bg-light'>
+                                        <div className='pe-0 bg-light'>
                                             <div className=' py-3 px-3'>
                                                 <h3 className='mb-0 financial-income-title'>Announcement Details</h3>
                                             </div>
@@ -323,7 +325,7 @@ const TenantPersonalDetails = () => {
                                                 {announcement.map((val, index) => (
                                                     <div className="col-lg-3 mb-3 " key={val.id}>
                                                         <div className="card">
-                                                            <div className="card-header card-title text-light d-flex align-items-center justify-content-between">
+                                                            <div className="card-header card-title text-light d-flex align-items-center justify-content-between py-3" style={{ background: "rgba(86, 120, 233, 1)" }}>
                                                                 {val.title}
                                                             </div>
                                                             <div className="card-body">

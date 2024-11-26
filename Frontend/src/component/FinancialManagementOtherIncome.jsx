@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Button, Modal, Form } from 'react-bootstrap';
-import Sidebar from "../component/Layout/Sidebar";
+import Sidebar from "../component/layout/Sidebar";
 
 
 
@@ -114,11 +114,11 @@ function FinancialManagementOtherIncome() {
 
 
                                 <div className='bg-light'>
-                                    <div className='d-flex justify-content-between align-items-center  py-3 px-2'>
+                                    <div className='d-flex justify-content-between align-items-center  p-3 py-1'>
                                         <h3 className=' mb-0  financial-income-title'>Other Income</h3>
 
                                         <div style={{marginBottom:"20px"}}>
-                                            <button className='set-maintainance-btn d-flex align-items-center other-income-btn' onClick={handleShow}> Create Other Income </button>
+                                            <button className='set-maintainance-btn d-flex align-items-center other-income-btn p-3' onClick={handleShow}> Create Other Income </button>
                                         </div>
                                     </div>
 
@@ -173,7 +173,7 @@ function FinancialManagementOtherIncome() {
                                             <div className="col-lg-3 mb-3" key={val.id}>
                                                 <div className="card">
                                                     <div className="card-header card-title text-light d-flex align-items-center justify-content-between" style={{ background: "rgba(86, 120, 233, 1)" }}>
-                                                        {val.title}"
+                                                        {val.title}
                                                         <div className='position-relative'>
                                                             {/* Three dots button */}
                                                             <button

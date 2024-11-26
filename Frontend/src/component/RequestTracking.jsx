@@ -4,15 +4,15 @@ import { FaEdit, FaEye, FaPlus, FaTrash } from 'react-icons/fa';
 
 import Avtar from "../assets/Avatar.png"
 import Header from './Navbar';
-import Sidebar from "../component/Layout/Sidebar";
+import Sidebar from "../component/layout/Sidebar";
 import viewICon from '../Icons/view.png'
 import deleteIcon from '../Icons/delete.png'
 import editIcon from '../Icons/Edit.png'
 
 function RequestTracking() {
   const [requests, setRequests] = useState([
-    { id: 1, name: "Evelyn Harper", type: "Unethical Behavior", description: "Providing false information or",date:"20/10/2002", unit: "A", number: "1001", priority: "Medium", status: "Pending" },
-    { id: 2, name: "Esther Howard", type: "Preventive Measures", description: "Regular waste collection services",date:"20/10/2002", unit: "B", number: "1002", priority: "High", status: "Solve" },
+    { id: 1, name: "Evelyn Harper", type: "Unethical Behavior", description: "Providing false information or", date: "20/10/2002", unit: "A", number: "1001", priority: "Medium", status: "Pending" },
+    { id: 2, name: "Esther Howard", type: "Preventive Measures", description: "Regular waste collection services", date: "20/10/2002", unit: "B", number: "1002", priority: "High", status: "Solve" },
   ]);
 
   const [selectedRequest, setSelectedRequest] = useState(null);
@@ -25,7 +25,7 @@ function RequestTracking() {
     name: "",
     type: "",
     description: "",
-    date:"",
+    date: "",
     unit: "",
     number: "",
     priority: "Medium",
@@ -45,17 +45,17 @@ function RequestTracking() {
       setErrorMessage("All fields are required.");
       return;
     }
-    
+
     setRequests((prevRequests) =>
       prevRequests.map((r) =>
         r.id === selectedRequest.id ? selectedRequest : r
       )
     );
-  
+
     setShowModal(false);
     setErrorMessage("");
   };
-  
+
   const handleView = (request) => {
     setSelectedRequest(request);
     setShowViewModal(true);
@@ -89,13 +89,13 @@ function RequestTracking() {
 
   const handleCreateRequest = () => {
     // Basic form validation
-    if (!newRequest.name || !newRequest.type || !newRequest.description ||!newRequest.date || !newRequest.unit || !newRequest.number) {
+    if (!newRequest.name || !newRequest.type || !newRequest.description || !newRequest.date || !newRequest.unit || !newRequest.number) {
       setErrorMessage("All fields are required.");
       return;
     }
 
     // Validate and set priority based on status
-   
+
 
     setErrorMessage(""); // Clear previous error message if any
 
@@ -103,7 +103,7 @@ function RequestTracking() {
     const requestToAdd = { ...newRequest, id: newId };
     setRequests([...requests, requestToAdd]);
 
-    setNewRequest({ name: "", type: "", description: "",date: "", unit: "", number: "", priority: "Medium", status: "Open" });
+    setNewRequest({ name: "", type: "", description: "", date: "", unit: "", number: "", priority: "Medium", status: "Open" });
     setShowCreateModal(false);
   };
 
@@ -131,6 +131,7 @@ function RequestTracking() {
 
   return (
     <div className="d-flex flex-column flex-md-row">
+
   <div className="flex-shrink-0" >
     <Sidebar />
   </div>
@@ -247,13 +248,13 @@ function RequestTracking() {
             ))}
           </tbody>
         </Table>
+
       </div>
-    </div>
-  </div>
 
 
 
       {/* Create Complaint Modal */}
+
       <Modal show={showCreateModal} onHide={handleCloseCreateModal} className='Round-modal'>
   <Modal.Header >
     <Modal.Title>Create Request</Modal.Title>
@@ -459,192 +460,235 @@ function RequestTracking() {
             }}
           />
           <div
+
             style={{
-              height: "70px",
-              gap: "0px",
-              marginTop: "10px"
+              width: "371px",
+              height: "40px",
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
             }}
           >
-            <h5 style={{ margin: 0 }}>{selectedRequest.name}</h5>
-            <span style={{
-              color: "#A7A7A7",
-            }}>Aug 5, 2024</span>
-          </div>
-        </div>
-
-        <div style={{
-          height: "51px",
-          gap: "3px",
-          marginTop: "15px",
-        }}>
-          <strong style={{
-            color: "#A7A7A7",
-            fontWeight:"200"
-          }}>Request Name</strong> <br />
-          <span>{selectedRequest.type}</span>
-        </div>
-        <div style={{
-          height: "75px",
-          gap: "3px",
-          marginTop: "15px",
-        }}>
-          <strong style={{
-            color: "#A7A7A7",
-            fontWeight:"200"
-          }}>Description</strong>
-          <p style={{ margin: 0 }}>{selectedRequest.description}</p>
-        </div>
-
-        <div style={{
-          height: "51px",
-          gap: "3px",
-          
-        }}>
-          <strong style={{
-            color: "#A7A7A7",
-            fontWeight:"200"
-          }}>Request Date</strong> <br />
-          <span>{selectedRequest.date}</span>
-        </div>
-
-        <div
-          className="d-flex"
+            View Request
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body
           style={{
-            width: "370.25px",
-            gap: "10px",
-            justifyContent: "space-around",
-            marginTop:"20px"
+            width: "371px",
+            height: "400px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "25px",
+            fontFamily: "Poppins, sans-serif",
           }}
         >
-          <div style={{
-            width: "41px",
-            height: "55px",
-            top: "166px",
-            gap: "3px",
-          }}>
-            <strong
-              style={{
-                fontFamily: "Poppins",
-                fontSize: "16px",
-                fontWeight: "400",
-                lineHeight: "24px",
-                textUnderlinePosition: "from-font",
-                textDecorationSkipInk: "none",
-                color: "#A7A7A7"
-              }}
-            >
-              Wing
-            </strong>
+          {selectedRequest && (
+            <div>
+              <div style={{
+                width: "285px",
+                height: "70px",
+                display: "flex",
+                gap: "15px",
+                fontFamily: "Poppins, sans-serif",
+              }}>
+                <img
+                  src={Avtar}
+                  alt="avatar"
+                  style={{
+                    width: "70px",
+                    height: "70px",
+                    borderRadius: "50%", // Ensures a perfect circle
+                    border: "3px solid #F4F4F4",
+                  }}
+                />
+                <div
+                  style={{
+                    height: "70px",
+                    gap: "0px",
+                    marginTop: "10px"
+                  }}
+                >
+                  <h5 style={{ margin: 0 }}>{selectedRequest.name}</h5>
+                  <span style={{
+                    color: "#A7A7A7",
+                  }}>Aug 5, 2024</span>
+                </div>
+              </div>
 
-            <p style={{ border: "1px solid ", borderRadius: "50%", width: "28px", height: "28px", display: "inline-flex", justifyContent: "center", alignItems: "center", color: "skyblue" }}>
-              {selectedRequest.unit}
-            </p>
-          </div>
+              <div style={{
+                height: "51px",
+                gap: "3px",
+                marginTop: "15px",
+              }}>
+                <strong style={{
+                  color: "#A7A7A7",
+                  fontWeight: "200"
+                }}>Request Name</strong> <br />
+                <span>{selectedRequest.type}</span>
+              </div>
+              <div style={{
+                height: "75px",
+                gap: "3px",
+                marginTop: "15px",
+              }}>
+                <strong style={{
+                  color: "#A7A7A7",
+                  fontWeight: "200"
+                }}>Description</strong>
+                <p style={{ margin: 0 }}>{selectedRequest.description}</p>
+              </div>
 
-          <div
-            style={{
-              width: "35px",
-              height: "51px",
-              top: "168px",
-              left: "89.25px",
-              gap: "3px",
-              textAlign: "center"
-            }}
-          >
-            <strong style={{
-              fontFamily: "Poppins",
-              fontSize: "16px",
-              fontWeight: "400",
-              lineHeight: "24px",
-              textUnderlinePosition: "from-font",
-              textDecorationSkipInk: "none",
-              color: "#A7A7A7"
-            }}>Unit</strong>
-            <p
-              style={{
-                fontFamily: "Poppins",
-                fontSize: "16px",
-                fontWeight: "400",
-                lineHeight: "24px",
-                textUnderlinePosition: "from-font",
-                textDecorationSkipInk: "none",
-                color: "#202224",
-                width: "35px",
-                height: "24px",
-                margin: "0"
-              }}
-            >
-              {selectedRequest.number}
-            </p>
-          </div>
+              <div style={{
+                height: "51px",
+                gap: "3px",
 
-          <div
-            style={{
-              width: "86px",
-              height: "55px",
-              top: "166px",
-              left: "172.25px",
-              gap: "3px",
-              textAlign: "center",
-            }}
-          >
-            <strong style={{
-              fontFamily: "Poppins",
-              fontSize: "16px",
-              fontWeight: "400",
-              lineHeight: "24px",
-              textUnderlinePosition: "from-font",
-              textDecorationSkipInk: "none",
-              color: "#A7A7A7",
-            }}>Priority</strong>
-            <p
-              style={{
-                textAlign: "center",
-                borderRadius: "50px",
-                background: badgeStyle(selectedRequest.priority).backgroundColor,
-                color: "white"
-              }}
-            >
-              {selectedRequest.priority}
-            </p>
-          </div>
+              }}>
+                <strong style={{
+                  color: "#A7A7A7",
+                  fontWeight: "200"
+                }}>Request Date</strong> <br />
+                <span>{selectedRequest.date}</span>
+              </div>
 
-          <div style={{
-            gap: "3px",
-            textAlign: "center",
-          }} >
-            <strong style={{
-              fontFamily: "Poppins",
-              fontSize: "16px",
-              fontWeight: "400",
-              lineHeight: "24px",
-              textUnderlinePosition: "from-font",
-              textDecorationSkipInk: "none",
-              color: "#A7A7A7"
-            }}>Status</strong>
-            <p
-              style={{
-                textAlign: "center",
-                padding: "2px 10px",
-                borderRadius: "50px",
-                backgroundColor: statusBadgeStyle(selectedRequest.status).backgroundColor,
-                color: statusBadgeStyle(selectedRequest.status).color
-              }}
-            >
-              {selectedRequest.status}
-            </p>
-          </div>
-        </div>
-      </div>
-    )}
-  </Modal.Body>
-</Modal>
+              <div
+                className="d-flex"
+                style={{
+                  width: "370.25px",
+                  gap: "10px",
+                  justifyContent: "space-around",
+                  marginTop: "20px"
+                }}
+              >
+                <div style={{
+                  width: "41px",
+                  height: "55px",
+                  top: "166px",
+                  gap: "3px",
+                }}>
+                  <strong
+                    style={{
+                      fontFamily: "Poppins",
+                      fontSize: "16px",
+                      fontWeight: "400",
+                      lineHeight: "24px",
+                      textUnderlinePosition: "from-font",
+                      textDecorationSkipInk: "none",
+                      color: "#A7A7A7"
+                    }}
+                  >
+                    Wing
+                  </strong>
+
+                  <p style={{ border: "1px solid ", borderRadius: "50%", width: "28px", height: "28px", display: "inline-flex", justifyContent: "center", alignItems: "center", color: "skyblue" }}>
+                    {selectedRequest.unit}
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    width: "35px",
+                    height: "51px",
+                    top: "168px",
+                    left: "89.25px",
+                    gap: "3px",
+                    textAlign: "center"
+                  }}
+                >
+                  <strong style={{
+                    fontFamily: "Poppins",
+                    fontSize: "16px",
+                    fontWeight: "400",
+                    lineHeight: "24px",
+                    textUnderlinePosition: "from-font",
+                    textDecorationSkipInk: "none",
+                    color: "#A7A7A7"
+                  }}>Unit</strong>
+                  <p
+                    style={{
+                      fontFamily: "Poppins",
+                      fontSize: "16px",
+                      fontWeight: "400",
+                      lineHeight: "24px",
+                      textUnderlinePosition: "from-font",
+                      textDecorationSkipInk: "none",
+                      color: "#202224",
+                      width: "35px",
+                      height: "24px",
+                      margin: "0"
+                    }}
+                  >
+                    {selectedRequest.number}
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    width: "86px",
+                    height: "55px",
+                    top: "166px",
+                    left: "172.25px",
+                    gap: "3px",
+                    textAlign: "center",
+                  }}
+                >
+                  <strong style={{
+                    fontFamily: "Poppins",
+                    fontSize: "16px",
+                    fontWeight: "400",
+                    lineHeight: "24px",
+                    textUnderlinePosition: "from-font",
+                    textDecorationSkipInk: "none",
+                    color: "#A7A7A7",
+                  }}>Priority</strong>
+                  <p
+                    style={{
+                      textAlign: "center",
+                      borderRadius: "50px",
+                      background: badgeStyle(selectedRequest.priority).backgroundColor,
+                      color: "white"
+                    }}
+                  >
+                    {selectedRequest.priority}
+                  </p>
+                </div>
+
+                <div style={{
+                  gap: "3px",
+                  textAlign: "center",
+                }} >
+                  <strong style={{
+                    fontFamily: "Poppins",
+                    fontSize: "16px",
+                    fontWeight: "400",
+                    lineHeight: "24px",
+                    textUnderlinePosition: "from-font",
+                    textDecorationSkipInk: "none",
+                    color: "#A7A7A7"
+                  }}>Status</strong>
+                  <p
+                    style={{
+                      textAlign: "center",
+                      padding: "2px 10px",
+                      borderRadius: "50px",
+                      backgroundColor: statusBadgeStyle(selectedRequest.status).backgroundColor,
+                      color: statusBadgeStyle(selectedRequest.status).color
+                    }}
+                  >
+                    {selectedRequest.status}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+        </Modal.Body>
+      </Modal>
 
 
 
 
 
       {/* edit model */}
+
 
       <Modal show={showModal} onHide={handleCloseModal} className='Round-modal'>
   <Modal.Header >
@@ -790,6 +834,7 @@ function RequestTracking() {
     </Button>
   </Modal.Footer>
 </Modal>
+
 
     </div>
   );

@@ -107,21 +107,37 @@ function Announcement() {
 
     return (
         <div className="d-flex flex-column flex-md-row">
+
+            <div className="flex-shrink-0" style={{ width: "280px" }}>
+
             <div className="flex-shrink-0" >
+
                 <Sidebar />
             </div>
             <div className='dashboard-bg' >
                 <Navbar />
+
+                <div>
+                    <div className='container-fluid'>
+                        <div className='row p-5'>
+                            <div className='p-0'>
+                                <div className='bg-light'>
+
                 <div style={{ marginLeft: "290px" }}>
                     <div className='container-fluid ' >
                         <div className='row p-5'>
                             <div className='p-0'>
                                 <div className='bg-light' style={{ borderRadius: "9px" }}>
+
                                     <div className='d-flex justify-content-between align-items-center  py-3 px-2'>
                                         <h3 className=' mb-0  financial-income-title' style={{ marginLeft: "12px" }}>Announcement</h3>
 
                                         <div>
+
+                                            <Button className='set-maintainance-btn d-flex align-items-center other-income-btn p-3' style={{ marginRight: "10px", border: "none" }} onClick={handleShow}><FaPlus
+
                                             <Button className='set-maintainance-btn d-flex align-items-center other-income-btn p-2' style={{ marginRight: "10px", border: "none" }} onClick={handleShow}><FaPlus
+
                                                 style={{
                                                     fontSize: "18px",
                                                     borderRadius: "5px",
@@ -188,7 +204,11 @@ function Announcement() {
                                                             <button
                                                                 className="btn btn-light p-0"
                                                                 onClick={() => setDropdownIndex(dropdownIndex === index ? null : index)}
+
+                                                                style={{ width: '30px', height: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+
                                                                 style={{ width: '30px', height: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center',marginBottom:"20px" }}
+
                                                             >
                                                                 <BsThreeDotsVertical />
                                                             </button>
