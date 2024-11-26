@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, useLocation } from "react-router-dom";
-
 import { FaSignOutAlt, FaChevronDown, FaChevronUp, FaBars } from "react-icons/fa";
 
 import "../../style.css";
@@ -16,7 +15,6 @@ import securityguardIcon from "../../Icons/security-user.png";
 import announcementIcon from "../../Icons/Announcement.png";
 import personaldetailsIcon from "../../Icons/personalcard.png";
 import securityIcon from "../../Icons/security.png";
-
 import Logo from "../Logo";
 import HideBgCopy from "../../assets/HideBgCopy.png";
   import BlackImage from '../../assets/Rectangle 1888.png'
@@ -29,14 +27,10 @@ function Sidebar() {
   const [isSecurityDropdownOpen, setSecurityDropdownOpen] = useState(false);
   const [isFinancialDropdownOpen, setFinancialDropdownOpen] = useState(false);
   const [isGeneralSecurityDropdownOpen, setGeneralSecurityDropdownOpen] = useState(false);
-
-  const [isPaymentPortalDropdownOpen, setPaymentPortalDropdownOpen] = useState(false);
-
-
   const [isSidebarOpen, setSidebarOpen] = useState(false); // Mobile sidebar toggle state
   const [isMobile, setIsMobile] = useState(window.innerWidth < 576); // Mobile screen check
-
-
+  const [isPaymentPortalDropdownOpen, setPaymentPortalDropdownOpen] = useState(false);
+  
   // Update active item on location change
   useEffect(() => {
     const currentPath = location.pathname;
@@ -85,13 +79,13 @@ function Sidebar() {
       setComplaintDropdownOpen(false);
       setSecurityDropdownOpen(false);
       setFinancialDropdownOpen(false);
-    } else if (key === "payment-portal") {
+    }else if (key === "payment-portal") {
       setFinancialDropdownOpen(false);
       setComplaintDropdownOpen(false);
       setSecurityDropdownOpen(false);
       setGeneralSecurityDropdownOpen(false);
       setPaymentPortalDropdownOpen(!isPaymentPortalDropdownOpen);
-    }
+    }
     setActiveItem(key);
   };
 
@@ -113,9 +107,7 @@ function Sidebar() {
       key: "dashboard",
       label: "Dashboard",
       icon: <img src={dashboardIcon} />,
-
       path: "/dashboard",
-
     },
     {
       key: "residentmanagement",
@@ -185,17 +177,10 @@ function Sidebar() {
       path: "/personal-details",
     },
     {
-
-      key: "service-and-complaint",
-      label: "Service And Complaint",
-      icon: <img src={personaldetailsIcon} />,
-      path: "/service-and-complaint",
-    },
-    {
-      key: "events-and-participation",
-      label: "Events Participation",
-      icon: <img src={personaldetailsIcon} />,
-      path: "/events-and-participation",
+      key: "Resident-Protocols",
+      label: "Security protocols",
+      icon: <img src={FrameIcon} />,
+      path: "/Resident-Protocols",
     },
     {
       key: "payment-portal",
@@ -204,14 +189,20 @@ function Sidebar() {
       subItems: [
         { key: "maintenance-invoices", label: "Maintenance Invoices", path: "/maintenance-invoices" },
         { key: "other-income-nvoice", label: "Other Income Invoice", path: "/other-income-nvoice" },
-      ],
-
-      key: "Resident-Protocols",
-      label: "Security protocols",
-      icon: <img src={FrameIcon} />,
-      path: "/Resident-Protocols",
-
-    },
+      ],
+    },
+{
+  key: "events-and-participation",
+  label: "Events Participation",
+  icon: <img src={personaldetailsIcon} />,
+  path: "/events-and-participation",
+    },
+{
+  key: "service-and-complaint",
+  label: "Service And Complaint",
+  icon: <img src={personaldetailsIcon} />,
+  path: "/service-and-complaint",
+    },
   ];
 
   return (
@@ -243,70 +234,60 @@ function Sidebar() {
         aria-labelledby="offcanvasExampleLabel"
       >
         <div className="offcanvas-header justify-content-center">
-
           <h1 className="offcanvas-title mainColor" id="offcanvasExampleLabel">
-
             <Logo />
           </h1>
         </div>
         <hr />
 
-        <div className="offcanvas-body p-0">
-          <ul className="list-unstyled">
-            {menuItems.map((item) =>
-              item.subItems ? (
-                <li key={item.key} className="p-3 rounded">
-                  <div
-                    className="d-flex align-items-center justify-content-between"
-                    style={{ cursor: "pointer", color: "black" }}
-                    onClick={() => handleDropdownClick(item.key)}
-                  >
-                    <div className="d-flex align-items-center">
-                      {item.icon}
-                      <span className="ms-3">{item.label}</span>
-                    </div>
-                    {(item.key === "complaint-tracking" && isComplaintDropdownOpen) ||
-                      (item.key === "security-management" && isSecurityDropdownOpen) ||
-                      (item.key === "financialmanagement" && isFinancialDropdownOpen) ||
-                      (item.key === "security" && isGeneralSecurityDropdownOpen) ? (
-                      <FaChevronUp />
-                    ) : (
-                      <FaChevronDown />
-                    )}
-                  </div>
-                  {(item.key === "complaint-tracking" && isComplaintDropdownOpen) ||
-                    (item.key === "security-management" && isSecurityDropdownOpen) ||
-                    (item.key === "financialmanagement" && isFinancialDropdownOpen) ||
-                    (item.key === "security" && isGeneralSecurityDropdownOpen) ||
-                    (item.key === "payment-portal" && isPaymentPortalDropdownOpen) ? (
-                    <ul className="list-unstyled ms-4">
-                      {item.subItems.map((subItem) => (
-                        <li
-                          key={subItem.key}
-                          className={`p-2 rounded ${activeItem === subItem.key ? "mainColor2 text-white" : ""}`}
-                        >
-                          <Link
-                            to={subItem.path}
-                            className="d-flex align-items-center"
-                            style={{
-                              textDecoration: "none",
-                              color: activeItem === subItem.key ? "white" : "black",
-                            }}
-                          >
-                            <span>{subItem.label}</span>
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : null}
-
-                </li>
-              ) : (
-                <li key={item.key} className={`p-3 rounded ${activeItem === item.key ? "mainColor2" : ""}`}>
-                  <Link
-                    to={item.path}
-                    className="d-flex align-items-center"
-
+        <div className="offcanvas-body ">
+        <ul className="list-unstyled">
+  {menuItems.map((item) =>
+    item.subItems ? (
+      <li key={item.key} className="position-relative p-3 rounded">
+        <div
+          className="d-flex align-items-center justify-content-between"
+          style={{ cursor: "pointer", color: "black" }}
+          onClick={() => handleDropdownClick(item.key)}
+        >
+          {activeItem === item.key && (
+           <img
+             src={HideBgCopy}
+             alt="Active Indicator"
+             style={{
+               position: "absolute",
+               left: "-15px", // Adjust this value as needed
+               height: "50px",
+               
+             }}
+           />
+          )}
+          <div className="d-flex align-items-center">
+            {item.icon}
+            <span className="ms-2">{item.label}</span>
+          </div>
+          {(item.key === "complaint-tracking" && isComplaintDropdownOpen) ||
+          (item.key === "security-management" && isSecurityDropdownOpen) ||
+          (item.key === "financialmanagement" && isFinancialDropdownOpen) ||
+          (item.key === "security" && isGeneralSecurityDropdownOpen) ||
+          (item.key === "payment-portal" && isPaymentPortalDropdownOpen)  ? (
+            <FaChevronUp />
+          ) : (
+            <FaChevronDown />
+          )}
+        </div>
+        {(item.key === "complaint-tracking" && isComplaintDropdownOpen) ||
+        (item.key === "security-management" && isSecurityDropdownOpen) ||
+        (item.key === "financialmanagement" && isFinancialDropdownOpen) ||
+        (item.key === "security" && isGeneralSecurityDropdownOpen) ||
+        (item.key === "payment-portal" && isPaymentPortalDropdownOpen)  ? (
+          <ul className="list-unstyled ms-4">
+            {item.subItems.map((subItem) => (
+              <li key={subItem.key} className="p-2 rounded position-relative">
+                {activeItem === subItem.key && (
+                  <img
+                    src={BlackImage}
+                    alt="Active Indicator" // Adding alt for better accessibility
                     style={{
                       position: "absolute",
                       left: "-15px", // Adjust this value as needed
@@ -363,7 +344,6 @@ function Sidebar() {
 </ul>
 
         </div>
-
 
         <div className="p-3">
           <Link to="/login" className="d-flex align-items-center text-danger" style={{ textDecoration: "none" }}>

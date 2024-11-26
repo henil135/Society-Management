@@ -136,9 +136,9 @@ function RequestTracking() {
     <Sidebar />
   </div>
 
-  <div className="flex-grow-1 dashboard-bg" style={{width:"1920px"}}>
+  <div className="flex-grow-1 dashboard-bg " style={{width:"1920px"}}>
     <Header/>
-    <div className="container-fluid  p-4" style={{ marginTop: "10px",marginLeft:"295px",width:"1625px" }}>
+    <div className="container-fluid stickyHeader p-4" style={{ marginLeft:"295px",width:"1620px" }}>
     
 
       <div className="table-responsive" style={{ border: "1px solid #ddd", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", overflow: "hidden", backgroundColor: "#fff",padding:"5px", marginTop: "20px" }}>
@@ -156,8 +156,8 @@ function RequestTracking() {
 
   />Create Request</Button>
       </div>
-        <Table striped hover responsive style={{ width: "1540px",marginLeft:"15px" }}>
-          <thead className="bg-light">
+        <Table  style={{ width: "1535px",marginLeft:"15px" }}>
+          <thead >
             <tr className="rmHead " >
               <th className="text-start" style={{ padding: "5px",fontSize:"14px",paddingLeft:"20px",background:"rgb(185, 198, 242)"}}>Requester Name</th>
               <th className="text-start" style={{ padding: "8px",fontSize:"14px",background:"rgb(185, 198, 242)" }}>Request Name</th>
@@ -440,48 +440,10 @@ function RequestTracking() {
       fontFamily: "Poppins, sans-serif",
     }}
   >
-    {selectedRequest && (
-      <div>
-        <div style={{
-          width: "285px",
-          height: "70px",
-          display: "flex",
-          gap: "15px",
-          fontFamily: "Poppins, sans-serif",
-        }}>
-          <img
-            src={Avtar}
-            alt="avatar"
-            style={{
-              width: "70px",
-              height: "70px",
-              borderRadius: "50%", // Ensures a perfect circle
-              border: "3px solid #F4F4F4",
-            }}
-          />
-          <div
-
-            style={{
-              width: "371px",
-              height: "40px",
-              display: "flex",
-              alignItems: "center",
-              gap: "10px",
-            }}
-          >
-            View Request
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body
-          style={{
-            width: "371px",
-            height: "400px",
-            display: "flex",
-            flexDirection: "column",
-            gap: "25px",
-            fontFamily: "Poppins, sans-serif",
-          }}
-        >
+   
+      
+              
+          
           {selectedRequest && (
             <div>
               <div style={{
@@ -837,6 +799,8 @@ function RequestTracking() {
 
 
     </div>
-  );
+    </div>
+    </div>
+  )
 }
 export default RequestTracking;

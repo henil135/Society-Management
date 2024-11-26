@@ -115,17 +115,17 @@ function Complaintlist() {
 
     return (
         <div className='container-fluid py-2'>
-            <div className='row px-3 pb-2'>
-                <div className='col-lg-9 py-0 px-1 bg-light'>
-                    <div className="table-responsive Complaint-table rounded">
+            <div className='row px-4 '>
+                <div className='col-lg-9 bg-light rounded'>
+                    <div className="table-responsive Complaint-table rounded" >
 
                         <div >
-                            <h3 className=' mb-0 py-3 ps-2  financial-income-title'>Maintenance  Details</h3>
-                            <div className='px-3 financial-maintainance-table '>
+                            <h5 className=' mb-0 py-3 ps-1  financial-income-title'>Maintenance  Details</h5>
+                            <div className=' financial-maintainance-table '>
 
                                 <table className="table">
                                     <thead className='table-primary'>
-                                        <tr style={{ height: '55px' }}>
+                                        <tr >
                                             <th scope="col">Complainer Name</th>
                                             <th scope="col">Complaint Name</th>
                                             <th scope="col" className='text-center' >Date</th>

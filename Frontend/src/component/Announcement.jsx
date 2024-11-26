@@ -4,7 +4,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { Modal, Button } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { MdAccessTimeFilled } from "react-icons/md";
-import Sidebar from "../component/Layout/Sidebar";
+import Sidebar from "../component/layout/Sidebar";
 import { FaPlus } from 'react-icons/fa6';
 
 import axios from 'axios';
@@ -147,31 +147,27 @@ function Announcement() {
     return (
         <div className="d-flex flex-column flex-md-row">
 
-            <div className="flex-shrink-0" style={{ width: "280px" }}>
+            <div className="flex-shrink-0" >
 
                 <Sidebar />
             </div>
-            <div className='dashboard-bg' >
+            <div className='dashboard-bg' style={{width:"1920px"}} >
                 <Navbar />
 
-                <div>
-                    <div className='container-fluid'>
-                        <div className='row p-5'>
-                            <div className='p-0'>
-                                <div className='bg-light'>
+              
 
 
-                <div style={{ marginLeft: "290px" }}>
+                <div className='stickyHeader' style={{ marginLeft: "300px" }}>
                     <div className='container-fluid ' >
-                        <div className='row p-5'>
-                            <div className='p-0'>
+                        <div className='row ps-4 pe-4 pt-5'>
+                         
                                 <div className='bg-light' style={{ borderRadius: "9px" }}>
 
 
-                                    <div className='d-flex justify-content-between align-items-center  py-3 px-2'>
-                                        <h3 className=' mb-0  financial-income-title' style={{ marginLeft: "12px" }}>Announcement</h3>
+                                    <div className='d-flex justify-content-between align-items-center     px-2'>
+                                        <h5 className=' mb-0  financial-income-title mt-2 pb-4' >Announcement</h5>
 
-                                        <div>
+                                        <div className='pb-5 pt-2'>
 
                                             <Button className='set-maintainance-btn d-flex align-items-center other-income-btn p-2' style={{ marginRight: "10px", border: "none" }} onClick={handleShow}><FaPlus
 
@@ -420,7 +416,7 @@ function Announcement() {
                 </div>
 
             </div>
-        </div>
+     
     )
 }
 

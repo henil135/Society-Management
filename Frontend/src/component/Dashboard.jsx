@@ -4,7 +4,7 @@ import Header from './Header';
 import Income from './Income';
 import TotalBalanceChart from './TotalBalanceChart';
 import Complaintlist from './Complaintlist';
-import Sidebar from "../component/Layout/Sidebar";
+import Sidebar from "../component/layout/Sidebar";
 
 
 function Dashboard() {
@@ -13,7 +13,7 @@ function Dashboard() {
     <div>
         <Sidebar />
       <Header/>
-      <div className="dashboard-bg" style={{ marginLeft: "300px" }}>
+      <div className="dashboard-bg " style={{ marginLeft: "300px",marginTop:"109px",width:"1600px" }}>
 
         <Income />
         <TotalBalanceChart />

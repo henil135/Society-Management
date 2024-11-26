@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import profile from '../assets/profile.png';
 import { MdEditSquare } from "react-icons/md";
 import { Link } from 'react-router-dom';
-import Sidebar from "../component/Layout/Sidebar";
+import Sidebar from "../component/layout/Sidebar";
 
 export default function Profile() {
 
@@ -36,7 +36,7 @@ export default function Profile() {
         </div>
         <div className="profile-dashboard-bg dashboard-bg" style={{width:"1910px"}}>
             <Navbar />
-            <div className="" style={{marginLeft:"280px"}}>
+            <div className="stickyHeader" style={{marginLeft:"280px"}}>
                 <div className="d-flex justify-content-center profile-bg">
                     <div className="col-lg-8">
                         <div className="d-flex align-items-center justify-content-between">

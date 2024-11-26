@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Sidebar from "../component/Layout/Sidebar";
+import Sidebar from "../component/layout/Sidebar";
 import Header from "./Navbar";
 import { Button, Table, Form, Modal } from "react-bootstrap";
 import Avtar from "../assets/Avatar.png";
@@ -75,10 +75,10 @@ function VisitorsTracking() {
         <Sidebar />
       </div>
 
-      <div className="flex-grow-1" style={{ width: "1910px" }}>
+      <div className="flex-grow-1" style={{ width: "1920px" }}>
         <Header />
 
-        <div className="container-fluid p-4" style={{ marginTop: "10px",width: "1610px",marginLeft:"300px" }}>
+        <div className="container-fluid p-3 stickyHeader" style={{width: "1620px",marginLeft:"300px" }}>
           <div
             className="table-responsive"
             style={{
@@ -121,7 +121,7 @@ function VisitorsTracking() {
                 </Button>
               </div>
             </div>
-            <Table hover responsive>
+            <Table >
               <thead style={{ background: "rgb(185, 198, 242)", color: "black" }}>
                 <tr className="text-start" >
                   <th >Visitor Name</th>
