@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Sidebar from "./Layout/Sidebar";
+import Sidebar from "./layout/Sidebar";
 import Header from "./Navbar";
 
 
@@ -34,7 +34,7 @@ const SecurityProtocolsResident = () => {
         </div>
 
         {/* Main Content Area */}
-        <div className="p-3 flex-grow-1" style={{ marginTop: "20px", marginRight: "15px", marginLeft: "280px" }}>
+        <div className="p-2 flex-grow-1" style={{ marginTop: "20px", marginRight: "15px", marginLeft: "280px" }}>
   <div className="row">
     <div className="col-12">
       <div className="table-responsive bg-white shadow-sm rounded p-3">

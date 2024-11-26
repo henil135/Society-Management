@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import { Button, Modal, Form } from 'react-bootstrap';
 import { MdEditSquare } from "react-icons/md";
 import { FaEdit, FaPlusSquare } from "react-icons/fa";
-import Sidebar from "../component/Layout/Sidebar";
+import Sidebar from "../component/layout/Sidebar";
 import { FaEye, FaTrash } from 'react-icons/fa6';
 import viewICon from '../Icons/view.png'
 import deleteIcon from '../Icons/delete.png'

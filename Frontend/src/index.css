@@ -503,7 +503,7 @@ input:focus {
 /* delete modal */
 
 .delete{
-  background: rgba(246, 248, 251, 1) !important;
+  /* background: rgba(246, 248, 251, 1) !important; */
   color: rgba(32, 34, 36, 1) !important;
   padding: 12px 53px;
   border-radius: 10px;
@@ -516,7 +516,7 @@ input:focus {
 
 .delete:hover{
   background-color: rgba(231, 76, 60, 1) !important;
-  color: white !important;
+  /* color: white !important; */
 }
 
 /* edit modal */
@@ -602,7 +602,6 @@ input:focus {
 
 .set-maintainance-btn{
   background: linear-gradient(90deg, #FE512E 0%, #F09619 100%);
-
   border-radius: 10px;
   color: white;
   border: 0;
@@ -679,8 +678,8 @@ input:focus {
 .maintainance-income-btn {
   font-size: 14px !important;
   font-weight: 600 !important;
-  padding: 18px 10px !important;
-  width: 135px !important;
+  padding: 18px 8px !important;
+  width: 135px;
  
   border-top-left-radius: 10px !important;
   border-top-right-radius: 10px !important;
@@ -915,3 +914,5 @@ input:focus {
   padding: 10px 20px;
   border-radius: 5px;
 }
+
+

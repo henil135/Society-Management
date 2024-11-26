@@ -56,11 +56,11 @@ import Sidebar from "../component/layout/Sidebar";
   };
 
   return (
-    <div className="d-flex flex-column flex-md-row">
+    <div className="d-flex flex-column flex-md-row w-100">
     <div className="flex-shrink-0" >
       <Sidebar />
     </div>
-    <div className='dashboard-bg' style={{ width:"1920px"}}>
+    <div className='dashboard-bg w-100' >
       <Navbar />
       <div className='container-fluid' style={{marginLeft:"290px",width:"1630px"}}>
         <div className='row p-5'>

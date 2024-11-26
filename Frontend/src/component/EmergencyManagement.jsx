@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Sidebar from "../component/Layout/Sidebar";
+import Sidebar from "../component/layout/Sidebar";
 import Header from "./Navbar";
 
 const EmergencyManagement = () => {

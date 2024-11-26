@@ -36,6 +36,7 @@ import ActivityParticipation from './component/ActivityParticipation.jsx';
 import MaintenanceInvoices from './component/MaintenanceInvoices.jsx';
 
 import SecurityProtocolsResident from './component/SecurityProtocolsResident';
+import ViewInvoice from './component/ViewInvoice.jsx';
 
 function App() {
   return (
@@ -48,40 +49,41 @@ function App() {
           <Route path="/enter-otp" element={<EnterOtp />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path='/residentmanagement' element={<ResidentManagement/>}/>
-          <Route path='/residentForm' element={<ResidentForm/>}/>
+          <Route path='/residentmanagement' element={<ResidentManagement />} />
+          <Route path='/residentForm' element={<ResidentForm />} />
           <Route path="/Financial-Maintenance" element={<FinancialManagementIncome />} />
           <Route path="/Other-Income" element={<FinancialManagementOtherIncome />} />
           <Route path="/Expense" element={<FinancialManagementExp />} />
           <Route path="/Note" element={<FinancialManagementNote />} />
-          <Route path="/facility-management" element={<FacilityManagement/>}/>
-          <Route path="/create-complaint" element={<ComplaintTracking/>}/>
-          <Route path="/request-tracking" element={<RequestTracking/>}/>
-          <Route path="/visitors-log" element={<DetailTracking/>}/>
-          <Route path="/security-protocols" element={<SecurityProtocols/>}/>
-          <Route path="/security-guard" element={<SecurityGaurd/>}/>
-          <Route path="/announcement" element={<Announcement/>} />
-          <Route path='/visitor-tracking' element={<VisitorsTracking/>}/>
-          <Route path='/emergency-management' element={<EmergencyManagement/>}/>
-          <Route path='/profile' element={<Profile/>}/>
-          <Route path='/EditProfile' element={<EditProfile/>}/>
+          <Route path="/facility-management" element={<FacilityManagement />} />
+          <Route path="/create-complaint" element={<ComplaintTracking />} />
+          <Route path="/request-tracking" element={<RequestTracking />} />
+          <Route path="/visitors-log" element={<DetailTracking />} />
+          <Route path="/security-protocols" element={<SecurityProtocols />} />
+          <Route path="/security-guard" element={<SecurityGaurd />} />
+          <Route path="/announcement" element={<Announcement />} />
+          <Route path='/visitor-tracking' element={<VisitorsTracking />} />
+          <Route path='/emergency-management' element={<EmergencyManagement />} />
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/EditProfile' element={<EditProfile />} />
 
-          <Route path='/personal-details' element={<PersonalDetail/>} />
-          <Route path='/personal-details-tenant' element={<TenantPersonalDetails/>} />
-          <Route path='/service-and-complaint' element={<ServiceComplaint/>} />
-          <Route path='/request-and-submission' element={<RequestSubmission/>} />
-          <Route path='/events-and-participation' element={<EventParticipation/>} />
-          <Route path='/activity-and-participation' element={<ActivityParticipation/>} />
-          <Route path='/maintenance-invoices' element={<MaintenanceInvoices/>} />
-
-
-          <Route element={<PersonalDetail/>} path='/personal-details' />
-
-            <Route element={<TenantPersonalDetails/>} path='/personal-details-tenant' />
-            <Route path='/Resident-Protocols' element={<SecurityProtocolsResident/>}/>
+          <Route path='/personal-details' element={<PersonalDetail />} />
+          <Route path='/personal-details-tenant' element={<TenantPersonalDetails />} />
+          <Route path='/service-and-complaint' element={<ServiceComplaint />} />
+          <Route path='/request-and-submission' element={<RequestSubmission />} />
+          <Route path='/events-and-participation' element={<EventParticipation />} />
+          <Route path='/activity-and-participation' element={<ActivityParticipation />} />
+          <Route path='/maintenance-invoices' element={<MaintenanceInvoices />} />
 
 
-        </Routes> 
+          <Route element={<PersonalDetail />} path='/personal-details' />
+
+          <Route element={<TenantPersonalDetails />} path='/personal-details-tenant' />
+          <Route path='/Resident-Protocols' element={<SecurityProtocolsResident />} />
+          <Route path='view-invoice' element={<ViewInvoice/>} />
+
+
+        </Routes>
       </BrowserRouter>
     </div>
   );

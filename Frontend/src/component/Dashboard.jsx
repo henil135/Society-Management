@@ -4,7 +4,7 @@ import Header from './Header';
 import Income from './Income';
 import TotalBalanceChart from './TotalBalanceChart';
 import Complaintlist from './Complaintlist';
-import Sidebar from "../component/Layout/Sidebar";
+import Sidebar from "../component/layout/Sidebar";
 
 
 function Dashboard() {

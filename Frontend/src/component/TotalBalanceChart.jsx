@@ -203,7 +203,7 @@ function TotalBalanceChart() {
 
     return (
         <div className='container-fluid py-2'>
-            <div className='row px-3 py-1'>
+            <div className='row px-4 '>
                 <div className='col-lg-6 py-0 px-1'>
                     <div className="chart-container" style={{ borderRadius: '12px', background: '#f9fafb', maxWidth: '1000px' }}>
                         <div className='d-flex justify-content-between align-items-center mb-2 '>

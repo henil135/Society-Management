@@ -4,7 +4,7 @@ import { FaEdit, FaEye, FaPlus, FaTrash } from 'react-icons/fa';
 
 import Avtar from "../assets/Avatar.png"
 import Header from './Navbar';
-import Sidebar from "../component/Layout/Sidebar";
+import Sidebar from "../component/layout/Sidebar";
 import viewICon from '../Icons/view.png'
 import deleteIcon from '../Icons/delete.png'
 import editIcon from '../Icons/Edit.png'
@@ -140,7 +140,7 @@ import editIcon from '../Icons/Edit.png'
 
       <div className="flex-grow-1 dashboard-bg " style={{ }}>
         <Header/>
-        <div className="container-fluid  p-4" style={{ marginTop: "10px",marginLeft:"300px" ,width:"1620px"}}>
+        <div className="container-fluid  p-3" style={{ marginTop: "25px",marginLeft:"300px" ,width:"1620px"}}>
          
 
           <div className="table-responsive" style={{ border: "1px solid #ddd", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", overflow: "hidden", backgroundColor: "#fff", padding: "20px", marginTop: "20px" }}>
@@ -157,7 +157,7 @@ import editIcon from '../Icons/Edit.png'
 
   />Create Complaint</Button>
           </div>
-            <Table striped hover responsive className="mt-3" style={{ width: "1530px" }}>
+            <Table  className="mt-3" style={{ width: "1542px" }}>
               <thead className="bg-light">
                 <tr className="rmHead">
                   <th className="text-start" style={{ padding: "10px",background:"rgb(185, 198, 242)" }}>Complainer Name</th>

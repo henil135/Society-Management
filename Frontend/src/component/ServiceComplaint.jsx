@@ -85,16 +85,16 @@ const ServiceComplaint = () => {
     };
 
     return (
-        <div className='dashboard-bg' style={{ marginLeft: '280px' }}>
+        <div className='dashboard-bg w-100'>
             <Sidebar />
             <Navbar />
-            <div>
+            <div style={{ marginLeft: '300px' }}>
                 <div className='container-fluid'>
-                    <div className='row pt-3 pb-0 pe-3 ps-4'>
-                        <div className='p-0'>
+                    <div className='row p-4'>
+                     
                             <div className="table-responsive rounded pb-3">
 
-                                <Link to="/service-and-complaint" className='btn btn-sm text-decoration-none border-0 maintainance-income-btn maintainance-income-btn-bg complaint-btn'>Complaint Submission</Link>
+                                <Link to="/service-and-complaint" className='btn btn-sm text-decoration-none border-0 maintainance-income-btn maintainance-income-btn-bg complaint-btn ms-1'>Complaint Submission</Link>
 
                                 <Link to="/request-and-submission" className='btn btn-sm maintainance-income-btn maintainance-income-btn-withoutbg complaint-btn'>Request Submission</Link>
 
@@ -155,7 +155,7 @@ const ServiceComplaint = () => {
                                 </div>
 
                             </div>
-                        </div>
+                    
 
                     </div>
                     {/* Add/Edit Modal */}

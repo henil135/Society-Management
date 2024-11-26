@@ -24,12 +24,12 @@ const ActivityParticipation = () => {
       ])
 
     return (
-        <div className='dashboard-bg w-100' style={{ marginLeft: '280px' }}>
+        <div className='dashboard-bg w-100' >
             <Sidebar />
             <Navbar />
-            <div>
+            <div style={{ marginLeft: '300px' }}>
         <div className='container-fluid'>
-          <div className='row py-3 px-3'>
+          <div className='row p-4'>
               <div className="table-responsive rounded pb-3">
 
                 <Link to="/events-and-participation" className='btn btn-sm maintainance-income-btn maintainance-income-btn-withoutbg complaint-btn'>Events Participate</Link>

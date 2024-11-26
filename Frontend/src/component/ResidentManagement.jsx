@@ -7,7 +7,7 @@ import { FaUser, FaHome, FaTag, FaEye, FaEdit, FaPlus } from 'react-icons/fa'; /
 import '../style.css';
 import Avtar from '../assets/Avatar.png';
 import Header from './Navbar';
-import Sidebar from "../component/Layout/Sidebar";
+import Sidebar from "../component/layout/Sidebar";
 
 import editIcon from '../Icons/Edit.png'
 import viewicon from '../Icons/view.png'

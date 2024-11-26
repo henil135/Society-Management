@@ -12,12 +12,12 @@ import { FaMoneyBill } from "react-icons/fa";
 import { Button, Modal, Form } from 'react-bootstrap';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
-import Sidebar from "../component/Layout/Sidebar";
+import Sidebar from "../component/layout/Sidebar";
 import AvatarImg from '../assets/Avatar.png';
 import viewicon from '../Icons/view.png'
 
 
-export default function FinancialManagementIncome() {
+ function FinancialManagementIncome() {
     const navigate = useNavigate()
 
     const [maintenance, setMaintenance] = useState([
@@ -67,12 +67,12 @@ export default function FinancialManagementIncome() {
     <div className='card-row dashboard-bg'  style={{ width:"1920px"}}>
       <Navbar />
       <div  style={{marginLeft:"290px"}}>
-        <div className='container-fluid mt-2' style={{marginLeft:"30px"}}>
+        <div className='container-fluid mt-2 p-3'  style={{marginLeft:"30px"}}>
 
-          <div className='row justify-content-between align-items-center mb-3 pt-2 bg-light '  style={{marginRight:"60px",borderRadius:"8px"}}>
+          <div className='row justify-content-between align-items-center mb-3 pt-2 bg-light '  style={{marginRight:"40px",borderRadius:"8px"}}>
           <div className="col-lg-8 col-md-12 d-flex flex-wrap" >
             {/* Maintenance Amount Card */}
-            <div className="col-lg-4 col-md-6 col-sm-12 py-2 px-1 ms-2" >
+            <div className="col-lg-4 col-md-6 col-sm-12 py-2 px-1 " > 
               <div className="card border-0 financial-amt-card-shadow" >
                 <div className="card-body d-flex align-items-center">
                   <img src={incomeRactangle} width={8} className="me-2" alt="Icon" />
@@ -391,3 +391,6 @@ export default function FinancialManagementIncome() {
       </div>
   )
 } 
+
+
+export default FinancialManagementIncome;

@@ -7,6 +7,7 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import visa from '../assets/visa-logo.png'
 import mastercard from '../assets/mastercard-logo.png'
 import cash from '../assets/cash-logo.png'
+import { Link } from 'react-router-dom';
 
 
 const MaintenanceInvoices = () => {
@@ -51,22 +52,22 @@ const MaintenanceInvoices = () => {
     };
 
     return (
-        <div className='dashboard-bg w-100' style={{ marginLeft: '280px' }}>
+        <div className='dashboard-bg w-100' >
             <Sidebar />
             <Navbar />
 
-            <div>
+            <div style={{ marginLeft: '300px' }}>
                 <div className='container-fluid'>
-                    <div className='row pt-3 pb-0 pe-3 ps-4'>
-                        <div className='p-0'>
-                            <div className="table-responsive rounded pb-3">
+                    <div className='row p-4 '>
+                        
+                            <div className="table-responsive rounded pb-3" >
 
-                                <div className='container-fluid'>
+                                <div className='container-fluid' >
 
-                                    <div className="row py-3 card-row bg-light rounded">
-                                        <div className='align-items-center d-flex'>
+                                    <div className="row py-3 card-row bg-light " style={{borderRadius:"10px"}}>
+                                        <div className='align-items-center d-flex' >
                                             <div className='col-12 col-sm-6 col-md-3'>
-                                                <h3 className="mb-0 financial-income-title p-3">Show Maintenance Details</h3>
+                                                <h5 className="mb-0 financial-income-title p-3">Show Maintenance Details</h5>
                                             </div>
                                             <div className='d-flex w-100 justify-content-end'>
                                                 {/* Maintenance Amount Card */}
@@ -101,11 +102,11 @@ const MaintenanceInvoices = () => {
                                         <div className='pe-0 bg-light'>
                                             <div className='d-flex justify-content-between align-items-center py-3 px-3'>
                                                 <h3 className='mb-0 financial-income-title'>Pending Maintanance</h3>
-                                                <button className='set-maintainance-btn d-flex align-items-center p-3' onClick={handleShow}>
+                                                <Link to="/view-invoice" className='text-decoration-none'><button className='set-maintainance-btn d-flex align-items-center p-2'>
                                                     View Invoice
-                                                </button>
+                                                </button></Link>
                                             </div>
-                                            <div className="row  px-3">
+                                            <div className="row  px-3" style={{borderRadius:"10px"}}>
                                                 {maintainace.map((val, index) => (
                                                     <div className="col-lg-3 mb-3 " key={val.id}>
                                                         <div className="card">
@@ -291,7 +292,7 @@ const MaintenanceInvoices = () => {
                                 </div>
 
                             </div>
-                        </div>
+                       
 
                     </div>
                 </div>
