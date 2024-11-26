@@ -36,6 +36,7 @@ import ActivityParticipation from './component/ActivityParticipation.jsx';
 import MaintenanceInvoices from './component/MaintenanceInvoices.jsx';
 
 import SecurityProtocolsResident from './component/SecurityProtocolsResident';
+import OtherIncomeInvoices from './component/OtherIncomeInvoice.jsx';
 
 function App() {
   return (
@@ -73,7 +74,7 @@ function App() {
           <Route path='/events-and-participation' element={<EventParticipation/>} />
           <Route path='/activity-and-participation' element={<ActivityParticipation/>} />
           <Route path='/maintenance-invoices' element={<MaintenanceInvoices/>} />
-
+          <Route path='/other-income-nvoice' element={<OtherIncomeInvoices/>}/>
 
           <Route element={<PersonalDetail/>} path='/personal-details' />
 

@@ -11,7 +11,7 @@ import expRactangle from '../assets/Rectangle 1063 (3).png'
  function Income() {
     return (
         <div className='container-fluid income'>
-            <div className='row px-3 py-2'>
+            <div className='row px-4'>
                 <div className='col-lg-3 col-md-6 col-sm-6 pt-3 position-relative px-1'>
                     <div className="card">   
                         <div className="card-body d-flex justify-content-between align-items-center px-4 py-3">

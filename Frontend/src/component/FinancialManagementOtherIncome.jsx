@@ -98,13 +98,13 @@ function FinancialManagementOtherIncome() {
     <div className="flex-shrink-0" >
       <Sidebar />
     </div>
-        <div className='dashboard-bg' style={{ width:"1920px"}} >
+        <div className='dashboard-bg ' style={{ width:"1920px"}} >
             <Navbar />
-            <div>
-                <div className='income' style={{marginLeft:"300px", width:"1600px"}}>
+            <div className='stickyHeader'>
+                <div className='income' style={{marginLeft:"300px", width:"1608px"}}>
 
-                    <div className='row p-5'>
-                        <div className='p-0'>
+                    <div className='row p-4'>
+                        
                             <div className="table-responsive rounded pb-3">
 
                                 <Link to="/Financial-Maintenance" className='btn btn-sm  maintainance-income-btn  maintainance-income-btn-withoutbg'>Maintenance</Link>
@@ -304,7 +304,7 @@ function FinancialManagementOtherIncome() {
                 </div>
             </div>
         </div>
-        </div>
+       
     )
 } 
 export default FinancialManagementOtherIncome;

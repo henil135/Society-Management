@@ -19,8 +19,8 @@ function Header() {
     };
 
     return (
-        <div className="header " style={{width:"1900px"}}>
-            <Navbar expand="lg" className="navbar bg-white border-bottom" style={{ height: "109px" }}>
+        <div className="header "  style={{ width:"1900px",position:"fixed",zIndex:"999",top:"0px" }}>
+            <Navbar expand="lg" className="navbar bg-white border-bottom" style={{ height: "109px"}}>
                 <Container fluid>
                     {/* Search Bar for Large Screens */}
                     <Navbar.Brand className="d-none d-lg-block w-20 ms-4">

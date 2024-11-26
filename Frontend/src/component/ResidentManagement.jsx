@@ -7,7 +7,7 @@ import { FaUser, FaHome, FaTag, FaEye, FaEdit, FaPlus } from 'react-icons/fa'; /
 import '../style.css';
 import Avtar from '../assets/Avatar.png';
 import Header from './Navbar';
-import Sidebar from "../component/Layout/Sidebar";
+import Sidebar from "../component/layout/Sidebar";
 
 import editIcon from '../Icons/Edit.png'
 import viewicon from '../Icons/view.png'
@@ -66,7 +66,7 @@ import viewicon from '../Icons/view.png'
         <Sidebar />
       </div>
 
-      <div className="flex-grow-1   container-fluid" style={{width:"1920px"}}>
+      <div className="flex-grow-1  stickyHeader container-fluid" style={{width:"1920px"}}>
         <Header/>
         <div className="container-fluid  " style={{ marginTop: "20px",marginLeft:"310px",width:"1590px" }}>
          

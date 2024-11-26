@@ -5,7 +5,7 @@ import { FaCamera, FaClock, FaEdit, FaEye, FaFemale, FaImage, FaMale, FaMoon, Fa
 import Avtar from "../assets/Avatar.png";
 import { LuImagePlus } from 'react-icons/lu';
 import Header from './Navbar';
-import Sidebar from "../component/Layout/Sidebar";
+import Sidebar from "../component/layout/Sidebar";
 import viewICon from '../Icons/view.png'
 import deleteIcon from '../Icons/delete.png'
 import editIcon from '../Icons/Edit.png'
@@ -171,9 +171,9 @@ import editIcon from '../Icons/Edit.png'
         <Sidebar />
       </div>
 
-      <div className="flex-grow-1 dashboard-bg"  style={{ width:"1910px"}}>
+      <div className="flex-grow-1 dashboard-bg"  style={{ width:"1920px"}}>
         <Header/>
-        <div className="container-fluid  p-4" style={{ marginTop: "10px",width:"1610px",marginLeft:"300px" }}>
+        <div className="container-fluid stickyHeader p-3" style={{ width:"1620px",marginLeft:"300px" }}>
           
 
 
@@ -193,7 +193,7 @@ import editIcon from '../Icons/Edit.png'
               Add Security
             </Button>
           </div>
-            <Table striped responsive style={{ width: "1520px"}}>
+            <Table  style={{ width: "1545px"}}>
               <thead style={{ background: "rgb(185, 198, 242)", color: "black"}}>
                 <tr>
                   <th
