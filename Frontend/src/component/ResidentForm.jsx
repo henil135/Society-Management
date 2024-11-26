@@ -206,13 +206,13 @@ const handleSubmit = (e) => {
       <div className="flex-shrink-0" >
         <Sidebar />
       </div>
-    <div className='dashboard-bg' style={{marginLeft:"270px",width:"1630px"}}>
+    <div className='dashboard-bg' style={{width:"1900px"}}>
     
    <div >
    <Header/>
    </div>
        
-    <div className="container  p-5" style={{ maxWidth: '1540px', marginLeft: '50px', marginTop: '50px' }}>
+    <div className="container  p-5" style={{ maxWidth: '1540px',  marginTop: '50px' ,marginLeft:"330px",}}>
       <div className="mb-4">
         <button
           className={`btn ${formType === 'owner' ? 'mainColor2' : 'btn'} me-2`}
@@ -412,7 +412,7 @@ const handleSubmit = (e) => {
     </div>
 
 
- <div className="container p-4" style={{ maxWidth: '1540px',marginLeft: '50px', marginTop: '20px' }}>
+ <div className="container p-4" style={{ maxWidth: '1540px',marginLeft:"330px", marginTop: '20px' }}>
  <form>
         {/* Member Count Dropdown Toggle */}
         <div className="row mb-3">
@@ -539,7 +539,7 @@ const handleSubmit = (e) => {
 </div>
 
 
-<div className="container p-4" style={{ maxWidth: '1540px', marginLeft: '50px', marginTop: '20px' }}>
+<div className="container p-4" style={{ maxWidth: '1540px',marginLeft:"330px", marginTop: '20px' }}>
 <form>
         {/* Vehicle Count Dropdown Toggle */}
         <div className="row mb-6 align-items-center">
@@ -648,11 +648,11 @@ const handleSubmit = (e) => {
       </form>
 </div>
 
-<div className="container-fluid " style={{ maxWidth: '1540px',marginLeft: '50px', marginTop: '20px' }}>
+<div className="container-fluid " style={{ maxWidth: '1540px',marginLeft:"330px", marginTop: '7px' }}>
 <form onSubmit={handleSubmit}>
-  <div className="d-flex justify-content-end gap-2 mt-4">
-    <button type="button" style={{ border: "1px solid #202224", padding: "10px ",borderRadius:"10px", background: "#FFFFFF", color: "#202224", }}  >Cancel</button>
-    <button type="submit" className="mainColor2" style={{borderRadius:"10px",padding:"10px"}}>Create</button>
+  <div className="d-flex justify-content-end gap-2 ">
+    <button type="button" className="cancle" style={{ border: "1px solid #202224", padding: "10px ",borderRadius:"10px", background: "#FFFFFF", color: "#202224", }}  >Cancel</button>
+    <button type="submit" className="save" style={{borderRadius:"10px",padding:"10px"}}>Create</button>
   </div>
 </form>
 </div>

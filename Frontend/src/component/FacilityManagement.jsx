@@ -131,9 +131,9 @@ const FacilityManagement = () => {
             </div>
 
 
-            <div className="  dashboard-bg " style={{ marginLeft: "270px", width: "1642px" }}>
+            <div className="  dashboard-bg " style={{  width: "1920px" }}>
                 <Header />
-                <div className="container-fluid bg-white rounded shadow-sm p-3" style={{ marginTop: "55px", width: "1550px", marginLeft: "55px" }}>
+                <div className="container-fluid bg-white rounded shadow-sm p-3" style={{ marginTop: "55px", width: "1580px", marginLeft: "320px" }}>
                     <div className="d-flex align-items-center justify-content-between">
                         <h4 className="mb-0" >Facility Management</h4>
 
@@ -171,8 +171,8 @@ const FacilityManagement = () => {
                 </div>
 
                 {/* Modal for Creating or Editing Facility */}
-                <Modal show={showModal} onHide={handleCloseModal} centered>
-                    <Modal.Header closeButton>
+                <Modal show={showModal} onHide={handleCloseModal} centered className="Round-modal">
+                    <Modal.Header >
                         <Modal.Title>{isEditing ? "Edit Facility" : "Create Facility"}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
@@ -225,10 +225,10 @@ const FacilityManagement = () => {
                         </Form>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={handleCloseModal}>
+                        <Button variant="secondary" className="cancle" onClick={handleCloseModal}>
                             Cancel
                         </Button>
-                        <Button className="mainColor2" onClick={handleSave}>
+                        <Button className="save" onClick={handleSave}>
                             Save
                         </Button>
                     </Modal.Footer>

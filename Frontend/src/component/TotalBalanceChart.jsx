@@ -155,6 +155,9 @@ function TotalBalanceChart() {
                 { name: 'John ', phone: '+91 91222 56789', work: 'Electricians' },
             ]);
 
+
+            
+
             const [show, setShow] = useState(false);
 
             const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -330,7 +333,7 @@ function TotalBalanceChart() {
                                 </Form.Group>
 
                                 <Form.Group className="mb-3" controlId="formPhoneNumber">
-                                    <Form.Label className="Form-Label">
+                                    <Form.Label className="Form-Label ">
                                         Phone Number<span className="text-danger"> *</span>
                                     </Form.Label>
                                     <Form.Control

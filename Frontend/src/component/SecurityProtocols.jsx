@@ -87,18 +87,18 @@ function SecurityProtocols() {
 
   return (
     <div className="d-flex flex-column flex-md-row">
-      <div className="flex-shrink-0" style={{ width: "280px" }}>
+      <div className="flex-shrink-0" >
         <Sidebar />
       </div>
 
-      <div className="flex-grow-1 dashboard-bg" style={{ width: "1640px" }}>
+      <div className="flex-grow-1 dashboard-bg" style={{ width: "1910px" }}>
         <Header />
-        <div className="container-fluid  p-4" style={{ marginTop: "10px" }}>
+        <div className="container-fluid  p-4" style={{ marginTop: "10px",width: "1610px",marginLeft:"300px" }}>
 
 
           {/* Modal for creating or editing a protocol */}
-          <Modal show={showModal} onHide={handleClose} centered>
-            <Modal.Header closeButton>
+          <Modal show={showModal} onHide={handleClose} centered className='Round-modal'>
+            <Modal.Header >
               <Modal.Title>{isEdit ? "Edit Security Protocol" : "Create Security Protocol"}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -151,28 +151,28 @@ function SecurityProtocols() {
               </Form>
             </Modal.Body>
             <Modal.Footer style={{ display: "flex", justifyContent: "space-between" }}>
-              <Button style={{ width: "175px", height: "51px", border: "1px solid #202224", padding: "10px 55px 10px 55px", background: "#FFFFFF", color: "#202224", }} variant="secondary" onClick={handleClose}>
+              <Button style={{ width: "175px", height: "51px", border: "1px solid #202224", padding: "10px 55px 10px 55px", background: "#FFFFFF", color: "#202224", }} className='cancle' onClick={handleClose}>
                 Cancel
               </Button>
               <Button style={{
                 width: "175px", height: "51px", border: "1px", padding: "10px 55px 10px 55px", color: "#202224",
 
-              }} className='mainColor2' onClick={handleSave}>
+              }} className='save' onClick={handleSave}>
                 Save
               </Button>
             </Modal.Footer>
           </Modal>
 
 
-          <Modal show={showDeleteModal} onHide={handleClose} centered>
-            <Modal.Header closeButton>
+          <Modal show={showDeleteModal} onHide={handleClose} centered className='Round-modal'>
+            <Modal.Header >
               <Modal.Title>Delete Protocol?</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <p>Are you sure you want to delete this protocol?</p>
             </Modal.Body>
             <Modal.Footer style={{ display: "flex", justifyContent: "space-between" }}>
-              <Button variant="secondary" onClick={handleClose} style={{ width: "175px", height: "51px", border: "1px solid #202224", padding: "10px 55px 10px 55px", background: "#FFFFFF", color: "#202224", }}>
+              <Button className='cancle' onClick={handleClose} style={{ width: "175px", height: "51px", border: "1px solid #202224", padding: "10px 55px 10px 55px", background: "#FFFFFF", color: "#202224", }}>
                 Cancel
               </Button>
               <Button onClick={handleDelete} style={{
@@ -184,7 +184,7 @@ function SecurityProtocols() {
             </Modal.Footer>
           </Modal>
           {/* View-only modal for displaying protocol details */}
-          <Modal show={showViewModal} onHide={handleClose} centered>
+          <Modal show={showViewModal} onHide={handleClose} centered className='Round-modal'> 
             <Modal.Header closeButton>
               <Modal.Title>View Security Protocols</Modal.Title>
             </Modal.Header>
@@ -259,19 +259,19 @@ function SecurityProtocols() {
             
               />Create Protocols</Button>
             </div>
-            <Table hover responsive style={{ width: "1550px" }}>
+            <Table hover responsive style={{ width: "1520px" }}>
               <thead style={{ background: "rgb(185, 198, 242)", color: "black" }}>
-                <tr className="text-start" style={{ height: '70px' }}>
-                  <th style={{ width: "280px" }}>Title</th>
-                  <th style={{ width: "350px" }} className="text-start">Description</th>
-                  <th className="text-center">Date</th>
-                  <th className="text-center">Time</th>
-                  <th className="text-center">Actions</th>
+                <tr className="text-start" >
+                  <th style={{ width: "20%" }}>Title</th>
+                  <th style={{ width: "30%" }} className="text-start">Description</th>
+                  <th className="text-center" style={{ width: "20%" }}>Date</th>
+                  <th className="text-center" style={{ width: "20%" }}>Time</th>
+                  <th className="text-center" style={{ width: "20%" }}>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {protocols.map((protocol) => (
-                  <tr key={protocol.id} className="text-start" style={{ height: '70px' }}>
+                  <tr key={protocol.id} className="text-start" >
                     <td style={{ padding: "15px" }}>
                       <div style={{ display: "flex", alignItems: "center", justifyContent: "start" }}>
                         {protocol.title}
@@ -284,7 +284,7 @@ function SecurityProtocols() {
                         <div
                           style={{
                             width: "100px",
-                            height: "34px",
+                          
                             padding: "5px 15px",
                             gap: "10px",
                             borderRadius: "50px",

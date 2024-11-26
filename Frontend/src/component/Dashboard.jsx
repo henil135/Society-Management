@@ -12,8 +12,9 @@ function Dashboard() {
   return (
     <div>
         <Sidebar />
-        <Header/>
-      <div className="dashboard-bg" style={{ marginLeft: "280px" }}>
+      <Header/>
+      <div className="dashboard-bg" style={{ marginLeft: "300px" }}>
+
         <Income />
         <TotalBalanceChart />
         <Complaintlist />

@@ -1,25 +1,27 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, useLocation } from "react-router-dom";
-import {
-  FaSignOutAlt,
-  FaChevronDown,
-  FaChevronUp,
-} from "react-icons/fa";
+
+import { FaSignOutAlt, FaChevronDown, FaChevronUp, FaBars } from "react-icons/fa";
 
 import "../../style.css";
 
-import dashboardIcon from '../../Icons/image.png';
-import residentIcon from '../../Icons/money.png';
-import financialIcon from '../../Icons/dollar-square.png';
-import facalityIcon from '../../Icons/building.png';
-import complainrtrackingIcon from '../../Icons/sms-tracking.png'
-import securitymanagementIcon from '../../Icons/shield-security.png'
-import securityguardIcon from '../../Icons/security-user.png'
-import announcementIcon from '../../Icons/Announcement.png'
-import personaldetailsIcon from '../../Icons/personalcard.png'
-import securityIcon from '../../Icons/security.png'
+import dashboardIcon from "../../Icons/image.png";
+import residentIcon from "../../Icons/money.png";
+import financialIcon from "../../Icons/dollar-square.png";
+import facalityIcon from "../../Icons/building.png";
+import complainrtrackingIcon from "../../Icons/sms-tracking.png";
+import securitymanagementIcon from "../../Icons/shield-security.png";
+import securityguardIcon from "../../Icons/security-user.png";
+import announcementIcon from "../../Icons/Announcement.png";
+import personaldetailsIcon from "../../Icons/personalcard.png";
+import securityIcon from "../../Icons/security.png";
+
 import Logo from "../Logo";
+import HideBgCopy from "../../assets/HideBgCopy.png";
+  import BlackImage from '../../assets/Rectangle 1888.png'
+import FrameIcon from '../../Icons/Frame.png'
+
 function Sidebar() {
   const location = useLocation();
   const [activeItem, setActiveItem] = useState("");
@@ -27,14 +29,17 @@ function Sidebar() {
   const [isSecurityDropdownOpen, setSecurityDropdownOpen] = useState(false);
   const [isFinancialDropdownOpen, setFinancialDropdownOpen] = useState(false);
   const [isGeneralSecurityDropdownOpen, setGeneralSecurityDropdownOpen] = useState(false);
+
   const [isPaymentPortalDropdownOpen, setPaymentPortalDropdownOpen] = useState(false);
+
+
+  const [isSidebarOpen, setSidebarOpen] = useState(false); // Mobile sidebar toggle state
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 576); // Mobile screen check
 
 
   // Update active item on location change
   useEffect(() => {
     const currentPath = location.pathname;
-
-    // Check if any sub-item matches the current path
     let foundActiveItem = false;
     menuItems.forEach((item) => {
       if (item.subItems) {
@@ -54,7 +59,6 @@ function Sidebar() {
       }
     });
 
-    // If no match found, reset active item
     if (!foundActiveItem) {
       setActiveItem("");
     }
@@ -91,12 +95,27 @@ function Sidebar() {
     setActiveItem(key);
   };
 
+  // Update the mobile screen state on window resize
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 576);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const menuItems = [
     {
       key: "dashboard",
       label: "Dashboard",
       icon: <img src={dashboardIcon} />,
-      path: "/dashboard"
+
+      path: "/dashboard",
+
     },
     {
       key: "residentmanagement",
@@ -166,6 +185,7 @@ function Sidebar() {
       path: "/personal-details",
     },
     {
+
       key: "service-and-complaint",
       label: "Service And Complaint",
       icon: <img src={personaldetailsIcon} />,
@@ -185,20 +205,47 @@ function Sidebar() {
         { key: "maintenance-invoices", label: "Maintenance Invoices", path: "/maintenance-invoices" },
         { key: "other-income-nvoice", label: "Other Income Invoice", path: "/other-income-nvoice" },
       ],
+
+      key: "Resident-Protocols",
+      label: "Security protocols",
+      icon: <img src={FrameIcon} />,
+      path: "/Resident-Protocols",
+
     },
   ];
 
   return (
-    <div className="sidebar">
+    <div>
+      <button
+        className="btn btn-primary d-sm-none d-md-none d-lg-none"
+        onClick={() => setSidebarOpen(!isSidebarOpen)}
+        style={{
+          position: "fixed", 
+          top: "10px",
+          left: "10px",
+          zIndex: 1050,
+          padding: "10px",
+        }}
+      >
+        <FaBars />
+      </button>
+
+      {/* Sidebar */}
       <div
-        className="offcanvas offcanvas-start show"
+        className={`sidebar offcanvas offcanvas-start ${isSidebarOpen || !isMobile ? "show" : ""}`}
         tabIndex="-1"
-        style={{ visibility: "visible", width: "280px" }}
+        style={{
+          width: "300px",
+          zIndex: 1049,
+          transition: "transform 0.3s ease",
+          transform: isSidebarOpen || !isMobile ? "translateX(0)" : "translateX(-100%)", 
+        }}
         aria-labelledby="offcanvasExampleLabel"
-        data-bs-backdrop="false"
       >
         <div className="offcanvas-header justify-content-center">
-          <h1 className="offcanvas-title mainColor " id="offcanvasExampleLabel">
+
+          <h1 className="offcanvas-title mainColor" id="offcanvasExampleLabel">
+
             <Logo />
           </h1>
         </div>
@@ -259,19 +306,62 @@ function Sidebar() {
                   <Link
                     to={item.path}
                     className="d-flex align-items-center"
+
                     style={{
-                      textDecoration: "none",
-                      color: activeItem === item.key ? "white" : "black",
+                      position: "absolute",
+                      left: "-15px", // Adjust this value as needed
+                      height: "30px",
                     }}
-                    onClick={() => setActiveItem(item.key)}
-                  >
-                    {item.icon}
-                    <span className="ms-3">{item.label}</span>
-                  </Link>
-                </li>
-              )
-            )}
+                  />
+                )}
+                <Link
+                  to={subItem.path}
+                  className="d-flex align-items-center"
+                  style={{
+                    textDecoration: "none",
+                    fontWeight: activeItem === subItem.key ? "bold" : "normal", // Bold only active submenu item
+                    color: "black", // Ensure consistent text color for submenu
+                  }}
+                  onClick={() => setActiveItem(subItem.key)} // Ensure submenu item gets set as active
+                >
+                  <span>{subItem.label}</span>
+                </Link>
+              </li>
+            ))}
           </ul>
+        ) : null}
+      </li>
+    ) : (
+      <li key={item.key} className={`p-3 rounded position-relative ${activeItem === item.key ? "mainColor2" : ""}`}>
+        {activeItem === item.key && (
+         <img
+           src={HideBgCopy}
+           alt="Active Indicator"
+           style={{
+             position: "absolute",
+             left: "-15px", // Adjust this value as needed
+             height: "50px",
+             top:"2px"
+           }}
+         />
+        )}
+        <Link
+          to={item.path}
+          className="d-flex align-items-center"
+          style={{
+            textDecoration: "none",
+            color: activeItem === item.key ? "white" : "black",
+          }}
+          onClick={() => setActiveItem(item.key)}
+        >
+          {item.icon}
+          <span className="ms-2">{item.label}</span>
+        </Link>
+      </li>
+    )
+  )}
+</ul>
+
         </div>
 
 

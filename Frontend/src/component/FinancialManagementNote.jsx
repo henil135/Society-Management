@@ -60,9 +60,9 @@ import Sidebar from "../component/layout/Sidebar";
     <div className="flex-shrink-0" >
       <Sidebar />
     </div>
-    <div className='dashboard-bg' style={{marginLeft:"270px", width:"1650px"}}>
+    <div className='dashboard-bg' style={{ width:"1920px"}}>
       <Navbar />
-      <div className='container-fluid' >
+      <div className='container-fluid' style={{marginLeft:"290px",width:"1630px"}}>
         <div className='row p-5'>
           <div className='p-0 bg-light' >
             <div className='d-flex justify-content-between align-items-center ps-2 pe-3 pt-1' style={{marginLeft:"10px"}}>

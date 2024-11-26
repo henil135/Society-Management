@@ -134,13 +134,13 @@ import editIcon from '../Icons/Edit.png'
 
   return (
     <div className="d-flex flex-column flex-md-row">
-      <div className="flex-shrink-0" style={{ width: "280px" }}>
+      <div className="flex-shrink-0" >
         <Sidebar />
       </div>
 
-      <div className="flex-grow-1 dashboard-bg " style={{ width:"1640px"}}>
+      <div className="flex-grow-1 dashboard-bg " style={{ }}>
         <Header/>
-        <div className="container-fluid  p-4" style={{ marginTop: "10px" }}>
+        <div className="container-fluid  p-4" style={{ marginTop: "10px",marginLeft:"300px" ,width:"1620px"}}>
          
 
           <div className="table-responsive" style={{ border: "1px solid #ddd", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", overflow: "hidden", backgroundColor: "#fff", padding: "20px", marginTop: "20px" }}>
@@ -157,9 +157,9 @@ import editIcon from '../Icons/Edit.png'
 
   />Create Complaint</Button>
           </div>
-            <Table striped hover responsive className="mt-3" style={{ width: "1550px" }}>
+            <Table striped hover responsive className="mt-3" style={{ width: "1530px" }}>
               <thead className="bg-light">
-                <tr className="rmHead" style={{ height: '70px' }}>
+                <tr className="rmHead">
                   <th className="text-start" style={{ padding: "10px",background:"rgb(185, 198, 242)" }}>Complainer Name</th>
                   <th className="text-start" style={{ padding: "10px",background:"rgb(185, 198, 242)" }}>Complaint Name</th>
                   <th className="text-center" style={{ padding: "10px",background:"rgb(185, 198, 242)" }}>Description</th>
@@ -171,7 +171,7 @@ import editIcon from '../Icons/Edit.png'
               </thead>
               <tbody>
                 {complaints.map((complaint) => (
-                  <tr key={complaint.id} style={{ height: '70px' }}>
+                  <tr key={complaint.id} >
                     <td style={tableColumnStyle}>
                       <div style={imageColumnStyle} className="text-center">
                         <img
@@ -254,8 +254,8 @@ import editIcon from '../Icons/Edit.png'
       </div>
 
       {/* Create Complaint Modal */}
-      <Modal show={showCreateModal} onHide={handleCloseCreateModal}>
-        <Modal.Header closeButton>
+      <Modal show={showCreateModal} onHide={handleCloseCreateModal} className='Round-modal'>
+        <Modal.Header >
           <Modal.Title>Create Complaint</Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -287,7 +287,7 @@ import editIcon from '../Icons/Edit.png'
                 onChange={(e) => setNewComplaint({ ...newComplaint, description: e.target.value })}
               />
               <Form >
-                <div className='d-flex justify-content-between'>
+                <div className='d-flex justify-content-between gap-2'>
 
                
                 <Form.Group className='mt-2'>
@@ -310,12 +310,13 @@ import editIcon from '../Icons/Edit.png'
                 </div> 
               </Form>
             </Form.Group>
-            <Form.Group className='mt-2'>
+            <Form.Group className='mt-2 radio-group'>
               <Form.Label >Priority<span className="text-danger">*</span></Form.Label>
               <div className="d-flex justify-content-around ">
                 <div style={{ width: "113px", height: "41px", border: "1px solid #ccc", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "5px", paddingTop: "10px", paddingRight: "15px", paddingBottom: "10px", paddingLeft: "15px" }} >
 
                   <Form.Check
+                  
                     type="radio"
                     label="High"
                     name="priority"
@@ -348,7 +349,7 @@ import editIcon from '../Icons/Edit.png'
               </div>
             </Form.Group>
 
-            <Form.Group className='mt-2'>
+            <Form.Group className='mt-2 radio-group'>
               <Form.Label>Status<span className="text-danger">*</span></Form.Label>
               <div className="d-flex justify-content-around">
                 <div style={{ width: "113px", height: "41px", border: "1px solid #ccc", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "5px", paddingTop: "10px", paddingRight: "15px", paddingBottom: "10px", paddingLeft: "15px" }}>
@@ -391,10 +392,10 @@ import editIcon from '../Icons/Edit.png'
           </Form>
         </Modal.Body>
         <Modal.Footer style={{ display: "flex", justifyContent: "space-between" }}>
-          <Button variant="secondary" onClick={handleCloseCreateModal} style={{ width: "175px", height: "51px", border: "1px solid #202224", padding: "10px 55px 10px 55px", background: "#FFFFFF", color: "#202224", }}>
+          <Button className='cancle' onClick={handleCloseCreateModal} style={{ width: "175px", height: "51px", border: "1px solid #202224", padding: "10px 55px 10px 55px", background: "#FFFFFF", color: "#202224", }}>
             Cancel
           </Button>
-          <Button className='mainColor2' onClick={handleCreateComplaint} style={{
+          <Button className='save' onClick={handleCreateComplaint} style={{
             width: "175px", height: "51px", border: "1px", padding: "10px 55px 10px 55px", color: "#202224",
 
           }}>
@@ -415,7 +416,7 @@ import editIcon from '../Icons/Edit.png'
           borderRadius: "15px 0px 0px 0px",
         }}
       >
-        <Modal.Header closeButton>
+        <Modal.Header closeButton >
           <Modal.Title
             style={{
               width: "371px",
@@ -663,8 +664,8 @@ import editIcon from '../Icons/Edit.png'
 
       {/* edit model */}
 
-      <Modal show={showModal} onHide={handleCloseModal}>
-  <Modal.Header closeButton>
+      <Modal show={showModal} onHide={handleCloseModal} className='Round-modal'>
+  <Modal.Header >
     <Modal.Title>Edit Complaint</Modal.Title>
   </Modal.Header>
   <Modal.Body>
@@ -742,7 +743,7 @@ import editIcon from '../Icons/Edit.png'
   />
 </Form.Group>
 </div>
-      <Form.Group className='mt-3'>
+      <Form.Group className='mt-3 radio-group'>
         <Form.Label>Priority<span className="text-danger">*</span></Form.Label>
         <div className="d-flex justify-content-around  " >
 
@@ -767,7 +768,7 @@ import editIcon from '../Icons/Edit.png'
           
         </div>
       </Form.Group>
-      <Form.Group className='mt-3'>
+      <Form.Group className='mt-3 radio-group'>
         <Form.Label>Status<span className="text-danger">*</span></Form.Label>
         <div className="d-flex justify-content-around">
           {["Open", "Pending", "Solve"].map((status) => (
@@ -792,13 +793,13 @@ import editIcon from '../Icons/Edit.png'
     </Form>
   </Modal.Body>
   <Modal.Footer style={{ display: "flex", justifyContent: "space-between" }}>
-    <Button style={{ width: "175px", height: "51px", border: "1px solid #202224", padding: "10px 55px 10px 55px", background: "#FFFFFF", color: "#202224", }} variant="secondary" onClick={handleCloseModal}>
+    <Button style={{ width: "175px", height: "51px", border: "1px solid #202224", padding: "10px 55px 10px 55px", background: "#FFFFFF", color: "#202224", }} className='cancle' onClick={handleCloseModal}>
       Cancel
     </Button>
     <Button style={{
             width: "175px", height: "51px", border: "1px", padding: "10px 55px 10px 55px", color: "#202224",
 
-          }} className='mainColor2' onClick={handleSave}>
+          }} className='save' onClick={handleSave}>
       Save 
     </Button>
   </Modal.Footer>
