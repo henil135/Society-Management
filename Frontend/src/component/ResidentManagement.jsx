@@ -61,14 +61,14 @@ import viewicon from '../Icons/view.png'
   };
 
   return (
-    <div className="d-flex flex-column flex-md-row">
+    <div className="d-flex flex-column flex-md-row dashboard-bg">
       <div className="flex-shrink-0" >
         <Sidebar />
       </div>
 
-      <div className="flex-grow-1  dashboard-bg container-fluid" style={{marginLeft:"270px",width:"1650px"}}>
+      <div className="flex-grow-1   container-fluid" style={{width:"1920px"}}>
         <Header/>
-        <div className="container-fluid  " style={{ marginTop: "20px",marginLeft:"20px",width:"1610px" }}>
+        <div className="container-fluid  " style={{ marginTop: "20px",marginLeft:"310px",width:"1590px" }}>
          
 
           <div className="table-responsive" style={{ border: "1px solid #ddd", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", overflow: "hidden", backgroundColor: "#fff", padding: "20px", marginTop: "20px",marginLeft:"10px" }}>
@@ -85,7 +85,7 @@ import viewicon from '../Icons/view.png'
             <table className="table striped hover responsive">
               
               <thead>
-                <tr className="rmHead"  style={{ height: '70px' }}>
+                <tr className="rmHead"  >
                   <th
                     className="text-start"
                     style={{
@@ -170,7 +170,7 @@ import viewicon from '../Icons/view.png'
               </thead>
               <tbody>
                 {residents.map((resident, index) => (
-                  <tr key={index} className="align-middle"  style={{ height: '70px' }}>
+                  <tr key={index} className="align-middle"  >
                     <td className="px-3">
                       <div style={imageColumnStyle} className="text-center">
                         <img
@@ -259,6 +259,7 @@ import viewicon from '../Icons/view.png'
                 <Form>
                   <div className="d-flex mb-3" style={{ gap: "70px" }}>
                     <Form.Check
+                    className='radio-group'
                       style={{ border: "1px solid rgba(211, 211, 211, 1)", paddingLeft: "30px",paddingTop:"8px",paddingBottom: "8px", paddingRight: "30px", borderRadius: "5px" }}
                       type="radio"
                       label="Occupied"
@@ -268,6 +269,7 @@ import viewicon from '../Icons/view.png'
                       onChange={(e) => setSelectedStatus(e.target.value)}
                     />
                     <Form.Check
+                    className='radio-group'
                       style={{ border: "1px solid rgba(211, 211, 211, 1)", paddingLeft: "30px",paddingTop:"8px",paddingBottom: "8px", paddingRight: "30px", borderRadius: "5px" }}
                       type="radio"
                       label="Vacate"
@@ -278,18 +280,19 @@ import viewicon from '../Icons/view.png'
                     />
                   </div>
                   <Form.Check
+                  
                     type="checkbox"
                     label={`By submitting, you agree to select ${selectedStatus}.`}
                     checked={agreeChecked}
                     onChange={(e) => setAgreeChecked(e.target.checked)}
-                    className="mb-3"
+                    className="mb-3 radio-group"
                   />
                 </Form>
               </div>
             </Modal.Body>
             <Modal.Footer>
-              <Button style={{ width: "175px", height: "51px", border: "1px solid #202224", padding: "10px 55px 10px 55px", background: "#FFFFFF", color: "#202224", }} variant="secondary" onClick={handleCloseModal}>Cancel</Button>
-              <Button  style={{width: "175px", height: "51px", border: "1px", padding: "10px 55px 10px 55px", color: "#202224",}} className="mainColor2" onClick={handleSave} disabled={!agreeChecked}>Save</Button>
+              <Button style={{ width: "175px", height: "51px", border: "1px solid #202224", padding: "10px 55px 10px 55px", background: "#FFFFFF", color: "#202224", }} className='cancle' onClick={handleCloseModal}>Cancel</Button>
+              <Button  style={{width: "175px", height: "51px", border: "1px", padding: "10px 55px 10px 55px", color: "#202224",}} className="save" onClick={handleSave} disabled={!agreeChecked}>Save</Button>
             </Modal.Footer>
           </Modal>
 
@@ -300,7 +303,7 @@ import viewicon from '../Icons/view.png'
         <Modal.Body>
           <Form className="d-flex align-items-center gap-4">
             <Form.Group controlId="wingSelect" className="flex-grow-1">
-              <Form.Label>Wing<span className="text-danger">*</span></Form.Label>
+              <Form.Label >Wing<span className="text-danger">*</span></Form.Label>
               <Form.Control as="select">
                 <option>A</option>
                 <option>B</option>
@@ -335,7 +338,7 @@ import viewicon from '../Icons/view.png'
         </Modal.Body>
         <Modal.Footer>
           <Button style={{width: "175px",height: "51px",border: "1px solid #202224",padding: "10px 55px 10px 55px",background: "#FFFFFF",color: "#202224",}}variant="secondary" onClick={handleCloseVacateModal}>Cancel</Button>
-          <Button style={{width: "175px",height: "51px",border: "1px",padding: "10px 55px 10px 55px",color: "#202224",}} className="mainColor2" onClick={handleCreateClick}>Create</Button>
+          <Button className='save' style={{width: "175px",height: "51px",border: "1px",padding: "10px 55px 10px 55px",color: "#202224",}}  onClick={handleCreateClick}>Create</Button>
         </Modal.Footer>
       </Modal>
 
@@ -348,8 +351,8 @@ import viewicon from '../Icons/view.png'
           <p>Are you sure you want to delate all details?</p>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary"  style={{width: "175px",height: "51px",border: "1px solid #202224",padding: "10px 55px 10px 55px",background: "#FFFFFF",color: "#202224",}} onClick={handleCloseCreateModal}>Cancle</Button>
-          <Button style={{width: "175px",height: "51px",border: "1px",padding: "10px 55px 10px 55px",color: "white",background:" rgba(231, 76, 60, 1)"}} variant="secondary" onClick={handleDelete}>Conform</Button>
+          <Button variant="secondary" className='cancle'  style={{width: "175px",height: "51px",border: "1px solid #202224",padding: "10px 55px 10px 55px",background: "#FFFFFF",color: "#202224",}} onClick={handleCloseCreateModal}>Cancle</Button>
+          <Button style={{width: "175px",height: "51px",border: "1px",padding: "10px 55px 10px 55px",color: "white",background:" rgba(231, 76, 60, 1)"}}   className=".dropdown-item.text-danger " onClick={handleDelete}>Conform</Button>
         </Modal.Footer>
       </Modal>
         </div>

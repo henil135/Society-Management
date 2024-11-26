@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { MdAccessTimeFilled } from "react-icons/md";
 import Sidebar from "../component/Layout/Sidebar";
 import { FaPlus } from 'react-icons/fa6';
+
 import axios from 'axios';
 
 
@@ -52,6 +53,7 @@ function Announcement() {
         };
         ViewAnnouncement();
     }, []);
+
 
     const [show, setShow] = useState(false);
     const [editIndex, setEditIndex] = useState(null);
@@ -144,21 +146,35 @@ function Announcement() {
 
     return (
         <div className="d-flex flex-column flex-md-row">
+
             <div className="flex-shrink-0" style={{ width: "280px" }}>
+
                 <Sidebar />
             </div>
             <div className='dashboard-bg' >
                 <Navbar />
+
                 <div>
                     <div className='container-fluid'>
                         <div className='row p-5'>
                             <div className='p-0'>
                                 <div className='bg-light'>
+
+
+                <div style={{ marginLeft: "290px" }}>
+                    <div className='container-fluid ' >
+                        <div className='row p-5'>
+                            <div className='p-0'>
+                                <div className='bg-light' style={{ borderRadius: "9px" }}>
+
+
                                     <div className='d-flex justify-content-between align-items-center  py-3 px-2'>
                                         <h3 className=' mb-0  financial-income-title' style={{ marginLeft: "12px" }}>Announcement</h3>
 
                                         <div>
+
                                             <Button className='set-maintainance-btn d-flex align-items-center other-income-btn p-2' style={{ marginRight: "10px", border: "none" }} onClick={handleShow}><FaPlus
+
                                                 style={{
                                                     fontSize: "18px",
                                                     borderRadius: "5px",
@@ -182,6 +198,7 @@ function Announcement() {
                                                     <form onSubmit={handleSubmit(onSubmit)}>
                                                         <div className="modal-body">
                                                             <div className="mb-3">
+
                                                                 <label className='Form-Label'>Announcement Title<span className='text-danger'>*</span></label>
                                                                 <input type="text" className="form-control Form-Control"
                                                                     placeholder='Enter Name' {...register('Announcement_Title', { required: true })} />
@@ -192,6 +209,7 @@ function Announcement() {
                                                                 <label className='Form-Label'>Description <span className='text-danger'>*</span></label>
                                                                 <input type="text" className="form-control Form-Control" placeholder='Enter Description' {...register('Description', { required: true })} />
                                                                 {errors.Description && <small className="text-danger">Description is required</small>}
+
                                                             </div>
                                                             <div className='d-flex justify-content-between'>
                                                                 <div className="mb-3 w-50 me-2">
@@ -201,6 +219,7 @@ function Announcement() {
                                                                 <div className="mb-3 w-50 ms-2">
                                                                     <label className='Form-Label'>Announcement Time <span className='text-danger position-relative'>*</span></label>
                                                                     <input type="time" id="appt" name="appt" className="form-control Form-Control timePicker" {...register('Announcement_Time', { required: true })} /><MdAccessTimeFilled className='position-absolute anouncement-icon' />
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -216,9 +235,11 @@ function Announcement() {
 
 
                                     <div className="row card-row g-3 ps-3">
+
                                         
                                         {/* {note.map((val, index) => ( */}
                                         {Array.isArray(note) && note.map((val, index) => (
+
                                             <div className="col-lg-3 mb-3" key={val.id}>
                                                 <div className="card">
                                                     <div className="card-header card-title text-light d-flex align-items-center justify-content-between" style={{ height: "54px", fontSize: "16px", fontWeight: "500", background: " rgba(86, 120, 233, 1)" }}>
@@ -228,7 +249,9 @@ function Announcement() {
                                                             <button
                                                                 className="btn btn-light p-0"
                                                                 onClick={() => setDropdownIndex(dropdownIndex === index ? null : index)}
+
                                                                 style={{ width: '30px', height: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+
                                                             >
                                                                 <BsThreeDotsVertical />
                                                             </button>
@@ -258,20 +281,25 @@ function Announcement() {
                                                                                             <div className="mb-3">
                                                                                                 <label className='Form-Label'>Announcement Title<span className='text-danger'>*</span></label>
                                                                                                 <input type="text" className="form-control Form-Control" {...register('title', { required: true })} />
+
                                                                                                 {errors.Announcement_Title && <small className="text-danger">Announcement is required</small>}
                                                                                                 {val.Announcement_Title}
+
                                                                                             </div>
 
                                                                                             <div className="mb-3">
                                                                                                 <label className='Form-Label'>Description <span className='text-danger'>*</span></label>
+
                                                                                                 <input type="text" className="form-control Form-Control" placeholder='Enter Description' {...register('Description', { required: true })} />
                                                                                                 {errors.Description && <small className="text-danger">Description is required</small>}
                                                                                                 {val.Description}
+
                                                                                             </div>
 
                                                                                             <div className='d-flex justify-content-between'>
                                                                                                 <div className="mb-3">
                                                                                                     <label className='Form-Label'>Announcement Date<span className='text-danger'>*</span></label>
+
                                                                                                     <input type="date" className="form-control Form-Control w-100" {...register('Announcement_Date', { required: true })} />
                                                                                                     {val.Announcement_Date}
                                                                                                 </div>
@@ -279,6 +307,7 @@ function Announcement() {
                                                                                                     <label className='Form-Label'>Announcement time<span className='text-danger'>*</span></label>
                                                                                                     <input type="text" className="form-control Form-Control" {...register('Announcement_Time', { required: true })} /><MdAccessTimeFilled className='position-absolute anouncement-icon' />
                                                                                                     {val.Announcement_Time}
+
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -332,22 +361,28 @@ function Announcement() {
 
                                                                                     <div className='mb-4'>
                                                                                         <label className='anouncement-view-title'>Title</label>
+
                                                                                         <p className='mb-0 anouncement-view-p'>{viewComplaint.Announcement_Title}</p>
+
                                                                                     </div>
 
                                                                                     <div className='mb-4'>
                                                                                         <label className='anouncement-view-title'>Description</label>
+
                                                                                         <p className='mb-0 anouncement-view-p'>{viewComplaint.Description}</p>
+
                                                                                     </div>
 
                                                                                     <div className='d-flex'>
                                                                                         <div className='mb-4'>
+
                                                                                             <label className='anouncement-view-title'>Announcement Date</label>
                                                                                             <p className='mb-0 anouncement-view-p'>{viewComplaint.Announcement_Date}</p>
                                                                                         </div>
                                                                                         <div className='mb-4 ms-5'>
                                                                                             <label className='anouncement-view-title'>Announcement Time</label>
                                                                                             <p className='mb-0 anouncement-view-p'>{viewComplaint.Announcement_Time}</p>
+
                                                                                         </div>
                                                                                     </div>
 
@@ -362,6 +397,7 @@ function Announcement() {
                                                     <div className="card-body">
                                                         <div className="d-flex justify-content-between align-items-center mb-2">
                                                             <h6 className="card-body-title mb-0">Announcement Date</h6>
+
                                                             <span className="card-body-title text-dark mb-0 fw-medium">{val.Announcement_Date}</span>
                                                         </div>
                                                         <div className="d-flex justify-content-between align-items-center mb-2">
@@ -370,6 +406,7 @@ function Announcement() {
                                                         </div>
                                                         <h6 className="card-body-title mb-2">Description</h6>
                                                         <p className="card-text card-des fw-medium">{val.Description}</p>
+
                                                     </div>
                                                 </div>
                                             </div>

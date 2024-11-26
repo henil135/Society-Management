@@ -117,9 +117,9 @@ import editIcon from '../Icons/Edit.png'
       <Sidebar />
     </div>
 
-    <div className='dashboard-bg' style={{marginLeft:"270px", width:"1650px"}}>
+    <div className='dashboard-bg' style={{ width:"1920px"}}>
       <Navbar />
-      <div>
+      <div style={{width:"1630px",marginLeft:"290px"}}>
         <div className='container-fluid income' >
 
           <div className='row p-5'>
@@ -127,11 +127,11 @@ import editIcon from '../Icons/Edit.png'
               <div className="table-responsive rounded pb-3">
 
                 <div className='bg-light'>
-                  <div className='d-flex justify-content-between align-items-center  py-3 px-2'>
+                  <div className='d-flex justify-content-between align-items-center p-3 pt-1'>
                     <h3 className=' mb-0  financial-income-title'>Add Expenses Details</h3>
 
                     <div>
-                      <button className='set-maintainance-btn d-flex align-items-center' onClick={handleShow}> <FaPlusSquare className='me-2' /> Add New Expenses details</button>
+                      <button className='set-maintainance-btn d-flex align-items-center p-3' onClick={handleShow}> <FaPlusSquare className='me-2' /> Add New Expenses details</button>
                     </div>
                   </div>
 
@@ -139,7 +139,7 @@ import editIcon from '../Icons/Edit.png'
                     <table className="table">
 
                       <thead className='table-primary '>
-                        <tr style={{ height: '70px' }}>
+                        <tr>
                           <th scope="col">Title</th>
                           <th scope="col">Description</th>
                           <th scope="col" className='text-center'>Date</th>
@@ -152,24 +152,24 @@ import editIcon from '../Icons/Edit.png'
                         {
                           exp.map((val, index) => {
                             return (
-                              <tr key={index} className='bg-light' style={{ height: '70px' }}>
+                              <tr key={index} className='bg-light'>
 
-                                <td style={{ height: '55px', verticalAlign: "middle",width:"270px"}} className='financial-Pnumber'> {val.title}</td>
-
-
-                                <td style={{ height: '55px', verticalAlign: "middle",width:"450px" }} className='financial-Pnumber'>{val.des}</td>
-
-                                <td style={{ height: '55px', verticalAlign: "middle",width:"250px" }} className='financial-Pnumber text-center'>{val.date}</td>
+                                <td style={{  verticalAlign: "middle",width:"270px"}} className='financial-Pnumber'> {val.title}</td>
 
 
-                                <td style={{ height: '55px' , verticalAlign: "middle" ,width:"200px" }} className='financial-Pnumber exp-amt-color text-center'>{val.amt}</td>
+                                <td style={{  verticalAlign: "middle",width:"450px" }} className='financial-Pnumber'>{val.des}</td>
 
-                                <td style={{ height: '55px', verticalAlign: "middle",width:"200px"  }} className='financial-Pnumber text-center'>
+                                <td style={{ verticalAlign: "middle",width:"250px" }} className='financial-Pnumber text-center'>{val.date}</td>
+
+
+                                <td style={{  verticalAlign: "middle" ,width:"200px" }} className='financial-Pnumber exp-amt-color text-center'>{val.amt}</td>
+
+                                <td style={{  verticalAlign: "middle",width:"200px"  }} className='financial-Pnumber text-center'>
                                   {val.format === 'JPG' ? <CiImageOn className='me-1 jpg-btn' style={{ fontSize: '20px' }} /> : <BiSolidFilePdf className='me-1 pdf-btn' style={{ fontSize: '20px' }} />}
                                   {val.format}
                                 </td>
 
-                                <td  style={{ height: '55px', verticalAlign: "middle",width:"200px"  }}>
+                                <td  style={{ verticalAlign: "middle",width:"200px"  }}>
 
                                 <div className="d-flex align-items-center justify-content-center " >
                                 <img src={editIcon} className="text-success me-2" style={{ cursor: "pointer" }} onClick={() => handleEdit(index)} />

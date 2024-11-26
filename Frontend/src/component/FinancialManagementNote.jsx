@@ -3,7 +3,7 @@ import Navbar from './Navbar';
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Modal, Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import Sidebar from "../component/Layout/Sidebar";
+import Sidebar from "../component/layout/Sidebar";
 
 
  function FinancialManagementNote() {
@@ -60,14 +60,14 @@ import Sidebar from "../component/Layout/Sidebar";
     <div className="flex-shrink-0" >
       <Sidebar />
     </div>
-    <div className='dashboard-bg' style={{marginLeft:"270px", width:"1650px"}}>
+    <div className='dashboard-bg' style={{ width:"1920px"}}>
       <Navbar />
-      <div className='container-fluid' >
+      <div className='container-fluid' style={{marginLeft:"290px",width:"1630px"}}>
         <div className='row p-5'>
           <div className='p-0 bg-light' >
-            <div className='d-flex justify-content-between align-items-center py-3 px-2' style={{marginLeft:"10px"}}>
+            <div className='d-flex justify-content-between align-items-center ps-2 pe-3 pt-1' style={{marginLeft:"10px"}}>
               <h3 className='mb-0 financial-income-title'>Note</h3>
-              <button className='set-maintainance-btn d-flex align-items-center'  onClick={handleShow}>
+              <button className='set-maintainance-btn d-flex align-items-center p-3'  onClick={handleShow}>
                 Create Note
               </button>
             </div>

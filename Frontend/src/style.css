@@ -511,13 +511,71 @@ body {
     max-width: none; /* Prevent default max-width */
   }
   
-  .Round-modal .modal-content {
-    height: 100%; /* Ensure the content fills the height */
-  }
-  
+ 
   .active {
     color: #202224;
     font-weight: bold;
   }
 
 
+/* Sidebar transition for mobile */
+.sidebar {
+  transition: transform 0.3s ease-in-out; /* Smooth open/close effect */
+  width: 300px; /* Sidebar width */
+  z-index: 1049;
+  position: fixed;
+  top: 0;
+  height: 100%;
+}
+
+  @media (max-width: 576px) {
+    .sidebar {
+      transform: translateX(-100%); /* Hide the sidebar by default on mobile */
+      visibility: hidden !important;
+    }
+
+    .sidebar.show {
+      transform: translateX(0); /* Show sidebar when toggled */
+      visibility: visible;
+    }
+  }
+
+  @media (min-width: 576px) {
+    .sidebar {
+      transform: none; /* Keep sidebar visible on larger screens */
+      visibility: visible !important;
+    }
+  }
+
+
+  .radio-group input[type="radio"] {
+    appearance: none; /* Remove default styles */
+    
+    padding: 7px 7px;
+    border: 2px solid #f09619; /* Orange border */
+    border-radius: 50%; /* Make it round */
+   
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+  }
+  .radio-group input[type="radio"]:checked{
+    background-color: rgb(255, 255, 255);
+  }
+  
+  .radio-group input[type="radio"]:checked::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: linear-gradient(90deg, #FE512E 0%, #F09619 100%);
+    /* Inner orange dot when checked */
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+
+
+  

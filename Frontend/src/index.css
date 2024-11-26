@@ -72,7 +72,7 @@ input[type=email]:focus,
 .form-group input,
 .form-group select {
   border-radius: 10px;
-  color: #FFFFFF;
+ 
   border: 1px solid #D3D3D3;
   padding: 9px 13px;
   height: 43.6px;
@@ -681,7 +681,7 @@ input:focus {
   font-weight: 600 !important;
   padding: 18px 10px !important;
   width: 135px !important;
-  border: 1px solid #007bff;
+ 
   border-top-left-radius: 10px !important;
   border-top-right-radius: 10px !important;
 }
@@ -849,4 +849,69 @@ input:focus {
   border-radius: 20px;
   font-size: 14px;
   text-align: center; /* Center text within badge */
+}
+
+ /* service and complaint  */
+ .complaint-btn{
+  width: 183px !important;
+}
+
+.event-time-btn{
+  background: rgba(246, 248, 251, 1) !important;
+  width: 92px;
+  height: 34px;
+  border-radius: 80px;
+  text-align: center;
+}
+
+
+/* payment modal  */
+
+
+.custom-modal .modal-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.payment-option {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+ 
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.payment-option{
+  box-shadow: 0px 0px 35px 0px rgba(0, 0, 0, 0.07);
+}
+
+.payment-option input[type="radio"]:checked {
+  background-color: #ff9900;
+  border-color: #ff9900;
+  box-shadow: 0 0 5px rgba(255, 153, 0, 0.5);
+}
+
+.payment-icon {
+  width: 30px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.btn-cancel {
+  background-color: #e0e0e0;
+  border: none;
+  color: #333;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.btn-confirm {
+  background-color: #ff9900;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
 }
