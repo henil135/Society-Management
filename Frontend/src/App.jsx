@@ -58,7 +58,7 @@ function App() {
           <Route path='/profile' element={<Profile/>}/>
           <Route path='/EditProfile' element={<EditProfile/>}/>
           <Route element={<PersonalDetail/>} path='/personal-details' />
-            <Route element={<TenantPersonalDetails/>} path='/personal-details-tenant' />
+            <Route element={<TenantPersonalDetails/>} path='/personal-details-tenant'/>
         </Routes> 
       </BrowserRouter>
     </div>

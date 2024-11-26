@@ -112,7 +112,7 @@ export default function Signup() {
             setSocieties((prevSocieties) => [...prevSocieties, res.data]);
 
             // Hide the form after success
-            setShowForm(true);
+            setShowForm(false);
         } catch (error) {
             console.error('Error creating society:', error);
         }
