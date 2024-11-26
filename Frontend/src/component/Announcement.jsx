@@ -1,25 +1,59 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Navbar from './Navbar';
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { Modal, Button, Form } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { MdAccessTimeFilled } from "react-icons/md";
 import Sidebar from "../component/Layout/Sidebar";
 import { FaPlus } from 'react-icons/fa6';
 
+import axios from 'axios';
+
+
 
 function Announcement() {
 
-    const [note, setNote] = useState([
-        { id: 1, title: 'Community Initiatives', date: '01/02/2024', time: '10:15 AM', des: 'The celebration of Ganesh Chaturthi involves the installation of clay idols of Ganesa in.' },
+    const [note, setNote] = useState(
+        [
+        // { id: 1, title: 'Community Initiatives', date: '01/02/2024', time: '10:15 AM', des: 'The celebration of Ganesh Chaturthi involves the installation of clay idols of Ganesa in.' },
 
-        { id: 2, title: 'Community Initiatives', date: '01/02/2024', time: '10:15 AM', des: 'The celebration of Ganesh Chaturthi involves the installation of clay idols of Ganesa in.' },
+        // { id: 2, title: 'Community Initiatives', date: '01/02/2024', time: '10:15 AM', des: 'The celebration of Ganesh Chaturthi involves the installation of clay idols of Ganesa in.' },
 
-        { id: 3, title: 'Community Initiatives', date: '01/02/2024', time: '10:15 AM', des: 'The celebration of Ganesh Chaturthi involves the installation of clay idols of Ganesa in.' },
+        // { id: 3, title: 'Community Initiatives', date: '01/02/2024', time: '10:15 AM', des: 'The celebration of Ganesh Chaturthi involves the installation of clay idols of Ganesa in.' },
 
-        { id: 4, title: 'Community Initiatives', date: '01/02/2024', time: '10:15 AM', des: 'The celebration of Ganesh Chaturthi involves the installation of clay idols of Ganesa in.' },
+        // { id: 4, title: 'Community Initiatives', date: '01/02/2024', time: '10:15 AM', des: 'The celebration of Ganesh Chaturthi involves the installation of clay idols of Ganesa in.' },
+//         // Announcement_Title:"",
+//         // Description:"",
+//         // Announcement_Date:"",
+//         // Announcement_Time:"",
 
-    ]);
+        ]
+);
+
+// const [note, setNote] = useState({
+//     Announcement_Title:"",
+//     Description:"",
+//     Announcement_Date:"",
+//     Announcement_Time:""
+// });
+    useEffect(() => {
+        const ViewAnnouncement = async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/api/v2/annoucement/');
+                if (response.data.success) {
+                    setNote(response.data.message); // Extract the data array
+                } else {
+                    console.log('API request failed:', response.data);
+                    setNote([]);
+                }
+            } catch (error) {
+                console.error('Error fetching societies:', error);
+                setNote([]);
+            }
+        };
+        ViewAnnouncement();
+    }, []);
+
 
     const [show, setShow] = useState(false);
     const [editIndex, setEditIndex] = useState(null);
@@ -34,7 +68,10 @@ function Announcement() {
 
     const handleShow = () => setShow(true);
 
-    const onSubmit = (data) => {
+    const onSubmit =async (data) => {
+        const response = await axios.post("http://localhost:5000/api/v2/annoucement/addannouncement", data)
+        console.log(response.data);
+
         if (editIndex !== null) {
             const updatedNotes = [...note];
             updatedNotes[editIndex] = { ...updatedNotes[editIndex], ...data };
@@ -79,11 +116,12 @@ function Announcement() {
     const handleShowEditModal = (index) => {
         setEditIndex(index);
         const selectedNote = note[index];
-        setValue('title', selectedNote.title);
-        setValue('amtPerMember', selectedNote.amtPerMember);
-        setValue('date', selectedNote.date);
-        setValue('dueDate', selectedNote.dueDate);
-        setValue('des', selectedNote.des);
+        setValue('Announcement_Title', selectedNote.Announcement_Title);
+        // setValue('amtPerMember', selectedNote.amtPerMember);
+        setValue('Announcement_Date', selectedNote.Announcement_Date);
+        setValue('Announcement_Time', selectedNote.Announcement_Time);
+        // setValue('dueDate', selectedNote.dueDate);
+        setValue('Description', selectedNote.Description);
         setShowEditModal(true);
     };
 
@@ -103,14 +141,13 @@ function Announcement() {
 
     const handleCloseViewModal = () => setShowViewModal(false);
 
-    const [showSetMaintenanceModal, setShowSetMaintenanceModal] = useState(false);
+
+    // const [showSetMaintenanceModal, setShowSetMaintenanceModal] = useState(false);
 
     return (
         <div className="d-flex flex-column flex-md-row">
 
             <div className="flex-shrink-0" style={{ width: "280px" }}>
-
-            <div className="flex-shrink-0" >
 
                 <Sidebar />
             </div>
@@ -123,18 +160,18 @@ function Announcement() {
                             <div className='p-0'>
                                 <div className='bg-light'>
 
+
                 <div style={{ marginLeft: "290px" }}>
                     <div className='container-fluid ' >
                         <div className='row p-5'>
                             <div className='p-0'>
                                 <div className='bg-light' style={{ borderRadius: "9px" }}>
 
+
                                     <div className='d-flex justify-content-between align-items-center  py-3 px-2'>
                                         <h3 className=' mb-0  financial-income-title' style={{ marginLeft: "12px" }}>Announcement</h3>
 
                                         <div>
-
-                                            <Button className='set-maintainance-btn d-flex align-items-center other-income-btn p-3' style={{ marginRight: "10px", border: "none" }} onClick={handleShow}><FaPlus
 
                                             <Button className='set-maintainance-btn d-flex align-items-center other-income-btn p-2' style={{ marginRight: "10px", border: "none" }} onClick={handleShow}><FaPlus
 
@@ -161,24 +198,28 @@ function Announcement() {
                                                     <form onSubmit={handleSubmit(onSubmit)}>
                                                         <div className="modal-body">
                                                             <div className="mb-3">
-                                                                <label className='Form-Label'>Announcement Title <span className='text-danger'>*</span></label>
+
+                                                                <label className='Form-Label'>Announcement Title<span className='text-danger'>*</span></label>
                                                                 <input type="text" className="form-control Form-Control"
-                                                                    placeholder='Enter Name' {...register('title', { required: true })} />
-                                                                {errors.title && <small className="text-danger">Title is required</small>}
+                                                                    placeholder='Enter Name' {...register('Announcement_Title', { required: true })} />
+                                                                    
+                                                                {errors.Announcement_Title && <small className="text-danger">Title is required</small>}
                                                             </div>
                                                             <div className="mb-3">
                                                                 <label className='Form-Label'>Description <span className='text-danger'>*</span></label>
-                                                                <input type="text" className="form-control Form-Control" placeholder='Enter Description' {...register('des', { required: true })} />
-                                                                {errors.amt && <small className="text-danger">Description is required</small>}
+                                                                <input type="text" className="form-control Form-Control" placeholder='Enter Description' {...register('Description', { required: true })} />
+                                                                {errors.Description && <small className="text-danger">Description is required</small>}
+
                                                             </div>
                                                             <div className='d-flex justify-content-between'>
                                                                 <div className="mb-3 w-50 me-2">
                                                                     <label className='Form-Label'>Announcement Date <span className='text-danger'>*</span></label>
-                                                                    <input type="date" className="form-control Form-Control" {...register('date', { required: true })} />
+                                                                    <input type="date" className="form-control Form-Control" {...register('Announcement_Date', { required: true })} />
                                                                 </div>
                                                                 <div className="mb-3 w-50 ms-2">
                                                                     <label className='Form-Label'>Announcement Time <span className='text-danger position-relative'>*</span></label>
-                                                                    <input type="text" className="form-control Form-Control" {...register('time', { required: true })} /><MdAccessTimeFilled className='position-absolute anouncement-icon' />
+                                                                    <input type="time" id="appt" name="appt" className="form-control Form-Control timePicker" {...register('Announcement_Time', { required: true })} /><MdAccessTimeFilled className='position-absolute anouncement-icon' />
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -194,7 +235,11 @@ function Announcement() {
 
 
                                     <div className="row card-row g-3 ps-3">
-                                        {note.map((val, index) => (
+
+                                        
+                                        {/* {note.map((val, index) => ( */}
+                                        {Array.isArray(note) && note.map((val, index) => (
+
                                             <div className="col-lg-3 mb-3" key={val.id}>
                                                 <div className="card">
                                                     <div className="card-header card-title text-light d-flex align-items-center justify-content-between" style={{ height: "54px", fontSize: "16px", fontWeight: "500", background: " rgba(86, 120, 233, 1)" }}>
@@ -206,8 +251,6 @@ function Announcement() {
                                                                 onClick={() => setDropdownIndex(dropdownIndex === index ? null : index)}
 
                                                                 style={{ width: '30px', height: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-
-                                                                style={{ width: '30px', height: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center',marginBottom:"20px" }}
 
                                                             >
                                                                 <BsThreeDotsVertical />
@@ -238,23 +281,33 @@ function Announcement() {
                                                                                             <div className="mb-3">
                                                                                                 <label className='Form-Label'>Announcement Title<span className='text-danger'>*</span></label>
                                                                                                 <input type="text" className="form-control Form-Control" {...register('title', { required: true })} />
-                                                                                                {errors.title && <small className="text-danger">Amount is required</small>}
+
+                                                                                                {errors.Announcement_Title && <small className="text-danger">Announcement is required</small>}
+                                                                                                {val.Announcement_Title}
+
                                                                                             </div>
 
                                                                                             <div className="mb-3">
                                                                                                 <label className='Form-Label'>Description <span className='text-danger'>*</span></label>
-                                                                                                <input type="text" className="form-control Form-Control" placeholder='Enter Description' {...register('des', { required: true })} />
-                                                                                                {errors.amt && <small className="text-danger">Description is required</small>}
+
+                                                                                                <input type="text" className="form-control Form-Control" placeholder='Enter Description' {...register('Description', { required: true })} />
+                                                                                                {errors.Description && <small className="text-danger">Description is required</small>}
+                                                                                                {val.Description}
+
                                                                                             </div>
 
                                                                                             <div className='d-flex justify-content-between'>
                                                                                                 <div className="mb-3">
                                                                                                     <label className='Form-Label'>Announcement Date<span className='text-danger'>*</span></label>
-                                                                                                    <input type="date" className="form-control Form-Control w-100" {...register('date', { required: true })} />
+
+                                                                                                    <input type="date" className="form-control Form-Control w-100" {...register('Announcement_Date', { required: true })} />
+                                                                                                    {val.Announcement_Date}
                                                                                                 </div>
                                                                                                 <div className="mb-3">
                                                                                                     <label className='Form-Label'>Announcement time<span className='text-danger'>*</span></label>
-                                                                                                    <input type="text" className="form-control Form-Control" {...register('time', { required: true })} /><MdAccessTimeFilled className='position-absolute anouncement-icon' />
+                                                                                                    <input type="text" className="form-control Form-Control" {...register('Announcement_Time', { required: true })} /><MdAccessTimeFilled className='position-absolute anouncement-icon' />
+                                                                                                    {val.Announcement_Time}
+
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -308,22 +361,28 @@ function Announcement() {
 
                                                                                     <div className='mb-4'>
                                                                                         <label className='anouncement-view-title'>Title</label>
-                                                                                        <p className='mb-0 anouncement-view-p'>{viewComplaint.title}</p>
+
+                                                                                        <p className='mb-0 anouncement-view-p'>{viewComplaint.Announcement_Title}</p>
+
                                                                                     </div>
 
                                                                                     <div className='mb-4'>
                                                                                         <label className='anouncement-view-title'>Description</label>
-                                                                                        <p className='mb-0 anouncement-view-p'>{viewComplaint.des}</p>
+
+                                                                                        <p className='mb-0 anouncement-view-p'>{viewComplaint.Description}</p>
+
                                                                                     </div>
 
                                                                                     <div className='d-flex'>
                                                                                         <div className='mb-4'>
-                                                                                            <label className='anouncement-view-title'>Date</label>
-                                                                                            <p className='mb-0 anouncement-view-p'>{viewComplaint.date}</p>
+
+                                                                                            <label className='anouncement-view-title'>Announcement Date</label>
+                                                                                            <p className='mb-0 anouncement-view-p'>{viewComplaint.Announcement_Date}</p>
                                                                                         </div>
                                                                                         <div className='mb-4 ms-5'>
-                                                                                            <label className='anouncement-view-title'>Time</label>
-                                                                                            <p className='mb-0 anouncement-view-p'>{viewComplaint.time}</p>
+                                                                                            <label className='anouncement-view-title'>Announcement Time</label>
+                                                                                            <p className='mb-0 anouncement-view-p'>{viewComplaint.Announcement_Time}</p>
+
                                                                                         </div>
                                                                                     </div>
 
@@ -338,14 +397,16 @@ function Announcement() {
                                                     <div className="card-body">
                                                         <div className="d-flex justify-content-between align-items-center mb-2">
                                                             <h6 className="card-body-title mb-0">Announcement Date</h6>
-                                                            <span className="card-body-title text-dark mb-0 fw-medium">{val.date}</span>
+
+                                                            <span className="card-body-title text-dark mb-0 fw-medium">{val.Announcement_Date}</span>
                                                         </div>
                                                         <div className="d-flex justify-content-between align-items-center mb-2">
                                                             <h6 className="card-body-title mb-0">Announcement Time</h6>
-                                                            <span className="card-body-title text-dark mb-0 fw-medium">{val.time}</span>
+                                                            <span className="card-body-title text-dark mb-0 fw-medium">{val.Announcement_Time}</span>
                                                         </div>
                                                         <h6 className="card-body-title mb-2">Description</h6>
-                                                        <p className="card-text card-des fw-medium">{val.des}</p>
+                                                        <p className="card-text card-des fw-medium">{val.Description}</p>
+
                                                     </div>
                                                 </div>
                                             </div>

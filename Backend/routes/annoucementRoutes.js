@@ -1,5 +1,5 @@
 const express = require('express');
-const { createAnnouncement, getAllAnnouncements, getAnnouncementById, updateAnnouncement, deleteAnnouncement } = require('../controller/AnnoucementController');
+const { createAnnouncement, getAllAnnouncements, getAnnouncementById, updateAnnouncement, deleteAnnouncement } = require('../controller/annoucementController');
 const router = express.Router();
 
 router.post('/addannouncement', createAnnouncement);

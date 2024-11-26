@@ -76,8 +76,10 @@ function App() {
 
 
           <Route element={<PersonalDetail/>} path='/personal-details' />
+
             <Route element={<TenantPersonalDetails/>} path='/personal-details-tenant' />
             <Route path='/Resident-Protocols' element={<SecurityProtocolsResident/>}/>
+
 
         </Routes> 
       </BrowserRouter>

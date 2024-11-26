@@ -1,8 +1,8 @@
-import React from 'react'
+// import React from 'react'
 import Navbar from './Navbar'
 import { useForm } from 'react-hook-form';
 import profile from '../assets/profile.png';
-import { MdEditSquare } from "react-icons/md";
+// import { MdEditSquare } from "react-icons/md";
 import Sidebar from "../component/Layout/Sidebar";
 import { Link } from 'react-router-dom';
 
