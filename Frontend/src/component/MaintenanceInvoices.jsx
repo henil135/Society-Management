@@ -7,6 +7,7 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import visa from '../assets/visa-logo.png'
 import mastercard from '../assets/mastercard-logo.png'
 import cash from '../assets/cash-logo.png'
+import { Link } from 'react-router-dom';
 
 
 const MaintenanceInvoices = () => {
@@ -56,7 +57,9 @@ const MaintenanceInvoices = () => {
             <Navbar />
 
             <div style={{ marginLeft: '300px' }}>
+
                 <div className='container-fluid stickyHeader'>
+
                     <div className='row p-4 '>
                         
                             <div className="table-responsive rounded pb-3" >
@@ -101,9 +104,13 @@ const MaintenanceInvoices = () => {
                                         <div className='pe-0 bg-light'>
                                             <div className='d-flex justify-content-between align-items-center py-3 px-3'>
                                                 <h3 className='mb-0 financial-income-title'>Pending Maintanance</h3>
+
+                                                <Link to="/view-invoice" className='text-decoration-none'><button className='set-maintainance-btn d-flex align-items-center p-2'>
+
                                                 <button className='set-maintainance-btn d-flex align-items-center p-2' onClick={handleShow}>
+
                                                     View Invoice
-                                                </button>
+                                                </button></Link>
                                             </div>
                                             <div className="row  px-3" style={{borderRadius:"10px"}}>
                                                 {maintainace.map((val, index) => (

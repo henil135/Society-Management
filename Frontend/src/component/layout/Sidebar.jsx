@@ -30,7 +30,7 @@ function Sidebar() {
   const [isSidebarOpen, setSidebarOpen] = useState(false); // Mobile sidebar toggle state
   const [isMobile, setIsMobile] = useState(window.innerWidth < 576); // Mobile screen check
   const [isPaymentPortalDropdownOpen, setPaymentPortalDropdownOpen] = useState(false);
-  
+
   // Update active item on location change
   useEffect(() => {
     const currentPath = location.pathname;

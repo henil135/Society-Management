@@ -78,7 +78,9 @@ function VisitorsTracking() {
       <div className="flex-grow-1" style={{ width: "1920px" }}>
         <Header />
 
+
         <div className="container-fluid p-3 stickyHeader" style={{width: "1620px",marginLeft:"300px" }}>
+
           <div
             className="table-responsive"
             style={{

@@ -20,7 +20,9 @@ import Sidebar from "../component/layout/Sidebar";
 
       <div className="flex-grow-1 dashboard-bg"  style={{width:"1920px"}}>
         <Header/>
+
         <div className="container-fluid stickyHeader p-3" style={{ width:"1615px",marginLeft:"300px" }}>
+
           
 
           <div className="table-responsive" style={{ border: "1px solid #ddd", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", overflow: "hidden", backgroundColor: "#fff", padding: "20px", marginTop: "20px" }}>

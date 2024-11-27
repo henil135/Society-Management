@@ -157,7 +157,9 @@ function Announcement() {
               
 
 
+
                 <div className='stickyHeader' style={{ marginLeft: "300px" }}>
+
                     <div className='container-fluid ' >
                         <div className='row ps-4 pe-4 pt-5'>
                          

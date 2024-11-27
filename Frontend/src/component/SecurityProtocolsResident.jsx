@@ -34,7 +34,9 @@ const SecurityProtocolsResident = () => {
         </div>
 
         {/* Main Content Area */}
+
         <div className="p-3 flex-grow-1 stickyHeader " style={{  marginRight: "15px", marginLeft: "280px" }}>
+
   <div className="row">
     <div className="col-12">
       <div className="table-responsive bg-white shadow-sm rounded p-3">
