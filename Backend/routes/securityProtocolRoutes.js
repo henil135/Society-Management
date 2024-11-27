@@ -9,3 +9,5 @@ router.put('/update/:id', updateSecurityProtocol);
 router.delete('/delete/:id', deleteSecurityProtocol);
 
 module.exports = router;
+
+

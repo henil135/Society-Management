@@ -41,7 +41,7 @@ function Announcement() {
             try {
                 const response = await axios.get('http://localhost:5000/api/v2/annoucement/');
                 if (response.data.success) {
-                    setNote(response.data.message); // Extract the data array
+                    setNote(response.data.data); // Extract the data array
                 } else {
                     console.log('API request failed:', response.data);
                     setNote([]);
@@ -147,19 +147,12 @@ function Announcement() {
     return (
         <div className="d-flex flex-column flex-md-row">
 
-            <div className="flex-shrink-0" style={{ width: "280px" }}>
+            <div className="flex-shrink-0">
 
                 <Sidebar />
             </div>
-            <div className='dashboard-bg' >
+            <div className='dashboard-bg'  style={{ width: "1900px" }}>
                 <Navbar />
-
-                <div>
-                    <div className='container-fluid'>
-                        <div className='row p-5'>
-                            <div className='p-0'>
-                                <div className='bg-light'>
-
 
                 <div style={{ marginLeft: "290px" }}>
                     <div className='container-fluid ' >
@@ -280,7 +273,7 @@ function Announcement() {
                                                                                         <div className="modal-body">
                                                                                             <div className="mb-3">
                                                                                                 <label className='Form-Label'>Announcement Title<span className='text-danger'>*</span></label>
-                                                                                                <input type="text" className="form-control Form-Control" {...register('title', { required: true })} />
+                                                                                                <input type="text" className="form-control Form-Control" {...register('Announcement_Title', { required: true })} />
 
                                                                                                 {errors.Announcement_Title && <small className="text-danger">Announcement is required</small>}
                                                                                                 {val.Announcement_Title}

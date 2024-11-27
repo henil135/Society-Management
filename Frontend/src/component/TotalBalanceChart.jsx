@@ -62,57 +62,37 @@ function TotalBalanceChart() {
     };
 
     // const [contacts, setContacts] = useState([
-        // { name: 'Hanna Donin', phone: '+91 99587 33657', work: 'Plumber' },
-        // { name: 'John Doe', phone: '+91 91234 56789', work: 'Electrician' },
-        // { name: 'Hanna ', phone: '+91 99555 33657', work: 'Plumbering' },
-        // { name: 'John ', phone: '+91 91222 56789', work: 'Electricians' },
+    // { name: 'Hanna Donin', phone: '+91 99587 33657', work: 'Plumber' },
+    // { name: 'John Doe', phone: '+91 91234 56789', work: 'Electrician' },
+    // { name: 'Hanna ', phone: '+91 99555 33657', work: 'Plumbering' },
+    // { name: 'John ', phone: '+91 91222 56789', work: 'Electricians' },
     //     fullName: "",
     //     phoneNumber: "",
     //     work: ""
     // ]);
 
     const [contacts, setContacts] = useState([]);
+    
+
+    // const [ImportNumber,setImportNumber] = useState({fullName:"",phoneNumber:"",work:""})
     useEffect(() => {
         const ViewNumber = async () => {
             try {
                 const response = await axios.get('http://localhost:5000/api/v2/important-numbers/');
                 if (response.data.success) {
-                    setContacts(response.data.message); // Extract the data array
+                    setContacts(response.data.data.contacts); // Ensure this matches the structure of your API response 
                 } else {
                     console.log('API request failed:', response.data);
                     setContacts([]);
                 }
             } catch (error) {
-                console.error('Error fetching societies:', error);
-                setContacts([]);
+                console.error('Error fetching important numbers:', error);
+                setContacts([]); // Fallback to an empty array in case of error
             }
         };
-        ViewNumber();
-    }, []);
 
-    // useEffect(() => {
-    //     const ViewNumber = async () => {
-    //         try {
-    //             const response = await axios.get('http://localhost:5000/api/v2/important-numbers/');
-    //             if (response.data.success) {
-    //                 setContacts(response.data.data); // Extract the data array
-    //             } else {
-    //                 console.error('API request failed:', response.data);
-    //                 setContacts([]);
-    //             }
-    //         } catch (error) {
-    //             console.error('Error fetching societies:', error);
-    //             setContacts([]);
-    //         } finally {
-    //             setContacts({
-    //                 fullName: "",
-    //                 phoneNumber: "",
-    //                 work: ""
-    //             })
-    //         }
-    //     };
-    //     ViewNumber();
-    // }, []);
+        ViewNumber(); // Correct function call
+    }, []);
 
     const [show, setShow] = useState(false);
 
@@ -163,8 +143,8 @@ function TotalBalanceChart() {
 
         // Populate the form with contact details for editing
         reset({
-            fullName: contact.name,
-            phoneNumber: contact.phone,
+            fullName: contact.fullName,
+            phoneNumber: contact.phoneNumber,
             work: contact.work,
         });
     };
@@ -253,24 +233,24 @@ function TotalBalanceChart() {
                                     </div>
                                 </div>
                             ))} */}
-                            {contacts.length > 0 && (
-                                <div>
-                                    {contacts.map((contact, index) => (
-                                        <div key={index} className="py-3 rounded-lg d-flex justify-content-between align-items-center shadow-sm ">
-                                            <div>
-                                                <p><strong>Name:</strong> {contact.name}</p>
-                                                <p><strong>Ph Number:</strong> {contact.phone}</p>
-                                                <p><strong>Work:</strong> {contact.work}</p>
-                                            </div>
-                                            <div className='gap-3 d-flex  '>
-                                                <Button onClick={() => handleShowDeleteModal(index)} className="delete-btn fs-5">
-                                                    <RiDeleteBin5Fill />
-                                                </Button>
-                                                <Button className="edit-btn fs-5" onClick={() => handleEdit(index)}><MdEditSquare /></Button>
-                                            </div>
+                            {contacts.length === 0 ? (
+                                <p>No important numbers available.</p>
+                            ) : (
+                                contacts.map((contact, index) => (
+                                    <div key={index} className="py-3 rounded-lg d-flex justify-content-between align-items-center shadow-sm ">
+                                        <div>
+                                            <p><strong>Name:</strong> {contact.name}</p>
+                                            <p><strong>Ph Number:</strong> {contact.phone}</p>
+                                            <p><strong>Work:</strong> {contact.work}</p>
                                         </div>
-                                    ))}
-                                </div>
+                                        <div className='gap-3 d-flex  '>
+                                            <Button onClick={() => handleShowDeleteModal(index)} className="delete-btn fs-5">
+                                                <RiDeleteBin5Fill />
+                                            </Button>
+                                            <Button className="edit-btn fs-5" onClick={() => handleEdit(index)}><MdEditSquare /></Button>
+                                        </div>
+                                    </div>
+                                ))
                             )}
                             {/* {contacts.map((contact, index) => (
                                 <div key={index} className="py-3 rounded-lg d-flex justify-content-between align-items-center shadow-sm ">
