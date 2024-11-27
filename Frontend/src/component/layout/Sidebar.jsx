@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, useLocation } from "react-router-dom";
 import { FaSignOutAlt, FaChevronDown, FaChevronUp, FaBars } from "react-icons/fa";
@@ -17,7 +17,7 @@ import personaldetailsIcon from "../../Icons/personalcard.png";
 import securityIcon from "../../Icons/security.png";
 import Logo from "../Logo";
 import HideBgCopy from "../../assets/HideBgCopy.png";
-  import BlackImage from '../../assets/Rectangle 1888.png'
+import BlackImage from '../../assets/Rectangle 1888.png'
 import FrameIcon from '../../Icons/Frame.png'
 
 function Sidebar() {
@@ -189,6 +189,7 @@ function Sidebar() {
       subItems: [
         { key: "maintenance-invoices", label: "Maintenance Invoices", path: "/maintenance-invoices" },
         { key: "other-income-nvoice", label: "Other Income Invoice", path: "/other-income-nvoice" },
+
       ],
     },
 {
@@ -203,6 +204,7 @@ function Sidebar() {
   icon: <img src={personaldetailsIcon} />,
   path: "/service-and-complaint",
     },
+
   ];
 
   return (
@@ -211,7 +213,7 @@ function Sidebar() {
         className="btn btn-primary d-sm-none d-md-none d-lg-none"
         onClick={() => setSidebarOpen(!isSidebarOpen)}
         style={{
-          position: "fixed", 
+          position: "fixed",
           top: "10px",
           left: "10px",
           zIndex: 1050,
@@ -229,7 +231,7 @@ function Sidebar() {
           width: "300px",
           zIndex: 1049,
           transition: "transform 0.3s ease",
-          transform: isSidebarOpen || !isMobile ? "translateX(0)" : "translateX(-100%)", 
+          transform: isSidebarOpen || !isMobile ? "translateX(0)" : "translateX(-100%)",
         }}
         aria-labelledby="offcanvasExampleLabel"
       >
@@ -241,6 +243,7 @@ function Sidebar() {
         <hr />
 
         <div className="offcanvas-body ">
+
         <ul className="list-unstyled">
   {menuItems.map((item) =>
     item.subItems ? (
@@ -288,60 +291,20 @@ function Sidebar() {
                   <img
                     src={BlackImage}
                     alt="Active Indicator" // Adding alt for better accessibility
+
                     style={{
-                      position: "absolute",
-                      left: "-15px", // Adjust this value as needed
-                      height: "30px",
+                      textDecoration: "none",
+                      color: activeItem === item.key ? "white" : "black",
                     }}
-                  />
-                )}
-                <Link
-                  to={subItem.path}
-                  className="d-flex align-items-center"
-                  style={{
-                    textDecoration: "none",
-                    fontWeight: activeItem === subItem.key ? "bold" : "normal", // Bold only active submenu item
-                    color: "black", // Ensure consistent text color for submenu
-                  }}
-                  onClick={() => setActiveItem(subItem.key)} // Ensure submenu item gets set as active
-                >
-                  <span>{subItem.label}</span>
-                </Link>
-              </li>
-            ))}
+                    onClick={() => setActiveItem(item.key)}
+                  >
+                    {item.icon}
+                    <span className="ms-2">{item.label}</span>
+                  </Link>
+                </li>
+              )
+            )}
           </ul>
-        ) : null}
-      </li>
-    ) : (
-      <li key={item.key} className={`p-3 rounded position-relative ${activeItem === item.key ? "mainColor2" : ""}`}>
-        {activeItem === item.key && (
-         <img
-           src={HideBgCopy}
-           alt="Active Indicator"
-           style={{
-             position: "absolute",
-             left: "-15px", // Adjust this value as needed
-             height: "50px",
-             top:"2px"
-           }}
-         />
-        )}
-        <Link
-          to={item.path}
-          className="d-flex align-items-center"
-          style={{
-            textDecoration: "none",
-            color: activeItem === item.key ? "white" : "black",
-          }}
-          onClick={() => setActiveItem(item.key)}
-        >
-          {item.icon}
-          <span className="ms-2">{item.label}</span>
-        </Link>
-      </li>
-    )
-  )}
-</ul>
 
         </div>
 

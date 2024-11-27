@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Modal, Form, Table } from 'react-bootstrap';
 import { FaEdit, FaEye, FaPlus, FaTrash } from 'react-icons/fa';
 
@@ -8,11 +8,9 @@ import Sidebar from "../component/layout/Sidebar";
 import viewICon from '../Icons/view.png'
 import deleteIcon from '../Icons/delete.png'
 import editIcon from '../Icons/Edit.png'
+import axios from 'axios';
 function SecurityProtocols() {
-  const [protocols, setProtocols] = useState([
-    { id: 1, title: "Physical Security", description: "Providing false information or Providing", date: "2022-05-20", time: "3:45 PM" },
-    { id: 2, title: "Cybersecurity", description: "Providing false information or", date: "2022-06-28", time: "3:45 PM" },
-  ]);
+  const [protocols, setProtocols] = useState([]);
 
   const [showModal, setShowModal] = useState(false);
   const [showViewModal, setShowViewModal] = useState(false);
@@ -20,7 +18,7 @@ function SecurityProtocols() {
   const [isEdit, setIsEdit] = useState(false);
   const [editProtocolId, setEditProtocolId] = useState(null);
   const [deleteProtocolId, setDeleteProtocolId] = useState(null);
-  const [protocolData, setProtocolData] = useState({ title: "", description: "", date: "", time: "" });
+  const [protocolData, setProtocolData] = useState({ Title: "", Description: "", Date: "", Time: "" });
 
   const handleShowCreate = () => {
     setIsEdit(false);
@@ -30,7 +28,7 @@ function SecurityProtocols() {
 
   const handleShowEdit = (protocol) => {
     setIsEdit(true);
-    setEditProtocolId(protocol.id);
+    setEditProtocolId(protocol._id);
     setProtocolData(protocol);
     setShowModal(true);
   };
@@ -48,7 +46,7 @@ function SecurityProtocols() {
     setShowModal(false);
     setShowViewModal(false);
     setShowDeleteModal(false); // Close the delete confirmation modal when handleClose is called
-    setProtocolData({ title: "", description: "", date: "", time: "" });
+    setProtocolData({ Title: "", Description: "", Date: "", Time: "" });
     setDeleteProtocolId(null); // Clear the ID of the protocol to delete
   };
 
@@ -58,33 +56,67 @@ function SecurityProtocols() {
     setProtocolData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSave = () => {
-    if (isEdit) {
-      // Update protocol
-      setProtocols((prevProtocols) =>
-        prevProtocols.map((protocol) =>
-          protocol.id === editProtocolId ? { ...protocol, ...protocolData } : protocol
-        )
-      );
-    } else {
-      // Add new protocol
-      const newId = protocols.length + 1;
-      const newEntry = { id: newId, ...protocolData };
-      setProtocols((prevProtocols) => [...prevProtocols, newEntry]);
+  useEffect(() => {
+    const fetchProtocols = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/v2/securityprotocol/');
+        if (response.data.success) {
+          setProtocols(response.data.data); // Assuming data contains the list of protocols
+        } else {
+          console.error('Failed to fetch protocols:', response.data.message);
+        }
+      } catch (error) {
+        console.error('Error fetching protocols:', error);
+      }
+    };
+
+    fetchProtocols();
+  }, []);
+
+  const handleSave = async () => {
+    try {
+      if (isEdit) {
+        // Update protocol
+        const response = await axios.put(`http://localhost:5000/api/v2/securityprotocol/update/${editProtocolId}`, protocolData);
+        if (response.data.success) {
+          setProtocols((prev) =>
+            prev.map((protocol) =>
+              protocol.id === editProtocolId ? { ...protocol, ...protocolData } : protocol
+            )
+          );
+        } else {
+          console.error('Error updating protocol:', response.data.message);
+        }
+      } else {
+        // Add new protocol
+        const response = await axios.post('http://localhost:5000/api/v2/securityprotocol/addsecurityprotocol', protocolData);
+        if (response.data.success) {
+          setProtocols((prev) => [...prev, response.data.data]); // Assuming the new protocol is returned in data
+        } else {
+          console.error('Error adding protocol:', response.data.message);
+        }
+      }
+    } catch (error) {
+      console.error('Error saving protocol:', error);
     }
 
     handleClose();
   };
 
-  const handleDelete = () => {
-    setProtocols((prevProtocols) =>
-      prevProtocols.filter((protocol) => protocol.id !== deleteProtocolId)
-    );
-    setDeleteProtocolId(null); // Clear the ID of the protocol to delete
-    setShowDeleteModal(false); // Close the delete confirmation modal
+  const handleDelete = async () => {
+    try {
+      const response = await axios.delete(`http://localhost:5000/api/v2/securityprotocol/delete/${deleteProtocolId}`);
+      if (response.data.success) {
+        setProtocols((prev) => prev.filter((protocol) => protocol._id !== deleteProtocolId));
+      } else {
+        console.error('Error deleting protocol:', response.data.message);
+      }
+    } catch (error) {
+      console.error('Error deleting protocol:', error);
+    }
+
+    handleClose();
   };
-
-
   return (
     <div className="d-flex flex-column flex-md-row">
       <div className="flex-shrink-0" >
@@ -110,8 +142,8 @@ function SecurityProtocols() {
                   <Form.Control
                     type="text"
                     placeholder="Enter Title"
-                    name="title"
-                    value={protocolData.title}
+                    name="Title"
+                    value={protocolData.Title}
                     onChange={handleChange}
                     required
                   />
@@ -122,8 +154,8 @@ function SecurityProtocols() {
                     as="textarea"
                     rows={3}
                     placeholder="Enter Description"
-                    name="description"
-                    value={protocolData.description}
+                    name="Description"
+                    value={protocolData.Description}
                     onChange={handleChange}
                     required
                   />
@@ -133,8 +165,8 @@ function SecurityProtocols() {
                     <Form.Label>Date<span className="text-danger">*</span></Form.Label>
                     <Form.Control
                       type="date"
-                      name="date"
-                      value={protocolData.date}
+                      name="Date"
+                      value={protocolData.Date}
                       onChange={handleChange}
                       required
                     />
@@ -143,8 +175,8 @@ function SecurityProtocols() {
                     <Form.Label>Time<span className="text-danger">*</span></Form.Label>
                     <Form.Control
                       type="time"
-                      name="time"
-                      value={protocolData.time}
+                      name="Time"
+                      value={protocolData.Time}
                       onChange={handleChange}
                       required
                     />
@@ -201,7 +233,7 @@ function SecurityProtocols() {
                   textDecorationSkipInk: "none",
                   color: "black",
                 }}>
-                  {protocolData.title}
+                  {protocolData.Title}
                 </strong>
 
               </p>
@@ -214,7 +246,7 @@ function SecurityProtocols() {
                   textUnderlinePosition: "from-font",
                   textDecorationSkipInk: "none",
                   color: "black",
-                }}>{protocolData.description}</strong>
+                }}>{protocolData.Description}</strong>
               </p>
               <div className="d-flex" style={{ gap: "70px" }}>
                 <div>
@@ -228,7 +260,7 @@ function SecurityProtocols() {
                     textUnderlinePosition: "from-font",
                     textDecorationSkipInk: "none",
                     color: "black",
-                  }}>{protocolData.date}</strong>
+                  }}>{protocolData.Date}</strong>
                 </div>
                 <div>
                   <p>Time</p>
@@ -240,7 +272,7 @@ function SecurityProtocols() {
                     textUnderlinePosition: "from-font",
                     textDecorationSkipInk: "none",
                     color: "black",
-                  }}>{protocolData.time}</strong>
+                  }}>{protocolData.Time}</strong>
                 </div>
               </div>
             </Modal.Body>
@@ -258,7 +290,7 @@ function SecurityProtocols() {
                   color: "#FE512E",
                   marginRight: "8px",
                 }}
-            
+              
               />Create Protocols</Button>
             </div>
             <Table  style={{ width: "1545px" }}>
@@ -276,11 +308,11 @@ function SecurityProtocols() {
                   <tr key={protocol.id} className="text-start" >
                     <td style={{ padding: "15px" }}>
                       <div style={{ display: "flex", alignItems: "center", justifyContent: "start" }}>
-                        {protocol.title}
+                        {protocol.Title}
                       </div>
                     </td>
-                    <td style={{ verticalAlign: "middle", width: "300px" }}>{protocol.description}</td>
-                    <td style={{ verticalAlign: "middle" }} className="text-center">{protocol.date}</td>
+                    <td style={{ verticalAlign: "middle", width: "300px" }}>{protocol.Description}</td>
+                    <td style={{ verticalAlign: "middle" }} className="text-center">{protocol.Date}</td>
                     <td style={{ verticalAlign: "middle" }} className="text-center">
                       <div className="d-flex align-items-center justify-content-center gap-2">
                         <div
@@ -295,7 +327,7 @@ function SecurityProtocols() {
                             display: "inline-block",
                           }}
                         >
-                          {protocol.time}
+                          {protocol.Time}
                         </div>
                       </div>
                     </td>
@@ -303,7 +335,7 @@ function SecurityProtocols() {
                       <div className="d-flex align-items-center justify-content-center">
                       <img src={editIcon} className="text-success me-2" style={{ cursor: "pointer" }} onClick={() => handleShowEdit(protocol)} />
                   <img src={viewICon} className="text-primary me-2" style={{ cursor: "pointer" }} onClick={() => handleShowView(protocol)} />
-                  <img src={deleteIcon} className="text-danger" style={{ cursor: "pointer" }} onClick={() => handleShowDelete(protocol.id)} />
+                  <img src={deleteIcon} className="text-danger" style={{ cursor: "pointer" }} onClick={() => handleShowDelete(protocol._id)} />
                       </div>
                     </td>
                   </tr>

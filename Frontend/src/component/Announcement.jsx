@@ -41,7 +41,7 @@ function Announcement() {
             try {
                 const response = await axios.get('http://localhost:5000/api/v2/annoucement/');
                 if (response.data.success) {
-                    setNote(response.data.message); // Extract the data array
+                    setNote(response.data.data); // Extract the data array
                 } else {
                     console.log('API request failed:', response.data);
                     setNote([]);
@@ -159,6 +159,7 @@ function Announcement() {
 
 
                 <div className='stickyHeader' style={{ marginLeft: "300px" }}>
+
 
                     <div className='container-fluid ' >
                         <div className='row ps-4 pe-4 pt-5'>
@@ -278,7 +279,7 @@ function Announcement() {
                                                                                         <div className="modal-body">
                                                                                             <div className="mb-3">
                                                                                                 <label className='Form-Label'>Announcement Title<span className='text-danger'>*</span></label>
-                                                                                                <input type="text" className="form-control Form-Control" {...register('title', { required: true })} />
+                                                                                                <input type="text" className="form-control Form-Control" {...register('Announcement_Title', { required: true })} />
 
                                                                                                 {errors.Announcement_Title && <small className="text-danger">Announcement is required</small>}
                                                                                                 {val.Announcement_Title}
