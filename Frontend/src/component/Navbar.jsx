@@ -36,7 +36,7 @@ import { useLocation, Link } from 'react-router-dom'; // Import Link from react-
   
     return (
         <>
-            <div className='header'  >
+            <div className='header'  style={{ width:"1920px",position:"fixed",zIndex:"999",top:"0px" }} >
                 <Navbar expand="sm" className="navbar bg-white  border-bottom p-4" style={{height:"109px"}}>
                     <Container fluid style={{marginLeft:"300px"}}>
                         {/* Breadcrumb */}

@@ -27,8 +27,10 @@ const ActivityParticipation = () => {
         <div className='dashboard-bg w-100' >
             <Sidebar />
             <Navbar />
-            <div style={{ marginLeft: '300px' }}>
-        <div className='container-fluid'>
+
+            <div className="stickyHeader" style={{ marginLeft: '300px' }}>
+        <div className='container-fluid '>
+
           <div className='row p-4'>
               <div className="table-responsive rounded pb-3">
 

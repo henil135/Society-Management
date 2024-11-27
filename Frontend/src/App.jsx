@@ -36,7 +36,11 @@ import ActivityParticipation from './component/ActivityParticipation.jsx';
 import MaintenanceInvoices from './component/MaintenanceInvoices.jsx';
 
 import SecurityProtocolsResident from './component/SecurityProtocolsResident';
+
 import ViewInvoice from './component/ViewInvoice.jsx';
+
+import OtherIncomeInvoices from './component/OtherIncomeInvoice.jsx';
+
 
 function App() {
   return (
@@ -67,18 +71,17 @@ function App() {
           <Route path='/profile' element={<Profile />} />
           <Route path='/EditProfile' element={<EditProfile />} />
 
-          <Route path='/personal-details' element={<PersonalDetail />} />
-          <Route path='/personal-details-tenant' element={<TenantPersonalDetails />} />
-          <Route path='/service-and-complaint' element={<ServiceComplaint />} />
-          <Route path='/request-and-submission' element={<RequestSubmission />} />
-          <Route path='/events-and-participation' element={<EventParticipation />} />
-          <Route path='/activity-and-participation' element={<ActivityParticipation />} />
-          <Route path='/maintenance-invoices' element={<MaintenanceInvoices />} />
+
+          <Route path='/personal-details' element={<PersonalDetail/>} />
+          <Route path='/personal-details-tenant' element={<TenantPersonalDetails/>} />
+          <Route path='/service-and-complaint' element={<ServiceComplaint/>} />
+          <Route path='/request-and-submission' element={<RequestSubmission/>} />
+          <Route path='/events-and-participation' element={<EventParticipation/>} />
+          <Route path='/activity-and-participation' element={<ActivityParticipation/>} />
+          <Route path='/maintenance-invoices' element={<MaintenanceInvoices/>} />
+          <Route path='/other-income-nvoice' element={<OtherIncomeInvoices/>}/>
 
 
-          <Route element={<PersonalDetail />} path='/personal-details' />
-
-          <Route element={<TenantPersonalDetails />} path='/personal-details-tenant' />
           <Route path='/Resident-Protocols' element={<SecurityProtocolsResident />} />
           <Route path='view-invoice' element={<ViewInvoice/>} />
 

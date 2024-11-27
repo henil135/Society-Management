@@ -22,7 +22,7 @@ const SecurityProtocolsResident = () => {
   return (
     <div className="container-fluid d-flex flex-column dashboard-bg">
       {/* Header Section */}
-      <div className="bg-white border-bottom shadow-sm">
+      <div className="bg-white border-bottom shadow-sm mb-4">
         <Header />
       </div>
 
@@ -34,7 +34,9 @@ const SecurityProtocolsResident = () => {
         </div>
 
         {/* Main Content Area */}
-        <div className="p-2 flex-grow-1" style={{ marginTop: "20px", marginRight: "15px", marginLeft: "280px" }}>
+
+        <div className="p-3 flex-grow-1 stickyHeader " style={{  marginRight: "15px", marginLeft: "280px" }}>
+
   <div className="row">
     <div className="col-12">
       <div className="table-responsive bg-white shadow-sm rounded p-3">

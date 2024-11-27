@@ -13,7 +13,7 @@ function Dashboard() {
     <div>
         <Sidebar />
       <Header/>
-      <div className="dashboard-bg" style={{ marginLeft: "300px" }}>
+      <div className="dashboard-bg " style={{ marginLeft: "300px",marginTop:"109px",width:"1600px" }}>
 
         <Income />
         <TotalBalanceChart />

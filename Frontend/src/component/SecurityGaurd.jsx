@@ -173,7 +173,9 @@ import editIcon from '../Icons/Edit.png'
 
       <div className="flex-grow-1 dashboard-bg"  style={{ width:"1920px"}}>
         <Header/>
-        <div className="container-fluid  p-3" style={{ marginTop: "10px",width:"1620px",marginLeft:"300px" }}>
+
+        <div className="container-fluid stickyHeader p-3" style={{ width:"1620px",marginLeft:"300px" }}>
+
           
 
 

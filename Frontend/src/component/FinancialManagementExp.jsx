@@ -9,7 +9,9 @@ import { Button, Modal, Form } from 'react-bootstrap';
 import { MdEditSquare } from "react-icons/md";
 import { FaEdit, FaPlusSquare } from "react-icons/fa";
 import Sidebar from "../component/layout/Sidebar";
-import { FaEye, FaTrash } from 'react-icons/fa6';
+
+import { FaCamera, FaEye, FaTrash } from 'react-icons/fa6';
+
 import viewICon from '../Icons/view.png'
 import deleteIcon from '../Icons/delete.png'
 import editIcon from '../Icons/Edit.png'
@@ -18,7 +20,7 @@ import editIcon from '../Icons/Edit.png'
 
   const [showViewModal, setShowViewModal] = useState(false);
   const [viewComplaint, setViewComplaint] = useState(null);
-
+  const [photo, setPhoto] = useState(null);
   const handleShowViewModal = (index) => {
     setViewComplaint(exp[index]);
     setShowViewModal(true);
@@ -26,7 +28,15 @@ import editIcon from '../Icons/Edit.png'
 
   const handleCloseViewModal = () => setShowViewModal(false);
 
-
+  const handleFileChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      setPhoto({
+        preview: URL.createObjectURL(e.target.files[0]),
+        file: e.target.files[0],
+      });
+    }
+  };
+  
   const [exp, setExp] = useState([
     { title: 'Rent or Mortgage', des: 'A visual representation of your spending categories...', date: '10/02/2024', amt: '₹ 1000', format: 'JPG' },
     { title: 'Housing Costs', des: 'Rack the fluctuations in your spending over we time...', date: '11/02/2024', amt: '₹ 1000', format: 'PDF' },
@@ -117,9 +127,9 @@ import editIcon from '../Icons/Edit.png'
       <Sidebar />
     </div>
 
-    <div className='dashboard-bg' style={{ width:"1920px"}}>
+    <div className='dashboard-bg ' style={{ width:"1920px"}}>
       <Navbar />
-      <div style={{width:"1630px",marginLeft:"290px"}}>
+      <div className='stickyHeader' style={{width:"1630px",marginLeft:"290px"}}>
         <div className='container-fluid income' >
 
           <div className='row p-5'>
@@ -131,7 +141,7 @@ import editIcon from '../Icons/Edit.png'
                     <h3 className=' mb-0  financial-income-title'>Add Expenses Details</h3>
 
                     <div>
-                      <button className='set-maintainance-btn d-flex align-items-center p-3' onClick={handleShow}> <FaPlusSquare className='me-2' /> Add New Expenses details</button>
+                      <button className='set-maintainance-btn d-flex align-items-center p-2' onClick={handleShow}> <FaPlusSquare className='me-2' /> Add New Expenses details</button>
                     </div>
                   </div>
 
@@ -253,13 +263,60 @@ import editIcon from '../Icons/Edit.png'
                       </Form.Group>
 
                       <Form.Group className="mb-3" controlId="formFormat">
-                        <Form.Label className='Form-Label'>Upload Bill</Form.Label>
-                        <Form.Control
-                          className='Form-Control'
-                          type="file"
-                          {...register('format')}
-                        />
-                      </Form.Group>
+  <Form.Label className="Form-Label">Upload Photo</Form.Label>
+  <div className="text-start" style={{ display: "flex", marginBottom: "20px" }}>
+    <label htmlFor="photo-upload" style={{ cursor: "pointer", textAlign: "center" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
+          textAlign: "center",
+        }}
+      >
+        <div
+          style={{
+            width: "50px",
+            height: "50px",
+            borderRadius: "50%",
+            background: "rgba(211, 211, 211, 1)",
+            overflow: "hidden",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            border: "2px solid #ddd",
+            marginRight: "10px",
+          }}
+        >
+          {photo?.preview ? (
+            <img
+              src={photo.preview}
+              alt="Uploaded"
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                borderRadius: "50%",
+              }}
+            />
+          ) : (
+            <FaCamera style={{ color: "rgba(255, 255, 255, 1)", fontSize: "16px" }} />
+          )}
+        </div>
+        <div style={{ color: "#007bff" }}>Add Photo</div>
+      </div>
+    </label>
+    <input
+      id="photo-upload"
+      type="file"
+      onChange={handleFileChange}
+      accept="image/png, image/jpeg"
+      style={{ display: "none" }}
+    />
+  </div>
+</Form.Group>
+
 
                       <div className="d-flex justify-content-between">
                         <Button variant="secondary" onClick={handleClose} className="btn mt-2 cancle">

@@ -66,7 +66,7 @@ import viewicon from '../Icons/view.png'
         <Sidebar />
       </div>
 
-      <div className="flex-grow-1   container-fluid" style={{width:"1920px"}}>
+      <div className="flex-grow-1  stickyHeader container-fluid" style={{width:"1920px"}}>
         <Header/>
         <div className="container-fluid  " style={{ marginTop: "20px",marginLeft:"310px",width:"1590px" }}>
          

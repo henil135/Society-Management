@@ -51,7 +51,9 @@ const TenantPersonalDetails = () => {
             <Sidebar />
             <Navbar />
             <div style={{ marginLeft: '300px' }}>
-                <div className='container-fluid income'>
+
+                <div className='container-fluid income stickyHeader' >
+
                     <div className='row p-4 pe-3'>
                         
                             <div className="table-responsive rounded pb-3">

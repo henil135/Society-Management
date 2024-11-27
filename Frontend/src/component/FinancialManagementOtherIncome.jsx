@@ -98,9 +98,11 @@ function FinancialManagementOtherIncome() {
     <div className="flex-shrink-0" >
       <Sidebar />
     </div>
-        <div className='dashboard-bg' style={{ width:"1920px"}} >
+        <div className='dashboard-bg ' style={{ width:"1920px"}} >
             <Navbar />
-            <div>
+
+            <div className='stickyHeader'>
+
                 <div className='income' style={{marginLeft:"300px", width:"1608px"}}>
 
                     <div className='row p-4'>

@@ -64,9 +64,11 @@ import viewicon from '../Icons/view.png'
     <div className="flex-shrink-0" >
       <Sidebar />
     </div>
-    <div className='card-row dashboard-bg'  style={{ width:"1920px"}}>
+    <div className='card-row dashboard-bg '  style={{ width:"1920px"}}>
       <Navbar />
-      <div  style={{marginLeft:"290px"}}>
+
+      <div className='stickyHeader' style={{marginLeft:"290px"}}>
+
         <div className='container-fluid mt-2 p-3'  style={{marginLeft:"30px"}}>
 
           <div className='row justify-content-between align-items-center mb-3 pt-2 bg-light '  style={{marginRight:"40px",borderRadius:"8px"}}>

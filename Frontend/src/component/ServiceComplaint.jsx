@@ -89,7 +89,9 @@ const ServiceComplaint = () => {
             <Sidebar />
             <Navbar />
             <div style={{ marginLeft: '300px' }}>
-                <div className='container-fluid'>
+
+                <div className='container-fluid stickyHeader'>
+
                     <div className='row p-4'>
                      
                             <div className="table-responsive rounded pb-3">
@@ -103,7 +105,7 @@ const ServiceComplaint = () => {
                                         <div className='p-0 bg-light'>
                                             <div className='d-flex justify-content-between align-items-center pb-3 px-3'>
                                                 <h3 className='mb-0 financial-income-title'>Complaint</h3>
-                                                <button className='set-maintainance-btn d-flex align-items-center p-3' onClick={handleShow}>
+                                                <button className='set-maintainance-btn d-flex align-items-center p-2' onClick={handleShow}>
                                                     Create Complaint
                                                 </button>
                                             </div>
