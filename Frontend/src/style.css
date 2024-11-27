@@ -459,12 +459,7 @@ body {
   }
 
 
-  .mainColor{
-    color: #FE512E;
-    
-  }.mainColor2{
-    background: linear-gradient(90deg, #FE512E 0%, #F09619 100%);
-  }
+  
 
 
 
@@ -574,8 +569,42 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    
   }
 
 
 
+  .Border{
+    border-radius: 20px !important;
+  }
+
+  .stickyHeader{
+    margin-top: 109px;
+  }
+
+
+  .maintainance-income-btn {
+   
+    color: #333;
+    background-color: #f9f9f9;
+  }
   
+  .maintainance-income-btn-active {
+    
+    background: linear-gradient(90deg, #FE512E 0%, #F09619 100%);
+    
+  }
+  
+  .maintainance-income-btn-withoutbg {
+    color:  #FE512E;
+    background-color: transparent;
+    
+  }
+  
+
+  .mainColor{
+    color: #FE512E;
+    
+  }.mainColor2{
+    background: linear-gradient(90deg, #FE512E 0%, #F09619 100%);
+  }

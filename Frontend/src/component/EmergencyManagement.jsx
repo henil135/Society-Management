@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Sidebar from "../component/Layout/Sidebar";
+import Sidebar from "../component/layout/Sidebar";
 import Header from "./Navbar";
 
 const EmergencyManagement = () => {
@@ -30,7 +30,7 @@ const EmergencyManagement = () => {
         <Header />
         
         {/* Alert Form Section */}
-        <div style={styles.formContainer} >
+        <div className="stickyHeader" style={styles.formContainer} >
           <h2 style={styles.title}>Alert </h2>
           <form onSubmit={handleSubmit} style={styles.form}>
             <div style={styles.formGroup}>

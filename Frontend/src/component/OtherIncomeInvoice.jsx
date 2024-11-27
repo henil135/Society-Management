@@ -7,22 +7,17 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import visa from '../assets/visa-logo.png'
 import mastercard from '../assets/mastercard-logo.png'
 import cash from '../assets/cash-logo.png'
-import { Link } from 'react-router-dom';
 
 
-const MaintenanceInvoices = () => {
+const OtherIncomeInvoices = () => {
 
-    const [maintainace, setMaintainace] = useState([
-        { id: 1, title: 'Maintenance', billDate: '11/01/2024', pendingDate: '11/01/2024', maintananceAmount: '1000.00', maintenancePenaltyAmount: '250.00', grandTotal: '1,250' },
-        { id: 2, title: 'Maintenance', billDate: '11/01/2024', pendingDate: '11/01/2024', maintananceAmount: '1000.00', maintenancePenaltyAmount: '250.00', grandTotal: '1,250' },
-        { id: 3, title: 'Maintenance', billDate: '11/01/2024', pendingDate: '11/01/2024', maintananceAmount: '1000.00', maintenancePenaltyAmount: '250.00', grandTotal: '1,250' },
+    const [DueEventPayment, setDueEventPayment] = useState([
+        { id: 1, title: 'Due Event Payment', name:"Navratri", billDate: '11/01/2024', amount:"1000.00"},
+        { id: 2, title: 'Due Event Payment',  name:"Navratri",billDate: '11/01/2024', amount:"1000.00"},
+         { id: 3, title: 'Due Event Payment', name:"Navratri",billDate: '11/01/2024', amount:"1000.00"},
     ]);
 
-    const [dueMaintainace, setdueMaintainace] = useState([
-        { id: 1, title: 'Maintenance', Date: '11/01/2024', amt: '1000.00', duemaintananceAmount: '250.00' },
-        { id: 2, title: 'Maintenance', Date: '11/01/2024', amt: '1000.00', duemaintananceAmount: '250.00' },
-    ]);
-
+   
     const [show, setShow] = useState(false);
 
     const handleShow = () => setShow(true);
@@ -57,63 +52,25 @@ const MaintenanceInvoices = () => {
             <Navbar />
 
             <div style={{ marginLeft: '300px' }}>
-
-                <div className='container-fluid stickyHeader'>
-
-                    <div className='row p-4 '>
+                <div className='container-fluid ' >
+                    <div className='row p-4  ' >
                         
-                            <div className="table-responsive rounded pb-3" >
+                            <div className="table-responsive pb-3 " >
 
-                                <div className='container-fluid' >
+                                <div className='container-fluid stickyHeader' >
 
-                                    <div className="row py-3 card-row bg-light " style={{borderRadius:"10px"}}>
-                                        <div className='align-items-center d-flex' >
-                                            <div className='col-12 col-sm-6 col-md-3'>
-                                                <h5 className="mb-0 financial-income-title p-3">Show Maintenance Details</h5>
-                                            </div>
-                                            <div className='d-flex w-100 justify-content-end'>
-                                                {/* Maintenance Amount Card */}
-                                                <div className="col-12 col-sm-6 col-md-3 pt-3 px-1">
-                                                    <div className="card">
-                                                        <div className="card-body d-flex justify-content-between align-items-center px-4 py-3">
-                                                            <img src={incomeRactangle} width={8} className="position-absolute start-0" />
-                                                            <div>
-                                                                <h6 className="card-subtitle mb-1">Maintenance Amount</h6>
-                                                                <p className="mb-0 text-success">₹ 1,500</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                {/* Penalty Amount Card */}
-                                                <div className="col-12 col-sm-6 col-md-3 pt-3 px-1">
-                                                    <div className="card">
-                                                        <div className="card-body d-flex justify-content-between align-items-center px-4 py-3">
-                                                            <img src={balanceRactangle} width={8} className="position-absolute start-0" />
-                                                            <div>
-                                                                <h6 className="card-subtitle mb-1">Penalty Amount</h6>
-                                                                <p className="mb-0 text-danger">₹ 500</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
 
-                                    <div className='row py-3 card-row rounded'>
+                                    <div className='row py-3 card-row ' >
                                         <div className='pe-0 bg-light'>
                                             <div className='d-flex justify-content-between align-items-center py-3 px-3'>
-                                                <h3 className='mb-0 financial-income-title'>Pending Maintanance</h3>
-
-                                                <Link to="/view-invoice" className='text-decoration-none'><button className='set-maintainance-btn d-flex align-items-center p-2'>
-
+                                                <h3 className='mb-0 financial-income-title'>Due Event Payment</h3>
                                                 <button className='set-maintainance-btn d-flex align-items-center p-2' onClick={handleShow}>
-
                                                     View Invoice
-                                                </button></Link>
+                                                </button>
                                             </div>
                                             <div className="row  px-3" style={{borderRadius:"10px"}}>
-                                                {maintainace.map((val, index) => (
+                                                {DueEventPayment.map((val, index) => (
                                                     <div className="col-lg-3 mb-3 " key={val.id}>
                                                         <div className="card">
                                                             <div className="card-header card-title text-light d-flex align-items-center justify-content-between py-3" style={{ background: "rgba(86, 120, 233, 1)" }}>
@@ -123,26 +80,21 @@ const MaintenanceInvoices = () => {
                                                                 <span className="badge1 Owner1">Pending</span>
                                                             </div>
                                                             <div className="card-body">
+                                                            <div className='d-flex justify-content-between align-items-center mb-1'>
+                                                                    <h6 className="card-body-title mb-0">Event Name</h6>
+                                                                    <span className="card-body-title fw-normal">{val.name}</span>
+                                                                </div>
                                                                 <div className='d-flex justify-content-between align-items-center mb-1'>
-                                                                    <h6 className="card-body-title mb-0">Bill Date</h6>
+                                                                    <h6 className="card-body-title mb-0">Event Due Date</h6>
                                                                     <span className="card-body-title fw-normal">{val.billDate}</span>
                                                                 </div>
+                                                                
+                                                             
                                                                 <div className='d-flex justify-content-between align-items-center mb-1'>
-                                                                    <h6 className="card-body-title mb-0">Pending Date </h6>
-                                                                    <span className="card-body-title fw-normal">{val.pendingDate}</span>
+                                                                    <h6 className="card-body-title mb-0"> Amount</h6>
+                                                                    <span className="card-body-title fw-medium text-danger">{val.amount}</span>
                                                                 </div>
-                                                                <div className='d-flex justify-content-between align-items-center mb-1'>
-                                                                    <h6 className="card-body-title mb-0">Maintanance Amount</h6>
-                                                                    <span className="card-body-title text-danger fw-medium">{val.maintananceAmount}</span>
-                                                                </div>
-                                                                <div className='d-flex justify-content-between align-items-center mb-1'>
-                                                                    <h6 className="card-body-title mb-0">Maintenance Penalty Amount</h6>
-                                                                    <span className="card-body-title fw-medium text-danger">{val.maintenancePenaltyAmount}</span>
-                                                                </div>
-                                                                <div className='d-flex justify-content-between align-items-center mb-1'>
-                                                                    <h6 className="card-body-title mb-0 text-dark fw-medium">Grand Total</h6>
-                                                                    <span className="card-body-title text-success fw-medium">{val.grandTotal}</span>
-                                                                </div>
+                                                                
 
                                                                 <Button className='btn btn-sm w-100 mainColor2 mt-2' style={{ padding: '10px 53px', borderRadius: '10px', border: '0px', fontSize: '18px', fontWeight: '600' }} onClick={handleShowPayNowModal}>Pay Now</Button>
                                                             </div>
@@ -154,45 +106,7 @@ const MaintenanceInvoices = () => {
                                     </div>
 
 
-                                    <div className='row py-3 card-row rounded'>
-                                        <div className='pe-0 bg-light'>
-                                            <div className='py-3 px-3'>
-                                                <h3 className='mb-0 financial-income-title'>Due Maintanance</h3>
-                                            </div>
-                                            <div className="row  px-3">
-                                                {dueMaintainace.map((val, index) => (
-                                                    <div className="col-lg-3 mb-3 " key={val.id}>
-                                                        <div className="card">
-                                                            <div className="card-header card-title text-light d-flex align-items-center justify-content-between py-3" style={{ background: "rgba(86, 120, 233, 1)" }}>
-                                                                <h5 className="mb-0" style={{ fontSize: "14px" }}>
-                                                                    {val.title}
-                                                                </h5>
-                                                                <span className="badge1 Owner1">Pending</span>
-                                                            </div>
-                                                            <div className="card-body">
-                                                                <div className='d-flex justify-content-between align-items-center mb-1'>
-                                                                    <h6 className="card-body-title mb-0">Date</h6>
-                                                                    <span className="card-body-title fw-normal">{val.Date}</span>
-                                                                </div>
-                                                                <div className='d-flex justify-content-between align-items-center mb-1'>
-                                                                    <h6 className="card-body-title mb-0">Amount</h6>
-                                                                    <span className="card-body-title text-danger fw-medium">{val.amt}</span>
-                                                                </div>
-                                                                <div className='d-flex justify-content-between align-items-center mb-1'>
-                                                                    <h6 className="card-body-title mb-0">Due
-
-                                                                        Maintanance Amount</h6>
-                                                                    <span className="card-body-title text-danger fw-medium">{val.duemaintananceAmount}</span>
-                                                                </div>
-
-                                                                <Button className='btn btn-sm w-100 mainColor2 mt-2' style={{ padding: '10px 53px', borderRadius: '10px', border: '0px', fontSize: '18px', fontWeight: '600' }} onClick={handleShowPayNowModal}>Pay Now</Button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
 
                                     {/* Payment Modal */}
                                     <Modal
@@ -308,4 +222,4 @@ const MaintenanceInvoices = () => {
     )
 }
 
-export default MaintenanceInvoices
+export default OtherIncomeInvoices

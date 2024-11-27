@@ -2,7 +2,7 @@
 // import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
-import loginImage from '../assets/login.jpg';
+import loginImage from '../assets/login.png';
 import '../style.css';
 import Logo from './Logo';
 import axios from 'axios';

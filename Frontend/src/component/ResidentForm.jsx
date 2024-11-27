@@ -4,7 +4,7 @@ import { LuImagePlus } from 'react-icons/lu';
 import { RxAvatar } from 'react-icons/rx';
 import { useNavigate } from 'react-router-dom';
 import Header from './Navbar';
-import Sidebar from "../component/Layout/Sidebar";
+import Sidebar from "../component/layout/Sidebar";
 
 
  function ResidentForm() {
@@ -206,7 +206,7 @@ const handleSubmit = (e) => {
       <div className="flex-shrink-0" >
         <Sidebar />
       </div>
-    <div className='dashboard-bg' style={{width:"1900px"}}>
+    <div className='dashboard-bg stickyHeader' style={{width:"1900px"}}>
     
    <div >
    <Header/>
@@ -214,18 +214,25 @@ const handleSubmit = (e) => {
        
     <div className="container  p-5" style={{ maxWidth: '1540px',  marginTop: '50px' ,marginLeft:"330px",}}>
       <div className="mb-4">
-        <button
-          className={`btn ${formType === 'owner' ? 'mainColor2' : 'btn'} me-2`}
-          onClick={() => setFormType('owner')}
-        >
-          Owner
-        </button>
-        <button
-          className={`btn ${formType === 'tenant' ? 'mainColor2' : 'btn'}`}
-          onClick={() => setFormType('tenant')}
-        >
-          Tenant
-        </button>
+      <button
+  className={`btn btn-sm maintainance-income-btn ${
+    formType === 'owner' ? 'maintainance-income-btn-active' : 'maintainance-income-btn-withoutbg'
+  }`}
+  onClick={() => setFormType('owner')}
+>
+  Owner
+</button>
+<button
+  className={`btn btn-sm maintainance-income-btn ${
+    formType === 'tenant' ? 'maintainance-income-btn-active' : 'maintainance-income-btn-withoutbg'
+  }`}
+  onClick={() => setFormType('tenant')}
+>
+  Tenant
+</button>
+
+
+        
       </div>
 
       <form onSubmit={handleSubmit}>

@@ -47,13 +47,15 @@ const TenantPersonalDetails = () => {
 
 
     return (
-        <div className='dashboard-bg' style={{ marginLeft: '280px' }}>
+        <div className='dashboard-bg w-100' >
             <Sidebar />
             <Navbar />
-            <div>
-                <div className='container-fluid income'>
-                    <div className='row pt-3 pb-0 pe-3 ps-4'>
-                        <div className='p-0'>
+            <div style={{ marginLeft: '300px' }}>
+
+                <div className='container-fluid income stickyHeader' >
+
+                    <div className='row p-4 pe-3'>
+                        
                             <div className="table-responsive rounded pb-3">
 
                                 <Link to="/personal-details" className='btn btn-sm  maintainance-income-btn maintainance-income-btn-withoutbg'>Owner</Link>
@@ -349,7 +351,7 @@ const TenantPersonalDetails = () => {
                                 </div>
 
                             </div>
-                        </div>
+                       
 
                     </div>
                 </div>

@@ -4,7 +4,7 @@ import {Table } from 'react-bootstrap';
 
 import Avtar from "../assets/Avatar.png"
 import Header from './Navbar';
-import Sidebar from "../component/Layout/Sidebar";
+import Sidebar from "../component/layout/Sidebar";
  function DetailTracking() {
   const [details, setDetails] = useState([
     { id: 1, name: "Evelyn Harper", phoneNumber: "9313876347", date: "20/02/2002", unit: "A", number: "1001", time: "3:45 PM" },
@@ -18,16 +18,18 @@ import Sidebar from "../component/Layout/Sidebar";
         <Sidebar />
       </div>
 
-      <div className="flex-grow-1 dashboard-bg"  style={{width:"1910px"}}>
+      <div className="flex-grow-1 dashboard-bg"  style={{width:"1920px"}}>
         <Header/>
-        <div className="container-fluid  p-4" style={{ marginTop: "10px", width:"1615px",marginLeft:"300px" }}>
+
+        <div className="container-fluid stickyHeader p-3" style={{ width:"1615px",marginLeft:"300px" }}>
+
           
 
           <div className="table-responsive" style={{ border: "1px solid #ddd", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", overflow: "hidden", backgroundColor: "#fff", padding: "20px", marginTop: "20px" }}>
           <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
             <h4 className="mb-0">Detail Tracking</h4>
           </div>
-            <Table hover responsive style={{ width: "1525px" }}>
+            <Table  style={{ width: "1525px" }}>
               <thead style={{background:"rgb(185, 198, 242)", color: "black" }}>
                 <tr className="text-start" >
                   <th style={{width:"300px"}}>Visitor Name</th>

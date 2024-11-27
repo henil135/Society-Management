@@ -56,18 +56,20 @@ import Sidebar from "../component/layout/Sidebar";
   };
 
   return (
-    <div className="d-flex flex-column flex-md-row">
+    <div className="d-flex flex-column flex-md-row w-100">
     <div className="flex-shrink-0" >
       <Sidebar />
     </div>
-    <div className='dashboard-bg' style={{ width:"1920px"}}>
+
+    <div className='dashboard-bg w-100 ' >
+
       <Navbar />
-      <div className='container-fluid' style={{marginLeft:"290px",width:"1630px"}}>
+      <div className='container-fluid stickyHeader' style={{marginLeft:"290px",width:"1630px"}}>
         <div className='row p-5'>
           <div className='p-0 bg-light' >
             <div className='d-flex justify-content-between align-items-center ps-2 pe-3 pt-1' style={{marginLeft:"10px"}}>
               <h3 className='mb-0 financial-income-title'>Note</h3>
-              <button className='set-maintainance-btn d-flex align-items-center p-3'  onClick={handleShow}>
+              <button className='set-maintainance-btn d-flex align-items-center p-2'  onClick={handleShow}>
                 Create Note
               </button>
             </div>
