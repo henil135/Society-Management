@@ -19,7 +19,7 @@ import Logo from "../Logo";
 import HideBgCopy from "../../assets/HideBgCopy.png";
 import BlackImage from '../../assets/Rectangle 1888.png'
 import FrameIcon from '../../Icons/Frame.png'
-
+import ArrowIcon from '../../Icons/arrow-down.png'
 function Sidebar() {
   const location = useLocation();
   const [activeItem, setActiveItem] = useState("");
@@ -291,16 +291,20 @@ function Sidebar() {
                       {item.icon}
                       <span className="ms-2">{item.label}</span>
                     </div>
-                    {(item.key === "complaint-tracking" && isComplaintDropdownOpen) ||
-                      (item.key === "security-management" && isSecurityDropdownOpen) ||
-                      (item.key === "financialmanagement" && isFinancialDropdownOpen) ||
-                      (item.key === "security" && isGeneralSecurityDropdownOpen) ||
-                      (item.key === "payment-portal" && isPaymentPortalDropdownOpen) ||
-                      (item.key === "Community" && isCommunityDropdownOpen) ? (
-                      <FaChevronUp />
-                    ) : (
-                      <FaChevronDown />
-                    )}
+
+                   {
+  (item.key === "complaint-tracking" && isComplaintDropdownOpen) ||
+  (item.key === "security-management" && isSecurityDropdownOpen) ||
+  (item.key === "financialmanagement" && isFinancialDropdownOpen) ||
+  (item.key === "security" && isGeneralSecurityDropdownOpen) ||
+  (item.key === "payment-portal" && isPaymentPortalDropdownOpen) ||
+  (item.key === "Community" && isCommunityDropdownOpen) ? (
+    <img src={ArrowIcon}  />
+  ) : (
+    <img src={ArrowIcon} />
+  )
+}
+
                   </div>
                   {(item.key === "complaint-tracking" && isComplaintDropdownOpen) ||
                     (item.key === "security-management" && isSecurityDropdownOpen) ||
