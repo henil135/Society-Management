@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Card, Button, Modal, Form } from "react-bootstrap";
 import { BsThreeDotsVertical } from "react-icons/bs";
@@ -6,6 +6,8 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa";
 import Header from "./Navbar";
 import Sidebar from "../component/layout/Sidebar";
+import { createFacility, getFacilities, getFacilitiesByID, updateFacility } from "../services/FacilityManagementapi"
+import axios from "axios";
 
 const FacilityCard = ({ title, date, description, onEdit }) => {
     const [showMenu, setShowMenu] = useState(false);
@@ -73,13 +75,13 @@ const FacilityManagement = () => {
     const [showModal, setShowModal] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const [editIndex, setEditIndex] = useState(null);
-    const [facilityData, setFacilityData] = useState({ title: "", date: "", description: "", reminderBefore: "" });
+    const [facilityData, setFacilityData] = useState({ Facility_name: "", Date: "", Description: "", Remind_Before: "" });
     const [validationError, setValidationError] = useState("");
 
     const handleShowModal = () => setShowModal(true);
     const handleCloseModal = () => {
         setShowModal(false);
-        setFacilityData({ title: "", date: "", description: "", reminderBefore: "" });
+        setFacilityData({ Facility_name: "", Date: "", Description: "", Remind_Before: "" });
         setIsEditing(false);
         setEditIndex(null);
         setValidationError(""); // Clear validation error
@@ -90,17 +92,25 @@ const FacilityManagement = () => {
         setFacilityData({ ...facilityData, [name]: value });
     };
 
-    const handleSave = () => {
-        const { title, date, description, reminderBefore } = facilityData;
+    const handleSave = async () => {
+        const { Facility_name, Date, Description, Remind_Before } = facilityData;
+        // try {
+        //     const response = await axios.post('http://localhost:5000/api/v2/facility/addfacility',facilityData);
+        //     console.log(response.facilityData);
+        //     setFacilities([...facilities, response.data]);
+        //     return;
+        // } catch (error) {
+        //     console.log(error);
+
 
         // Field validation
-        if (!title || !date || !description || !reminderBefore) {
+        if (!Facility_name || !Date || !Description || !Remind_Before) {
             setValidationError("All fields are required.");
             return;
         }
 
         // Validation for reminderBefore input
-        if (isNaN(reminderBefore) || reminderBefore <= 0) {
+        if (isNaN(Remind_Before) || Remind_Before <= 0) {
             setValidationError("Reminder Before must be a positive number.");
             return;
         }
@@ -114,8 +124,42 @@ const FacilityManagement = () => {
             setFacilities([...facilities, facilityData]);
         }
 
-        handleCloseModal();
+        try {
+            if (isEditing) {
+                const updatedFacilities = [...facilities];
+                updatedFacilities[editIndex] = facilityData;
+                setFacilities(updatedFacilities);
+            } else {
+                // create a facility
+                const response = await createFacility(facilityData);
+                if (response && response.data) {
+                    setFacilities([...facilities, response.data]); // Update state with the newly created facility
+                } else {
+                    console.error("Failed to create facility.");
+                }
+            }
+
+            handleCloseModal();
+        } catch (error) {
+            console.error("Error while creating/updating the facility:", error.message);
+        }
+    
     };
+
+    useEffect(() => {
+        const fetchFacilities = async () => {
+            try {
+                const response = await getFacilities(); // Call the API to get all facilities
+                if (response && response.data) {
+                    setFacilities(response.data); // Update state with fetched facilities
+                }
+            } catch (error) {
+                console.error("Error fetching facilities:", error.message);
+            }
+        };
+    
+        fetchFacilities();
+    }, []);
 
     const handleEdit = (index) => {
         setFacilityData(facilities[index]);
@@ -131,7 +175,7 @@ const FacilityManagement = () => {
             </div>
 
 
-            <div className="  dashboard-bg " style={{  width: "1920px" }}>
+            <div className="  dashboard-bg " style={{ width: "1920px" }}>
                 <Header />
 
                 <div className="container-fluid bg-white rounded shadow-sm p-2 " style={{ marginTop: "150px", width: "1580px", marginLeft: "320px" }}>
@@ -140,18 +184,18 @@ const FacilityManagement = () => {
                         <h4 className="mb-0" >Facility Management</h4>
 
 
-                        <Button className="btn mainColor2 d-flex align-items-center justify-content-center p-2" style={{ border:"none"}}  onClick={() => {
+                        <Button className="btn mainColor2 d-flex align-items-center justify-content-center p-2" style={{ border: "none" }} onClick={() => {
                             setIsEditing(false);
                             handleShowModal();
                         }}> <FaPlus
-                        style={{
-                            fontSize: "18px",
-                            borderRadius: "5px",
-                            background: "rgba(255, 255, 255, 1)",
-                            color: "#FE512E",
-                            marginRight: "8px",
-                          }}
-                      
+                                style={{
+                                    fontSize: "18px",
+                                    borderRadius: "5px",
+                                    background: "rgba(255, 255, 255, 1)",
+                                    color: "#FE512E",
+                                    marginRight: "8px",
+                                }}
+
                             />
                             Create Facility
                         </Button>
@@ -183,9 +227,9 @@ const FacilityManagement = () => {
                                 <Form.Label>Facility Name<span className="text-danger">*</span></Form.Label>
                                 <Form.Control
                                     type="text"
-                                    name="title"
+                                    name="Facility_name"
                                     placeholder="Enter Name"
-                                    value={facilityData.title}
+                                    value={facilityData.Facility_name}
                                     onChange={handleInputChange}
                                 />
                             </Form.Group>
@@ -194,9 +238,9 @@ const FacilityManagement = () => {
                                 <Form.Control
                                     as="textarea"
                                     rows={3}
-                                    name="description"
+                                    name="Description"
                                     placeholder="Enter Description"
-                                    value={facilityData.description}
+                                    value={facilityData.Description}
                                     onChange={handleInputChange}
                                 />
                             </Form.Group>
@@ -205,8 +249,8 @@ const FacilityManagement = () => {
                                 <Form.Label>Schedule Service Date</Form.Label>
                                 <Form.Control
                                     type="date"
-                                    name="date"
-                                    value={facilityData.date}
+                                    name="Date"
+                                    value={facilityData.Date}
                                     onChange={handleInputChange}
                                 />
                             </Form.Group>
@@ -215,8 +259,8 @@ const FacilityManagement = () => {
                                 <Form.Label>Reminder Before (in days)</Form.Label>
                                 <Form.Control
                                     type="number"
-                                    name="reminderBefore"
-                                    value={facilityData.reminderBefore}
+                                    name="Remind_Before"
+                                    value={facilityData.Remind_Before}
                                     onChange={handleInputChange}
                                     min="1"
                                 />
