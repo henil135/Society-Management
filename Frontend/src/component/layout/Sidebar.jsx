@@ -91,6 +91,7 @@ function Sidebar() {
       setGeneralSecurityDropdownOpen(false);
       setPaymentPortalDropdownOpen(!isPaymentPortalDropdownOpen);
     }
+
     else if (key === "Community") {
       setFinancialDropdownOpen(false);
       setComplaintDropdownOpen(false);
@@ -100,6 +101,7 @@ function Sidebar() {
       setCommunityDropdownOpen(!isCommunityDropdownOpen);
 
     }
+
     setActiveItem(key);
   };
 
@@ -217,6 +219,7 @@ function Sidebar() {
       icon: <img src={personaldetailsIcon} />,
       path: "/service-and-complaint",
     },
+
     {
       key: "Community",
       label: "Community",
@@ -227,7 +230,7 @@ function Sidebar() {
         { key: "Community-Discussion", label: "Communities Discussion", path: "/Community-Discussion" },
       ],
     },
-    
+
   ];
 
   return (
@@ -292,6 +295,7 @@ function Sidebar() {
                       <span className="ms-2">{item.label}</span>
                     </div>
 
+
                    {
   (item.key === "complaint-tracking" && isComplaintDropdownOpen) ||
   (item.key === "security-management" && isSecurityDropdownOpen) ||
@@ -305,13 +309,16 @@ function Sidebar() {
   )
 }
 
+
                   </div>
                   {(item.key === "complaint-tracking" && isComplaintDropdownOpen) ||
                     (item.key === "security-management" && isSecurityDropdownOpen) ||
                     (item.key === "financialmanagement" && isFinancialDropdownOpen) ||
                     (item.key === "security" && isGeneralSecurityDropdownOpen) ||
+
                     (item.key === "payment-portal" && isPaymentPortalDropdownOpen) ||
                     (item.key === "Community" && isCommunityDropdownOpen) ? (
+
                     <ul className="list-unstyled ms-4">
                       {item.subItems.map((subItem) => (
                         <li key={subItem.key} className="p-2 rounded position-relative">

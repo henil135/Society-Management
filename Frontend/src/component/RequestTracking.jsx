@@ -133,6 +133,7 @@ function RequestTracking() {
     <div className="d-flex flex-column flex-md-row">
 
 
+
   <div className="flex-shrink-0" >
     <Sidebar />
   </div>
@@ -475,6 +476,7 @@ function RequestTracking() {
                 }}>Description</strong>
                 <p style={{ margin: 0 }}>{selectedRequest.description}</p>
               </div>
+
 
 
               <div style={{

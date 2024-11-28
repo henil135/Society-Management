@@ -72,27 +72,28 @@ function TotalBalanceChart() {
     // ]);
 
     const [contacts, setContacts] = useState([]);
-    
 
-    // const [ImportNumber,setImportNumber] = useState({fullName:"",phoneNumber:"",work:""})
-    useEffect(() => {
-        const ViewNumber = async () => {
-            try {
-                const response = await axios.get('http://localhost:5000/api/v2/important-numbers/');
-                if (response.data.success) {
-                    setContacts(response.data.data.contacts); // Ensure this matches the structure of your API response 
-                } else {
-                    console.log('API request failed:', response.data);
-                    setContacts([]);
-                }
-            } catch (error) {
-                console.error('Error fetching important numbers:', error);
-                setContacts([]); // Fallback to an empty array in case of error
-            }
-        };
+  const ViewNumber = async () => {
+    try {
+      // Make a GET request to your backend endpoint
+      const response = await axios.get("http://localhost:5000/api/v2/important-numbers/getnumber");
 
-        ViewNumber(); // Correct function call
-    }, []);
+      // Log and update state with the retrieved data
+      if (response.status === 200) {
+        console.log("API Response:", response.data.data); // Logs the retrieved data
+        setContacts(response.data.data); // Save data in state
+      } else {
+        console.error("Failed to retrieve important numbers:", response.data.message);
+      }
+    } catch (error) {
+      console.error("Error fetching important numbers:", error.message);
+    }
+  };
+
+  // Call ViewNumber once when the component mounts
+  useEffect(() => {
+    ViewNumber();
+  }, []);
 
     const [show, setShow] = useState(false);
 
@@ -108,29 +109,37 @@ function TotalBalanceChart() {
         setEditIndex(null);
         // setContacts()
     };
-
-    // Handle adding or updating a contact
     const onSubmit = async (data) => {
-        const response = await axios.post("http://localhost:5000/api/v2/important-numbers/create", data)
-        const newContact = {
-            name: data.fullName,
-            phone: data.phoneNumber,
-            work: data.work,
+        try {
+            if (editIndex !== null) {
+                // Update an existing contact
+                const contactToEdit = contacts[editIndex];
+                const response = await axios.put(`http://localhost:5000/api/v2/important-numbers/${contactToEdit._id}`, data);
+    
+                if (response.status === 200) {
+                    const updatedContacts = contacts.map((contact, index) =>
+                        index === editIndex ? { ...contact, ...data } : contact
+                    );
+                    setContacts(updatedContacts);
+                    console.log('Number updated successfully:', response.data.message);
+                } else {
+                    console.error('Failed to update number:', response.data.message);
+                }
+            } else {
+                // Add a new contact
+                const response = await axios.post("http://localhost:5000/api/v2/important-numbers/create", data);
+                if (response.status === 200) {
+                    setContacts([...contacts, response.data.data]);
+                    console.log('Number added successfully:', response.data.message);
+                }
+            }
+        } catch (error) {
+            console.error('Error updating/creating number:', error.message);
         }
-        console.log(response.data);
-
-        if (editIndex !== null) {
-            // Update existing contact
-            const updatedContacts = contacts.map((contact, index) =>
-                index === editIndex ? newContact : contact
-            );
-            setContacts(updatedContacts);
-        } else {
-            // Add new contact
-            setContacts([...contacts, newContact]);
-        }
-        handleClose();
+    
+        handleClose(); // Close modal after submission
     };
+    
 
 
 
@@ -159,18 +168,44 @@ function TotalBalanceChart() {
         setShowDeleteModal(true);
     };
 
+    const confirmDelete = async () => {
+        if (deleteIndex !== null) {
+            try {
+                const contactToDelete = contacts[deleteIndex];
+    
+                // API call to delete the contact
+                const response = await axios.delete(`http://localhost:5000/api/v2/important-numbers/${contactToDelete._id}`);
+    
+                if (response.status === 200) {
+                    console.log('Number deleted successfully:', response.data.message);
+    
+                    // Update state to reflect deletion
+                    const updatedContacts = contacts.filter((_, index) => index !== deleteIndex);
+                    setContacts(updatedContacts);
+                } else {
+                    console.error('Failed to delete number:', response.data.message);
+                }
+            } catch (error) {
+                console.error('Error deleting number:', error.message);
+            }
+    
+            // Close delete modal
+            handleCloseDeleteModal();
+        }
+    };
+
     const handleCloseDeleteModal = () => {
         setShowDeleteModal(false);
         setDeleteIndex(null);
     };
 
-    const confirmDelete = () => {
-        if (deleteIndex !== null) {
-            const updatedContacts = contacts.filter((_, i) => i !== deleteIndex);
-            setContacts(updatedContacts);
-        }
-        handleCloseDeleteModal();
-    };
+    // const confirmDelete = () => {
+    //     if (deleteIndex !== null) {
+    //         const updatedContacts = contacts.filter((_, i) => i !== deleteIndex);
+    //         setContacts(updatedContacts);
+    //     }
+    //     handleCloseDeleteModal();
+    // };
 
 
     const [maintenances, setMaintenances] = useState([
@@ -210,48 +245,37 @@ function TotalBalanceChart() {
                         </div>
 
                         <div>
-                            {/* {contacts.map((contact, index) => (
-                                <div>
-                                    <div key={index} className="py-3 rounded-lg d-flex justify-content-between align-items-center shadow-sm ">
-                                        <div>
-                                            <p><strong>Name:</strong> {contact.name}</p>
-                                            <p><strong>Ph Number:</strong> {contact.phone}</p>
-                                            <p><strong>Work:</strong> {contact.work}</p>
-                                        </div>
-                                        <div className='gap-3 d-flex  '>
-                                            <Button onClick={() => handleShowDeleteModal(index)} className="delete-btn fs-5">
-                                                <RiDeleteBin5Fill />
-                                            </Button>
-                                            <Button className="edit-btn fs-5" onClick={() => handleEdit(index)}><MdEditSquare /></Button>
-                                        </div>
-                                    </div>
-
-
-                                    <div className='gap-1'>
-                                        <img src={editIcon} className="text-success me-2" style={{ cursor: "pointer" }} onClick={() => handleEdit(complaint)} />
-                                        <img src={deleteIcon} className="text-danger" style={{ cursor: "pointer" }} onClick={() => handleDelete(index)} />
-                                    </div>
-                                </div>
-                            ))} */}
-                            {contacts.length === 0 ? (
-                                <p>No important numbers available.</p>
-                            ) : (
-                                contacts.map((contact, index) => (
-                                    <div key={index} className="py-3 rounded-lg d-flex justify-content-between align-items-center shadow-sm ">
-                                        <div>
-                                            <p><strong>Name:</strong> {contact.name}</p>
-                                            <p><strong>Ph Number:</strong> {contact.phone}</p>
-                                            <p><strong>Work:</strong> {contact.work}</p>
-                                        </div>
-                                        <div className='gap-3 d-flex  '>
-                                            <Button onClick={() => handleShowDeleteModal(index)} className="delete-btn fs-5">
-                                                <RiDeleteBin5Fill />
-                                            </Button>
-                                            <Button className="edit-btn fs-5" onClick={() => handleEdit(index)}><MdEditSquare /></Button>
-                                        </div>
-                                    </div>
-                                ))
-                            )}
+                            
+                             {contacts.length > 0 ? (
+                contacts.map((contact, index) => (
+                    <div
+                        key={index}
+                        className="py-3 rounded-lg d-flex justify-content-between align-items-center shadow-sm"
+                    >
+                        <div>
+                            <p><strong>Name:</strong> {contact.fullName}</p>
+                            <p><strong>Phone Number:</strong> {contact.phoneNumber}</p>
+                            <p><strong>Work:</strong> {contact.work}</p>
+                        </div>
+                        <div className="gap-3 d-flex">
+                            <Button
+                                onClick={() => handleShowDeleteModal(index)}
+                                className="delete-btn fs-5"
+                            >
+                                <RiDeleteBin5Fill />
+                            </Button>
+                            <Button
+                                className="edit-btn fs-5"
+                                onClick={() => handleEdit(index)}
+                            >
+                                <MdEditSquare />
+                            </Button>
+                        </div>
+                    </div>
+                ))
+            ) : (
+                <p>No important numbers available.</p>
+            )}
                             {/* {contacts.map((contact, index) => (
                                 <div key={index} className="py-3 rounded-lg d-flex justify-content-between align-items-center shadow-sm ">
                                     <div>

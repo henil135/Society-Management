@@ -72,7 +72,7 @@ export default function Signup() {
     // }
     const societySubmit = async (data) => {
         try {
-            const response = await axios.post('http://localhost:5000/api/v1/Registration',data);
+            const response = await axios.post('http://localhost:5000/api/v1/Registration', data);
             console.log(response.data);
             Navigate("/login")
         } catch (error) {
@@ -158,10 +158,10 @@ export default function Signup() {
             {/* Left Side: Image */}
             <div className="signup-img  d-flex flex-column align-items-left" style={{ width: "950px" }}>
 
-                  <div className='stack mt-5 '>
+                <div className='stack mt-5 '>
 
-                <Logo />
-                  </div>
+                    <Logo />
+                </div>
 
                 {/* Center the image vertically in the remaining space */}
                 <div className='d-flex align-items-center justify-content-center flex-grow-1'>
@@ -319,7 +319,7 @@ export default function Signup() {
                                         </option>
                                     ))}
 
-                                <option value="create" className='create-society-btn'>Create Society</option>
+                                <option value="create" className='create-society-btn' onClick={() => setShowForm(true)}>Create Society</option>
                             </select>
                             {errors.select_society && <p className="text-danger">{errors.select_society.message}</p>}
 

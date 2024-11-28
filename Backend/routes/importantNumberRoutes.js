@@ -4,7 +4,7 @@ const router = express.Router();
 
 
 router.post('/create', createImportantNumber);
-router.get('/', getAllImportantNumbers);
+router.get('/getnumber', getAllImportantNumbers);
 router.get('/:id', getImportantNumberById);
 router.put('/:id', EditImportantNumber);
 router.delete('/:id', deleteImportantNumber);
