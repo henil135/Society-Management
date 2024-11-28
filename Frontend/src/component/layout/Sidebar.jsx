@@ -19,7 +19,7 @@ import Logo from "../Logo";
 import HideBgCopy from "../../assets/HideBgCopy.png";
 import BlackImage from '../../assets/Rectangle 1888.png'
 import FrameIcon from '../../Icons/Frame.png'
-
+import ArrowIcon from '../../Icons/arrow-down.png'
 function Sidebar() {
   const location = useLocation();
   const [activeItem, setActiveItem] = useState("");
@@ -30,6 +30,8 @@ function Sidebar() {
   const [isSidebarOpen, setSidebarOpen] = useState(false); // Mobile sidebar toggle state
   const [isMobile, setIsMobile] = useState(window.innerWidth < 576); // Mobile screen check
   const [isPaymentPortalDropdownOpen, setPaymentPortalDropdownOpen] = useState(false);
+  const [isCommunityDropdownOpen, setCommunityDropdownOpen] = useState(false);
+
 
   // Update active item on location change
   useEffect(() => {
@@ -44,6 +46,9 @@ function Sidebar() {
             if (item.key === "security-management") setSecurityDropdownOpen(true);
             if (item.key === "financialmanagement") setFinancialDropdownOpen(true);
             if (item.key === "security") setGeneralSecurityDropdownOpen(true);
+            if (item.key === "payment-portal") setPaymentPortalDropdownOpen(true);
+            if (item.key === "Community") setCommunityDropdownOpen(true);
+
             foundActiveItem = true;
           }
         });
@@ -86,6 +91,17 @@ function Sidebar() {
       setGeneralSecurityDropdownOpen(false);
       setPaymentPortalDropdownOpen(!isPaymentPortalDropdownOpen);
     }
+
+    else if (key === "Community") {
+      setFinancialDropdownOpen(false);
+      setComplaintDropdownOpen(false);
+      setSecurityDropdownOpen(false);
+      setGeneralSecurityDropdownOpen(false);
+      setPaymentPortalDropdownOpen(false);
+      setCommunityDropdownOpen(!isCommunityDropdownOpen);
+
+    }
+
     setActiveItem(key);
   };
 
@@ -203,6 +219,18 @@ function Sidebar() {
       icon: <img src={personaldetailsIcon} />,
       path: "/service-and-complaint",
     },
+
+    {
+      key: "Community",
+      label: "Community",
+      icon: <img src={financialIcon} />,
+      subItems: [
+        { key: "Access", label: "Access Forums", path: "/Access" },
+        { key: "Polls", label: "Polls", path: "/Polls" },
+        { key: "Community-Discussion", label: "Communities Discussion", path: "/Community-Discussion" },
+      ],
+    },
+
   ];
 
   return (
@@ -266,21 +294,31 @@ function Sidebar() {
                       {item.icon}
                       <span className="ms-2">{item.label}</span>
                     </div>
-                    {(item.key === "complaint-tracking" && isComplaintDropdownOpen) ||
-                      (item.key === "security-management" && isSecurityDropdownOpen) ||
-                      (item.key === "financialmanagement" && isFinancialDropdownOpen) ||
-                      (item.key === "security" && isGeneralSecurityDropdownOpen) ||
-                      (item.key === "payment-portal" && isPaymentPortalDropdownOpen) ? (
-                      <FaChevronUp />
-                    ) : (
-                      <FaChevronDown />
-                    )}
+
+
+                   {
+  (item.key === "complaint-tracking" && isComplaintDropdownOpen) ||
+  (item.key === "security-management" && isSecurityDropdownOpen) ||
+  (item.key === "financialmanagement" && isFinancialDropdownOpen) ||
+  (item.key === "security" && isGeneralSecurityDropdownOpen) ||
+  (item.key === "payment-portal" && isPaymentPortalDropdownOpen) ||
+  (item.key === "Community" && isCommunityDropdownOpen) ? (
+    <img src={ArrowIcon}  />
+  ) : (
+    <img src={ArrowIcon} />
+  )
+}
+
+
                   </div>
                   {(item.key === "complaint-tracking" && isComplaintDropdownOpen) ||
                     (item.key === "security-management" && isSecurityDropdownOpen) ||
                     (item.key === "financialmanagement" && isFinancialDropdownOpen) ||
                     (item.key === "security" && isGeneralSecurityDropdownOpen) ||
-                    (item.key === "payment-portal" && isPaymentPortalDropdownOpen) ? (
+
+                    (item.key === "payment-portal" && isPaymentPortalDropdownOpen) ||
+                    (item.key === "Community" && isCommunityDropdownOpen) ? (
+
                     <ul className="list-unstyled ms-4">
                       {item.subItems.map((subItem) => (
                         <li key={subItem.key} className="p-2 rounded position-relative">

@@ -287,7 +287,7 @@ input:focus {
 /* income start */
 
 .dashboard-bg {
-  background: rgba(210, 215, 234, 0.476) !important;
+  background: #F0F5FB !important;
   min-height: 100vh;
 }
 
@@ -915,4 +915,95 @@ input:focus {
   border-radius: 5px;
 }
 
+
+/* poll card */
+.poll-card {
+  background: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.poll-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.poll-author {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.poll-type {
+  font-size: 14px;
+  color: #999;
+  margin: 0;
+}
+
+.poll-points {
+  font-size: 14px;
+}
+
+.poll-question {
+  margin: 16px 0;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.poll-options {
+  margin-bottom: 16px;
+}
+
+.poll-instruction {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.poll-option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.poll-option label {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.poll-progress {
+  background: #eaeaea;
+  border-radius: 4px;
+  height: 8px;
+  width: 100%;
+  margin: 0 10px;
+  position: relative;
+}
+
+.poll-bar {
+  height: 100%;
+  border-radius: 4px;
+}
+
+.poll-bar.yes {
+  background-color: #4caf50;
+}
+
+.poll-bar.no {
+  background-color: #f44336;
+}
+
+.poll-votes {
+  font-size: 14px;
+}
+
+.poll-footer {
+  font-size: 12px;
+  color: #777;
+}
 
