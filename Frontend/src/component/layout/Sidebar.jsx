@@ -291,6 +291,7 @@ function Sidebar() {
                       {item.icon}
                       <span className="ms-2">{item.label}</span>
                     </div>
+
                    {
   (item.key === "complaint-tracking" && isComplaintDropdownOpen) ||
   (item.key === "security-management" && isSecurityDropdownOpen) ||
@@ -303,6 +304,7 @@ function Sidebar() {
     <img src={ArrowIcon} />
   )
 }
+
                   </div>
                   {(item.key === "complaint-tracking" && isComplaintDropdownOpen) ||
                     (item.key === "security-management" && isSecurityDropdownOpen) ||

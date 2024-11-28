@@ -7,6 +7,7 @@ import editIcon from '../Icons/Edit.png';
 import viewICon from '../Icons/view.png';
 import deleteIcon from '../Icons/delete.png';
 import { LuArrowDownSquare } from "react-icons/lu";
+import { jsPDF } from 'jspdf'; 
 
 const ViewInvoice = () => {
 
@@ -36,6 +37,37 @@ const ViewInvoice = () => {
     };
 
     const handleCloseViewModal = () => setShowViewModal(false);
+
+    const handleDownloadInvoice = () => {
+        if (!viewComplaint) return;
+
+        const doc = new jsPDF();
+
+        // Add Title
+        doc.setFontSize(16);
+        doc.text("Maintenance Invoice", 14, 20);
+
+        // Add Invoice Details
+        doc.setFontSize(12);
+        doc.text(`Invoice ID: ${viewComplaint.id}`, 14, 30);
+        doc.text(`Owner Name: ${viewComplaint.name}`, 14, 40);
+        doc.text(`Bill Date: ${viewComplaint.bdate}`, 14, 50);
+        doc.text(`Payment Date: ${viewComplaint.pdate}`, 14, 60);
+        doc.text(`Phone Number: ${viewComplaint.pnumber}`, 14, 70);
+        doc.text(`Email: ${viewComplaint.email}`, 14, 80);
+
+        // Add Maintenance and Pending Amount
+        doc.text(`Maintenance Amount: ₹${viewComplaint.mamt}`, 14, 90);
+        doc.text(`Pending Amount: ₹${viewComplaint.pamt}`, 14, 100);
+        doc.text("Penalty: ₹350.00", 14, 110);
+        doc.text("Grand Total: ₹1850.00", 14, 120);
+
+        // Add Footer Note
+        doc.text("Note: A visual representation of your spending categories.", 14, 140);
+
+        // Save PDF
+        doc.save(`Invoice_${viewComplaint.id}.pdf`);
+    };
 
     return (
         <div className='dashboard-bg w-100'>
@@ -178,7 +210,7 @@ const ViewInvoice = () => {
 
                                                 {/* Download Button */}
                                                 <div className="text-center mt-2 mb-2">
-                                                    <Button variant="warning" className="px-4 save maintainance-income-btn-bg w-100">
+                                                    <Button variant="warning" className="px-4 save maintainance-income-btn-bg w-100" onClick={handleDownloadInvoice}>
                                                         <LuArrowDownSquare className='text-light me-1' />
                                                         Download Invoice
                                                     </Button>

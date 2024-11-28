@@ -95,18 +95,18 @@ function FinancialManagementOtherIncome() {
 
     return (
         <div className="d-flex flex-column flex-md-row">
-    <div className="flex-shrink-0" >
-      <Sidebar />
-    </div>
-        <div className='dashboard-bg ' style={{ width:"1920px"}} >
-            <Navbar />
+            <div className="flex-shrink-0" >
+                <Sidebar />
+            </div>
+            <div className='dashboard-bg ' style={{ width: "1920px" }} >
+                <Navbar />
 
-            <div className='stickyHeader'>
+                <div className='stickyHeader'>
 
-                <div className='income' style={{marginLeft:"300px", width:"1608px"}}>
+                    <div className='income' style={{ marginLeft: "300px", width: "1608px" }}>
 
-                    <div className='row p-4'>
-                        
+                        <div className='row p-4'>
+
                             <div className="table-responsive rounded pb-3">
 
                                 <Link to="/Financial-Maintenance" className='btn btn-sm  maintainance-income-btn  maintainance-income-btn-withoutbg'>Maintenance</Link>
@@ -119,7 +119,7 @@ function FinancialManagementOtherIncome() {
                                     <div className='d-flex justify-content-between align-items-center  p-3 py-1'>
                                         <h3 className=' mb-0  financial-income-title'>Other Income</h3>
 
-                                        <div style={{marginBottom:"20px"}}>
+                                        <div style={{ marginBottom: "20px" }}>
                                             <button className='set-maintainance-btn d-flex align-items-center other-income-btn p-3' onClick={handleShow}> Create Other Income </button>
                                         </div>
                                     </div>
@@ -246,7 +246,7 @@ function FinancialManagementOtherIncome() {
                                                                     >
                                                                         View
                                                                     </button>
-                                                                    
+
                                                                     <button
                                                                         className="dropdown-item"
                                                                         onClick={() => handleShowDeleteModal(index)}
@@ -256,9 +256,9 @@ function FinancialManagementOtherIncome() {
 
                                                                     {/* delete modal */}
                                                                     <Modal className='custom-modal' show={showDeleteModal} onHide={handleCloseDeleteModal} centered>
-                                                                        
-                                                                            <Modal.Title className='Modal-Title px-3 pt-3'>Delete Number?</Modal.Title>
-                                                                        
+
+                                                                        <Modal.Title className='Modal-Title px-3 pt-3'>Delete Number?</Modal.Title>
+
                                                                         <Modal.Body>
                                                                             <p className='Form-p mb-0'>Are you sure you want to delete this number?</p>
                                                                         </Modal.Body>
@@ -306,7 +306,7 @@ function FinancialManagementOtherIncome() {
                 </div>
             </div>
         </div>
-       
+
     )
-} 
+}
 export default FinancialManagementOtherIncome;
