@@ -40,6 +40,7 @@ import SecurityProtocolsResident from './component/SecurityProtocolsResident';
 import ViewInvoice from './component/ViewInvoice.jsx';
 
 import OtherIncomeInvoices from './component/OtherIncomeInvoice.jsx';
+import Polls from './component/Polls.jsx';
 
 
 function App() {
@@ -83,8 +84,8 @@ function App() {
 
 
           <Route path='/Resident-Protocols' element={<SecurityProtocolsResident />} />
-          <Route path='view-invoice' element={<ViewInvoice/>} />
-
+          <Route path='/view-invoice' element={<ViewInvoice/>} />
+          <Route path='/Polls' element={<Polls/>} />
 
         </Routes>
       </BrowserRouter>
