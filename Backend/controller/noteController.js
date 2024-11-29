@@ -3,10 +3,10 @@ const Note = require('../models/noteModel'); // Adjust path as necessary
 // Create a new note
 exports.createNote = async (req, res) => {
     try {
-        const { Title, Description, Date, role } = req.body;
+        const { title, des, date, role } = req.body;
 
         // Check if all fields are provided
-        if (!Title || !Description || !Date ) {
+        if (!title || !des || !date ) {
             return res.status(400).json({
                 success: false,
                 message: "All fields (Title, Description, Date) are required",
@@ -15,9 +15,9 @@ exports.createNote = async (req, res) => {
 
         // Create a new note document
         const newNote = new Note({
-            Title,
-            Description,
-            Date,
+            title,
+            des,
+            date,
             role: role || 'resident',
         });
 
@@ -85,27 +85,27 @@ exports.getNoteById = async (req, res) => {
 // Edit a note by ID
 exports.updateNote = async (req, res) => {
     try {
-        const { Title, Description, Date, role } = req.body;
+        const { title, des, date, role } = req.body;
 
         const updatedNote = await Note.findByIdAndUpdate(
             req.params.id,
             {
-                Title,
-                Description,
-                Date,
+                title,
+                des,
+                date,
                 role: role || 'resident',
             },
-            { new: true } // Return the updated document
+            { new: true }
         );
         if (!updatedNote) {
             return res.status(404).json({
                 success: false,
-                message: "Note not found",
+                message: "Note is not found",
             });
         }
         return res.json({
             success: true,
-            message: "Note updated successfully",
+            message: "Note updated successfully.....",
             note: updatedNote,
         });
     } catch (error) {

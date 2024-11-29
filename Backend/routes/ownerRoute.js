@@ -11,6 +11,5 @@ router.post("/addowner", upload.fields([
     { name: 'Owner_image', maxCount: 1 }
 ]),addOwnerData);
 
-
 router.get("/viewowner",GetAllOwner)
 module.exports=router;

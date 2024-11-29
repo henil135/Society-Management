@@ -2,7 +2,7 @@ const Owner = require('../models/ownerModel');
 const cloudinary = require('../utils/cloudinary'); 
 const fs=require("fs")
 const crypto= require("crypto");
-const senData = require('../config/mailer');
+const sendOtpUi = require('../config/mailer');
 const { hash } = require('../utils/hashpassword');
 exports.addOwnerData = async (req, res) => {
     try {
@@ -82,7 +82,7 @@ exports.addOwnerData = async (req, res) => {
         await newOwner.save();
         
 
-        await senData(
+        await sendOtpUi(
             newOwner.Email_address,
             "Registration Successful - Login Details",
             `Dear ${newOwner.Full_name},\n\nYou have successfully registered as a resident. Your login details are as follows:\n\nUsername: ${newOwner.Email_address}\nPassword: <b> ${password}</b>\n\nPlease keep this information secure.\n\nBest Regards,\nManagement`

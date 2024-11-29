@@ -26,7 +26,6 @@ function Announcement() {
             //         // Description:"",
             //         // Announcement_Date:"",
             //         // Announcement_Time:"",
-
         ]
     );
 
@@ -37,22 +36,18 @@ function Announcement() {
     //     Announcement_Time:""
     // });
     useEffect(() => {
-        const ViewAnnouncement = async () => {
-            try {
-                const response = await axios.get('http://localhost:5000/api/v2/annoucement/');
-                if (response.data.success) {
-                    setNote(response.data.data); // Extract the data array
-                } else {
-                    console.log('API request failed:', response.data);
-                    setNote([]);
-                }
-            } catch (error) {
-                console.error('Error fetching societies:', error);
-                setNote([]);
-            }
-        };
-        ViewAnnouncement();
-    }, []);
+        fetchData();
+    }, []);  // This will run when the component mounts
+
+    const fetchData = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/api/v2/annoucement/');
+            console.log(response.data);  // Check the data in console
+            setNote(response.data);  // Set the state with fetched data
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
 
 
     const [show, setShow] = useState(false);
@@ -78,10 +73,9 @@ function Announcement() {
             setNote(updatedNotes);
         } else {
             setNote([...note, { id: note.length + 1, ...data }]);
-        }
-        handleClose();
-    };
 
+        }
+    };
 
     const [dropdownIndex, setDropdownIndex] = useState(null);
 
@@ -202,12 +196,14 @@ function Announcement() {
                                                             <input type="text" className="form-control Form-Control"
                                                                 placeholder='Enter Name' {...register('Announcement_Title', { required: true })} />
 
+
                                                             {errors.Announcement_Title && <small className="text-danger">Title is required</small>}
                                                         </div>
                                                         <div className="mb-3">
                                                             <label className='Form-Label'>Description <span className='text-danger'>*</span></label>
                                                             <input type="text" className="form-control Form-Control" placeholder='Enter Description' {...register('Description', { required: true })} />
                                                             {errors.Description && <small className="text-danger">Description is required</small>}
+
 
                                                         </div>
                                                         <div className='d-flex justify-content-between'>
@@ -398,11 +394,13 @@ function Announcement() {
                                                         <h6 className="card-body-title mb-0">Announcement Date</h6>
 
                                                         <span className="card-body-title text-dark mb-0 fw-medium">{val.Announcement_Date}</span>
+
                                                     </div>
                                                     <div className="d-flex justify-content-between align-items-center mb-2">
                                                         <h6 className="card-body-title mb-0">Announcement Time</h6>
                                                         <span className="card-body-title text-dark mb-0 fw-medium">{val.Announcement_Time}</span>
                                                     </div>
+
                                                     <h6 className="card-body-title mb-2">Description</h6>
                                                     <p className="card-text card-des fw-medium">{val.Description}</p>
 
