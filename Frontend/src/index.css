@@ -223,7 +223,7 @@ input[type=checkbox]:focus {
 
 .notification-dropdown {
   border-radius: 6px;
-  max-height: 250px;
+  max-height: 741px;
   overflow-y: auto;
   font-size: 0.9rem;
 }
@@ -1007,3 +1007,63 @@ input:focus {
   color: #777;
 }
 
+/* community discussion */
+
+.ask-que-btn{
+  background: linear-gradient(90deg, #FE512E 0%, #F09619 100%);
+  color: white !important;
+  padding: 12px 14px !important;
+  width: 148px !important;
+  height: 51px !important;
+  border: none !important;
+  font-weight: 600 !important;
+}
+
+.community-card{
+  background: rgba(86, 120, 233, 0.1);
+}
+
+.community-votes{
+  color: rgba(167, 167, 167, 1);
+}
+
+.community-que{
+  font-size: 16px;
+  font-weight: 500 !important;
+}
+
+.community-ans{
+  font-weight: 300;
+  color: rgba(167, 167, 167, 1);
+}
+
+.community-view{
+  font-size: 14px !important;
+  font-weight: 400;
+  color: rgba(79, 79, 79, 1);
+  width: 61px;
+}
+
+.community-icon{
+  font-size: 16px;
+}
+
+.community-que-input::placeholder{
+  color: rgba(167, 167, 167, 1) !important;
+  font-size: 16px !important;
+}
+
+.community-que-input{
+  border: 1px solid rgba(86, 120, 233, 1) !important;
+  box-shadow: 0px 0px 0px 3px rgba(209, 219, 255, 1);
+}
+
+.good-question-title{
+  color: rgba(79, 79, 79, 1);
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.good-question-p{
+  font-weight: 400;
+}

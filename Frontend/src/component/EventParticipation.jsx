@@ -66,7 +66,7 @@ const EventParticipation = () => {
                               <tr key={index} className='bg-light'>
                                 <td><img src={val.img} className='me-2' height={40} />{val.complainer}</td>
                                 <td>{val.des}</td>
-                                <td><Button className='event-time-btn border-0 text-dark mt-0'>{val.time}</Button></td>
+                                <td ><Button className='event-time-btn border-0 text-dark mt-0'>{val.time}</Button></td>
 
                                 <td>{val.date}</td>
 

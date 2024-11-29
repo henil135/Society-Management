@@ -9,7 +9,11 @@ import { Button, Modal, Form } from 'react-bootstrap';
 import { MdEditSquare } from "react-icons/md";
 import { FaEdit, FaPlusSquare } from "react-icons/fa";
 import Sidebar from "../component/layout/Sidebar";
+
 import axios from "axios"
+
+
+import { LuImagePlus } from 'react-icons/lu'
 
 import { FaCamera, FaEye, FaTrash } from 'react-icons/fa6';
 
@@ -167,6 +171,7 @@ function FinancialManagementExp() {
                     <div className='d-flex justify-content-between align-items-center p-3 pt-1'>
                       <h3 className=' mb-0  financial-income-title'>Add Expenses Details</h3>
 
+
                       <div>
                         <button className='set-maintainance-btn d-flex align-items-center p-2' onClick={handleShow}> <FaPlusSquare className='me-2' /> Add New Expenses details</button>
                       </div>
@@ -220,8 +225,9 @@ function FinancialManagementExp() {
                           }
                         </tbody>
                       </table>
+
                     </div>
-                  </div>
+
 
                   {/* Add/Edit Modal */}
                   <Modal show={show} onHide={handleClose} centered className="custom-modal">
@@ -365,16 +371,44 @@ function FinancialManagementExp() {
                         <div>
 
 
+
                           <p className='view-strong text-dark'><strong className='view-strong'>Title</strong> <br />{viewComplaint.Title}</p>
 
 
-                          <p className='view-strong text-dark'><strong className='view-strong'>Description</strong> <br />{viewComplaint.Description}</p>
+
+                        <div className="d-flex justify-content-between">
+                          <Button variant="secondary" onClick={handleClose} className="btn mt-2 cancle">
+                            Cancel
+                          </Button>
+                          <Button variant="primary" type="submit" className='btn mt-2 save'>
+                            {editIndex !== null ? 'Update' : 'Add'}
+                          </Button>
+                        </div>
+                      </Form>
+                    </Modal.Body>
+                  </Modal>
+
+                  {/* View Modal */}
+                  <Modal show={showViewModal} onHide={handleCloseViewModal} centered>
+                    <Modal.Header closeButton>
+                      <Modal.Title>View Complain</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      {viewComplaint && (
+                        <div>
+
+
+                          <p className='view-strong text-dark'><strong className='view-strong'>Title</strong> <br />{viewComplaint.title}</p>
+
+
+                          <p className='view-strong text-dark'><strong className='view-strong'>Description</strong> <br />{viewComplaint.des}</p>
 
                           <div className='d-flex'>
-                            <p className='view-strong text-dark'><strong className='view-strong'>Date</strong> <br />{viewComplaint.Date}</p>
+                            <p className='view-strong text-dark'><strong className='view-strong'>Date</strong> <br />{viewComplaint.date}</p>
 
-                            <p className='view-strong text-dark ms-5'><strong className='view-strong'>Amount</strong> <br />{viewComplaint.Amount}</p>
+                            <p className='view-strong text-dark ms-5'><strong className='view-strong'>Amount</strong> <br />{viewComplaint.amt}</p>
                           </div>
+
 
                           <p className='view-strong text-dark'><strong className='view-strong'>Bill</strong> <br /></p>
 

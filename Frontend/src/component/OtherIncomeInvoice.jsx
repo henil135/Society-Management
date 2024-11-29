@@ -8,7 +8,7 @@ import visa from '../assets/visa-logo.png'
 import mastercard from '../assets/mastercard-logo.png'
 import cash from '../assets/cash-logo.png'
 import { LuArrowDownSquare } from "react-icons/lu";
-import { jsPDF } from 'jspdf'; 
+import { jsPDF } from 'jspdf';
 
 
 const OtherIncomeInvoices = () => {
@@ -102,8 +102,6 @@ const OtherIncomeInvoices = () => {
 
                             <div className='container-fluid stickyHeader' >
 
-
-
                                 <div className='row py-3 card-row ' >
                                     <div className='pe-0 bg-light'>
                                         <div className='d-flex justify-content-between align-items-center py-3 px-3'>
@@ -146,14 +144,14 @@ const OtherIncomeInvoices = () => {
                                                                     </div>
 
                                                                     <div className="row">
-                                                                    <div className="col-6">
+                                                                        <div className="col-6">
                                                                             <strong className='view-strong'>Event Date:</strong>
                                                                             <p>6549873521</p>
                                                                         </div>
-                                                                    <div className="col-6">
-                                                                        <strong className='view-strong'>Phone Number:</strong>
-                                                                        <p>6549873521</p>
-                                                                    </div>
+                                                                        <div className="col-6">
+                                                                            <strong className='view-strong'>Phone Number:</strong>
+                                                                            <p>6549873521</p>
+                                                                        </div>
                                                                     </div>
                                                                     <div className="col-12">
                                                                         <strong className='view-strong'>Email:</strong>

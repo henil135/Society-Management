@@ -4,12 +4,42 @@ import { FiSearch } from "react-icons/fi";
 import avtar from '../assets/Avatar.png';
 import { FaBell } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import notification1 from '../assets/Ellipse 1092.png'
+import notification2 from '../assets/Group 1000004305.png'
+import notification3 from '../assets/Group 1000004173.png'
+import { IoCheckmarkDoneSharp } from "react-icons/io5";
 
 function Header() {
     const [notifications, setNotifications] = useState([
-        'New habit reminder',
-        'Goal achieved!',
-        'Don\'t forget to update your progress'
+        {
+            img: notification1,
+            title: 'Evelyn Harper (A-101)',
+            dateTime: 'Monday 11:41 AM',
+            content: 'Evelyn Harper gave a fund of 1000 rupees for Navratri.',
+            timestamp: '32 Minutes ago'
+        },
+        {
+            img: notification2,
+            title: 'Evelyn Harper (A-101)',
+            dateTime: 'Tuesday 11:41 AM',
+            content: 'Evelyn Harper gave a Maintenance of 1000 rupees. ',
+            timestamp: '2 days ago'
+        },
+        {
+            img: notification3,
+            title: 'Ganesh Chaturthi (A- 101)',
+            dateTime: 'Saturday 11:41 AM',
+            amt: 'Per Person Amount : ₹ 1,500',
+            content: 'The celebration of Ganesh Chaturthi involves the installation of clay idols of Lord Ganesa in  OurResident. ',
+            timestamp: '2 days ago'
+        },
+        {
+            img: notification2,
+            title: 'Update Maintenance',
+            mamt: '₹ 1,500',
+            pamt: '₹ 350',
+            timestamp: '32 Minutes ago'
+        },
     ]);
     const [showNotifications, setShowNotifications] = useState(false);
 
@@ -19,8 +49,16 @@ function Header() {
     };
 
     return (
-        <div className="header "  style={{ width:"1900px",position:"fixed",zIndex:"999",top:"0px" }}>
-            <Navbar expand="lg" className="navbar bg-white border-bottom" style={{ height: "109px"}}>
+        <div
+            className="header"
+            style={{
+                width: "100%",
+                position: "fixed",
+                zIndex: 999,
+                top: 0,
+            }}
+        >
+            <Navbar expand="lg" className="navbar bg-white border-bottom" style={{ height: "109px" }}>
                 <Container fluid>
                     {/* Search Bar for Large Screens */}
                     <Navbar.Brand className="d-none d-lg-block w-20 ms-4">
@@ -61,13 +99,14 @@ function Header() {
                         {/* Notification Dropdown */}
                         {showNotifications && (
                             <div
-                                className="notification-dropdown bg-white border shadow-sm p-2 rounded"
+                                className="notification-dropdown bg-white border shadow-sm px-3 py-2 rounded"
                                 style={{
                                     position: 'absolute',
-                                    right: '15px',
-                                    top: '70px',
+                                    right: '150px',
+                                    top: '90px',
                                     width: '280px',
-                                    zIndex: 1000
+                                    zIndex: 1000,
+                                    width: '540px',
                                 }}
                             >
                                 <div className="d-flex justify-content-between align-items-center mb-2">
@@ -76,7 +115,7 @@ function Header() {
                                         variant="link"
                                         size="sm"
                                         onClick={clearNotifications}
-                                        className="text-primary"
+                                        className="text-primary mt-0 text-decoration-none"
                                     >
                                         Clear All
                                     </Button>
@@ -84,8 +123,35 @@ function Header() {
                                 <ul className="list-unstyled">
                                     {notifications.length > 0 ? (
                                         notifications.map((notification, index) => (
-                                            <li key={index} className="border-bottom py-2 text-muted">
-                                                {notification}
+                                            <li
+                                                key={index}
+                                                className="border-bottom text-dark"
+                                            >
+                                                <div className='d-flex'>
+                                                    <div className='pe-2'>
+                                                        <img src={notification.img} />
+                                                    </div>
+                                                    <div>
+                                                        <strong>{notification.title}</strong>
+                                                        <br />
+                                                        <small className="text-muted">
+                                                            {notification.dateTime}
+                                                        </small>
+                                                        <p className='mb-0'>{notification.amt}</p>
+                                                        <p className="mb-0">{notification.content}</p>
+
+
+                                                    </div>
+                                                </div>
+                                                <div className='d-flex align-items-end justify-content-between'>
+                                                    <div className='mx-5 mb-2'>
+                                                        <Button className='me-3 mt-2 text-decoration-none bg-light text-dark' style={{ border: '1px solid rgba(211, 211, 211, 1)' }}>Accept</Button>
+                                                        <Button className='text-decoration-none mt-2'>Decline</Button>
+                                                    </div>
+                                                    <div className='mb-2'>
+                                                        <small className="text-muted d-flex align-items-center">{notification.timestamp}<IoCheckmarkDoneSharp className='ms-1' /></small>
+                                                    </div>
+                                                </div>
                                             </li>
                                         ))
                                     ) : (
@@ -97,7 +163,10 @@ function Header() {
 
                         {/* User Profile */}
                         <div className="d-flex align-items-center">
-                            <Link to="/profile" className="d-flex align-items-center text-decoration-none">
+                            <Link
+                                to="/profile"
+                                className="d-flex align-items-center text-decoration-none"
+                            >
                                 <img
                                     src={avtar}
                                     alt="User"

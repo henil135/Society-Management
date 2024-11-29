@@ -17,16 +17,16 @@ import AvatarImg from '../assets/Avatar.png';
 import viewicon from '../Icons/view.png'
 
 
- function FinancialManagementIncome() {
-    const navigate = useNavigate()
+function FinancialManagementIncome() {
+  const navigate = useNavigate()
 
-    const [maintenance, setMaintenance] = useState([
-      { img: AvatarImg, name: 'Evelyn Harper', wing: 'A', Unumber: '1001', date: '01/02/2024', status: 'Tenant', Pnumber: '92524 34522', amt: '₹ 1000', penalty: '--', status1: 'Pending', payment: 'Online' },
-      { img: AvatarImg, name: 'Evelyn', wing: 'B', Unumber: '1002', date: '11/02/2024', status: 'Owner', Pnumber: '92524 12365', amt: '₹ 1000', penalty: '250', status1: 'Done', payment: 'Cash' },
-      { img: AvatarImg, name: 'Evelyn Harper', wing: 'A', Unumber: '1001', date: '01/02/2024', status: 'Tenant', Pnumber: '92524 34522', amt: '₹ 1000', penalty: '--', status1: 'Pending', payment: 'Online' },
-      { img: AvatarImg, name: 'Evelyn', wing: 'B', Unumber: '1002', date: '11/02/2024', status: 'Owner', Pnumber: '92524 12365', amt: '₹ 1000', penalty: '250', status1: 'Done', payment: 'Cash' },
-      { img: AvatarImg, name: 'Evelyn Harper', wing: 'A', Unumber: '1001', date: '01/02/2024', status: 'Tenant', Pnumber: '92524 34522', amt: '₹ 1000', penalty: '--', status1: 'Pending', payment: 'Online' },
-      
+  const [maintenance, setMaintenance] = useState([
+    { img: AvatarImg, name: 'Evelyn Harper', wing: 'A', Unumber: '1001', date: '01/02/2024', status: 'Tenant', Pnumber: '92524 34522', amt: '₹ 1000', penalty: '--', status1: 'Pending', payment: 'Online' },
+    { img: AvatarImg, name: 'Evelyn', wing: 'B', Unumber: '1002', date: '11/02/2024', status: 'Owner', Pnumber: '92524 12365', amt: '₹ 1000', penalty: '250', status1: 'Done', payment: 'Cash' },
+    { img: AvatarImg, name: 'Evelyn Harper', wing: 'A', Unumber: '1001', date: '01/02/2024', status: 'Tenant', Pnumber: '92524 34522', amt: '₹ 1000', penalty: '--', status1: 'Pending', payment: 'Online' },
+    { img: AvatarImg, name: 'Evelyn', wing: 'B', Unumber: '1002', date: '11/02/2024', status: 'Owner', Pnumber: '92524 12365', amt: '₹ 1000', penalty: '250', status1: 'Done', payment: 'Cash' },
+    { img: AvatarImg, name: 'Evelyn Harper', wing: 'A', Unumber: '1001', date: '01/02/2024', status: 'Tenant', Pnumber: '92524 34522', amt: '₹ 1000', penalty: '--', status1: 'Pending', payment: 'Online' },
+
   ]);
 
 
@@ -50,66 +50,66 @@ import viewicon from '../Icons/view.png'
 
   const [showAddMaintenanceModal, setShowAddMaintenanceModal] = useState(false);
 
-  const handleShowAddMaintenanceModal = () =>{  
+  const handleShowAddMaintenanceModal = () => {
     setShowSetMaintenanceModal(false);
     setShowAddMaintenanceModal(true)
-}
+  }
   const handleCloseAddMaintenanceModal = () => setShowAddMaintenanceModal(false);
 
-  
- 
+
+
 
   return (
     <div className="d-flex flex-column flex-md-row">
-    <div className="flex-shrink-0" >
-      <Sidebar />
-    </div>
-    <div className='card-row dashboard-bg '  style={{ width:"1920px"}}>
-      <Navbar />
+      <div className="flex-shrink-0" >
+        <Sidebar />
+      </div>
+      <div className='card-row dashboard-bg ' style={{ width: "1920px" }}>
+        <Navbar />
 
-      <div className='stickyHeader' style={{marginLeft:"290px"}}>
+        <div className='stickyHeader' style={{ marginLeft: "290px" }}>
 
-        <div className='container-fluid mt-2 p-3'  style={{marginLeft:"30px"}}>
+          <div className='container-fluid mt-2 p-3' style={{ marginLeft: "30px" }}>
 
-          <div className='row justify-content-between align-items-center mb-3 pt-2 bg-light '  style={{marginRight:"40px",borderRadius:"8px"}}>
-          <div className="col-lg-8 col-md-12 d-flex flex-wrap" >
-            {/* Maintenance Amount Card */}
-            <div className="col-lg-4 col-md-6 col-sm-12 py-2 px-1 " > 
-              <div className="card border-0 financial-amt-card-shadow" >
-                <div className="card-body d-flex align-items-center">
-                  <img src={incomeRactangle} width={8} className="me-2" alt="Icon" />
-                  <div>
-                    <h6 className="card-subtitle mb-1">Maintenance Amount</h6>
-                    <p className="mb-0">₹ 0</p>
+            <div className='row justify-content-between align-items-center mb-3 pt-2 bg-light ' style={{ marginRight: "40px", borderRadius: "8px" }}>
+              <div className="col-lg-8 col-md-12 d-flex flex-wrap" >
+                {/* Maintenance Amount Card */}
+                <div className="col-lg-4 col-md-6 col-sm-12 py-2 px-1 " >
+                  <div className="card border-0 financial-amt-card-shadow" >
+                    <div className="card-body d-flex align-items-center">
+                      <img src={incomeRactangle} width={8} className="me-2" alt="Icon" />
+                      <div>
+                        <h6 className="card-subtitle mb-1">Maintenance Amount</h6>
+                        <p className="mb-0">₹ 0</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Penalty Amount Card */}
+                <div className="col-lg-4 col-md-6 col-sm-12 py-2 px-1" >
+                  <div className="card border-0 financial-amt-card-shadow">
+                    <div className="card-body d-flex align-items-center">
+                      <img src={balanceRactangle} width={8} className="me-2" alt="Icon" />
+                      <div>
+                        <h6 className="card-subtitle mb-1">Penalty Amount</h6>
+                        <p className="mb-0">₹ 0</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            {/* Penalty Amount Card */}
-            <div className="col-lg-4 col-md-6 col-sm-12 py-2 px-1" >
-              <div className="card border-0 financial-amt-card-shadow">
-                <div className="card-body d-flex align-items-center">
-                  <img src={balanceRactangle} width={8} className="me-2" alt="Icon" />
-                  <div>
-                    <h6 className="card-subtitle mb-1">Penalty Amount</h6>
-                    <p className="mb-0">₹ 0</p>
-                  </div>
-                </div>
+              {/* Set Maintenance Button */}
+              <div className="col-auto" style={{ marginBottom: "20px", marginRight: "20px" }}>
+                <button
+                  className="btn btn-primary set-maintainance-btn border-0 py-3 px-3"
+                  onClick={handleShowSetMaintenanceModal}
+                >
+                  Set Maintenance
+                </button>
               </div>
             </div>
-          </div>
-
-          {/* Set Maintenance Button */}
-          <div className="col-auto" style={{marginBottom:"20px",marginRight:"20px"}}>
-            <button
-              className="btn btn-primary set-maintainance-btn border-0 py-3 px-3"
-              onClick={handleShowSetMaintenanceModal}
-            >
-              Set Maintenance
-            </button>
-          </div>
-        </div>
 
             {/* Set Maintenance Modal */}
             <Modal show={showSetMaintenanceModal} className='custom-modal' onHide={handleCloseSetMaintenanceModal} centered>
@@ -160,15 +160,15 @@ import viewicon from '../Icons/view.png'
               <Modal.Body>
                 <Form>
                   <div className='d-flex' >
-                  <Form.Group controlId="formName" className='me-3'>
-                    <Form.Label className='Form-Label'>Maintenance Amount</Form.Label>
-                    <Form.Control className='Form-Control' type="text" placeholder="₹ 0000" required />
-                  </Form.Group>
+                    <Form.Group controlId="formName" className='me-3'>
+                      <Form.Label className='Form-Label'>Maintenance Amount</Form.Label>
+                      <Form.Control className='Form-Control' type="text" placeholder="₹ 0000" required />
+                    </Form.Group>
 
-                  <Form.Group controlId="formName">
-                    <Form.Label className='Form-Label'>Penalty Amount</Form.Label>
-                    <Form.Control className='Form-Control' type="text" placeholder="₹ 0000" required />
-                  </Form.Group>
+                    <Form.Group controlId="formName">
+                      <Form.Label className='Form-Label'>Penalty Amount</Form.Label>
+                      <Form.Control className='Form-Control' type="text" placeholder="₹ 0000" required />
+                    </Form.Group>
                   </div>
 
                   <Form.Group controlId="formUnit">
@@ -194,205 +194,205 @@ import viewicon from '../Icons/view.png'
           </div>
 
           <div className='row px-3 pb-3'  >
-              <div className="table-responsive ">
+            <div className="table-responsive ">
 
-              <Link to="/Financial-Maintenance" className="btn btn-sm maintainance-income-btn maintainance-income-btn-bg" style={{marginLeft:"15px"}}>Maintenance</Link>
-
-
-                <Link to="/Other-Income" className='btn btn-sm  maintainance-income-btn maintainance-income-btn-withoutbg'>Other Income</Link>
-
-                <div className='bg-light' style={{width:"1570px",marginLeft:"15px",borderRadius:"8px"}}>
-                  <h3 className=' mb-0 py-3 ps-2 financial-income-title'>Maintenance  Details</h3>
-                  <div className='px-3 financial-maintainance-table '>
-                    <table className="table ">
-
-                      <thead className='table-primary '>
-                        <tr >
-                          <th scope="col">Name</th>
-                          <th scope="col">Unit Number</th>
-                          <th scope="col" className='text-center'>Date</th>
-                          <th scope="col" className='text-center'>Status</th>
-                          <th scope="col" className='text-center'>Phone Number</th>
-                          <th scope="col">Amount</th>
-                          <th scope="col" className='text-center'>Penalty</th>
-                          <th scope="col" className='text-center'>Status</th>
-                          <th scope="col" className='text-center'>Payment</th>
-                          <th scope="col">Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {
-                          maintenance.map((val, index) => {
-                            return (
-                              <tr key={index} className='bg-light'  >
-
-                                <td className='financial-Pnumber'><img src={val.img} className='me-2' height={40} />{val.name}</td>
+              <Link to="/Financial-Maintenance" className="btn btn-sm maintainance-income-btn maintainance-income-btn-bg" style={{ marginLeft: "15px" }}>Maintenance</Link>
 
 
-                                <td  className='financial-Pnumber'><span className='wing-name'>{val.wing}</span> {val.Unumber}</td>
+              <Link to="/Other-Income" className='btn btn-sm  maintainance-income-btn maintainance-income-btn-withoutbg'>Other Income</Link>
 
-                                <td style={{ textAlign:"center" }} className='financial-Pnumber'>{val.date}</td>
+              <div className='bg-light' style={{ width: "1570px", marginLeft: "15px", borderRadius: "8px" }}>
+                <h3 className=' mb-0 py-3 ps-2 financial-income-title'>Maintenance  Details</h3>
+                <div className='px-3 financial-maintainance-table '>
+                  <table className="table ">
 
-                                <td
+                    <thead className='table-primary '>
+                      <tr >
+                        <th scope="col">Name</th>
+                        <th scope="col">Unit Number</th>
+                        <th scope="col" className='text-center'>Date</th>
+                        <th scope="col" className='text-center'>Status</th>
+                        <th scope="col" className='text-center'>Phone Number</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col" className='text-center'>Penalty</th>
+                        <th scope="col" className='text-center'>Status</th>
+                        <th scope="col" className='text-center'>Payment</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {
+                        maintenance.map((val, index) => {
+                          return (
+                            <tr key={index} className='bg-light'  >
+
+                              <td className='financial-Pnumber'><img src={val.img} className='me-2' height={40} />{val.name}</td>
+
+
+                              <td className='financial-Pnumber'><span className='wing-name'>{val.wing}</span> {val.Unumber}</td>
+
+                              <td style={{ textAlign: "center" }} className='financial-Pnumber'>{val.date}</td>
+
+                              <td
+                                style={{
+
+                                }}
+                              >
+                                <span className='financial-status-btn' style={{
+                                  backgroundColor: val.status === 'Tenant' ? 'rgba(255, 241, 248, 1)' : 'rgba(241, 240, 255, 1)',
+                                  color: val.status === 'Tenant' ? 'rgba(236, 72, 153, 1)' : 'rgba(79, 70, 229, 1)',
+                                }}>
+                                  {val.status === 'Tenant' ? <FaUser className='me-1' style={{ fontSize: '16px' }} /> : <BiSolidUserPin className='me-1' style={{ fontSize: '16px' }} />}
+                                  {val.status}
+                                </span>
+                              </td>
+
+
+                              <td style={{ textAlign: "center" }} className='financial-Pnumber'>{val.Pnumber}</td>
+
+                              <td className='amt'>{val.amt}</td>
+
+                              <td style={{ textAlign: "center" }}>
+                                <span
+                                  className='financial-penalty-btn btn btn-sm r'
                                   style={{
-                                    
+                                    backgroundColor: val.penalty === '--' ? 'rgba(246, 248, 251, 1)' : 'rgba(231, 76, 60, 1)',
+                                    color: val.penalty === '--' ? 'rgba(79, 79, 79, 1)' : 'rgba(255, 255, 255, 1)',
                                   }}
                                 >
-                                  <span className='financial-status-btn' style={{
-                                    backgroundColor: val.status === 'Tenant' ? 'rgba(255, 241, 248, 1)' : 'rgba(241, 240, 255, 1)',
-                                    color: val.status === 'Tenant' ? 'rgba(236, 72, 153, 1)' : 'rgba(79, 70, 229, 1)',
-                                  }}>
-                                    {val.status === 'Tenant' ? <FaUser className='me-1' style={{ fontSize: '16px' }} /> : <BiSolidUserPin className='me-1' style={{ fontSize: '16px' }} />}
-                                    {val.status}
-                                  </span>
-                                </td>
+                                  {val.penalty}
+                                </span>
+                              </td>
 
+                              <td style={{ textAlign: "center" }} >
+                                <span
+                                  className='financial-status-btn btn btn-sm '
+                                  style={{
+                                    backgroundColor: val.status1 === 'Pending' ? 'rgba(255, 195, 19, 0.1)' : 'rgba(57, 151, 61, 0.1)',
+                                    color: val.status1 === 'Pending' ? 'rgba(255, 195, 19, 1)' : 'rgba(57, 151, 61, 1)',
+                                  }}
+                                >
+                                  {val.status1 === 'Pending' ? <FaStopwatch className='me-1' style={{ fontSize: '16px' }} /> : <RiVerifiedBadgeFill className='me-1' style={{ fontSize: '16px' }} />}
+                                  {val.status1}
+                                </span>
+                              </td>
 
-                                <td style={{ textAlign:"center" }} className='financial-Pnumber'>{val.Pnumber}</td>
+                              <td style={{ textAlign: "center" }}>
+                                <span
+                                  className='financial-status-btn btn btn-sm '
+                                  style={{
+                                    backgroundColor: val.payment === 'Online' ? 'rgba(86, 120, 233, 0.1)' : 'rgba(32, 34, 36, 0.05)',
+                                    color: val.payment === 'Online' ? 'rgba(86, 120, 233, 1)' : 'rgba(32, 34, 36, 1)',
+                                  }}
+                                >
+                                  {val.payment === 'Online' ? <FaWallet className='me-1' style={{ fontSize: '16px' }} /> : <FaMoneyBill className='me-1' style={{ fontSize: '16px' }} />}
+                                  {val.payment}
+                                </span>
+                              </td>
 
-                                <td  className='amt'>{val.amt}</td>
+                              <td style={{ textAlign: "center", verticalAlign: "middle" }}>
+                                <div className="d-flex align-items-center justify-content-center">
 
-                                <td style={{textAlign:"center" }}>
-                                  <span
-                                    className='financial-penalty-btn btn btn-sm r'
-                                    style={{
-                                      backgroundColor: val.penalty === '--' ? 'rgba(246, 248, 251, 1)' : 'rgba(231, 76, 60, 1)',
-                                      color: val.penalty === '--' ? 'rgba(79, 79, 79, 1)' : 'rgba(255, 255, 255, 1)',
-                                    }}
-                                  >
-                                    {val.penalty}
-                                  </span>
-                                </td>
+                                  <img src={viewicon} className="text-success me-2" style={{ cursor: "pointer" }} onClick={() => handleShowViewModal(index)} />
 
-                                <td style={{ textAlign:"center" }} >
-                                  <span
-                                    className='financial-status-btn btn btn-sm '
-                                    style={{
-                                      backgroundColor: val.status1 === 'Pending' ? 'rgba(255, 195, 19, 0.1)' : 'rgba(57, 151, 61, 0.1)',
-                                      color: val.status1 === 'Pending' ? 'rgba(255, 195, 19, 1)' : 'rgba(57, 151, 61, 1)',
-                                    }}
-                                  >
-                                    {val.status1 === 'Pending' ? <FaStopwatch className='me-1' style={{ fontSize: '16px' }} /> : <RiVerifiedBadgeFill className='me-1' style={{ fontSize: '16px' }} />}
-                                    {val.status1}
-                                  </span>
-                                </td>
-
-                                <td style={{ textAlign:"center" }}>
-                                  <span
-                                    className='financial-status-btn btn btn-sm '
-                                    style={{
-                                      backgroundColor: val.payment === 'Online' ? 'rgba(86, 120, 233, 0.1)' : 'rgba(32, 34, 36, 0.05)',
-                                      color: val.payment === 'Online' ? 'rgba(86, 120, 233, 1)' : 'rgba(32, 34, 36, 1)',
-                                    }}
-                                  >
-                                    {val.payment === 'Online' ? <FaWallet className='me-1' style={{ fontSize: '16px' }} /> : <FaMoneyBill className='me-1' style={{ fontSize: '16px' }} />}
-                                    {val.payment}
-                                  </span>
-                                </td>
-
-                                <td style={{  textAlign: "center", verticalAlign: "middle" }}>
-                  <div className="d-flex align-items-center justify-content-center">
-                   
-                     <img src={viewicon} className="text-success me-2" style={{ cursor: "pointer" }}  onClick={() => handleShowViewModal(index)}/>
-                   
-                  </div>
-                </td>
-                              </tr>
-                            )
-                          })
-                        }
-                      </tbody>
-                    </table>
-                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                          )
+                        })
+                      }
+                    </tbody>
+                  </table>
                 </div>
-
-                {/* View Modal */}
-                <Modal show={showViewModal} className='custom-modal' onHide={handleCloseViewModal} centered>
-                  <Modal.Header closeButton>
-                    <Modal.Title>View Maintenance Details</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    {viewComplaint && (
-                      <div>
-
-                        <div className='d-flex align-items-center mb-4'>
-                          <img src={viewComplaint.img} className='me-3' width={70} /><p className='mb-0 view-p'>{viewComplaint.name}<br /><span className='view-span'>{viewComplaint.date}</span></p>
-                        </div>
-
-
-                        <div className='d-flex justify-content-between'>
-
-                          <div className='text-center'>
-                            <strong className='view-strong'>Wing</strong><p className='wing-name d-flex flex-column mt-1 status-btn text-center' >
-                              {viewComplaint.wing}
-                            </p>
-                          </div>
-                          <div className='text-center'>
-                            <strong className='view-strong'>Unit</strong><p className='financial-Pnumber mt-1 status-btn text-center' >
-                              {viewComplaint.Unumber}
-                            </p>
-                          </div>
-
-                          <div className='text-center'>
-                            <strong className='view-strong'>Status</strong><p className='view-strong mt-1 status-btn text-center' style={{
-                              backgroundColor: viewComplaint.status === 'Tenant' ? 'rgba(255, 241, 248, 1)' : 'rgba(241, 240, 255, 1)',
-                              color: viewComplaint.status === 'Tenant' ? 'rgba(236, 72, 153, 1)' : 'rgba(79, 70, 229, 1)',
-                            }} >
-                              {viewComplaint.status === 'Tenant' ? <FaUser className='me-1' style={{ fontSize: '16px' }} /> : <BiSolidUserPin className='me-1' style={{ fontSize: '16px' }} />}
-                              {viewComplaint.status}
-                            </p>
-                          </div>
-
-                          <div className='text-center'>
-                            <strong className='view-strong'>Amount</strong><p className='amt mt-1 status-btn text-center' >
-                              {viewComplaint.amt}
-                            </p>
-                          </div>
-                        </div>
-
-
-                        <div className='d-flex justify-content-between'>
-                          <div className='text-center'>
-                            <strong className='view-strong'>Penalty</strong><p className='view-strong mt-1 status-btn text-center' style={{
-                              backgroundColor: viewComplaint.penalty === '--' ? 'rgba(246, 248, 251, 1)' : 'rgba(231, 76, 60, 1)',
-                              color: viewComplaint.penalty === '--' ? 'rgba(79, 79, 79, 1)' : 'rgba(255, 255, 255, 1)',
-                            }} >
-                              {viewComplaint.penalty}
-                            </p>
-                          </div>
-
-                          <div className='text-center'>
-                            <strong className='view-strong'>Status</strong><p className='view-strong mt-1 status-btn text-center' style={{
-                              backgroundColor: viewComplaint.status1 === 'Pending' ? 'rgba(255, 195, 19, 0.1)' : 'rgba(57, 151, 61, 0.1)',
-                              color: viewComplaint.status1 === 'Pending' ? 'rgba(255, 195, 19, 1)' : 'rgba(57, 151, 61, 1)',
-                            }} >
-                              {viewComplaint.status1 === 'Pending' ? <FaStopwatch className='me-1' style={{ fontSize: '16px' }} /> : <RiVerifiedBadgeFill className='me-1' style={{ fontSize: '16px' }} />}
-                              {viewComplaint.status1}
-                            </p>
-                          </div>
-
-                          <div className='text-center'>
-                            <strong className='view-strong'>Payment</strong><p className='view-strong mt-1 status-btn text-center' style={{
-                              backgroundColor: viewComplaint.payment === 'Online' ? 'rgba(86, 120, 233, 0.1)' : 'rgba(32, 34, 36, 0.05)',
-                              color: viewComplaint.payment === 'Online' ? 'rgba(86, 120, 233, 1)' : 'rgba(32, 34, 36, 1)',
-                            }} >
-                              {viewComplaint.payment === 'Online' ? <FaWallet className='me-1' style={{ fontSize: '16px' }} /> : <FaMoneyBill className='me-1' style={{ fontSize: '16px' }} />}
-                              {viewComplaint.payment}
-                            </p>
-                          </div>
-                        </div>
-
-                      </div>
-                    )}
-                  </Modal.Body>
-                </Modal>
               </div>
+
+              {/* View Modal */}
+              <Modal show={showViewModal} className='custom-modal' onHide={handleCloseViewModal} centered>
+                <Modal.Header closeButton>
+                  <Modal.Title>View Maintenance Details</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  {viewComplaint && (
+                    <div>
+
+                      <div className='d-flex align-items-center mb-4'>
+                        <img src={viewComplaint.img} className='me-3' width={70} /><p className='mb-0 view-p'>{viewComplaint.name}<br /><span className='view-span'>{viewComplaint.date}</span></p>
+                      </div>
+
+
+                      <div className='d-flex justify-content-between'>
+
+                        <div className='text-center'>
+                          <strong className='view-strong'>Wing</strong><p className='wing-name d-flex flex-column mt-1 status-btn text-center' >
+                            {viewComplaint.wing}
+                          </p>
+                        </div>
+                        <div className='text-center'>
+                          <strong className='view-strong'>Unit</strong><p className='financial-Pnumber mt-1 status-btn text-center' >
+                            {viewComplaint.Unumber}
+                          </p>
+                        </div>
+
+                        <div className='text-center'>
+                          <strong className='view-strong'>Status</strong><p className='view-strong mt-1 status-btn text-center' style={{
+                            backgroundColor: viewComplaint.status === 'Tenant' ? 'rgba(255, 241, 248, 1)' : 'rgba(241, 240, 255, 1)',
+                            color: viewComplaint.status === 'Tenant' ? 'rgba(236, 72, 153, 1)' : 'rgba(79, 70, 229, 1)',
+                          }} >
+                            {viewComplaint.status === 'Tenant' ? <FaUser className='me-1' style={{ fontSize: '16px' }} /> : <BiSolidUserPin className='me-1' style={{ fontSize: '16px' }} />}
+                            {viewComplaint.status}
+                          </p>
+                        </div>
+
+                        <div className='text-center'>
+                          <strong className='view-strong'>Amount</strong><p className='amt mt-1 status-btn text-center' >
+                            {viewComplaint.amt}
+                          </p>
+                        </div>
+                      </div>
+
+
+                      <div className='d-flex justify-content-between'>
+                        <div className='text-center'>
+                          <strong className='view-strong'>Penalty</strong><p className='view-strong mt-1 status-btn text-center' style={{
+                            backgroundColor: viewComplaint.penalty === '--' ? 'rgba(246, 248, 251, 1)' : 'rgba(231, 76, 60, 1)',
+                            color: viewComplaint.penalty === '--' ? 'rgba(79, 79, 79, 1)' : 'rgba(255, 255, 255, 1)',
+                          }} >
+                            {viewComplaint.penalty}
+                          </p>
+                        </div>
+
+                        <div className='text-center'>
+                          <strong className='view-strong'>Status</strong><p className='view-strong mt-1 status-btn text-center' style={{
+                            backgroundColor: viewComplaint.status1 === 'Pending' ? 'rgba(255, 195, 19, 0.1)' : 'rgba(57, 151, 61, 0.1)',
+                            color: viewComplaint.status1 === 'Pending' ? 'rgba(255, 195, 19, 1)' : 'rgba(57, 151, 61, 1)',
+                          }} >
+                            {viewComplaint.status1 === 'Pending' ? <FaStopwatch className='me-1' style={{ fontSize: '16px' }} /> : <RiVerifiedBadgeFill className='me-1' style={{ fontSize: '16px' }} />}
+                            {viewComplaint.status1}
+                          </p>
+                        </div>
+
+                        <div className='text-center'>
+                          <strong className='view-strong'>Payment</strong><p className='view-strong mt-1 status-btn text-center' style={{
+                            backgroundColor: viewComplaint.payment === 'Online' ? 'rgba(86, 120, 233, 0.1)' : 'rgba(32, 34, 36, 0.05)',
+                            color: viewComplaint.payment === 'Online' ? 'rgba(86, 120, 233, 1)' : 'rgba(32, 34, 36, 1)',
+                          }} >
+                            {viewComplaint.payment === 'Online' ? <FaWallet className='me-1' style={{ fontSize: '16px' }} /> : <FaMoneyBill className='me-1' style={{ fontSize: '16px' }} />}
+                            {viewComplaint.payment}
+                          </p>
+                        </div>
+                      </div>
+
+                    </div>
+                  )}
+                </Modal.Body>
+              </Modal>
+            </div>
           </div>
         </div>
       </div>
-      </div>
+    </div>
   )
-} 
+}
 
 
 export default FinancialManagementIncome;

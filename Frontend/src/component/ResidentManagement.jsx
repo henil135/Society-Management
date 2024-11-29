@@ -17,6 +17,7 @@ import viewicon from '../Icons/view.png'
   const [residents, setResidents] = useState([
     {id:1, name: "Evelyn Harper", unit: 'A', Number: "1001", unitStatus: "Occupied", residentStatus: "Tenant", phoneNumber: "97587 85828", members: 1, vehicles: 2 },
     {id:2, name: "-", unit: "B", Number: "1002", unitStatus: "Vacate", residentStatus: "--", phoneNumber: "--", members: "-", vehicles: "-" },
+
   ]);
 
   const [showModal, setShowModal] = useState(false);
@@ -66,9 +67,9 @@ import viewicon from '../Icons/view.png'
         <Sidebar />
       </div>
 
-      <div className="flex-grow-1  stickyHeader container-fluid" style={{width:"1920px"}}>
+      <div className="flex-grow-1  stickyHeader container-fluid " style={{width:"1900px"}}>
         <Header/>
-        <div className="container-fluid  " style={{ marginTop: "20px",marginLeft:"310px",width:"1590px" }}>
+        <div className="container-fluid custom-scrollbar " style={{ marginTop: "20px",marginLeft:"310px",width:"1590px" }}>
          
 
           <div className="table-responsive" style={{ border: "1px solid #ddd", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", overflow: "hidden", backgroundColor: "#fff", padding: "20px", marginTop: "20px",marginLeft:"10px" }}>

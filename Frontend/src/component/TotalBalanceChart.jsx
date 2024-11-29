@@ -8,7 +8,8 @@ import { RiDeleteBin5Fill } from "react-icons/ri";
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-
+import Delete from '../Icons/delete.png'
+import Edit from '../Icons/Edit.png'
 import { useForm } from 'react-hook-form';
 import maintainance1 from '../assets/maintainance1.png';
 import maintainance2 from '../assets/maintainance2.png';
@@ -236,7 +237,7 @@ function TotalBalanceChart() {
                 </div>
 
                 <div className='col-lg-3 px-1 my-sm-3 my-md-0'>
-                    <div className="important-member  px-2 bg-white rounded-lg shadow-md max-w-md mx-auto" style={{ borderRadius: '12px', overflowY: 'auto' }}>
+                    <div className="important-member  px-2 bg-white rounded-lg shadow-md max-w-md mx-auto custom-scrollbar" style={{ borderRadius: '12px', overflowY: 'auto' }}>
                         <div className="d-flex justify-content-between align-items-center ">
                             <h2 className='mt-4'>Important Numbers</h2>
                             <Button onClick={handleShow} className='add-btn rounded-2 '>
@@ -260,15 +261,15 @@ function TotalBalanceChart() {
                         <div className="gap-3 d-flex">
                             <Button
                                 onClick={() => handleShowDeleteModal(index)}
-                                className="delete-btn fs-5"
+                               
                             >
-                                <RiDeleteBin5Fill />
+                               <img src={Delete}/>
                             </Button>
                             <Button
-                                className="edit-btn fs-5"
+                             
                                 onClick={() => handleEdit(index)}
                             >
-                                <MdEditSquare />
+                                <img src={Edit}/>
                             </Button>
                         </div>
                     </div>
@@ -390,7 +391,7 @@ function TotalBalanceChart() {
 
 
                 <div className='col-lg-3 px-1'>
-                    <div className="maintenances py-4 px-2 bg-white rounded-lg shadow-md max-w-md mx-auto" style={{ borderRadius: '12px', overflowY: 'auto' }}>
+                    <div className="maintenances py-4 px-2 bg-white rounded-lg shadow-md max-w-md mx-auto custom-scrollbar" style={{ borderRadius: '12px', overflowY: 'auto' }}>
                         <div className="d-flex justify-content-between mb-2">
                             <h2>Pending Maintenances</h2>
 

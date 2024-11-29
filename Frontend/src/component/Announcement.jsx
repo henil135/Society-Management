@@ -63,43 +63,17 @@ function Announcement() {
 
     const handleShow = () => setShow(true);
 
-    // const onSubmit =async (data) => {
-    //     const response = await axios.post("http://localhost:5000/api/v2/annoucement/addannouncement", data)
-    //     console.log(response.data);
-
-    //     if (response.status === 201) {
-    //         const updatedNotes = [...note];
-    //         updatedNotes[editIndex] = { ...updatedNotes[editIndex], ...data };
-    //         setNote(updatedNotes);
-    //     } else {
-    //         setNote([...note, { id: note.length + 1, ...data }]);
-    //     }
-    //     handleClose();
-    // };
-
     const onSubmit = async (data) => {
-        try {
-            const response = await axios.post("http://localhost:5000/api/v2/annoucement/addannouncement", data);
-            console.log(response.data);
+        const response = await axios.post("http://localhost:5000/api/v2/annoucement/addannouncement", data)
+        console.log(response.data);
 
-            // if (response.status === 201) {
-            //     // if (editIndex !== undefined) {
-            //         // Editing an existing note
-            //     //     const updatedNotes = [...note];
-            //     //     updatedNotes[editIndex] = { ...updatedNotes[editIndex], ...data };
-            //     //     setNote(updatedNotes);
-            //     //     console.log("Updated Notes after edit:", updatedNotes);
-            //     // } else {
-            //     //     // Adding a new note
-            //     //     setNote([...note, { id: response.data.id || note.length + 1, ...data }]);
-            //     //     console.log("Updated Notes after adding:", note);
-            //     }
-            // } else {
-            //     console.error("Failed to create announcement");
-            // }
-            handleClose();
-        } catch (error) {
-            console.error("Error during submission:", error);
+        if (editIndex !== null) {
+            const updatedNotes = [...note];
+            updatedNotes[editIndex] = { ...updatedNotes[editIndex], ...data };
+            setNote(updatedNotes);
+        } else {
+            setNote([...note, { id: note.length + 1, ...data }]);
+
         }
     };
 
@@ -222,12 +196,14 @@ function Announcement() {
                                                             <input type="text" className="form-control Form-Control"
                                                                 placeholder='Enter Name' {...register('Announcement_Title', { required: true })} />
 
+
                                                             {errors.Announcement_Title && <small className="text-danger">Title is required</small>}
                                                         </div>
                                                         <div className="mb-3">
                                                             <label className='Form-Label'>Description <span className='text-danger'>*</span></label>
                                                             <input type="text" className="form-control Form-Control" placeholder='Enter Description' {...register('Description', { required: true })} />
                                                             {errors.Description && <small className="text-danger">Description is required</small>}
+
 
                                                         </div>
                                                         <div className='d-flex justify-content-between'>
@@ -418,11 +394,13 @@ function Announcement() {
                                                         <h6 className="card-body-title mb-0">Announcement Date</h6>
 
                                                         <span className="card-body-title text-dark mb-0 fw-medium">{val.Announcement_Date}</span>
+
                                                     </div>
                                                     <div className="d-flex justify-content-between align-items-center mb-2">
                                                         <h6 className="card-body-title mb-0">Announcement Time</h6>
                                                         <span className="card-body-title text-dark mb-0 fw-medium">{val.Announcement_Time}</span>
                                                     </div>
+
                                                     <h6 className="card-body-title mb-2">Description</h6>
                                                     <p className="card-text card-des fw-medium">{val.Description}</p>
 
