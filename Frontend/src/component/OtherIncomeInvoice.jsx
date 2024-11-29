@@ -204,7 +204,7 @@ const OtherIncomeInvoices = () => {
 
                                         </div>
                                         <div className="row  px-3" style={{ borderRadius: "10px" }}>
-                                            {DueEventPayment.map((val, index) => (
+                                            {DueEventPayment.map((val) => (
                                                 <div className="col-lg-3 mb-3 " key={val.id}>
                                                     <div className="card">
                                                         <div className="card-header card-title text-light d-flex align-items-center justify-content-between py-3" style={{ background: "rgba(86, 120, 233, 1)" }}>
@@ -357,4 +357,4 @@ const OtherIncomeInvoices = () => {
     )
 }
 
-export default OtherIncomeInvoices
+export default OtherIncomeInvoices;
