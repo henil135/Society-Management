@@ -16,7 +16,7 @@ import viewICon from '../Icons/view.png'
 import deleteIcon from '../Icons/delete.png'
 import editIcon from '../Icons/Edit.png'
 
- function FinancialManagementExp() {
+function FinancialManagementExp() {
 
   const [showViewModal, setShowViewModal] = useState(false);
   const [viewComplaint, setViewComplaint] = useState(null);
@@ -36,7 +36,7 @@ import editIcon from '../Icons/Edit.png'
       });
     }
   };
-  
+
   const [exp, setExp] = useState([
     { title: 'Rent or Mortgage', des: 'A visual representation of your spending categories...', date: '10/02/2024', amt: '₹ 1000', format: 'JPG' },
     { title: 'Housing Costs', des: 'Rack the fluctuations in your spending over we time...', date: '11/02/2024', amt: '₹ 1000', format: 'PDF' },
@@ -123,80 +123,81 @@ import editIcon from '../Icons/Edit.png'
 
   return (
     <div className="d-flex flex-column flex-md-row">
-    <div className="flex-shrink-0" >
-      <Sidebar />
-    </div>
+      <div className="flex-shrink-0" >
+        <Sidebar />
+      </div>
 
-    <div className='dashboard-bg ' style={{ width:"1920px"}}>
-      <Navbar />
-      <div className='stickyHeader' style={{width:"1630px",marginLeft:"290px"}}>
-        <div className='container-fluid income' >
+      <div className='dashboard-bg ' style={{ width: "1920px" }}>
+        <Navbar />
+        <div className='stickyHeader' style={{ width: "1630px", marginLeft: "290px" }}>
+          <div className='container-fluid income' >
 
-          <div className='row p-5'>
-            <div className='p-0'>
-              <div className="table-responsive rounded pb-3">
+            <div className='row p-5'>
+              <div className='p-0'>
+                <div className="table-responsive rounded pb-3">
 
-                <div className='bg-light'>
-                  <div className='d-flex justify-content-between align-items-center p-3 pt-1'>
-                    <h3 className=' mb-0  financial-income-title'>Add Expenses Details</h3>
+                  <div className='bg-light'>
+                    <div className='d-flex justify-content-between align-items-center p-3 pt-1'>
+                      <h3 className=' mb-0  financial-income-title'>Add Expenses Details</h3>
 
-                    <div>
-                      <button className='set-maintainance-btn d-flex align-items-center p-2' onClick={handleShow}> <FaPlusSquare className='me-2' /> Add New Expenses details</button>
+                      <div>
+                        <button className='set-maintainance-btn d-flex align-items-center p-2' onClick={handleShow}> <FaPlusSquare className='me-2' /> Add New Expenses details</button>
+                      </div>
+                    </div>
+
+                    <div className='px-3 financial-maintainance-table '>
+                      <table className="table">
+
+                        <thead className='table-primary '>
+                          <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Description</th>
+                            <th scope="col" className='text-center'>Date</th>
+                            <th scope="col" className='text-center'>Amount</th>
+                            <th scope="col" className='text-center'>Bill Format</th>
+                            <th scope="col" className='text-center' >Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {
+                            exp.map((val, index) => {
+                              return (
+                                <tr key={index} className='bg-light'>
+
+                                  <td style={{ verticalAlign: "middle", width: "270px" }} className='financial-Pnumber'> {val.title}</td>
+
+
+                                  <td style={{ verticalAlign: "middle", width: "450px" }} className='financial-Pnumber'>{val.des}</td>
+
+                                  <td style={{ verticalAlign: "middle", width: "250px" }} className='financial-Pnumber text-center'>{val.date}</td>
+
+
+                                  <td style={{ verticalAlign: "middle", width: "200px" }} className='financial-Pnumber exp-amt-color text-center'>{val.amt}</td>
+
+                                  <td style={{ verticalAlign: "middle", width: "200px" }} className='financial-Pnumber text-center'>
+                                    {val.format === 'JPG' ? <CiImageOn className='me-1 jpg-btn' style={{ fontSize: '20px' }} /> : <BiSolidFilePdf className='me-1 pdf-btn' style={{ fontSize: '20px' }} />}
+                                    {val.format}
+                                  </td>
+
+                                  <td style={{ verticalAlign: "middle", width: "200px" }}>
+
+                                    <div className="d-flex align-items-center justify-content-center " >
+                                      <img src={editIcon} className="text-success me-2" style={{ cursor: "pointer" }} onClick={() => handleEdit(index)} />
+                                      <img src={viewICon} className="text-primary me-2" style={{ cursor: "pointer" }} onClick={() => handleShowViewModal(index)} />
+                                      <img src={deleteIcon} className="text-danger" style={{ cursor: "pointer" }} onClick={() => handleCloseDeleteModal(index)} />
+                                    </div>
+
+
+                                  </td>
+                                </tr>
+                              )
+                            })
+                          }
+                        </tbody>
+                      </table>
                     </div>
                   </div>
 
-                  <div className='px-3 financial-maintainance-table '>
-                    <table className="table">
-
-                      <thead className='table-primary '>
-                        <tr>
-                          <th scope="col">Title</th>
-                          <th scope="col">Description</th>
-                          <th scope="col" className='text-center'>Date</th>
-                          <th scope="col" className='text-center'>Amount</th>
-                          <th scope="col" className='text-center'>Bill Format</th>
-                          <th scope="col" className='text-center' >Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {
-                          exp.map((val, index) => {
-                            return (
-                              <tr key={index} className='bg-light'>
-
-                                <td style={{  verticalAlign: "middle",width:"270px"}} className='financial-Pnumber'> {val.title}</td>
-
-
-                                <td style={{  verticalAlign: "middle",width:"450px" }} className='financial-Pnumber'>{val.des}</td>
-
-                                <td style={{ verticalAlign: "middle",width:"250px" }} className='financial-Pnumber text-center'>{val.date}</td>
-
-
-                                <td style={{  verticalAlign: "middle" ,width:"200px" }} className='financial-Pnumber exp-amt-color text-center'>{val.amt}</td>
-
-                                <td style={{  verticalAlign: "middle",width:"200px"  }} className='financial-Pnumber text-center'>
-                                  {val.format === 'JPG' ? <CiImageOn className='me-1 jpg-btn' style={{ fontSize: '20px' }} /> : <BiSolidFilePdf className='me-1 pdf-btn' style={{ fontSize: '20px' }} />}
-                                  {val.format}
-                                </td>
-
-                                <td  style={{ verticalAlign: "middle",width:"200px"  }}>
-
-                                <div className="d-flex align-items-center justify-content-center " >
-                                <img src={editIcon} className="text-success me-2" style={{ cursor: "pointer" }} onClick={() => handleEdit(index)} />
-                                            <img src={viewICon} className="text-primary me-2" style={{ cursor: "pointer" }} onClick={() => handleShowViewModal(index)} />
-                                            <img src={deleteIcon} className="text-danger" style={{ cursor: "pointer" }} onClick={() => handleCloseDeleteModal(index)} />
-                  </div>
-                                                       
-
-                                </td>
-                              </tr>
-                            )
-                          })
-                        }
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
 
                 {/* Add/Edit Modal */}
                 <Modal show={show} onHide={handleClose} centered className="custom-modal">
@@ -342,65 +343,88 @@ import editIcon from '../Icons/Edit.png'
                       <div>
 
 
-                        <p className='view-strong text-dark'><strong className='view-strong'>Title</strong> <br />{viewComplaint.title}</p>
 
-
-                        <p className='view-strong text-dark'><strong className='view-strong'>Description</strong> <br />{viewComplaint.des}</p>
-
-                        <div className='d-flex'>
-                          <p className='view-strong text-dark'><strong className='view-strong'>Date</strong> <br />{viewComplaint.date}</p>
-
-                          <p className='view-strong text-dark ms-5'><strong className='view-strong'>Amount</strong> <br />{viewComplaint.amt}</p>
+                        <div className="d-flex justify-content-between">
+                          <Button variant="secondary" onClick={handleClose} className="btn mt-2 cancle">
+                            Cancel
+                          </Button>
+                          <Button variant="primary" type="submit" className='btn mt-2 save'>
+                            {editIndex !== null ? 'Update' : 'Add'}
+                          </Button>
                         </div>
+                      </Form>
+                    </Modal.Body>
+                  </Modal>
 
-                        <p className='view-strong text-dark'><strong className='view-strong'>Bill</strong> <br /></p>
+                  {/* View Modal */}
+                  <Modal show={showViewModal} onHide={handleCloseViewModal} centered>
+                    <Modal.Header closeButton>
+                      <Modal.Title>View Complain</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      {viewComplaint && (
+                        <div>
 
-                        {/* Display the file */}
-                        {viewComplaint.file && (
-                          <div>
-                            {viewComplaint.format === 'JPG' || viewComplaint.format === 'PNG' ? (
-                              <img
-                                src={URL.createObjectURL(viewComplaint.file)}
-                                alt="Uploaded Bill"
-                                style={{ maxWidth: '100%', height: 'auto' }}
-                              />
-                            ) : viewComplaint.format === 'PDF' ? (
-                              <embed
-                                src={URL.createObjectURL(viewComplaint.file)}
-                                type="application/pdf"
-                                width="100%"
-                                height="400px"
-                              />
-                            ) : (
-                              <p>No file to display</p>
-                            )}
+
+                          <p className='view-strong text-dark'><strong className='view-strong'>Title</strong> <br />{viewComplaint.title}</p>
+
+
+                          <p className='view-strong text-dark'><strong className='view-strong'>Description</strong> <br />{viewComplaint.des}</p>
+
+                          <div className='d-flex'>
+                            <p className='view-strong text-dark'><strong className='view-strong'>Date</strong> <br />{viewComplaint.date}</p>
+
+                            <p className='view-strong text-dark ms-5'><strong className='view-strong'>Amount</strong> <br />{viewComplaint.amt}</p>
                           </div>
-                        )}
-                      </div>
-                    )}
-                  </Modal.Body>
-                </Modal>
 
-                {/* delete modal */}
-                <Modal className='custom-modal' show={showDeleteModal} onHide={handleCloseDeleteModal} centered>
-                  <Modal.Header>
-                    <Modal.Title className='Modal-Title'>Delete Number?</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    <p className='Form-p mb-0'>Are you sure you want to delete this?</p>
-                  </Modal.Body>
-                  <Modal.Footer className='d-flex justify-content-between'>
-                    <Button variant="secondary" className='btn cancle  mt-2' onClick={handleCloseDeleteModal}>Cancel</Button>
-                    <Button variant="danger" className='btn delete' onClick={confirmDelete}>Delete</Button>
-                  </Modal.Footer>
-                </Modal>
+                          <p className='view-strong text-dark'><strong className='view-strong'>Bill</strong> <br /></p>
+
+                          {/* Display the file */}
+                          {viewComplaint.file && (
+                            <div>
+                              {viewComplaint.format === 'JPG' || viewComplaint.format === 'PNG' ? (
+                                <img
+                                  src={URL.createObjectURL(viewComplaint.file)}
+                                  alt="Uploaded Bill"
+                                  style={{ maxWidth: '100%', height: 'auto' }}
+                                />
+                              ) : viewComplaint.format === 'PDF' ? (
+                                <embed
+                                  src={URL.createObjectURL(viewComplaint.file)}
+                                  type="application/pdf"
+                                  width="100%"
+                                  height="400px"
+                                />
+                              ) : (
+                                <p>No file to display</p>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </Modal.Body>
+                  </Modal>
+
+                  {/* delete modal */}
+                  <Modal className='custom-modal' show={showDeleteModal} onHide={handleCloseDeleteModal} centered>
+                    <Modal.Header>
+                      <Modal.Title className='Modal-Title'>Delete Number?</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <p className='Form-p mb-0'>Are you sure you want to delete this?</p>
+                    </Modal.Body>
+                    <Modal.Footer className='d-flex justify-content-between'>
+                      <Button variant="secondary" className='btn cancle  mt-2' onClick={handleCloseDeleteModal}>Cancel</Button>
+                      <Button variant="danger" className='btn delete' onClick={confirmDelete}>Delete</Button>
+                    </Modal.Footer>
+                  </Modal>
+                </div>
               </div>
-            </div>
 
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </div>
   )
 }

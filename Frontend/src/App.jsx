@@ -44,6 +44,8 @@ import OtherIncomeInvoices from './component/OtherIncomeInvoice.jsx';
 import Polls from './component/Polls.jsx';
 
 import Access from './component/Access.jsx';
+import CommunitiesDiscussion from './component/CommunitiesDiscussion.jsx';
+import CommunityQuestion from './component/CommunityQuestion.jsx';
 
 
 
@@ -89,9 +91,8 @@ function App() {
 
           <Route path='/view-invoice' element={<ViewInvoice/>} />
           <Route path='/Polls' element={<Polls/>} />
-
-  
- 
+          <Route path='/Community-Discussion' element={<CommunitiesDiscussion/>} />
+          <Route path='/Community-Question' element={<CommunityQuestion/>}/>
 
 
 

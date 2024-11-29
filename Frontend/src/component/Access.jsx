@@ -63,12 +63,15 @@ const ChatLayout = () => {
         <Sidebar />
       </div>
 
+
       <div className="flex-grow-1 dashboard-bg">
+
         <Header />
 
         <div className="container-fluid stickyHeader p-3" style={{ marginLeft: "315px", width: "1590px" }}>
           <div className="row">
             {/* Left Sidebar */}
+
             <div className="col-md-3 chat-sidebar custom-scrollbar p-0">
               <div className="sidebar-header  mt-3 mx-3">
                 <h5 className="mb-0">Chat</h5>
@@ -127,6 +130,7 @@ const ChatLayout = () => {
             </div>
           </div>
         </div>  
+
       </div>
     </div>
   );

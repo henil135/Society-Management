@@ -10,7 +10,7 @@ const ChatSidebar = ({ onContactClick }) => {
     { id: 2, name: 'Elizabeth Sarah', lastMessage: 'Thank you for your order!', time: '9:20', unread: 0, active: false, avatar: avatar },
     { id: 3, name: 'Jenny Wilson', lastMessage: 'Hello, Jenny', time: '7:00', unread: 1, active: false, avatar: avatar },
     { id: 4, name: 'Arlene McCoy', lastMessage: 'Typing...', time: '9:20', unread: 0, active: true, avatar: avatar },
-    
+
     // Add more contacts as necessary
   ];
 
@@ -27,9 +27,11 @@ const ChatSidebar = ({ onContactClick }) => {
   };
 
   return (
+
     <div className="chat-sidebar-container bg-white shadow-sm ">
       <div className="search-bar p-3 border-0">
         <div className="input-group rounded shadow-sm overflow-hidden">
+
           <span className="input-group-text bg-light border-0">
             <FiSearch className="text-muted" style={{ fontSize: '18px' }} />
           </span>
