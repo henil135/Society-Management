@@ -116,8 +116,8 @@ function Complaintlist() {
     return (
         <div className='container-fluid py-2'>
             <div className='row px-4 '>
-                <div className='col-lg-9 bg-light rounded'>
-                    <div className="table-responsive Complaint-table rounded" >
+                <div className='col-lg-9 bg-light rounded '>
+                    <div className="table-responsive Complaint-table rounded custom-scrollbar" >
 
                         <div >
                             <h5 className=' mb-0 py-3 ps-1  financial-income-title'>Maintenance  Details</h5>
@@ -355,7 +355,7 @@ function Complaintlist() {
                 </div>
 
                 <div className='col-lg-3 px-1'>
-                    <div className="maintenances  px-2 bg-white rounded-lg shadow-md max-w-md mx-auto" style={{ borderRadius: '12px', overflowY: 'auto' }}>
+                    <div className="maintenances  px-2 bg-white rounded-lg shadow-md max-w-md mx-auto custom-scrollbar" style={{ borderRadius: '12px', overflowY: 'auto' }}>
                         <div className="d-flex justify-content-between align-items-center mb-2">
                             <h2 className='mt-4'>Upcoming Activity</h2>
 
