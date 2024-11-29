@@ -77,8 +77,6 @@ function App() {
           <Route path='/emergency-management' element={<EmergencyManagement />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/EditProfile' element={<EditProfile />} />
-
-
           <Route path='/personal-details' element={<PersonalDetail/>} />
           <Route path='/personal-details-tenant' element={<TenantPersonalDetails/>} />
           <Route path='/service-and-complaint' element={<ServiceComplaint/>} />

@@ -123,10 +123,10 @@ function SecurityProtocols() {
         <Sidebar />
       </div>
 
-      <div className="flex-grow-1 dashboard-bg" style={{ width: "1920px" }}>
+      <div className="flex-grow-1 dashboard-bg" style={{ width: "1900px" }}>
         <Header />
 
-        <div className="container-fluid stickyHeader p-3" style={{ width: "1620px",marginLeft:"300px" }}>
+        <div className="container-fluid stickyHeader p-3" style={{ width: "1600px",marginLeft:"300px" }}>
 
 
 

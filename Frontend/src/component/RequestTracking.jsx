@@ -296,8 +296,9 @@ function RequestTracking() {
         />
       </Form.Group>
         <Form>
+          <div className='d-flex gap-2'>
           <Form.Group className='mt-2'>
-            <Form.Label>Unit<span className="text-danger">*</span></Form.Label>
+            <Form.Label>Wing<span className="text-danger">*</span></Form.Label>
             <Form.Control
               type="text"
               value={newRequest.unit}
@@ -306,13 +307,14 @@ function RequestTracking() {
           </Form.Group>
 
           <Form.Group className='mt-2'>
-            <Form.Label>Number<span className="text-danger">*</span></Form.Label>
+            <Form.Label>Unit<span className="text-danger">*</span></Form.Label>
             <Form.Control
               type="text"
               value={newRequest.number}
               onChange={(e) => setNewRequest({ ...newRequest, number: e.target.value })}
             />
           </Form.Group>
+          </div>
         </Form>
       </Form.Group>
       <Form.Group className='mt-2 '>
@@ -713,8 +715,9 @@ function RequestTracking() {
           }
         />
       </Form.Group>
+      <div className='d-flex gap-2'>
       <Form.Group className='mt-2'>
-        <Form.Label>Unit</Form.Label>
+        <Form.Label>Wing<span className="text-danger">*</span></Form.Label>
         <Form.Control
           type="text"
           value={selectedRequest?.unit || ""}
@@ -727,7 +730,7 @@ function RequestTracking() {
         />
       </Form.Group>
       <Form.Group className='mt-2'>
-        <Form.Label>Number<span className="text-danger">*</span></Form.Label>
+        <Form.Label>Unit<span className="text-danger">*</span></Form.Label>
         <Form.Control
           type="text"
           value={selectedRequest?.number || ""}
@@ -739,6 +742,7 @@ function RequestTracking() {
           }
         />
       </Form.Group>
+      </div>
       <Form.Group className='mt-2'>
         <Form.Label>Priority<span className="text-danger">*</span></Form.Label>
         <div className="d-flex justify-content-around">

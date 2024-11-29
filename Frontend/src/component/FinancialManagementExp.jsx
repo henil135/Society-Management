@@ -9,7 +9,7 @@ import { Button, Modal, Form } from 'react-bootstrap';
 import { MdEditSquare } from "react-icons/md";
 import { FaEdit, FaPlusSquare } from "react-icons/fa";
 import Sidebar from "../component/layout/Sidebar";
-
+import { LuImagePlus } from 'react-icons/lu'
 import { FaCamera, FaEye, FaTrash } from 'react-icons/fa6';
 
 import viewICon from '../Icons/view.png'
@@ -198,124 +198,150 @@ function FinancialManagementExp() {
                     </div>
                   </div>
 
-                  {/* Add/Edit Modal */}
-                  <Modal show={show} onHide={handleClose} centered className="custom-modal">
-                    <Modal.Header>
-                      <Modal.Title className='Modal-Title'>
-                        {editIndex !== null ? 'Edit Expense Details' : 'Add Expense Details'}
-                      </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                      <Form onSubmit={handleSubmit(onSubmit)}>
-                        <Form.Group className="mb-3" controlId="formTitle">
-                          <Form.Label className='Form-Label'>Title<span className="text-danger"> *</span></Form.Label>
-                          <Form.Control
-                            className='Form-Control'
-                            type="text"
-                            placeholder="Enter Title"
-                            {...register('title', { required: "Title is required" })}
-                            isInvalid={errors.title}
-                          />
-                          <Form.Control.Feedback type="invalid">
-                            {errors.title?.message}
-                          </Form.Control.Feedback>
-                        </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formDescription">
-                          <Form.Label className='Form-Label'>Description<span className="text-danger"> *</span></Form.Label>
-                          <Form.Control
-                            className='Form-Control'
-                            type="text"
-                            placeholder="Enter Description"
-                            {...register('des', { required: "Description is required" })}
-                            isInvalid={errors.des}
-                          />
-                          <Form.Control.Feedback type="invalid">
-                            {errors.des?.message}
-                          </Form.Control.Feedback>
-                        </Form.Group>
+                {/* Add/Edit Modal */}
+                <Modal show={show} onHide={handleClose} centered className="custom-modal">
+                  <Modal.Header>
+                    <Modal.Title className='Modal-Title'>
+                      {editIndex !== null ? 'Edit Expense Details' : 'Add Expense Details'}
+                    </Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <Form onSubmit={handleSubmit(onSubmit)}>
+                      <Form.Group className="mb-3" controlId="formTitle">
+                        <Form.Label className='Form-Label'>Title<span className="text-danger"> *</span></Form.Label>
+                        <Form.Control
+                          className='Form-Control'
+                          type="text"
+                          placeholder="Enter Title"
+                          {...register('title', { required: "Title is required" })}
+                          isInvalid={errors.title}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                          {errors.title?.message}
+                        </Form.Control.Feedback>
+                      </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formDate">
-                          <Form.Label className='Form-Label'>Date<span className="text-danger"> *</span></Form.Label>
-                          <Form.Control
-                            className='Form-Control'
-                            type="date"
-                            {...register('date', { required: "Date is required" })}
-                            isInvalid={errors.date}
-                          />
-                          <Form.Control.Feedback type="invalid">
-                            {errors.date?.message}
-                          </Form.Control.Feedback>
-                        </Form.Group>
+                      <Form.Group className="mb-3" controlId="formDescription">
+                        <Form.Label className='Form-Label'>Description<span className="text-danger"> *</span></Form.Label>
+                        <Form.Control
+                          className='Form-Control'
+                          type="text"
+                          placeholder="Enter Description"
+                          {...register('des', { required: "Description is required" })}
+                          isInvalid={errors.des}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                          {errors.des?.message}
+                        </Form.Control.Feedback>
+                      </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formAmount">
-                          <Form.Label className='Form-Label'>Amount<span className="text-danger"> *</span></Form.Label>
-                          <Form.Control
-                            className='Form-Control'
-                            type="text"
-                            placeholder="Enter Amount"
-                            {...register('amt', { required: "Amount is required" })}
-                            isInvalid={errors.amt}
-                          />
-                          <Form.Control.Feedback type="invalid">
-                            {errors.amt?.message}
-                          </Form.Control.Feedback>
-                        </Form.Group>
+                      <Form.Group className="mb-3" controlId="formDate">
+                        <Form.Label className='Form-Label'>Date<span className="text-danger"> *</span></Form.Label>
+                        <Form.Control
+                          className='Form-Control'
+                          type="date"
+                          {...register('date', { required: "Date is required" })}
+                          isInvalid={errors.date}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                          {errors.date?.message}
+                        </Form.Control.Feedback>
+                      </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formFormat">
-                          <Form.Label className="Form-Label">Upload Photo</Form.Label>
-                          <div className="text-start" style={{ display: "flex", marginBottom: "20px" }}>
-                            <label htmlFor="photo-upload" style={{ cursor: "pointer", textAlign: "center" }}>
-                              <div
-                                style={{
-                                  display: "flex",
-                                  flexDirection: "row",
-                                  alignItems: "center",
-                                  justifyContent: "center",
-                                  textAlign: "center",
-                                }}
-                              >
-                                <div
-                                  style={{
-                                    width: "50px",
-                                    height: "50px",
-                                    borderRadius: "50%",
-                                    background: "rgba(211, 211, 211, 1)",
-                                    overflow: "hidden",
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    border: "2px solid #ddd",
-                                    marginRight: "10px",
-                                  }}
-                                >
-                                  {photo?.preview ? (
-                                    <img
-                                      src={photo.preview}
-                                      alt="Uploaded"
-                                      style={{
-                                        width: "100%",
-                                        height: "100%",
-                                        objectFit: "cover",
-                                        borderRadius: "50%",
-                                      }}
-                                    />
-                                  ) : (
-                                    <FaCamera style={{ color: "rgba(255, 255, 255, 1)", fontSize: "16px" }} />
-                                  )}
-                                </div>
-                                <div style={{ color: "#007bff" }}>Add Photo</div>
-                              </div>
-                            </label>
-                            <input
-                              id="photo-upload"
-                              type="file"
-                              onChange={handleFileChange}
-                              accept="image/png, image/jpeg"
-                              style={{ display: "none" }}
+                      <Form.Group className="mb-3" controlId="formAmount">
+                        <Form.Label className='Form-Label'>Amount<span className="text-danger"> *</span></Form.Label>
+                        <Form.Control
+                          className='Form-Control'
+                          type="text"
+                          placeholder="Enter Amount"
+                          {...register('amt', { required: "Amount is required" })}
+                          isInvalid={errors.amt}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                          {errors.amt?.message}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+
+                      <Form.Group controlId="formAadhaar" className=" mt-4">
+                    <Form.Label>Upload Bill<span className="text-danger">*</span></Form.Label>
+                    <div className='text-center'
+                      style={{
+                        border: "2px dashed rgba(211, 211, 211, 1)",
+                        borderRadius: "8px",
+                        padding: "20px",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        flexDirection: "column",
+                        cursor: "pointer"
+                      }}
+                    >
+                      <label htmlFor="aadhaar-upload" style={{ cursor: 'pointer', color: '#007bff' }}>
+                        <LuImagePlus className='text-center'
+                          style={{
+                            fontSize: '24px',      // Size of the icon
+                            marginBottom: '8px',   // Bottom margin
+                            width: '40px',         // Icon width
+                            height: '50px',        // Icon height
+                            top: '4px',            // Top offset
+                            left: '8px',           // Left offset
+                            color: " rgba(167, 167, 167, 1)",// Ensure position is relative to the container
+                            gap: '0px',
+                            // No gap between elementsr
+                          }}
+                        />
+
+                        <div>Upload a file <span style={{ color: "black" }}>or drag and drop</span></div>
+                      </label>
+                      <small className="text-muted">PNG, JPG, GIF, PDF up to 10MB</small>
+                      <input
+                        id="aadhaar-upload"
+                        type="file"
+                        onChange={(e) => handleFileChange(e, 'aadhaar')}
+                        accept="image/png, image/jpeg, application/pdf"
+                        style={{ display: 'none' }}
+                      />
+
+                      {/* Display file preview or name */}
+                      {exp.aadhaar && (
+                        <div style={{ marginTop: '15px', textAlign: 'center' }}>
+                          {exp.aadhaar.preview && exp.aadhaar.file.type.startsWith('image/') ? (
+                            <img
+                              src={exp.aadhaar.preview}
+                              alt="Aadhaar Preview"
+                              style={{ width: '80px', height: '80px', borderRadius: '8px', objectFit: 'cover' }}
                             />
-                          </div>
-                        </Form.Group>
+                          ) : (
+                            <div>{exp.aadhaar.file.name}</div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </Form.Group>
+
+
+                      <div className="d-flex justify-content-between">
+                        <Button variant="secondary" onClick={handleClose} className="btn mt-2 cancle">
+                          Cancel
+                        </Button>
+                        <Button variant="primary" type="submit" className='btn mt-2 save'>
+                          {editIndex !== null ? 'Update' : 'Add'}
+                        </Button>
+                      </div>
+                    </Form>
+                  </Modal.Body>
+                </Modal>
+
+                {/* View Modal */}
+                <Modal show={showViewModal} onHide={handleCloseViewModal} centered>
+                  <Modal.Header closeButton>
+                    <Modal.Title>View Complain</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    {viewComplaint && (
+                      <div>
+
 
 
                         <div className="d-flex justify-content-between">
