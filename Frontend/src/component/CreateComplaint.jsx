@@ -293,7 +293,7 @@ import editIcon from '../Icons/Edit.png'
 
                
                 <Form.Group className='mt-2'>
-                  <Form.Label>Unit<span className="text-danger">*</span></Form.Label>
+                  <Form.Label>Wing<span className="text-danger">*</span></Form.Label>
                   <Form.Control
                     type="text"
                     value={newComplaint.unit}
@@ -302,7 +302,7 @@ import editIcon from '../Icons/Edit.png'
                 </Form.Group>
 
                 <Form.Group className='mt-2'>
-                  <Form.Label>Number<span className="text-danger">*</span></Form.Label>
+                  <Form.Label>Unit<span className="text-danger">*</span></Form.Label>
                   <Form.Control
                     type="text"
                     value={newComplaint.number}
@@ -718,7 +718,7 @@ import editIcon from '../Icons/Edit.png'
 
      
       <Form.Group className='mt-3'>
-  <Form.Label>Unit<span className="text-danger">*</span></Form.Label>
+  <Form.Label>Wing<span className="text-danger">*</span></Form.Label>
   <Form.Control
     type="text"
     value={selectedComplaint?.unit || ""}
@@ -732,7 +732,7 @@ import editIcon from '../Icons/Edit.png'
 </Form.Group>
 
 <Form.Group className='mt-3'>
-  <Form.Label>Number<span className="text-danger">*</span></Form.Label>
+  <Form.Label>Unit<span className="text-danger">*</span></Form.Label>
   <Form.Control
     type="text"
     value={selectedComplaint?.number || ""}

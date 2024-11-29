@@ -9,7 +9,7 @@ import { Button, Modal, Form } from 'react-bootstrap';
 import { MdEditSquare } from "react-icons/md";
 import { FaEdit, FaPlusSquare } from "react-icons/fa";
 import Sidebar from "../component/layout/Sidebar";
-
+import { LuImagePlus } from 'react-icons/lu'
 import { FaCamera, FaEye, FaTrash } from 'react-icons/fa6';
 
 import viewICon from '../Icons/view.png'
@@ -262,60 +262,62 @@ import editIcon from '../Icons/Edit.png'
                         </Form.Control.Feedback>
                       </Form.Group>
 
-                      <Form.Group className="mb-3" controlId="formFormat">
-  <Form.Label className="Form-Label">Upload Photo</Form.Label>
-  <div className="text-start" style={{ display: "flex", marginBottom: "20px" }}>
-    <label htmlFor="photo-upload" style={{ cursor: "pointer", textAlign: "center" }}>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "center",
-          textAlign: "center",
-        }}
-      >
-        <div
-          style={{
-            width: "50px",
-            height: "50px",
-            borderRadius: "50%",
-            background: "rgba(211, 211, 211, 1)",
-            overflow: "hidden",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            border: "2px solid #ddd",
-            marginRight: "10px",
-          }}
-        >
-          {photo?.preview ? (
-            <img
-              src={photo.preview}
-              alt="Uploaded"
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                borderRadius: "50%",
-              }}
-            />
-          ) : (
-            <FaCamera style={{ color: "rgba(255, 255, 255, 1)", fontSize: "16px" }} />
-          )}
-        </div>
-        <div style={{ color: "#007bff" }}>Add Photo</div>
-      </div>
-    </label>
-    <input
-      id="photo-upload"
-      type="file"
-      onChange={handleFileChange}
-      accept="image/png, image/jpeg"
-      style={{ display: "none" }}
-    />
-  </div>
-</Form.Group>
+                      <Form.Group controlId="formAadhaar" className=" mt-4">
+                    <Form.Label>Upload Bill<span className="text-danger">*</span></Form.Label>
+                    <div className='text-center'
+                      style={{
+                        border: "2px dashed rgba(211, 211, 211, 1)",
+                        borderRadius: "8px",
+                        padding: "20px",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        flexDirection: "column",
+                        cursor: "pointer"
+                      }}
+                    >
+                      <label htmlFor="aadhaar-upload" style={{ cursor: 'pointer', color: '#007bff' }}>
+                        <LuImagePlus className='text-center'
+                          style={{
+                            fontSize: '24px',      // Size of the icon
+                            marginBottom: '8px',   // Bottom margin
+                            width: '40px',         // Icon width
+                            height: '50px',        // Icon height
+                            top: '4px',            // Top offset
+                            left: '8px',           // Left offset
+                            color: " rgba(167, 167, 167, 1)",// Ensure position is relative to the container
+                            gap: '0px',
+                            // No gap between elementsr
+                          }}
+                        />
+
+                        <div>Upload a file <span style={{ color: "black" }}>or drag and drop</span></div>
+                      </label>
+                      <small className="text-muted">PNG, JPG, GIF, PDF up to 10MB</small>
+                      <input
+                        id="aadhaar-upload"
+                        type="file"
+                        onChange={(e) => handleFileChange(e, 'aadhaar')}
+                        accept="image/png, image/jpeg, application/pdf"
+                        style={{ display: 'none' }}
+                      />
+
+                      {/* Display file preview or name */}
+                      {exp.aadhaar && (
+                        <div style={{ marginTop: '15px', textAlign: 'center' }}>
+                          {exp.aadhaar.preview && exp.aadhaar.file.type.startsWith('image/') ? (
+                            <img
+                              src={exp.aadhaar.preview}
+                              alt="Aadhaar Preview"
+                              style={{ width: '80px', height: '80px', borderRadius: '8px', objectFit: 'cover' }}
+                            />
+                          ) : (
+                            <div>{exp.aadhaar.file.name}</div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </Form.Group>
 
 
                       <div className="d-flex justify-content-between">

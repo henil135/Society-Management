@@ -261,14 +261,14 @@ function Sidebar() {
         }}
         aria-labelledby="offcanvasExampleLabel"
       >
-        <div className="offcanvas-header justify-content-center">
+        <div className="offcanvas-header justify-content-center ">
           <h1 className="offcanvas-title mainColor" id="offcanvasExampleLabel">
             <Logo />
           </h1>
         </div>
         <hr />
 
-        <div className="offcanvas-body ">
+        <div className="offcanvas-body custom-scrollbar">
           <ul className="list-unstyled">
             {menuItems.map((item) =>
               item.subItems ? (
