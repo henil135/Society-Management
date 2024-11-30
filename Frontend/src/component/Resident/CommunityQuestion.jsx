@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import Sidebar from './layout/Sidebar';
-import Navbar from './Navbar';
+import Sidebar from '../layout/Sidebar';
+import Navbar from '../Navbar';
 import ChatSidebar from './ChatSidebar';
-import Avtar from '../assets/Avatar plain.png';
+import Avtar from '../../assets/Avatar plain.png';
 import { Button } from 'react-bootstrap';
 import { IoEyeSharp } from "react-icons/io5";
-import threedotbtn from '../assets/threedotes-btn.png';
+import threedotbtn from '../../assets/threedotes-btn.png';
 import { Link, useNavigate } from 'react-router-dom';
 
 const CommunityQuestion = () => {

@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import '../index.css';
-import signupimg2 from '../assets/signup-img2.png';
-import signupimg from '../assets/signup-img.png';
+import '../../index.css';
+import signupimg2 from '../../assets/signup-img2.png';
+import signupimg from '../../assets/signup-img.png';
 import { HiMiniEyeSlash } from "react-icons/hi2";
 import { IoEyeSharp } from "react-icons/io5";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'
-import Logo from './Logo';
+import Logo from '../Logo';
+import toast from 'react-hot-toast';
 // import { Register } from '../services/authentication';
 
 
@@ -74,6 +75,7 @@ export default function Signup() {
         try {
             const response = await axios.post('http://localhost:5000/api/v1/Registration', data);
             console.log(response.data);
+            toast.success(response.data.message)
             Navigate("/login")
         } catch (error) {
             console.log(error);
@@ -97,17 +99,12 @@ export default function Signup() {
         console.log("Creating new society...");
         setShowForm(true);
     };
-    // const onSubmit = async (data) => {
-    //     await axios.post('http://localhost:5000/api/v1/Registration', data).then((res) => {
-    //         console.log(res)
-    //     })
-    // };
 
     const handleNewSocietySubmit = async (newdata) => {
         try {
             const res = await axios.post('http://localhost:5000/api/societies/create', newdata);
             console.log('Response:', res.data);
-
+            toast.success(res.data.message)
             // Update societies list after successfully creating a new society
             setSocieties((prevSocieties) => [...prevSocieties, res.data]);
 

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import Navbar from './Navbar';
+import { useState } from 'react';
+import Navbar from '../Navbar';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { IoEyeSharp } from "react-icons/io5";
-import Sidebar from "../component/layout/Sidebar";
-import profileimg from '../assets/profile.png';
-import pollImg from '../assets/poll-icon.png';
+import Sidebar from "../../component/layout/Sidebar";
+import profileimg from '../../assets/profile.png';
+import pollImg from '../../assets/poll-icon.png';
 
 const Polls = () => {
     const [note, setNote] = useState([

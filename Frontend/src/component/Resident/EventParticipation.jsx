@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import Sidebar from './layout/Sidebar'
-import Navbar from './Navbar'
-import Avatar from '../assets/Avatar.png'
+import { useState } from 'react'
+import Sidebar from '../layout/Sidebar'
+import Navbar from '../Navbar'
+import Avatar from '../../assets/Avatar.png'
 import { Link } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 

@@ -3,10 +3,10 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
-import ResetImage from '../assets/forgotpassword.jpg'; // Use your own image path
-import '../style.css';
+import ResetImage from '../../assets/forgotpassword.jpg'; // Use your own image path
+import '../../style.css';
 import toast from "react-hot-toast"
-import Logo from './Logo';
+import Logo from '../Logo';
 import axios from 'axios';
 
 

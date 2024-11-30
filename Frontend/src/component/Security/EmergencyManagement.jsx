@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import Sidebar from "../component/layout/Sidebar";
-import Header from "./Navbar";
+import { useState } from "react";
+import Sidebar from "../../component/layout/Sidebar";
+import Header from "../Navbar";
 
 const EmergencyManagement = () => {
   const [formData, setFormData] = useState({

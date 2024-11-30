@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Modal, Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import Sidebar from './layout/Sidebar'
-import Navbar from './Navbar';
+import Sidebar from '../layout/Sidebar'
+import Navbar from '../Navbar';
 
 const ServiceComplaint = () => {
 
