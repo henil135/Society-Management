@@ -4,28 +4,27 @@ import { Link, useLocation } from "react-router-dom";
 import { FaSignOutAlt, FaBars } from "react-icons/fa";
 import "../../style.css";
 import dashboardIcon from "../../Icons/image.png";
-import residentIcon from "../../Icons/money.png";
 import financialIcon from "../../Icons/dollar-square.png";
-import facalityIcon from "../../Icons/building.png";
-import complainrtrackingIcon from "../../Icons/sms-tracking.png";
-import securitymanagementIcon from "../../Icons/shield-security.png";
-import securityguardIcon from "../../Icons/security-user.png";
-import announcementIcon from "../../Icons/Announcement.png";
-
+import personaldetailsIcon from "../../Icons/personalcard.png";
+import securityIcon from "../../Icons/security.png";
 import Logo from "../Logo";
 import HideBgCopy from "../../assets/HideBgCopy.png";
 import BlackImage from '../../assets/Rectangle 1888.png'
-
+import FrameIcon from '../../Icons/Frame.png'
 import ArrowIcon from '../../Icons/arrow-down.png'
-function Sidebar() {
+import serviceIcon from '../../Icons/2.png'
+import eventsIcon from '../../Icons/Events Participation.png'
+import commuityIcon from '../../Icons/Community.png'
+import paymentIcon from '../../Icons/wallet.png'
+function ResidentSidebar() {
   const location = useLocation();
   const [activeItem, setActiveItem] = useState("");
-  const [isComplaintDropdownOpen, setComplaintDropdownOpen] = useState(false);
-  const [isSecurityDropdownOpen, setSecurityDropdownOpen] = useState(false);
-  const [isFinancialDropdownOpen, setFinancialDropdownOpen] = useState(false);
+
   const [isSidebarOpen, setSidebarOpen] = useState(false); // Mobile sidebar toggle state
   const [isMobile, setIsMobile] = useState(window.innerWidth < 576); // Mobile screen check
-  
+  const [isPaymentPortalDropdownOpen, setPaymentPortalDropdownOpen] = useState(false);
+  const [isCommunityDropdownOpen, setCommunityDropdownOpen] = useState(false);
+
 
   // Update active item on location change
   useEffect(() => {
@@ -36,10 +35,9 @@ function Sidebar() {
         item.subItems.forEach((subItem) => {
           if (currentPath === subItem.path) {
             setActiveItem(subItem.key);
-            if (item.key === "complaint-tracking") setComplaintDropdownOpen(true);
-            if (item.key === "security-management") setSecurityDropdownOpen(true);
-            if (item.key === "financialmanagement") setFinancialDropdownOpen(true);
-            
+        
+            if (item.key === "payment-portal") setPaymentPortalDropdownOpen(true);
+            if (item.key === "Community") setCommunityDropdownOpen(true);
 
             foundActiveItem = true;
           }
@@ -56,22 +54,20 @@ function Sidebar() {
   }, [location]);
 
   const handleDropdownClick = (key) => {
-    if (key === "complaint-tracking") {
-      setComplaintDropdownOpen(!isComplaintDropdownOpen);
-      setSecurityDropdownOpen(false);
-      setFinancialDropdownOpen(false);
-     
-    } else if (key === "security-management") {
-      setSecurityDropdownOpen(!isSecurityDropdownOpen);
-      setComplaintDropdownOpen(false);
-      setFinancialDropdownOpen(false);
 
-    } else if (key === "financialmanagement") {
-      setFinancialDropdownOpen(!isFinancialDropdownOpen);
-      setComplaintDropdownOpen(false);
-      setSecurityDropdownOpen(false);
-     
-    } 
+
+     if (key === "payment-portal") {
+   
+ 
+      setPaymentPortalDropdownOpen(!isPaymentPortalDropdownOpen);
+    }
+
+    else if (key === "Community") {
+        
+      setPaymentPortalDropdownOpen(false);
+      setCommunityDropdownOpen(!isCommunityDropdownOpen);
+
+    }
 
     setActiveItem(key);
   };
@@ -96,59 +92,56 @@ function Sidebar() {
       icon: <img src={dashboardIcon} />,
       path: "/dashboard",
     },
+   
+  
     {
-      key: "residentmanagement",
-      label: "Resident Management",
-      icon: <img src={residentIcon} />,
-      path: "/residentmanagement",
+      key: "personal-details",
+      label: "Personal Details",
+      icon: <img src={personaldetailsIcon} />,
+      path: "/personal-details",
     },
     {
-      key: "financialmanagement",
-      label: "Financial Management",
-      icon: <img src={financialIcon} />,
-      subItems: [
-        { key: "income", label: "Income", path: "/Financial-Maintenance" },
-        { key: "expenses", label: "Expenses", path: "/expense" },
-        { key: "note", label: "Note", path: "/note" },
-      ],
-    },
+        key: "service-and-complaint",
+        label: "Service And Complaint",
+        icon: <img src={serviceIcon} />,
+        path: "/service-and-complaint",
+      },
+      {
+        key: "events-and-participation",
+        label: "Events Participation",
+        icon: <img src={eventsIcon} />,
+        path: "/events-and-participation",
+      },
+      
+  
+      {
+        key: "Community",
+        label: "Community",
+        icon: <img src={commuityIcon} />,
+        subItems: [
+          { key: "Access", label: "Access Forums", path: "/Access" },
+          { key: "Polls", label: "Polls", path: "/Polls" },
+          { key: "Community-Discussion", label: "Communities Discussion", path: "/Community-Discussion" },
+        ],
+      },
+      {
+        key: "payment-portal",
+        label: "Payment Portal",
+        icon: <img src={paymentIcon} />,
+        subItems: [
+          { key: "maintenance-invoices", label: "Maintenance Invoices", path: "/maintenance-invoices" },
+          { key: "other-income-nvoice", label: "Other Income Invoice", path: "/other-income-nvoice" },
+        ],
+      },
     {
-      key: "facility-management",
-      label: "Facility Management",
-      icon: <img src={facalityIcon} />,
-      path: "/facility-management",
+      key: "security-Protocols",
+      label: "Security protocols",
+      icon: <img src={FrameIcon} />,
+      path: "/security-Protocol",
     },
-    {
-      key: "complaint-tracking",
-      label: "Complaint Tracking",
-      icon: <img src={complainrtrackingIcon} />,
-      subItems: [
-        { key: "request-tracking", label: "Request Tracking", path: "/request-tracking" },
-        { key: "create-complaint", label: "Create Complaint", path: "/create-complaint" },
-      ],
-    },
-    {
-      key: "security-management",
-      label: "Security Management",
-      icon: <img src={securitymanagementIcon} />,
-      subItems: [
-        { key: "visitors-log", label: "Visitors Log", path: "/visitors-log" },
-        { key: "security-protocols", label: "Security Protocols", path: "/security-protocols" },
-      ],
-    },
-    {
-      key: "security-guard",
-      label: "Security Guard",
-      icon: <img src={securityguardIcon} />,
-      path: "/security-guard",
-    },
-    {
-      key: "announcement",
-      label: "Announcement",
-      icon: <img src={announcementIcon} />,
-      path: "/announcement",
-    },
+   
     
+
   ];
 
   return (
@@ -215,9 +208,9 @@ function Sidebar() {
 
 
                    {
-  (item.key === "complaint-tracking" && isComplaintDropdownOpen) ||
-  (item.key === "security-management" && isSecurityDropdownOpen) ||
-  (item.key === "financialmanagement" && isFinancialDropdownOpen)  ? (
+  
+  (item.key === "payment-portal" && isPaymentPortalDropdownOpen) ||
+  (item.key === "Community" && isCommunityDropdownOpen) ? (
     <img src={ArrowIcon}  />
   ) : (
     <img src={ArrowIcon} />
@@ -226,9 +219,10 @@ function Sidebar() {
 
 
                   </div>
-                  {(item.key === "complaint-tracking" && isComplaintDropdownOpen) ||
-                    (item.key === "security-management" && isSecurityDropdownOpen) ||
-                    (item.key === "financialmanagement" && isFinancialDropdownOpen)  ? (
+                  {
+
+                    (item.key === "payment-portal" && isPaymentPortalDropdownOpen) ||
+                    (item.key === "Community" && isCommunityDropdownOpen) ? (
 
                     <ul className="list-unstyled ms-4">
                       {item.subItems.map((subItem) => (
@@ -305,4 +299,4 @@ function Sidebar() {
   );
 }
 
-export default Sidebar;
+export default ResidentSidebar;

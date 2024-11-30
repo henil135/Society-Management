@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Sidebar from '../layout/Sidebar'
+import ResidentSidebar from '../layout/ResidentSidebar'
 import Navbar from '../Navbar';
 import balanceRactangle from '../../assets/Rectangle 1063.png'
 import incomeRactangle from '../../assets/Rectangle 1063 (1).png'
@@ -91,7 +91,7 @@ const OtherIncomeInvoices = () => {
 
     return (
         <div className='dashboard-bg w-100' >
-            <Sidebar />
+            <ResidentSidebar     />
             <Navbar />
 
             <div style={{ marginLeft: '300px' }}>

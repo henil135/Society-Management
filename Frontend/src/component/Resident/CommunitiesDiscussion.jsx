@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Sidebar from '../layout/Sidebar';
+import ResidentSidebar from '../layout/ResidentSidebar';
 import Navbar from '../Navbar';
 import ChatSidebar from './ChatSidebar';
 import Avtar from '../../assets/Avatar plain.png';
@@ -51,9 +51,24 @@ const CommunitiesDiscussion = () => {
         }
     }, []); // The useEffect will run only once when the component mounts
 
+
+
+    // locastorage 
+    // useEffect(() => {
+    //     // "newQuestions" તરીકે ઘણી બધી માહિતી localStorage માંથી મેળવો.
+    //     const newQuestions = JSON.parse(localStorage.getItem('newQuestions')) || [];
+        
+    //     if (newQuestions.length > 0) {
+    //         setCardData(prevData => [...prevData, ...newQuestions]);
+            
+    //         // localStorage માંથી જો બધું વાપરી લીધું હોય તો તેને સાફ કરો.
+    //         localStorage.removeItem('newQuestions');
+    //     }
+    // }, []); // ફક્ત કૉમ્પોનેન્ટનું માઉન્ટ સમયે ચાલે
+    
     return (
         <div className='dashboard-bg w-100'>
-            <Sidebar />
+            <ResidentSidebar />
             <Navbar />
             <div className="container-fluid stickyHeader p-3" style={{ marginLeft: "315px", width: "1590px" }}>
                 <div className="row">
@@ -87,7 +102,7 @@ const CommunitiesDiscussion = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>  
 
                         {/* Cards Section */}
                         <div className='ps-4 pe-2 py-3'>

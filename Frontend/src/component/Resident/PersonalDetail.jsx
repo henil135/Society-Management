@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Sidebar from "../../component/layout/Sidebar";
+import ResidentSidebar from "../../component/layout/ResidentSidebar";
 import Navbar from '../Navbar';
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Link } from 'react-router-dom';
@@ -47,7 +47,7 @@ const PersonalDetail = () => {
 
     return (
         <div className='dashboard-bg w-100'  >
-            <Sidebar/>
+            <ResidentSidebar/>
             <Navbar />
             <div style={{ marginLeft: '300px' }}>
 

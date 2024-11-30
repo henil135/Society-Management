@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Modal, Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import Sidebar from '../layout/Sidebar'
+import ResidentSidebar from '../layout/ResidentSidebar'
 import Navbar from '../Navbar';
 
 const ServiceComplaint = () => {
@@ -86,7 +86,7 @@ const ServiceComplaint = () => {
 
     return (
         <div className='dashboard-bg w-100'>
-            <Sidebar />
+            <ResidentSidebar />
             <Navbar />
             <div style={{ marginLeft: '300px' }}>
 

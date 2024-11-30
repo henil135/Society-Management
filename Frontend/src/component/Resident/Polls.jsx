@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import Navbar from '../Navbar';
+
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { IoEyeSharp } from "react-icons/io5";
-import Sidebar from "../../component/layout/Sidebar";
+
 import profileimg from '../../assets/profile.png';
 import pollImg from '../../assets/poll-icon.png';
+import ResidentSidebar from '../layout/ResidentSidebar';
+import Header from '../Navbar';
 
 const Polls = () => {
     const [note, setNote] = useState([
@@ -70,10 +72,10 @@ const Polls = () => {
     return (
         <div className="d-flex flex-column flex-md-row">
             <div className="flex-shrink-0">
-                <Sidebar />
+                <ResidentSidebar/>
             </div>
             <div className="dashboard-bg" style={{ width: "1920px" }}>
-                <Navbar />
+                <Header />
                 <div className="stickyHeader">
                     <div className="income" style={{ marginLeft: "300px", width: "1608px" }}>
                         <div className="row p-4">

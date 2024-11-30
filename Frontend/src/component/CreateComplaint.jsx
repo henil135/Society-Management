@@ -256,7 +256,7 @@ function ComplaintTracking() {
       </div>
 
       {/* Create Complaint Modal */}
-      <Modal show={showCreateModal} onHide={handleCloseCreateModal} className='Round-modal'>
+      <Modal show={showCreateModal} onHide={handleCloseCreateModal} centered className='Round-modal'>
         <Modal.Header >
           <Modal.Title>Create Complaint</Modal.Title>
         </Modal.Header>
@@ -409,7 +409,7 @@ function ComplaintTracking() {
       </Modal>
 
 
-      <Modal
+      <Modal centered
         show={showViewModal}
         onHide={handleCloseViewModal}
         style={{
@@ -667,7 +667,7 @@ function ComplaintTracking() {
 
       {/* edit model */}
 
-      <Modal show={showModal} onHide={handleCloseModal} className='Round-modal'>
+      <Modal show={showModal} onHide={handleCloseModal} centered className='Round-modal'>
 
   <Modal.Header >
     <Modal.Title>Edit Complaint</Modal.Title>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Sidebar from '../layout/Sidebar';
+import ResidentSidebar from '../layout/ResidentSidebar';
 import Navbar from '../Navbar';
 import ChatSidebar from './ChatSidebar';
 import Avtar from '../../assets/Avatar plain.png';
@@ -35,7 +35,7 @@ const CommunityQuestion = () => {
 
     return (
         <div className='dashboard-bg w-100'>
-            <Sidebar />
+            <ResidentSidebar />
             <Navbar />
             <div className="container-fluid stickyHeader p-3" style={{ marginLeft: "315px", width: "1590px" }}>
                 <div className="row">

@@ -3,29 +3,19 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, useLocation } from "react-router-dom";
 import { FaSignOutAlt, FaBars } from "react-icons/fa";
 import "../../style.css";
-import dashboardIcon from "../../Icons/image.png";
-import residentIcon from "../../Icons/money.png";
-import financialIcon from "../../Icons/dollar-square.png";
-import facalityIcon from "../../Icons/building.png";
-import complainrtrackingIcon from "../../Icons/sms-tracking.png";
-import securitymanagementIcon from "../../Icons/shield-security.png";
-import securityguardIcon from "../../Icons/security-user.png";
-import announcementIcon from "../../Icons/Announcement.png";
-
+import securityIcon from "../../Icons/security.png";
 import Logo from "../Logo";
 import HideBgCopy from "../../assets/HideBgCopy.png";
 import BlackImage from '../../assets/Rectangle 1888.png'
-
 import ArrowIcon from '../../Icons/arrow-down.png'
-function Sidebar() {
+function SecuritySidebar() {
   const location = useLocation();
   const [activeItem, setActiveItem] = useState("");
-  const [isComplaintDropdownOpen, setComplaintDropdownOpen] = useState(false);
-  const [isSecurityDropdownOpen, setSecurityDropdownOpen] = useState(false);
-  const [isFinancialDropdownOpen, setFinancialDropdownOpen] = useState(false);
+  const [isGeneralSecurityDropdownOpen, setGeneralSecurityDropdownOpen] = useState(false);
   const [isSidebarOpen, setSidebarOpen] = useState(false); // Mobile sidebar toggle state
   const [isMobile, setIsMobile] = useState(window.innerWidth < 576); // Mobile screen check
-  
+ 
+
 
   // Update active item on location change
   useEffect(() => {
@@ -36,11 +26,7 @@ function Sidebar() {
         item.subItems.forEach((subItem) => {
           if (currentPath === subItem.path) {
             setActiveItem(subItem.key);
-            if (item.key === "complaint-tracking") setComplaintDropdownOpen(true);
-            if (item.key === "security-management") setSecurityDropdownOpen(true);
-            if (item.key === "financialmanagement") setFinancialDropdownOpen(true);
-            
-
+            if (item.key === "security") setGeneralSecurityDropdownOpen(true);
             foundActiveItem = true;
           }
         });
@@ -56,23 +42,11 @@ function Sidebar() {
   }, [location]);
 
   const handleDropdownClick = (key) => {
-    if (key === "complaint-tracking") {
-      setComplaintDropdownOpen(!isComplaintDropdownOpen);
-      setSecurityDropdownOpen(false);
-      setFinancialDropdownOpen(false);
-     
-    } else if (key === "security-management") {
-      setSecurityDropdownOpen(!isSecurityDropdownOpen);
-      setComplaintDropdownOpen(false);
-      setFinancialDropdownOpen(false);
-
-    } else if (key === "financialmanagement") {
-      setFinancialDropdownOpen(!isFinancialDropdownOpen);
-      setComplaintDropdownOpen(false);
-      setSecurityDropdownOpen(false);
-     
+ 
+   if (key === "security") {
+      setGeneralSecurityDropdownOpen(!isGeneralSecurityDropdownOpen);
+    
     } 
-
     setActiveItem(key);
   };
 
@@ -90,65 +64,18 @@ function Sidebar() {
   }, []);
 
   const menuItems = [
+  
     {
-      key: "dashboard",
-      label: "Dashboard",
-      icon: <img src={dashboardIcon} />,
-      path: "/dashboard",
-    },
-    {
-      key: "residentmanagement",
-      label: "Resident Management",
-      icon: <img src={residentIcon} />,
-      path: "/residentmanagement",
-    },
-    {
-      key: "financialmanagement",
-      label: "Financial Management",
-      icon: <img src={financialIcon} />,
+      key: "security",
+      label: "Security",
+      icon: <img src={securityIcon} />,
       subItems: [
-        { key: "income", label: "Income", path: "/Financial-Maintenance" },
-        { key: "expenses", label: "Expenses", path: "/expense" },
-        { key: "note", label: "Note", path: "/note" },
+        { key: "visitor-tracking", label: "Visitor Tracking", path: "/visitor-tracking" },
+        { key: "emergency-management", label: "Emergency Management", path: "/emergency-management" },
       ],
     },
-    {
-      key: "facility-management",
-      label: "Facility Management",
-      icon: <img src={facalityIcon} />,
-      path: "/facility-management",
-    },
-    {
-      key: "complaint-tracking",
-      label: "Complaint Tracking",
-      icon: <img src={complainrtrackingIcon} />,
-      subItems: [
-        { key: "request-tracking", label: "Request Tracking", path: "/request-tracking" },
-        { key: "create-complaint", label: "Create Complaint", path: "/create-complaint" },
-      ],
-    },
-    {
-      key: "security-management",
-      label: "Security Management",
-      icon: <img src={securitymanagementIcon} />,
-      subItems: [
-        { key: "visitors-log", label: "Visitors Log", path: "/visitors-log" },
-        { key: "security-protocols", label: "Security Protocols", path: "/security-protocols" },
-      ],
-    },
-    {
-      key: "security-guard",
-      label: "Security Guard",
-      icon: <img src={securityguardIcon} />,
-      path: "/security-guard",
-    },
-    {
-      key: "announcement",
-      label: "Announcement",
-      icon: <img src={announcementIcon} />,
-      path: "/announcement",
-    },
-    
+   
+
   ];
 
   return (
@@ -215,9 +142,9 @@ function Sidebar() {
 
 
                    {
-  (item.key === "complaint-tracking" && isComplaintDropdownOpen) ||
-  (item.key === "security-management" && isSecurityDropdownOpen) ||
-  (item.key === "financialmanagement" && isFinancialDropdownOpen)  ? (
+
+  (item.key === "security" && isGeneralSecurityDropdownOpen) 
+   ? (
     <img src={ArrowIcon}  />
   ) : (
     <img src={ArrowIcon} />
@@ -226,9 +153,8 @@ function Sidebar() {
 
 
                   </div>
-                  {(item.key === "complaint-tracking" && isComplaintDropdownOpen) ||
-                    (item.key === "security-management" && isSecurityDropdownOpen) ||
-                    (item.key === "financialmanagement" && isFinancialDropdownOpen)  ? (
+                  {
+                    (item.key === "security" && isGeneralSecurityDropdownOpen)       ? (
 
                     <ul className="list-unstyled ms-4">
                       {item.subItems.map((subItem) => (
@@ -243,7 +169,7 @@ function Sidebar() {
                                 height: "30px",
                               }}
                             />
-                          )}
+                          )}        
                           <Link
                             to={subItem.path}
                             className="d-flex align-items-center"
@@ -305,4 +231,4 @@ function Sidebar() {
   );
 }
 
-export default Sidebar;
+export default SecuritySidebar;

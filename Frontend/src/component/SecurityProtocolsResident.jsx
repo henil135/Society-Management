@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Sidebar from "./layout/Sidebar";
+import ResidentSidebar from "./layout/ResidentSidebar";
 import Header from "./Navbar";
 
 
@@ -30,7 +30,7 @@ const SecurityProtocolsResident = () => {
       <div className="d-flex flex-grow-1">
         {/* Sidebar */}
         <div className="text-white p-3" >
-          <Sidebar />
+          <ResidentSidebar />
         </div>
 
         {/* Main Content Area */}
