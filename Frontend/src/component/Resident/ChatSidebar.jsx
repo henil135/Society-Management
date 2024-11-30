@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
-import avatar from '../assets/Avatar.png';
+import avatar from '../../assets/Avatar.png';
 
 const ChatSidebar = ({ onContactClick }) => {
   const [searchQuery, setSearchQuery] = useState(''); // State for search query

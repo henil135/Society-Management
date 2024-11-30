@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { Navbar, Nav, Button, InputGroup, FormControl, Container } from 'react-bootstrap';
 import { FiSearch } from "react-icons/fi";
 import avtar from '../assets/Avatar.png';

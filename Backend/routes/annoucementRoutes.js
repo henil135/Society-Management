@@ -3,7 +3,7 @@ const { createAnnouncement, getAllAnnouncements, getAnnouncementById, updateAnno
 const router = express.Router();
 
 router.post('/addannouncement', createAnnouncement);
-router.get('/', getAllAnnouncements);
+router.get('/getannouncement', getAllAnnouncements);
 router.get('/:id', getAnnouncementById);
 router.put('/updateannouncement/:id', updateAnnouncement);
 router.delete('/deleteannouncement/:id', deleteAnnouncement);

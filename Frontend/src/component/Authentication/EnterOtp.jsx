@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useLocation, useNavigate } from 'react-router-dom';
-import OTPImage from '../assets/forgotpassword.jpg';
-import '../style.css';
-import Logo from './Logo';
+import OTPImage from '../../assets/forgotpassword.jpg';
+import '../../style.css';
+import Logo from '../Logo';
 import toast from "react-hot-toast"
 import axios from 'axios';
-import { verifyOtp } from '../services/authentication';
+import { verifyOtp } from '../../services/authentication';
 
  function EnterOtp() {
   const { register, handleSubmit } = useForm();

@@ -2,9 +2,7 @@ import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, useLocation } from "react-router-dom";
 import { FaSignOutAlt, FaChevronDown, FaChevronUp, FaBars } from "react-icons/fa";
-
 import "../../style.css";
-
 import dashboardIcon from "../../Icons/image.png";
 import residentIcon from "../../Icons/money.png";
 import financialIcon from "../../Icons/dollar-square.png";

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import Sidebar from "../component/layout/Sidebar";
-import Header from "./Navbar";
+import { useState } from "react";
+import Sidebar from "../../component/layout/Sidebar";
+import Header from "../Navbar";
 import { Button, Table, Form, Modal } from "react-bootstrap";
-import Avtar from "../assets/Avatar.png";
+import Avtar from "../../assets/Avatar.png";
 import { FaPlus } from "react-icons/fa";
 
 function VisitorsTracking() {

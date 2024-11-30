@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import Sidebar from './layout/Sidebar';
-import Navbar from './Navbar';
+import { useState, useEffect } from 'react';
+import Sidebar from '../layout/Sidebar';
+import Navbar from '../Navbar';
 import ChatSidebar from './ChatSidebar';
-import Avtar from '../assets/Avatar plain.png';
+import Avtar from '../../assets/Avatar plain.png';
 import { IoEyeSharp } from "react-icons/io5";
-import threedotbtn from '../assets/threedotes-btn.png';
+import threedotbtn from '../../assets/threedotes-btn.png';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 

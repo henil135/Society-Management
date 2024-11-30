@@ -2,9 +2,9 @@
 // import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
-import ForgotPasswordImage from '../assets/forgotpassword.jpg'; // Use the correct path for your image
-import Logo from './Logo';
-import '../style.css'
+import ForgotPasswordImage from '../../assets/forgotpassword.jpg'; // Use the correct path for your image
+import Logo from '../Logo';
+import '../../style.css'
 import toast from "react-hot-toast"
 import axios from 'axios';
 

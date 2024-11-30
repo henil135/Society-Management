@@ -1,7 +1,8 @@
+/// model 
 const { Schema, model } = require("mongoose");
 
 const Ownerschema= new Schema({
-    Owner_image:{
+    profileImage:{
         type:String,
          required:true
     },

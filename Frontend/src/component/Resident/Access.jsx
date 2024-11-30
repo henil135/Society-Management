@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ChatSidebar from './ChatSidebar';
 import ChatMessage from './ChatMessage';
-import ChatInput from './ChatInput';
-import Sidebar from './layout/Sidebar';
-import Header from './Navbar';
-import Avatar from '../assets/Avatar.png';
-import call from '../Icons/call.png';
-import videocall from '../Icons/videocall.png';
-import threedots from '../Icons/threedots.png';
+import ChatInput from '../ChatInput';
+import Sidebar from '../layout/Sidebar';
+import Header from '../Navbar';
+import Avatar from '../../assets/Avatar.png';
+import call from '../../Icons/call.png';
+import videocall from '../../Icons/videocall.png';
+import threedots from '../../Icons/threedots.png';
 import './Chat.css';
 
 const ChatLayout = () => {

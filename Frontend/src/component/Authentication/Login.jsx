@@ -1,28 +1,15 @@
-// Login.js
-// import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
-import loginImage from '../assets/login.png';
-import '../style.css';
-import Logo from './Logo';
+import loginImage from '../../assets/login.png';
+import '../../style.css';
+import Logo from '../Logo';
 import axios from 'axios';
-import { StoreUser } from "../redux/authslice"
+import { StoreUser } from "../../redux/authslice"
+import toast from 'react-hot-toast';
 
 function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
-
-  // const onSubmit = (data) => {
-  //   const storedUser = JSON.parse(localStorage.getItem('user'));
-
-  //   // Check if email and password match with registration data
-  //   if (storedUser && storedUser.email === data.email && storedUser.password === data.password) {
-  //     alert('Login successful!');
-  //     navigate('/home'); // Redirect to homepage
-  //   } else {
-  //     alert('Invalid email or password. Please try again.');
-  //   }
-  // };
 
   const onSubmit = async (data) => {
     try {
@@ -31,16 +18,15 @@ function Login() {
 
       // Handle successful login
       if (response.data.success) {
-        alert(response.data.success) // Assuming the API response has a "success" property
-        const user = response.data.user; // Assuming the API response includes user data
-        StoreUser(user); // Assuming this function stores user data in Redux store (if applicable)
-        navigate('/dashboard'); // Redirect to homepage after successful login
+        toast.success(response.data.message)
+        const user = response.data.user; 
+        StoreUser(user);
+        navigate('/dashboard'); 
       } else {
-        alert(response.data.message || 'Login failed!'); // Display error message from response or a generic message
+        alert(response.data.message || 'Login failed!'); 
       }
     } catch (error) {
-      console.log(error); // Log errors for debugging
-      // alert('An error occurred. Please try again.'); // Generic error message for user
+      console.log(error);
     }
   };
 
