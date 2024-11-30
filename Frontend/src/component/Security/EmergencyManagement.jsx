@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Sidebar from "../../component/layout/Sidebar";
+import SecuritySidebar from "../../component/layout/SecuritySidebar";
 import Header from "../Navbar";
 
 const EmergencyManagement = () => {
@@ -22,7 +22,7 @@ const EmergencyManagement = () => {
     <div className="d-flex flex-column flex-md-row dashboard-bg h-100">
       {/* Sidebar Section */}
       <div className="flex-shrink-0" >
-        <Sidebar />
+        <SecuritySidebar   />
       </div>
 
       {/* Main Content Section */}

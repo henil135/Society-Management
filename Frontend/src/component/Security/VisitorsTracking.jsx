@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Sidebar from "../../component/layout/Sidebar";
+import SecuritySidebar from "../../component/layout/SecuritySidebar";
 import Header from "../Navbar";
 import { Button, Table, Form, Modal } from "react-bootstrap";
 import Avtar from "../../assets/Avatar.png";
@@ -72,7 +72,7 @@ function VisitorsTracking() {
   return (
     <div className="d-flex flex-column flex-md-row dashboard-bg">
       <div className="flex-shrink-0">
-        <Sidebar />
+        <SecuritySidebar />
       </div>
 
       <div className="flex-grow-1" style={{ width: "1920px" }}>

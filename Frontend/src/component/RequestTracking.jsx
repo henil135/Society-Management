@@ -255,7 +255,7 @@ function RequestTracking() {
 
       {/* Create Complaint Modal */}
 
-      <Modal show={showCreateModal} onHide={handleCloseCreateModal} className='Round-modal'>
+      <Modal show={showCreateModal} onHide={handleCloseCreateModal} centered className='Round-modal'>
   <Modal.Header >
     <Modal.Title>Create Request</Modal.Title>
   </Modal.Header>
@@ -290,7 +290,7 @@ function RequestTracking() {
        <Form.Group className='mt-2'>
         <Form.Label>Request Date<span className="text-danger">*</span></Form.Label>
         <Form.Control
-          type="text"
+          type="date"
           value={newRequest.date}
           onChange={(e) => setNewRequest({ ...newRequest, date: e.target.value })}
         />
@@ -409,7 +409,7 @@ function RequestTracking() {
 </Modal>
 
 
-<Modal
+<Modal centered
   show={showViewModal}
   onHide={handleCloseViewModal}
   style={{
@@ -654,7 +654,7 @@ function RequestTracking() {
       {/* edit model */}
 
 
-      <Modal show={showModal} onHide={handleCloseModal} className='Round-modal'>
+      <Modal show={showModal} onHide={handleCloseModal} centered  className='Round-modal'>
   <Modal.Header >
     <Modal.Title>Edit Request</Modal.Title>
   </Modal.Header>
@@ -705,7 +705,7 @@ function RequestTracking() {
       <Form.Group className='mt-2'>
         <Form.Label>Request Date<span className="text-danger">*</span></Form.Label>
         <Form.Control
-          type="text"
+          type="date"
           value={selectedRequest?.date || ""}
           onChange={(e) =>
             setSelectedRequest((prev) => ({

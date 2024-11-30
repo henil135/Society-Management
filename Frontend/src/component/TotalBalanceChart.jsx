@@ -259,18 +259,18 @@ function TotalBalanceChart() {
                             <p><strong>Work:</strong> {contact.work}</p>
                         </div>
                         <div className="gap-3 d-flex">
-                            <Button
+                            <button className='border-0'
                                 onClick={() => handleShowDeleteModal(index)}
                                
                             >
                                <img src={Delete}/>
-                            </Button>
-                            <Button
+                            </button>
+                            <button className='border-0'
                              
                                 onClick={() => handleEdit(index)}
                             >
                                 <img src={Edit}/>
-                            </Button>
+                            </button>
                         </div>
                     </div>
                 ))

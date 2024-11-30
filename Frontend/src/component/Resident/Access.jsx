@@ -2,7 +2,7 @@ import { useState } from 'react';
 import ChatSidebar from './ChatSidebar';
 import ChatMessage from './ChatMessage';
 import ChatInput from '../ChatInput';
-import Sidebar from '../layout/Sidebar';
+import ResidentSidebar from '../layout/ResidentSidebar';
 import Header from '../Navbar';
 import Avatar from '../../assets/Avatar.png';
 import call from '../../Icons/call.png';
@@ -60,7 +60,7 @@ const ChatLayout = () => {
   return (
     <div className="d-flex flex-column flex-md-row">
       <div className="flex-shrink-0">
-        <Sidebar />
+        <ResidentSidebar />
       </div>
 
 

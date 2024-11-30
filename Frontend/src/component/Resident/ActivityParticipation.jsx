@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Sidebar from '../layout/Sidebar'
+import ResidentSidebar from '../layout/ResidentSidebar'
 import Navbar from '../Navbar'
 import Avatar from '../../assets/Avatar.png'
 import { Link } from 'react-router-dom'
@@ -25,7 +25,7 @@ const ActivityParticipation = () => {
 
   return (
     <div className='dashboard-bg w-100' >
-      <Sidebar />
+      <ResidentSidebar   />
       <Navbar />
 
       <div className="stickyHeader" style={{ marginLeft: '300px' }}>

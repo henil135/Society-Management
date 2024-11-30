@@ -25,7 +25,6 @@ import Announcement from './component/Announcement';
 import VisitorsTracking from './component/Security/VisitorsTracking';
 import EmergencyManagement from './component/Security/EmergencyManagement';
 import Profile from './component/Profile';
-
 import EditProfile from './component/EditProfile'
 import PersonalDetail from './component/Resident/PersonalDetail';
 import TenantPersonalDetails from './component/TenantPersonalDetails';
@@ -35,13 +34,9 @@ import EventParticipation from './component/Resident/EventParticipation.jsx';
 import ActivityParticipation from './component/Resident/ActivityParticipation.jsx';
 import MaintenanceInvoices from './component/Resident/MaintenanceInvoices.jsx';
 import SecurityProtocolsResident from './component/SecurityProtocolsResident';
-
 import ViewInvoice from './component/ViewInvoice.jsx';
-
 import OtherIncomeInvoices from './component/Resident/OtherIncomeInvoice.jsx';
-
 import Polls from './component/Resident/Polls.jsx';
-
 import Access from './component/Resident/Access.jsx';
 import CommunitiesDiscussion from './component/Resident/CommunitiesDiscussion.jsx';
 import CommunityQuestion from './component/Resident/CommunityQuestion.jsx';
@@ -89,7 +84,7 @@ function App() {
           <Route path='/other-income-nvoice' element={<OtherIncomeInvoices />} />
 
 
-          <Route path='/Resident-Protocols' element={<SecurityProtocolsResident />} />
+          <Route path='/security-Protocol' element={<SecurityProtocolsResident />} />
 
           <Route path='/view-invoice' element={<ViewInvoice />} />
           <Route path='/Polls' element={<Polls />} />
