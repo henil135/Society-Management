@@ -52,7 +52,7 @@ exports.getAllFacilities = async (req, res) => {
 
         return res.json({
             success: true,
-            facilities,
+            facilities:facilities || [],
         });
     } catch (error) {
         console.error("Error retrieving facilities:", error);
