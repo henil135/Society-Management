@@ -9,7 +9,7 @@ import Sidebar from "../component/layout/Sidebar";
 import { createFacility, getFacilities, getFacilitiesByID, updateFacility } from "../services/FacilityManagementapi"
 import axios from "axios";
 
-const FacilityCard = ({ title, date, description, onEdit }) => {
+const FacilityCard = ({ Facility_name, Date, Description, onEdit }) => {
     const [showMenu, setShowMenu] = useState(false);
 
     const handleIconClick = () => {
@@ -23,17 +23,17 @@ const FacilityCard = ({ title, date, description, onEdit }) => {
                     className="text-white d-flex justify-content-between align-items-center"
                     style={{ background: "#5678E9" }}
                 >
-                    {title}
+                    {Facility_name}
                     <BsThreeDotsVertical onClick={handleIconClick} style={{ cursor: "pointer" }} />
                 </Card.Header>
                 <Card.Body>
                     <p className="mb-1" style={{ fontSize: "12px", color: "gray" }}>
-                        <strong>Upcoming Schedule Service Date:</strong> {date}
+                        <strong>Upcoming Schedule Service Date:</strong> {Date}
                     </p>
                     <h5 className="card-title" style={{ fontSize: "15px", color: "gray" }}>
                         Description
                     </h5>
-                    <p className="card-text" style={{ fontSize: "13px" }}>{description}</p>
+                    <p className="card-text" style={{ fontSize: "13px" }}>{Description}</p>
                 </Card.Body>
 
                 {/* Dropdown menu */}
@@ -63,12 +63,12 @@ const FacilityCard = ({ title, date, description, onEdit }) => {
 
 const FacilityManagement = () => {
     const [facilities, setFacilities] = useState([
-        { title: "Parking Facilities", date: "01/07/2024", description: "Description here." },
-        { title: "Community Center", date: "01/07/2024", description: "Description here." },
-        { title: "Swimming Pool", date: "01/07/2024", description: "Description here." },
-        { title: "Wi-Fi and Connectivity", date: "01/07/2024", description: "Description here." },
-        { title: "Parking Facilities", date: "01/07/2024", description: "Description here." },
-        { title: "Community Center", date: "01/07/2024", description: "Description here." },
+        // { title: "Parking Facilities", date: "01/07/2024", description: "Description here." },
+        // { title: "Community Center", date: "01/07/2024", description: "Description here." },
+        // { title: "Swimming Pool", date: "01/07/2024", description: "Description here." },
+        // { title: "Wi-Fi and Connectivity", date: "01/07/2024", description: "Description here." },
+        // { title: "Parking Facilities", date: "01/07/2024", description: "Description here." },
+        // { title: "Community Center", date: "01/07/2024", description: "Description here." },
 
     ]);
 
@@ -94,14 +94,6 @@ const FacilityManagement = () => {
 
     const handleSave = async () => {
         const { Facility_name, Date, Description, Remind_Before } = facilityData;
-        // try {
-        //     const response = await axios.post('http://localhost:5000/api/v2/facility/addfacility',facilityData);
-        //     console.log(response.facilityData);
-        //     setFacilities([...facilities, response.data]);
-        //     return;
-        // } catch (error) {
-        //     console.log(error);
-
 
         // Field validation
         if (!Facility_name || !Date || !Description || !Remind_Before) {
@@ -132,8 +124,9 @@ const FacilityManagement = () => {
             } else {
                 // create a facility
                 const response = await createFacility(facilityData);
-                if (response && response.data) {
-                    setFacilities([...facilities, response.data]); // Update state with the newly created facility
+                console.log("Create Facility API Response:", response);
+                if (response && response.data.facility) {
+                    setFacilities([...facilities, response.data.facility]); // Update state with the newly created facility
                 } else {
                     console.error("Failed to create facility.");
                 }
@@ -141,25 +134,31 @@ const FacilityManagement = () => {
 
             handleCloseModal();
         } catch (error) {
-            console.error("Error while creating/updating the facility:", error.message);
+            console.log("Error while creating/updating the facility:", error.message);
         }
-    
+
     };
 
     useEffect(() => {
-        const fetchFacilities = async () => {
-            try {
-                const response = await getFacilities(); // Call the API to get all facilities
-                if (response && response.data) {
-                    setFacilities(response.data); // Update state with fetched facilities
-                }
-            } catch (error) {
-                console.error("Error fetching facilities:", error.message);
-            }
-        };
-    
-        fetchFacilities();
+        
+        FetchFacilities();
     }, []);
+    const FetchFacilities = async () => {
+        try {
+            const response = await getFacilities(); // Assuming this is your API call
+            console.log("API Response:", response); // Debug response
+            
+            // Access facilities directly if the structure matches your log
+            if (response && response.success && Array.isArray(response.facilities)) {
+                console.log("Facilities fetched:", response.facilities);
+                setFacilities(response.facilities); // Update state
+            } else {
+                console.error("Unexpected response format: ", response);
+            }
+        } catch (error) {
+            console.error("Error fetching facilities:", error.message);
+        }
+    };
 
     const handleEdit = (index) => {
         setFacilityData(facilities[index]);
@@ -204,15 +203,21 @@ const FacilityManagement = () => {
 
                     {/* Facility Cards */}
                     <div className="row mt-3">
-                        {facilities.map((facility, index) => (
-                            <FacilityCard
-                                key={index}
-                                title={facility.title}
-                                date={facility.date}
-                                description={facility.description}
-                                onEdit={() => handleEdit(index)}
-                            />
-                        ))}
+                        {facilities.length > 0 ? (
+                            console.log("Facilities state before rendering:", facilities),
+                            facilities.map((facility, index) => (
+                                <FacilityCard
+                                    key={index}
+                                    Facility_name={facility.Facility_name}
+                                    Date={facility.Date}
+                                    Description={facility.Description}
+                                    onEdit={() => handleEdit(index)}
+                                />
+                                
+                            ))
+                        ) : (
+                            <p>No facilities available</p>
+                        )}
                     </div>
                 </div>
 
