@@ -10,123 +10,123 @@ import axios from 'axios';
 
 function Announcement() {
 
-        const [note, setNote] = useState(
-            []
-        );
-        // This will run when the component mounts
+    const [note, setNote] = useState(
+        []
+    );
+    // This will run when the component mounts
 
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('http://localhost:5000/api/v2/annoucement/getannouncement');
-                console.log(response.data.announcements);  // Check the data in console
-                setNote(response.data.announcements);  // Set the state with fetched data
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-        useEffect(() => {
-            fetchData();
-        }, []);
-        const [show, setShow] = useState(false);
-        const [editIndex, setEditIndex] = useState(null);
-        const [showEditModal, setShowEditModal] = useState(false);
-        const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm();
+    const fetchData = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/api/v2/annoucement/getannouncement');
+            console.log(response.data.announcements);  // Check the data in console
+            setNote(response.data.announcements);  // Set the state with fetched data
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+    useEffect(() => {
+        fetchData();
+    }, []);
+    const [show, setShow] = useState(false);
+    const [editIndex, setEditIndex] = useState(null);
+    const [showEditModal, setShowEditModal] = useState(false);
+    const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm();
 
-        const handleClose = () => {
-            setShow(false);
-            reset();
-            setEditIndex(null);
-        };
-        const handleShow = () => setShow(true);
-        const onSubmit = async (data) => {
-            const response = await axios.post("http://localhost:5000/api/v2/annoucement/addannouncement", data)
-            console.log(response.data);
-            if (editIndex !== null) {
-                const updatedNotes = [...note];
-                updatedNotes[editIndex] = { ...updatedNotes[editIndex], ...data };
-                setNote(updatedNotes);
-            } else {
-                setNote([...note, { id: note.length + 1, ...data }]);
-            }
-        };
+    const handleClose = () => {
+        setShow(false);
+        reset();
+        setEditIndex(null);
+    };
+    const handleShow = () => setShow(true);
+    const onSubmit = async (data) => {
+        const response = await axios.post("http://localhost:5000/api/v2/annoucement/addannouncement", data)
+        console.log(response.data);
+        if (editIndex !== null) {
+            const updatedNotes = [...note];
+            updatedNotes[editIndex] = { ...updatedNotes[editIndex], ...data };
+            setNote(updatedNotes);
+        } else {
+            setNote([...note, { id: note.length + 1, ...data }]);
+        }
+    };
 
-        const [dropdownIndex, setDropdownIndex] = useState(null);
+    const [dropdownIndex, setDropdownIndex] = useState(null);
 
-        // New state for delete confirmation modal
-        const [showDeleteModal, setShowDeleteModal] = useState(false);
-        const [deleteIndex, setDeleteIndex] = useState(null);
+    // New state for delete confirmation modal
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [deleteIndex, setDeleteIndex] = useState(null);
 
-        // Functions for delete modal
-        const handleShowDeleteModal = (index) => {
-            setDeleteIndex(index);
-            setShowDeleteModal(true);
-        };
+    // Functions for delete modal
+    const handleShowDeleteModal = (index) => {
+        setDeleteIndex(index);
+        setShowDeleteModal(true);
+    };
 
-        const handleCloseDeleteModal = () => {
-            setShowDeleteModal(false);
-            setDeleteIndex(null);
-        };
+    const handleCloseDeleteModal = () => {
+        setShowDeleteModal(false);
+        setDeleteIndex(null);
+    };
 
-        const confirmDelete = async () => {
-            if (deleteIndex !== null) {
-                const response = await axios.delete(`http://localhost:5000/api/v2/annoucement/deleteannouncement${id}`)
-                const updatedNotes = note.filter((_, i) => i !== deleteIndex);
-                setNote(updatedNotes);
-            }
-            handleCloseDeleteModal();
-        };
+    const confirmDelete = async () => {
+        if (deleteIndex !== null) {
+            const response = await axios.delete(`http://localhost:5000/api/v2/annoucement/deleteannouncement${id}`)
+            const updatedNotes = note.filter((_, i) => i !== deleteIndex);
+            setNote(updatedNotes);
+        }
+        handleCloseDeleteModal();
+    };
 
-        const handleShowEditModal = (index) => {
-            setEditIndex(index);
-            const selectedNote = note[index];
-            setValue('Announcement_Title', selectedNote.Announcement_Title);
-            // setValue('amtPerMember', selectedNote.amtPerMember);
-            setValue('Announcement_Date', selectedNote.Announcement_Date);
-            setValue('Announcement_Time', selectedNote.Announcement_Time);
-            // setValue('dueDate', selectedNote.dueDate);
-            setValue('Description', selectedNote.Description);
-            setShowEditModal(true);
-        };
+    const handleShowEditModal = (index) => {
+        setEditIndex(index);
+        const selectedNote = note[index];
+        setValue('Announcement_Title', selectedNote.Announcement_Title);
+        // setValue('amtPerMember', selectedNote.amtPerMember);
+        setValue('Announcement_Date', selectedNote.Announcement_Date);
+        setValue('Announcement_Time', selectedNote.Announcement_Time);
+        // setValue('dueDate', selectedNote.dueDate);
+        setValue('Description', selectedNote.Description);
+        setShowEditModal(true);
+    };
 
-        // const updateAnnouncement = async (id, updatedData) => {
-        //     try {
-        //         const response = await axios.put(
-        //             `http://localhost:5000/api/v2/announcement/updateannouncement/${id}`,
-        //             updatedData
-        //         );
-        //         console.log('Update response:', response.data);
+    // const updateAnnouncement = async (id, updatedData) => {
+    //     try {
+    //         const response = await axios.put(
+    //             `http://localhost:5000/api/v2/announcement/updateannouncement/${id}`,
+    //             updatedData
+    //         );
+    //         console.log('Update response:', response.data);
 
-        //         // Update local state to reflect changes
-        //         const updatedNotes = note.map((announcement, idx) =>
-        //             idx === editIndex ? { ...announcement, ...updatedData } : announcement
-        //         );
-        //         setNote(updatedNotes);
-        //         setShowEditModal(false); // Close the modal
-        //     } catch (error) {
-        //         console.error('Error updating announcement:', error);
-        //     }
-        // };
-        // const handleEditSubmit = async (data) => {
-        //     const id = note[editIndex]?.id; // Assuming `id` is the identifier for the announcement
-        //     if (id) {
-        //         await updateAnnouncement(id, data);
-        //     }
-        // };    
-        const handleCloseEditModal = () => {
-            setShowEditModal(false);
-            reset();
-            setEditIndex(null);
-        };
+    //         // Update local state to reflect changes
+    //         const updatedNotes = note.map((announcement, idx) =>
+    //             idx === editIndex ? { ...announcement, ...updatedData } : announcement
+    //         );
+    //         setNote(updatedNotes);
+    //         setShowEditModal(false); // Close the modal
+    //     } catch (error) {
+    //         console.error('Error updating announcement:', error);
+    //     }
+    // };
+    // const handleEditSubmit = async (data) => {
+    //     const id = note[editIndex]?.id; // Assuming `id` is the identifier for the announcement
+    //     if (id) {
+    //         await updateAnnouncement(id, data);
+    //     }
+    // };    
+    const handleCloseEditModal = () => {
+        setShowEditModal(false);
+        reset();
+        setEditIndex(null);
+    };
 
-        const [showViewModal, setShowViewModal] = useState(false);
-        const [viewComplaint, setViewComplaint] = useState(null);
+    const [showViewModal, setShowViewModal] = useState(false);
+    const [viewComplaint, setViewComplaint] = useState(null);
 
-        const handleShowViewModal = (index) => {
-            setViewComplaint(note[index]);
-            setShowViewModal(true);
-        };
+    const handleShowViewModal = (index) => {
+        setViewComplaint(note[index]);
+        setShowViewModal(true);
+    };
 
-        const handleCloseViewModal = () => setShowViewModal(false);
+    const handleCloseViewModal = () => setShowViewModal(false);
 
     return (
         <div className="d-flex flex-column flex-md-row">
@@ -335,7 +335,11 @@ function Announcement() {
                                                 <div className='card-body'>
                                                     <div className="d-flex justify-content-between align-items-center mb-2">
                                                         <h6 className="card-body-title mb-0">Announcement Date</h6>
-                                                        <span className="card-body-title text-dark mb-0 fw-medium">{val.Announcement_Date}</span>
+                                                        <span className="card-body-title text-dark mb-0 fw-medium">{new Date(val.Announcement_Date).toLocaleDateString("en-GB", {
+                                                            day: "2-digit",
+                                                            month: "2-digit",
+                                                            year: "numeric",
+                                                        })}</span>
                                                     </div>
                                                     <div className="d-flex justify-content-between align-items-center mb-2">
                                                         <h6 className="card-body-title mb-0">Announcement Time</h6>

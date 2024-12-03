@@ -1,7 +1,7 @@
 
 const router=require("express").Router();
 const { addOwnerData, GetAllOwner } = require("../controller/ownerController");
-const upload=require("../utils/ownerImages")
+const upload=require("../utils/owner_Image")
 
 //add owner
 router.post("/addowner", upload.fields([

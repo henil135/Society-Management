@@ -8,10 +8,11 @@ import Sidebar from "../component/layout/Sidebar";
 import viewICon from '../Icons/view.png'
 import deleteIcon from '../Icons/delete.png'
 import editIcon from '../Icons/Edit.png'
+import axios from 'axios'
 function ComplaintTracking() {
   const [complaints, setComplaints] = useState([
-    { id: 1, name: "Evelyn Harper", type: "Unethical Behavior", description: "Providing false information or  ", unit: "A", number: "1001", priority: "Medium", status: "Pending" },
-    { id: 2, name: "Esther Howard", type: "Preventive Measures", description: "Regular waste collection services  ", unit: "B", number: "1002", priority: "High", status: "Solve" },
+    // { id: 1, name: "Evelyn Harper", type: "Unethical Behavior", description: "Providing false information or  ", unit: "A", number: "1001", priority: "Medium", status: "Pending" },
+    // { id: 2, name: "Esther Howard", type: "Preventive Measures", description: "Regular waste collection services  ", unit: "B", number: "1002", priority: "High", status: "Solve" },
   ]);
 
   const [selectedComplaint, setSelectedComplaint] = useState(null);
@@ -21,13 +22,13 @@ function ComplaintTracking() {
   // New state for the "Create Complaint" feature
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [newComplaint, setNewComplaint] = useState({
-    name: "",
-    type: "",
-    description: "",
-    unit: "",
-    number: "",
-    priority: "Medium",
-    status: "Open",
+    Complainer_name: "",
+    Complaint_name: "",
+    Description: "",
+    Wing: "",
+    Unit: "",
+    Priority: "Medium",
+    Status: "Open",
   });
 
 
@@ -40,7 +41,7 @@ function ComplaintTracking() {
   const handleCloseModal = () => setShowModal(false);
 
   const handleSave = () => {
-    if (!selectedComplaint.name || !selectedComplaint.type || !selectedComplaint.description || !selectedComplaint.unit || !selectedComplaint.number) {
+    if (!selectedComplaint.Complainer_name || !selectedComplaint.Complaint_name || !selectedComplaint.Description || !selectedComplaint.Wing || !selectedComplaint.Unit) {
       setErrorMessage("All fields are required.");
       return;
     }
@@ -89,24 +90,73 @@ function ComplaintTracking() {
 
 
 
-  const handleCreateComplaint = () => {
+  // const handleCreateComplaint = () => {
+  //   // Basic form validation
+  //   if (!newComplaint.Complainer_name || !newComplaint.Complaint_name || !newComplaint.Description || !newComplaint.Wing || !newComplaint.Unit) {
+  //     setErrorMessage("All fields are required.");
+  //     return;
+  //   }
+
+  //   // Validate and set priority based on status
+
+  //   setErrorMessage(""); // Clear previous error message if any
+
+  //   const newId = complaints.length + 1;  // Auto-generate a new ID
+  //   const complaintToAdd = { ...newComplaint, id: newId };
+  //   setComplaints([...complaints, complaintToAdd]);
+
+  //   setNewComplaint({ Complainer_name: "", Complaint_name: "", Description: "", Wing: "", Unit: "", Priority: "Medium", Status: "Open" });
+  //   setShowCreateModal(false);
+  // };
+
+
+  const handleCreateComplaint = async () => {
     // Basic form validation
-    if (!newComplaint.name || !newComplaint.type || !newComplaint.description || !newComplaint.unit || !newComplaint.number) {
+    if (!newComplaint.Complainer_name || !newComplaint.Complaint_name || !newComplaint.Description || !newComplaint.Wing || !newComplaint.Unit) {
       setErrorMessage("All fields are required.");
       return;
     }
 
-    // Validate and set priority based on status
-
-    setErrorMessage(""); // Clear previous error message if any
-
-    const newId = complaints.length + 1;  // Auto-generate a new ID
-    const complaintToAdd = { ...newComplaint, id: newId };
-    setComplaints([...complaints, complaintToAdd]);
-
-    setNewComplaint({ name: "", type: "", description: "", unit: "", number: "", priority: "Medium", status: "Open" });
-    setShowCreateModal(false);
+    try {
+      const response = await axios.post("http://localhost:5000/api/v2/complaint/addcomplaint", newComplaint);
+      setComplaints(response.data.complaints); // Assuming response.data contains the created complaint
+      setNewComplaint({ Complainer_name: "", Complaint_name: "", Description: "", Wing: "", Unit: "", Priority: "Medium", Status: "Open" });
+      setShowCreateModal(false);
+      setErrorMessage("");
+      fetchComplaints();
+    } catch (error) {
+      console.error("Error creating complaint:", error);
+      setErrorMessage("Failed to create complaint. Please try again.");
+    }
   };
+
+
+  // useEffect(() => {
+  //   const fetchComplaints = async () => {
+  //     try {
+  //       const response = await axios.get("http://localhost:5000/api/v2/complaint/");
+  //       setComplaints(response.data); // Assuming response.data contains the list of complaints
+  //     } catch (error) {
+  //       console.error("Error fetching complaints:", error);
+  //     }
+  //   };
+
+  //   fetchComplaints();
+  // }, []);
+  const fetchComplaints = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/v2/complaint/");
+      console.log(response.data.complaints); // Log API response
+      setComplaints(response.data.complaints); // Ensure it's an array
+    } catch (error) {
+      console.error("Error fetching complaints:", error);
+    }
+  };
+
+  useEffect(() => {
+
+    fetchComplaints();
+  }, []);
 
   // Trigger this effect whenever priority changes
 
@@ -172,84 +222,178 @@ function ComplaintTracking() {
                 </tr>
               </thead>
               <tbody>
-                {complaints.map((complaint) => (
-                  <tr key={complaint.id} >
-                    <td style={tableColumnStyle}>
-                      <div style={imageColumnStyle} className="text-center">
-                        <img
-                          src={Avtar}
-                          alt="avatar"
-                          className="rounded-circle"
-                          style={{
-                            width: "40px", // Fixed width
-                            height: "40px", // Fixed height
-                            borderRadius: "36px", // Radius for rounding the image
-                            border: "2px solid #F4F4F4", // Border with the desired color
-                          }}
-                        />
+                {complaints?.length > 0 ? (
+                  complaints.map((complaint) => (
+                    <tr key={complaint.id}>
+                      <td style={tableColumnStyle}>
+                        <div style={imageColumnStyle} className="text-center">
+                          <img
+                            src={Avtar}
+                            alt="avatar"
+                            className="rounded-circle"
+                            style={{
+                              width: "40px",
+                              height: "40px",
+                              borderRadius: "36px",
+                              border: "2px solid #F4F4F4",
+                            }}
+                          />
+                          <span
+                            style={{
+                              fontFamily: "Poppins",
+                              fontSize: "16px",
+                              fontWeight: "500",
+                              lineHeight: "24px",
+                              textAlign: "left",
+                            }}
+                          >
+                            {complaint.Complainer_name}
+                          </span>
+                        </div>
+                      </td>
+                      <td
+                        style={{
+                          padding: "15px",
+                          textAlign: "center",
+                          verticalAlign: "middle",
+                        }}
+                        className="text-start"
+                      >
+                        {complaint.Complaint_name}
+                      </td>
+                      <td
+                        style={{
+                          ...tableColumnStyle,
+                          width: "250px",
+                          height: "24px",
+                          fontFamily: "Poppins",
+                          fontSize: "16px",
+                          fontWeight: "500",
+                          lineHeight: "24px",
+                          textAlign: "left",
+                        }}
+                      >
+                        {complaint.Description}
+                      </td>
+                      <td
+                        style={{
+                          padding: "15px",
+                          textAlign: "center",
+                          verticalAlign: "middle",
+                        }}
+                      >
                         <span
                           style={{
-                            fontFamily: "Poppins", // Apply Poppins font-family
-                            fontSize: "16px", // Set font size to 16px
-                            fontWeight: "500", // Set font weight to 500 (Medium)
-                            lineHeight: "24px", // Set line height to 24px
-                            textAlign: "left", // Align text to the left
+                            border: "1px solid",
+                            borderRadius: "50%",
+                            width: "28px",
+                            height: "28px",
+                            display: "inline-flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            color: "skyblue",
                           }}
                         >
-                          {complaint.name}
+                          {complaint.Wing}
                         </span>
-                      </div>
-                    </td>
-
-                    <td style={{ padding: "15px", textAlign: "center", verticalAlign: "middle" }} className="text-start">
-                      {complaint.type}
-                    </td>
-                    <td style={{
-                      ...tableColumnStyle,               // Presuming tableColumnStyle is a predefined style object
-                      width: "250px",                    // Set the width of the element
-                      height: "24px",                    // Set the height of the element
-                      top: "21px",                       // Set the top positioning (ensure relative/absolute context)
-                      left: "465px",                     // Set the left positioning (ensure relative/absolute context)
-                      // Make the element fully transparent
-                      fontFamily: "Poppins",             // Apply the Poppins font family
-                      fontSize: "16px",                  // Set font size
-                      fontWeight: "500",                 // Set font weight
-                      lineHeight: "24px",                // Set line height
-                      textAlign: "left",                 // Align text to the left
-                      // Set background color
-                      // Needed for positioning with top/left
-                    }}>
-                      {complaint.description}
-                    </td>
-
-                    <td style={{ padding: "15px", textAlign: "center", verticalAlign: "middle" }}>
-                      <span style={{ border: "1px solid ", borderRadius: "50%", width: "28px", height: "28px", display: "inline-flex", justifyContent: "center", alignItems: "center", color: "skyblue" }}>
-                        {complaint.unit}
-                      </span>
-                      <span style={{ fontFamily: "Poppins, sans-serif", fontWeight: "500", fontSize: "16px", lineHeight: "24px", marginLeft: "8px" }}>
-                        {complaint.number}
-                      </span>
-                    </td>
-                    <td style={{ padding: "15px", textAlign: "center", verticalAlign: "middle" }}>
-                      <span className="badge" style={{ ...badgeStyle(complaint.priority), width: "100px", height: "31px", padding: "5px 12px", gap: "8px", borderRadius: "50px", display: "inline-flex", justifyContent: "center", alignItems: "center" }}>
-                        {complaint.priority}
-                      </span>
-                    </td>
-                    <td style={{ padding: "15px", textAlign: "center", verticalAlign: "middle" }}>
-                      <span style={{ ...statusBadgeStyle(complaint.status), width: "113px", height: "31px", padding: "5px 12px", gap: "5px", borderRadius: "50px", display: "inline-flex", justifyContent: "center", alignItems: "center" }}>
-                        {complaint.status}
-                      </span>
-                    </td>
-                    <td style={{ padding: "15px", textAlign: "center", verticalAlign: "middle" }}>
-                      <div className="d-flex align-items-center justify-content-center">
-                        <img src={editIcon} className="text-success me-2" style={{ cursor: "pointer" }} onClick={() => handleEdit(complaint)} />
-                        <img src={viewICon} className="text-primary me-2" style={{ cursor: "pointer" }} onClick={() => handleView(complaint)} />
-                        <img src={deleteIcon} className="text-danger" style={{ cursor: "pointer" }} onClick={() => handleDelete(complaint.id)} />
-                      </div>
+                        <span
+                          style={{
+                            fontFamily: "Poppins, sans-serif",
+                            fontWeight: "500",
+                            fontSize: "16px",
+                            lineHeight: "24px",
+                            marginLeft: "8px",
+                          }}
+                        >
+                          {complaint.Unit}
+                        </span>
+                      </td>
+                      <td
+                        style={{
+                          padding: "15px",
+                          textAlign: "center",
+                          verticalAlign: "middle",
+                        }}
+                      >
+                        <span
+                          className="badge"
+                          style={{
+                            ...badgeStyle(complaint.Priority),
+                            width: "100px",
+                            height: "31px",
+                            padding: "5px 12px",
+                            gap: "8px",
+                            borderRadius: "50px",
+                            display: "inline-flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                          }}
+                        >
+                          {complaint.Priority}
+                        </span>
+                      </td>
+                      <td
+                        style={{
+                          padding: "15px",
+                          textAlign: "center",
+                          verticalAlign: "middle",
+                        }}
+                      >
+                        <span
+                          style={{
+                            ...statusBadgeStyle(complaint.Status),
+                            width: "113px",
+                            height: "31px",
+                            padding: "5px 12px",
+                            gap: "5px",
+                            borderRadius: "50px",
+                            display: "inline-flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                          }}
+                        >
+                          {complaint.Status}
+                        </span>
+                      </td>
+                      <td
+                        style={{
+                          padding: "15px",
+                          textAlign: "center",
+                          verticalAlign: "middle",
+                        }}
+                      >
+                        <div className="d-flex align-items-center justify-content-center">
+                          <img
+                            src={editIcon}
+                            className="text-success me-2"
+                            style={{ cursor: "pointer" }}
+                            onClick={() => handleEdit(complaint)}
+                          />
+                          <img
+                            src={viewICon}
+                            className="text-primary me-2"
+                            style={{ cursor: "pointer" }}
+                            onClick={() => handleView(complaint)}
+                          />
+                          <img
+                            src={deleteIcon}
+                            className="text-danger"
+                            style={{ cursor: "pointer" }}
+                            onClick={() => handleDelete(complaint.id)}
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="7" className="text-center">
+                      No complaints available
                     </td>
                   </tr>
-                ))}
+                )}
               </tbody>
+
             </Table>
           </div>
         </div>
@@ -269,47 +413,47 @@ function ComplaintTracking() {
               <Form.Label>Complainer Name<span className="text-danger">*</span></Form.Label>
               <Form.Control
                 type="text"
-                value={newComplaint.name}
-                onChange={(e) => setNewComplaint({ ...newComplaint, name: e.target.value })}
+                value={newComplaint.Complainer_name}
+                onChange={(e) => setNewComplaint({ ...newComplaint, Complainer_name: e.target.value })}
               />
             </Form.Group>
             <Form.Group className='mt-2'>
               <Form.Label>Complaint Type<span className="text-danger">*</span></Form.Label>
               <Form.Control
                 type="text"
-                value={newComplaint.type}
-                onChange={(e) => setNewComplaint({ ...newComplaint, type: e.target.value })}
+                value={newComplaint.Complaint_name}
+                onChange={(e) => setNewComplaint({ ...newComplaint, Complaint_name: e.target.value })}
               />
             </Form.Group>
             <Form.Group className='mt-2'>
               <Form.Label>Description<span className="text-danger">*</span></Form.Label>
               <Form.Control
                 type="text"
-                value={newComplaint.description}
-                onChange={(e) => setNewComplaint({ ...newComplaint, description: e.target.value })}
+                value={newComplaint.Description}
+                onChange={(e) => setNewComplaint({ ...newComplaint, Description: e.target.value })}
               />
               <Form >
                 <div className='d-flex justify-content-between gap-2'>
 
-               
-                <Form.Group className='mt-2'>
-                  <Form.Label>Wing<span className="text-danger">*</span></Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={newComplaint.unit}
-                    onChange={(e) => setNewComplaint({ ...newComplaint, unit: e.target.value })}
-                  />
-                </Form.Group>
 
-                <Form.Group className='mt-2'>
-                  <Form.Label>Unit<span className="text-danger">*</span></Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={newComplaint.number}
-                    onChange={(e) => setNewComplaint({ ...newComplaint, number: e.target.value })}
-                  />
-                </Form.Group>
-                </div> 
+                  <Form.Group className='mt-2'>
+                    <Form.Label>Wing<span className="text-danger">*</span></Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={newComplaint.Wing}
+                      onChange={(e) => setNewComplaint({ ...newComplaint, Wing: e.target.value })}
+                    />
+                  </Form.Group>
+
+                  <Form.Group className='mt-2'>
+                    <Form.Label>Unit<span className="text-danger">*</span></Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={newComplaint.Unit}
+                      onChange={(e) => setNewComplaint({ ...newComplaint, Unit: e.target.value })}
+                    />
+                  </Form.Group>
+                </div>
 
               </Form>
             </Form.Group>
@@ -322,10 +466,10 @@ function ComplaintTracking() {
 
                     type="radio"
                     label="High"
-                    name="priority"
+                    name="Priority"
                     value="High"
-                    checked={newComplaint.priority === "High"}
-                    onChange={(e) => setNewComplaint({ ...newComplaint, priority: e.target.value })}
+                    checked={newComplaint.Priority === "High"}
+                    onChange={(e) => setNewComplaint({ ...newComplaint, Priority: e.target.value })}
                   />
                 </div>
                 <div style={{ width: "113px", height: "41px", border: "1px solid #ccc", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "5px", paddingTop: "10px", paddingRight: "15px", paddingBottom: "10px", paddingLeft: "15px" }}>
@@ -333,20 +477,20 @@ function ComplaintTracking() {
                   <Form.Check
                     type="radio"
                     label="Medium"
-                    name="priority"
+                    name="Priority"
                     value="Medium"
-                    checked={newComplaint.priority === "Medium"}
-                    onChange={(e) => setNewComplaint({ ...newComplaint, priority: e.target.value })}
+                    checked={newComplaint.Priority === "Medium"}
+                    onChange={(e) => setNewComplaint({ ...newComplaint, Priority: e.target.value })}
                   />
                 </div>
                 <div style={{ width: "113px", height: "41px", border: "1px solid #ccc", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "5px", paddingTop: "10px", paddingRight: "15px", paddingBottom: "10px", paddingLeft: "15px" }}>
                   <Form.Check
                     type="radio"
                     label="Low"
-                    name="priority"
+                    name="Priority"
                     value="Low"
-                    checked={newComplaint.priority === "Low"}
-                    onChange={(e) => setNewComplaint({ ...newComplaint, priority: e.target.value })}
+                    checked={newComplaint.Priority === "Low"}
+                    onChange={(e) => setNewComplaint({ ...newComplaint, Priority: e.target.value })}
                   />
                 </div>
               </div>
@@ -360,10 +504,10 @@ function ComplaintTracking() {
                   <Form.Check
                     type="radio"
                     label="Open"
-                    name="status"
+                    name="Status"
                     value="Open"
-                    checked={newComplaint.status === "Open"}
-                    onChange={(e) => setNewComplaint({ ...newComplaint, status: e.target.value })}
+                    checked={newComplaint.Status === "Open"}
+                    onChange={(e) => setNewComplaint({ ...newComplaint, Status: e.target.value })}
                   />
                 </div>
                 <div style={{ width: "113px", height: "41px", border: "1px solid #ccc", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "5px", paddingTop: "10px", paddingRight: "15px", paddingBottom: "10px", paddingLeft: "15px" }}>
@@ -374,8 +518,8 @@ function ComplaintTracking() {
                     label="Pending"
                     name="status"
                     value="Pending"
-                    checked={newComplaint.status === "Pending"}
-                    onChange={(e) => setNewComplaint({ ...newComplaint, status: e.target.value })}
+                    checked={newComplaint.Status === "Pending"}
+                    onChange={(e) => setNewComplaint({ ...newComplaint, Status: e.target.value })}
                   />
                 </div>
                 <div style={{ width: "113px", height: "41px", border: "1px solid #ccc", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "5px", paddingTop: "10px", paddingRight: "15px", paddingBottom: "10px", paddingLeft: "15px" }}>
@@ -385,8 +529,8 @@ function ComplaintTracking() {
                     label="Solve"
                     name="status"
                     value="Solve"
-                    checked={newComplaint.status === "Solve"}
-                    onChange={(e) => setNewComplaint({ ...newComplaint, status: e.target.value })}
+                    checked={newComplaint.Status === "Solve"}
+                    onChange={(e) => setNewComplaint({ ...newComplaint, Status: e.target.value })}
                   />
                 </div>
               </div>
@@ -472,7 +616,7 @@ function ComplaintTracking() {
                     marginTop: "10px"
                   }}
                 >
-                  <h5 style={{ margin: 0 }}>{selectedComplaint.name}</h5>
+                  <h5 style={{ margin: 0 }}>{selectedComplaint.Complainer_name}</h5>
                   <span style={{
                     color: "#A7A7A7",
                   }}>Aug 5, 2024</span>
@@ -491,7 +635,7 @@ function ComplaintTracking() {
                   color: "#A7A7A7",
                   fontWeight: "200"
                 }}>Request Name</strong> <br />
-                <span>{selectedComplaint.type}</span>
+                <span>{selectedComplaint.Complaint_name}</span>
               </div>
               <div style={{
 
@@ -504,7 +648,7 @@ function ComplaintTracking() {
                   color: "#A7A7A7",
                   fontWeight: "200"
                 }}>Description</strong>
-                <p style={{ margin: 0 }}>{selectedComplaint.description}</p>
+                <p style={{ margin: 0 }}>{selectedComplaint.Description}</p>
               </div>
 
               <div
@@ -542,7 +686,7 @@ function ComplaintTracking() {
                   </strong>
 
                   <p style={{ border: "1px solid ", borderRadius: "50%", width: "28px", height: "28px", display: "inline-flex", justifyContent: "center", alignItems: "center", color: "skyblue" }}>
-                    {selectedComplaint.unit}
+                    {selectedComplaint.Wing}
                   </p>
 
                 </div>
@@ -583,7 +727,7 @@ function ComplaintTracking() {
                       margin: "0"  // Set margin to 0 (instead of gap) as gap works only in flex/grid containers
                     }}
                   >
-                    {selectedComplaint.number}
+                    {selectedComplaint.Unit}
                   </p>
 
                 </div>
@@ -615,11 +759,11 @@ function ComplaintTracking() {
                     style={{
                       textAlign: "center",
                       borderRadius: "50px",
-                      background: badgeStyle(selectedComplaint.priority).backgroundColor,
+                      background: badgeStyle(selectedComplaint.Priority).backgroundColor,
                       color: "white"
                     }}
                   >
-                    {selectedComplaint.priority}
+                    {selectedComplaint.Priority}
                   </p>
 
 
@@ -647,11 +791,11 @@ function ComplaintTracking() {
                       textAlign: "center",
                       padding: "2px 10px",
                       borderRadius: "50px",
-                      backgroundColor: statusBadgeStyle(selectedComplaint.status).backgroundColor,
-                      color: statusBadgeStyle(selectedComplaint.status).color
+                      backgroundColor: statusBadgeStyle(selectedComplaint.Status).backgroundColor,
+                      color: statusBadgeStyle(selectedComplaint.Status).color
                     }}
                   >
-                    {selectedComplaint.status}
+                    {selectedComplaint.Status}
                   </p>
 
                 </div>
@@ -669,138 +813,138 @@ function ComplaintTracking() {
 
       <Modal show={showModal} onHide={handleCloseModal} centered className='Round-modal'>
 
-  <Modal.Header >
-    <Modal.Title>Edit Complaint</Modal.Title>
-  </Modal.Header>
-  <Modal.Body>
-    {errorMessage && (
-      <div className="alert alert-danger">{errorMessage}</div>
-    )}
-    <Form>
-      <Form.Group className='mt-2'>
-        <Form.Label>Complainer Name<span className="text-danger">*</span></Form.Label>
-        <Form.Control
-          type="text"
-          value={selectedComplaint?.name || ""}
-          onChange={(e) =>
-            setSelectedComplaint((prev) => ({
-              ...prev,
-              name: e.target.value,
-            }))
-          }
-        />
-      </Form.Group>
-      <Form.Group className='mt-3'>
-        <Form.Label>Complaint Type<span className="text-danger">*</span></Form.Label>
-        <Form.Control
-          type="text"
-          value={selectedComplaint?.type || ""}
-          onChange={(e) =>
-            setSelectedComplaint((prev) => ({
-              ...prev,
-              type: e.target.value,
-            }))
-          }
-        />
-      </Form.Group>
-      <Form.Group className='mt-3'>
-        <Form.Label>Description<span className="text-danger">*</span></Form.Label>
-        <Form.Control
-          type="text"
-          value={selectedComplaint?.description || ""}
-          onChange={(e) =>
-            setSelectedComplaint((prev) => ({
-              ...prev,
-              description: e.target.value,
-            }))
-          }
-        />
-      </Form.Group >
-      <div className='d-flex justify-content-between'>
+        <Modal.Header >
+          <Modal.Title>Edit Complaint</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {errorMessage && (
+            <div className="alert alert-danger">{errorMessage}</div>
+          )}
+          <Form>
+            <Form.Group className='mt-2'>
+              <Form.Label>Complainer Name<span className="text-danger">*</span></Form.Label>
+              <Form.Control
+                type="text"
+                value={selectedComplaint?.Complainer_name || ""}
+                onChange={(e) =>
+                  setSelectedComplaint((prev) => ({
+                    ...prev,
+                    Complainer_name: e.target.value,
+                  }))
+                }
+              />
+            </Form.Group>
+            <Form.Group className='mt-3'>
+              <Form.Label>Complaint Type<span className="text-danger">*</span></Form.Label>
+              <Form.Control
+                type="text"
+                value={selectedComplaint?.Complaint_name || ""}
+                onChange={(e) =>
+                  setSelectedComplaint((prev) => ({
+                    ...prev,
+                    Complaint_name: e.target.value,
+                  }))
+                }
+              />
+            </Form.Group>
+            <Form.Group className='mt-3'>
+              <Form.Label>Description<span className="text-danger">*</span></Form.Label>
+              <Form.Control
+                type="text"
+                value={selectedComplaint?.Description || ""}
+                onChange={(e) =>
+                  setSelectedComplaint((prev) => ({
+                    ...prev,
+                    Description: e.target.value,
+                  }))
+                }
+              />
+            </Form.Group >
+            <div className='d-flex justify-content-between'>
 
-     
-      <Form.Group className='mt-3'>
-  <Form.Label>Wing<span className="text-danger">*</span></Form.Label>
-  <Form.Control
-    type="text"
-    value={selectedComplaint?.unit || ""}
-    onChange={(e) =>
-      setSelectedComplaint((prev) => ({
-        ...prev,
-        unit: e.target.value,
-      }))
-    }
-  />
-</Form.Group>
 
-<Form.Group className='mt-3'>
-  <Form.Label>Unit<span className="text-danger">*</span></Form.Label>
-  <Form.Control
-    type="text"
-    value={selectedComplaint?.number || ""}
-    onChange={(e) =>
-      setSelectedComplaint((prev) => ({
-        ...prev,
-        number: e.target.value,
-      }))
-    }
-  />
-</Form.Group>
-</div>
-      <Form.Group className='mt-3 radio-group'>
-        <Form.Label>Priority<span className="text-danger">*</span></Form.Label>
-        <div className="d-flex justify-content-around  " >
+              <Form.Group className='mt-3'>
+                <Form.Label>Wing<span className="text-danger">*</span></Form.Label>
+                <Form.Control
+                  type="text"
+                  value={selectedComplaint?.Wing || ""}
+                  onChange={(e) =>
+                    setSelectedComplaint((prev) => ({
+                      ...prev,
+                      Wing: e.target.value,
+                    }))
+                  }
+                />
+              </Form.Group>
 
-          {["High", "Medium", "Low"].map((priority) => (
-            <Form.Check
-            style={{ border: "1px solid rgba(211, 211, 211, 1)", paddingLeft: "30px", paddingRight: "30px", borderRadius: "5px",paddingTop:"8px",paddingBottom: "8px" }}
-              type="radio"
-              label={priority}
-              name="priority"
-              value={priority}
-              checked={selectedComplaint?.priority === priority}
-              onChange={(e) =>
-                setSelectedComplaint((prev) => ({
-                  ...prev,
-                  priority: e.target.value,
-                }))
-              }
-              key={priority}
-            />
-           
-          ))}
-          
-        </div>
-      </Form.Group>
-      <Form.Group className='mt-3 radio-group'>
-        <Form.Label>Status<span className="text-danger">*</span></Form.Label>
-        <div className="d-flex justify-content-around">
-          {["Open", "Pending", "Solve"].map((status) => (
-            <Form.Check
-             style={{ border: "1px solid rgba(211, 211, 211, 1)", paddingLeft: "30px", paddingRight: "30px",paddingTop:"8px",paddingBottom: "8px", borderRadius: "5px" }}
-              type="radio"
-              label={status}
-              name="status"
-              value={status}
-              checked={selectedComplaint?.status === status}
-              onChange={(e) =>
-                setSelectedComplaint((prev) => ({
-                  ...prev,
-                  status: e.target.value,
-                }))
-              }
-              key={status}
-            />
-          ))}
-        </div>
-      </Form.Group>
-    </Form>
-  </Modal.Body>
-  <Modal.Footer style={{ display: "flex", justifyContent: "space-between" }}>
-    <Button style={{ width: "175px", height: "51px", border: "1px solid #202224", padding: "10px 55px 10px 55px", background: "#FFFFFF", color: "#202224", }} className='cancle' onClick={handleCloseModal}>
-      Cancel
-    </Button>
-    <Button style={{
+              <Form.Group className='mt-3'>
+                <Form.Label>Unit<span className="text-danger">*</span></Form.Label>
+                <Form.Control
+                  type="text"
+                  value={selectedComplaint?.Unit || ""}
+                  onChange={(e) =>
+                    setSelectedComplaint((prev) => ({
+                      ...prev,
+                      Unit: e.target.value,
+                    }))
+                  }
+                />
+              </Form.Group>
+            </div>
+            <Form.Group className='mt-3 radio-group'>
+              <Form.Label>Priority<span className="text-danger">*</span></Form.Label>
+              <div className="d-flex justify-content-around  " >
+
+                {["High", "Medium", "Low"].map((Priority) => (
+                  <Form.Check
+                    style={{ border: "1px solid rgba(211, 211, 211, 1)", paddingLeft: "30px", paddingRight: "30px", borderRadius: "5px", paddingTop: "8px", paddingBottom: "8px" }}
+                    type="radio"
+                    label={Priority}
+                    name="Priority"
+                    value={Priority}
+                    checked={selectedComplaint?.Priority === Priority}
+                    onChange={(e) =>
+                      setSelectedComplaint((prev) => ({
+                        ...prev,
+                        priority: e.target.value,
+                      }))
+                    }
+                    key={Priority}
+                  />
+
+                ))}
+
+              </div>
+            </Form.Group>
+            <Form.Group className='mt-3 radio-group'>
+              <Form.Label>Status<span className="text-danger">*</span></Form.Label>
+              <div className="d-flex justify-content-around">
+                {["Open", "Pending", "Solve"].map((Status) => (
+                  <Form.Check
+                    style={{ border: "1px solid rgba(211, 211, 211, 1)", paddingLeft: "30px", paddingRight: "30px", paddingTop: "8px", paddingBottom: "8px", borderRadius: "5px" }}
+                    type="radio"
+                    label={Status}
+                    name="status"
+                    value={Status}
+                    checked={selectedComplaint?.Status === Status}
+                    onChange={(e) =>
+                      setSelectedComplaint((prev) => ({
+                        ...prev,
+                        Status: e.target.value,
+                      }))
+                    }
+                    key={Status}
+                  />
+                ))}
+              </div>
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer style={{ display: "flex", justifyContent: "space-between" }}>
+          <Button style={{ width: "175px", height: "51px", border: "1px solid #202224", padding: "10px 55px 10px 55px", background: "#FFFFFF", color: "#202224", }} className='cancle' onClick={handleCloseModal}>
+            Cancel
+          </Button>
+          <Button style={{
 
             width: "175px", height: "51px", border: "1px", padding: "10px 55px 10px 55px", color: "#202224",
 

@@ -79,7 +79,7 @@ exports.GetAllExpenses= async(req,res)=>{
         }
         return res.json({
             success:true,
-            Owner:find
+            Expense:find
         })
     } catch (error) {
         console.error(error);

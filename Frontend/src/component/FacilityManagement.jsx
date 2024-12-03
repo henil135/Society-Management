@@ -140,7 +140,6 @@ const FacilityManagement = () => {
     };
 
     useEffect(() => {
-        
         FetchFacilities();
     }, []);
     const FetchFacilities = async () => {
@@ -209,7 +208,11 @@ const FacilityManagement = () => {
                                 <FacilityCard
                                     key={index}
                                     Facility_name={facility.Facility_name}
-                                    Date={facility.Date}
+                                    Date={new Date(facility.Date).toLocaleDateString("en-GB", {
+                                        day: "2-digit",
+                                        month: "2-digit",
+                                        year: "numeric",
+                                      })}
                                     Description={facility.Description}
                                     onEdit={() => handleEdit(index)}
                                 />
