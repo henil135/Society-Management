@@ -67,9 +67,10 @@ function Announcement() {
         setDeleteIndex(null);
     };
 
-    const confirmDelete = async () => {
+    const confirmDelete = async (_id) => {
         if (deleteIndex !== null) {
-            const response = await axios.delete(`http://localhost:5000/api/v2/annoucement/deleteannouncement${id}`)
+            const response = await axios.delete(`http://localhost:5000/api/v2/annoucement/deleteannouncement/${_id}`)
+            console.log(response.message._id);
             const updatedNotes = note.filter((_, i) => i !== deleteIndex);
             setNote(updatedNotes);
         }
@@ -86,32 +87,7 @@ function Announcement() {
         // setValue('dueDate', selectedNote.dueDate);
         setValue('Description', selectedNote.Description);
         setShowEditModal(true);
-    };
-
-    // const updateAnnouncement = async (id, updatedData) => {
-    //     try {
-    //         const response = await axios.put(
-    //             `http://localhost:5000/api/v2/announcement/updateannouncement/${id}`,
-    //             updatedData
-    //         );
-    //         console.log('Update response:', response.data);
-
-    //         // Update local state to reflect changes
-    //         const updatedNotes = note.map((announcement, idx) =>
-    //             idx === editIndex ? { ...announcement, ...updatedData } : announcement
-    //         );
-    //         setNote(updatedNotes);
-    //         setShowEditModal(false); // Close the modal
-    //     } catch (error) {
-    //         console.error('Error updating announcement:', error);
-    //     }
-    // };
-    // const handleEditSubmit = async (data) => {
-    //     const id = note[editIndex]?.id; // Assuming `id` is the identifier for the announcement
-    //     if (id) {
-    //         await updateAnnouncement(id, data);
-    //     }
-    // };    
+    };  
     const handleCloseEditModal = () => {
         setShowEditModal(false);
         reset();
@@ -156,7 +132,7 @@ function Announcement() {
                                     </div>
                                 </div>
 
-                               
+
                                 {show && (
                                     <div className="modal fade show d-block  custom-modal" style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
                                         <div className="modal-dialog modal-dialog-centered">
@@ -198,14 +174,14 @@ function Announcement() {
                                 )}
                                 <div className="row card-row g-3 ps-3">
 
-                                   
+
                                     {Array.isArray(note) && note.map((val, index) => (
-                                        <div className="col-lg-3 mb-3" key={val.id}>
+                                        <div className="col-lg-3 mb-3" key={val._id}>
                                             <div className="card">
                                                 <div className="card-header card-title text-light d-flex align-items-center justify-content-between" style={{ height: "54px", fontSize: "16px", fontWeight: "500", background: " rgba(86, 120, 233, 1)" }}>
                                                     {val.Announcement_Title}
                                                     <div className='position-relative'>
-                                                       
+
                                                         <button
                                                             className="btn btn-light p-0 mt-0"
                                                             onClick={() => setDropdownIndex(dropdownIndex === index ? null : index)}
@@ -214,7 +190,7 @@ function Announcement() {
                                                             <BsThreeDotsVertical />
                                                         </button>
 
-                                                     
+
                                                         {dropdownIndex === index && (
                                                             <div className="dropdown-menu show position-absolute" style={{ top: '100%', zIndex: 10 }}>
                                                                 <button
@@ -223,7 +199,7 @@ function Announcement() {
                                                                 >
                                                                     Edit
                                                                 </button>
-                                                               
+
                                                                 {showEditModal && (
                                                                     <div className="modal fade show d-block custom-modal" style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
                                                                         <div className="modal-dialog modal-dialog-centered">
@@ -280,7 +256,7 @@ function Announcement() {
                                                                     Delete
                                                                 </button>
 
-                                                                
+
                                                                 <Modal className='custom-modal' show={showDeleteModal} onHide={handleCloseDeleteModal} centered>
 
                                                                     <Modal.Title className='Modal-Title px-3 pt-3'>Delete Number?</Modal.Title>
@@ -295,7 +271,7 @@ function Announcement() {
                                                                     </Modal.Footer>
                                                                 </Modal>
 
-                                                               
+
                                                                 <Modal show={showViewModal} className='custom-modal custom-modal' onHide={handleCloseViewModal} centered>
                                                                     <Modal.Header closeButton>
                                                                         <Modal.Title>View Security Protocol</Modal.Title>
