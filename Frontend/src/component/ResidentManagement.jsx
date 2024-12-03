@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import {  useNavigate } from 'react-router-dom';
 import { Button, Modal, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FaUser, FaHome, FaTag, FaEye, FaEdit, FaPlus } from 'react-icons/fa'; // Using react-icons as placeholders
+import { FaUser, FaHome, FaTag,  FaPlus } from 'react-icons/fa'; // Using react-icons as placeholders
 
 import '../style.css';
 import Avtar from '../assets/Avatar.png';
@@ -14,7 +14,7 @@ import viewicon from '../Icons/view.png'
 
 
  function ResidentManagement() {
-  const [residents, setResidents] = useState([
+  const [residents] = useState([
     {id:1, name: "Evelyn Harper", unit: 'A', Number: "1001", unitStatus: "Occupied", residentStatus: "Tenant", phoneNumber: "97587 85828", members: 1, vehicles: 2 },
     {id:2, name: "-", unit: "B", Number: "1002", unitStatus: "Vacate", residentStatus: "--", phoneNumber: "--", members: "-", vehicles: "-" },
 
@@ -34,7 +34,8 @@ import viewicon from '../Icons/view.png'
 
   const handleSave = () => {
     if (selectedStatus === "Occupied" && agreeChecked) {
-      navigate('/residentForm');
+      navigate('/ownerform');
+
     } else if (selectedStatus === "Vacate") {
       setShowVacateModal(true);
     }
