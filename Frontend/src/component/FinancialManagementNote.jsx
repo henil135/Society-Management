@@ -123,8 +123,8 @@ function FinancialManagementNote() {
       <div className='dashboard-bg w-100 ' >
 
         <Navbar />
-        <div className='container-fluid stickyHeader' style={{ marginLeft: "290px", width: "1630px" }}>
-          <div className='row p-5'>
+        <div className='container-fluid stickyHeader' style={{ marginLeft: "310px", width: "1580px" }}>
+          <div className='row p-4'>
             <div className='p-0 bg-light' >
               <div className='d-flex justify-content-between align-items-center ps-2 pe-3 pt-1' style={{ marginLeft: "10px" }}>
                 <h3 className='mb-0 financial-income-title'>Note</h3>

@@ -18,7 +18,8 @@ function RequestTracking() {
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [showViewModal, setShowViewModal] = useState(false);
-
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteRequestId, setDeleteRequestId] = useState(null);
   // New state for the "Create Request" feature
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [newRequest, setNewRequest] = useState({
@@ -60,7 +61,11 @@ function RequestTracking() {
     setSelectedRequest(request);
     setShowViewModal(true);
   };
-
+  const handleClose = () =>{
+    setShowDeleteModal(false); 
+    setDeleteRequestId(null); 
+  }
+ 
   const handleCloseViewModal = () => setShowViewModal(false);
 
   const getPriorityByStatus = (status) => {
@@ -125,9 +130,13 @@ function RequestTracking() {
   };
 
   const handleDelete = (id) => {
-    setRequests((prevRequests) => prevRequests.filter((request) => request.id !== id));
+    setRequests((prevRequests) => prevRequests.filter((request) => request.id !== deleteRequestId));
   };
 
+  const handleShowDelete = (requestId) => {
+    setDeleteRequestId(requestId);
+    setShowDeleteModal(true);
+  };
 
   return (
     <div className="d-flex flex-column flex-md-row">
@@ -241,7 +250,7 @@ function RequestTracking() {
                   <div className="d-flex align-items-center justify-content-center">
                   <img src={editIcon} className="text-success me-2" style={{ cursor: "pointer" }} onClick={() => handleEdit(request)} />
                   <img src={viewICon} className="text-primary me-2" style={{ cursor: "pointer" }} onClick={() => handleView(request)} />
-                  <img src={deleteIcon} className="text-danger" style={{ cursor: "pointer" }} onClick={() => handleDelete(request.id)} />
+                  <img src={deleteIcon} className="text-danger" style={{ cursor: "pointer" }} onClick={() => handleShowDelete(request.id)} />
                   </div>
                 </td>
               </tr>
@@ -251,6 +260,25 @@ function RequestTracking() {
 
       </div>
 
+      <Modal show={showDeleteModal} onHide={handleClose} centered className='Round-modal'>
+            <Modal.Header >
+              <Modal.Title>Delete Protocol?</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <p>Are you sure you want to delete this protocol?</p>
+            </Modal.Body>
+            <Modal.Footer style={{ display: "flex", justifyContent: "space-between" }}>
+              <Button className='cancle' onClick={handleClose} style={{ width: "175px", height: "51px", border: "1px solid #202224", padding: "10px 55px 10px 55px", background: "#FFFFFF", color: "#202224", }}>
+                Cancel
+              </Button>
+              <Button onClick={handleDelete} style={{
+                width: "175px", height: "51px", border: "1px", padding: "10px 55px 10px 55px", color: "#202224", background: "rgba(231, 76, 60, 1)"
+              }}>
+                Delete
+              </Button>
+
+            </Modal.Footer>
+          </Modal>
 
 
       {/* Create Complaint Modal */}
