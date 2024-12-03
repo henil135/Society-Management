@@ -1,21 +1,20 @@
 const multer = require('multer');
 const path = require('path');
 
-// Configure storage for Multer
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, './uploads'); // Destination for storing files
+        cb(null, './uploads'); 
     },
     filename: (req, file, cb) => {
-        cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`); // Unique filename
+        cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`); 
     }
 });
 
-// Initialize Multer with limits
+
 const upload = multer({
     storage,
     limits: {
-        fileSize: 10 * 1024 * 1024 // Limit file size to 10MB
+        fileSize: 10 * 1024 * 1024 
     },
     fileFilter: (req, file, cb) => {
         // Check file type (optional)
@@ -25,10 +24,10 @@ const upload = multer({
         if (mimetype && extname) {
             return cb(null, true);
         } else {
-            cb('Error: Images only!'); // Handle error for wrong file type
+            cb('Error: Images only!'); 
         }
     }
 });
 
-// Export the upload middleware for use in routes
+
 module.exports = upload;

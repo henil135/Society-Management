@@ -1,7 +1,7 @@
 const router=require("express").Router();
 
 const { createExpense, GetAllExpenses, GetExpenseById, UpdateExpense, DeleteExpense,  } = require("../controller/expensesController");
-const upload=require("../utils/expensesImage")
+const upload=require("../utils/expenses_Image")
 
 
 router.post("/addexpenses", upload.fields([{ name: 'Upload_Bill', maxCount: 1 },]),createExpense);

@@ -19,8 +19,8 @@ exports.Register = async (req, res) => {
       return res.status(400).json({ success: false, message: "Passwords do not match" });
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(Email_Address)) {
+    const email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.test(Email_Address)) {
       return res.status(400).json({ success: false, message: "Invalid email format" });
     }
 
@@ -274,14 +274,6 @@ exports.verifyOtp = async (req, res) => {
               message: "Invalid OTP"
           });
       }
-
-      // const currentDate = new Date();
-      // if (currentDate > user.otpExpiration) {
-      //     return res.status(400).json({
-      //         success: false,
-      //         message: "OTP has expired"
-      //     });
-      // }
 
       // Clear OTP after successful verification
       await User.findByIdAndUpdate(user._id, { otp: null, otpExpiration: null });

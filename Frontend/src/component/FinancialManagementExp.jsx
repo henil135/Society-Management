@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import { CiImageOn } from "react-icons/ci";
 import { IoEyeSharp } from "react-icons/io5";
 import { BiSolidFilePdf } from "react-icons/bi";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { useForm } from 'react-hook-form';
-import { Button, Modal, Form } from 'react-bootstrap';
+import { Button, Modal, Form, Spinner } from 'react-bootstrap';
 import { MdEditSquare } from "react-icons/md";
 import { FaEdit, FaPlusSquare } from "react-icons/fa";
 import Sidebar from "../component/layout/Sidebar";
@@ -38,18 +38,13 @@ function FinancialManagementExp() {
     }
   };
 
-  const [exp, setExp] = useState([
-    // { title: 'Rent or Mortgage', des: 'A visual representation of your spending categories...', date: '10/02/2024', amt: '₹ 1000', format: 'JPG' },
-    // { title: 'Housing Costs', des: 'Rack the fluctuations in your spending over we time...', date: '11/02/2024', amt: '₹ 1000', format: 'PDF' },
-    // { title: 'Property Taxes', des: 'Easily compare your planned budget against we your...', date: '12/02/2024', amt: '₹ 1000', format: 'PDF' },
-    // { title: 'Transportation', des: ' Identify your largest expenditures, you a enabling you...', date: '13/02/2024', amt: '₹ 1000', format: 'PDF' },
-    // { title: 'Financial Breakdown', des: 'Tailor the dashboard to your unique financial we goals...', date: '14/02/2024', amt: '₹ 1000', format: 'PDF' },
-    // { title: 'Expense Tracker', des: 'preferences by categorizing and organizing your expe...', date: '15/02/2024', amt: '₹ 1000', format: 'PDF' },
-    // { title: 'Personal Expenses', des: 'future and adjust your budget will become accordingly...', date: '16/02/2024', amt: '₹ 1000', format: 'PDF' },
-  ])
 
-  
-  
+  const [exp, setExp] = useState()
+
+
+
+  // New state for delete confirmation modal
+
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteIndex, setDeleteIndex] = useState(null);
 
@@ -64,10 +59,24 @@ function FinancialManagementExp() {
     setDeleteIndex(null);
   };
 
-  const confirmDelete = () => {
-    if (deleteIndex !== null) {
-      const updatedComplaint = exp.filter((_, i) => i !== deleteIndex);
-      setExp(updatedComplaint);
+  const confirmDelete = async(id) => {
+    // if (deleteIndex !== null) {
+    //   const updatedComplaint = exp.filter((_, i) => i !== deleteIndex);
+    //   setExp(updatedComplaint);
+    // }
+    try {
+      const response = await axios.delete(`http://localhost:5000/api/v2/expenses/${id}`);
+      console.log("Delete Response:", response.data); // Debug response
+      if (response.data.success) {
+        // Remove the deleted expense from the state
+        setExp((prevExp) => prevExp.filter((expense) => expense._id !== id));
+      } else {
+        console.error("Failed to delete expense:", response.data.message);
+        alert("Failed to delete expense. Please try again.");
+      }
+    } catch (error) {
+      console.error("Delete error:", error); // Debug error
+      alert("An error occurred while deleting the expense. Please try again.");
     }
     handleCloseDeleteModal();
   };
@@ -78,6 +87,8 @@ function FinancialManagementExp() {
 
   const [editIndex, setEditIndex] = useState(null);
 
+  const [error, setError] = useState(null);
+
   const handleShow = () => setShow(true);
 
   const handleClose = () => {
@@ -86,50 +97,67 @@ function FinancialManagementExp() {
     setEditIndex(null);
   };
 
-  // const onSubmit = (data) => {
-  //   const updatedComplaint = {
-  //     Title: data.Title,
-  //     Description: data.Description,
-  //     Date: data.Date,
-  //     Amount: data.Amount,
-  //     Upload_Bill: data.Upload_Bill,
-  //   };
 
   const onSubmit = async (data) => {
     try {
       const expenseData = {
         ...data,
-        Upload_Bill: photo?.file ? photo.file : undefined, // Only include Upload_Bill if a file is uploaded
+        Upload_Bill: photo?.file || undefined,
       };
 
+
       if (editIndex !== null) {
-        // Edit an expense
-        const response = await axios.patch(`http://localhost:5000/api/v2/expenses/${exp[editIndex].id}`, expenseData);
+        // Edit expense
+        const expenseId = exp[editIndex]?._id; // Use `_id` instead of `id` if that's the key in your backend
+        if (!expenseId) {
+          console.error("Expense ID is missing for edit operation.");
+          return;
+        }
+
+        const response = await axios.put(
+          `http://localhost:5000/api/v2/expenses/updateexpenses/${expenseId}`,
+          expenseData
+        );
+
         const updatedExpenses = [...exp];
-        updatedExpenses[editIndex] = response.data;
+        updatedExpenses[editIndex] = response.data.updatedExpense; // Update the local list with the updated expense
         setExp(updatedExpenses);
+        FetchExpenses()
       } else {
         // Add new expense
-        const response = await axios.post("http://localhost:5000/api/v2/expenses/addexpenses", expenseData);
-        setExp([...exp, response.data]);
+        const formData = new FormData();
+        Object.entries(expenseData).forEach(([key, value]) => formData.append(key, value));
+        const response = await axios.post(`http://localhost:5000/api/v2/expenses/addexpenses`, formData);
+        setExp( response.data.FormData);
+        FetchExpenses()
       }
-
       handleClose();
     } catch (error) {
       console.error("Error saving expense:", error);
     }
   };
-    // if (editIndex !== null) {
-    //   const updatedComplaintsList = exp.map((exp, index) =>
-    //     index === editIndex ? updatedComplaint : exp
-    //   );
-    //   setExp(updatedComplaintsList);
-    // } else {
-    //   setExp([...exp, updatedComplaint]);
-    // }
 
-    // handleClose();
- 
+  const FetchExpenses = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/v2/expenses/viewexpenses');
+      console.log("API Response:", response.data.Expense); // Debug response
+      if (response.data && response.data.Expense) {
+        setExp(response.data.Expense);
+      } else {
+        setExp([]); // Handle unexpected structure
+      }
+    } catch (error) {
+      console.error("Fetch error:", error); // Debug error
+      setError("Failed to fetch expenses. Please try again.");
+    }
+  };
+
+  // Fetch data on component mount
+  useEffect(() => {
+    FetchExpenses();
+  }, []);
+
+
 
   const handleEdit = (index) => {
     const complaintToEdit = exp[index];
@@ -145,6 +173,12 @@ function FinancialManagementExp() {
     });
   };
 
+
+
+
+  if (error) {
+    return <div className="alert alert-danger mt-5">{error}</div>;
+  }
 
 
   return (
@@ -171,55 +205,66 @@ function FinancialManagementExp() {
                       </div>
                     </div>
 
-                    <div className='px-3 financial-maintainance-table '>
-                      <table className="table">
-
-                        <thead className='table-primary '>
-                          <tr>
-                            <th scope="col">Title</th>
-                            <th scope="col">Description</th>
-                            <th scope="col" className='text-center'>Date</th>
-                            <th scope="col" className='text-center'>Amount</th>
-                            <th scope="col" className='text-center'>Bill Format</th>
-                            <th scope="col" className='text-center' >Action</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {
-                            exp.map((val, index) => {
-                              return (
-                                <tr key={index} className='bg-light'>
-
-                                  <td style={{ verticalAlign: "middle", width: "270px" }} className='financial-Pnumber'> {val.Title}</td>
-
-
-                                  <td style={{ verticalAlign: "middle", width: "450px" }} className='financial-Pnumber'>{val.Description}</td>
-
-                                  <td style={{ verticalAlign: "middle", width: "250px" }} className='financial-Pnumber text-center'>{val.Date}</td>
-
-
-                                  <td style={{ verticalAlign: "middle", width: "200px" }} className='financial-Pnumber exp-amt-color text-center'>{val.Amount}</td>
-
-                                  <td style={{ verticalAlign: "middle", width: "200px" }} className='financial-Pnumber text-center'>
-                                    {val.format === 'JPG' ? <CiImageOn className='me-1 jpg-btn' style={{ fontSize: '20px' }} /> : <BiSolidFilePdf className='me-1 pdf-btn' style={{ fontSize: '20px' }} />}
-                                    {val.Upload_Bill}
+                    <div className="px-3 financial-maintainance-table">
+                      {error ? (
+                        <div>{error}</div>
+                      ) : (
+                        <table className="table">
+                          <thead className="table-primary">
+                            <tr>
+                              <th scope="col">Title</th>
+                              <th scope="col">Description</th>
+                              <th scope="col" className="text-center">Date</th>
+                              <th scope="col" className="text-center">Amount</th>
+                              <th scope="col" className="text-center">Bill Format</th>
+                              <th scope="col" className="text-center">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {exp?.length > 0 ? (
+                              exp.map((val, index) => (
+                                <tr key={index} className="bg-light">
+                                  <td>{val?.Title }</td>
+                                  <td>{val?.Description || "N/A"}</td>
+                                  <td className="text-center">{new Date(val?.Date).toLocaleDateString("en-GB", {
+                                    day: "2-digit",
+                                    month: "2-digit",
+                                    year: "numeric",
+                                  })}</td>
+                                  <td className="text-center">{val?.Amount || "N/A"}</td>
+                                  <td className="text-center">
+                                    {val?.Upload_Bill ? (
+                                      <a href={val.Upload_Bill} target="_blank" rel="noopener noreferrer">
+                                        {val.Upload_Bill.endsWith(".pdf") ? (
+                                          <BiSolidFilePdf style={{ fontSize: "20px" }} />
+                                        ) : (
+                                          <CiImageOn style={{ fontSize: "20px" }} />
+                                        )}
+                                      </a>
+                                    ) : (
+                                      "N/A"
+                                    )}
                                   </td>
-
-                                  <td style={{ verticalAlign: "middle", width: "200px" }}>
-
-                                    <div className="d-flex align-items-center justify-content-center " >
-                                      <img src={editIcon} className="text-success me-2" style={{ cursor: "pointer" }} onClick={() => handleEdit(index)} />
-                                      <img src={viewICon} className="text-primary me-2" style={{ cursor: "pointer" }} onClick={() => handleShowViewModal(index)} />
-                                      <img src={deleteIcon} className="text-danger" style={{ cursor: "pointer" }} onClick={() => handleCloseDeleteModal(index)} />
-                                    </div>
+                                  <td className="text-center">
+                                    {/* <button onClick={() => handleEdit(index)}>Edit</button>
+                                    <button onClick={() => handleShowDeleteModal(index)}>Delete</button>
+                                    <button onClick={() => handleShowViewModal(index)}>View</button> */}
+                                    <img src={editIcon} className="text-success me-2" style={{ cursor: "pointer" }} onClick={() => handleEdit(index)} />
+                                    <img src={viewICon} className="text-primary me-2" style={{ cursor: "pointer" }} onClick={() => handleShowViewModal(index)} />
+                                    <img src={deleteIcon} className="text-danger" style={{ cursor: "pointer" }} onClick={() => handleShowDeleteModal(index)} />
                                   </td>
                                 </tr>
-                              )
-                            })
-                          }
-                        </tbody>
-                      </table>
+                              ))
+                            ) : (
+                              <tr>
+                                <td colSpan="6" className="text-center">No Expenses Found</td>
+                              </tr>
+                            )}
+                          </tbody>
+                        </table>
+                      )}
                     </div>
+
                   </div>
 
                   
@@ -363,9 +408,7 @@ function FinancialManagementExp() {
                       {viewComplaint && (
                         <div>
 
-
                           <p className='view-strong text-dark'><strong className='view-strong'>Title</strong> <br />{viewComplaint.Title}</p>
-
 
                           <p className='view-strong text-dark'><strong className='view-strong'>Description</strong> <br />{viewComplaint.Description}</p>
 

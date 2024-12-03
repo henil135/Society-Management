@@ -1,8 +1,8 @@
 const { updateSecurityGuard, DeleteGuard, GetByIdGuard, GetSecurityGuard, CreateSecurityGuard } = require("../controller/securityGuardController");
-const upload = require("../utils/securityImage");
+const upload = require("../utils/security_Image");
 const router = require("express").Router();
 
-//add security Guard
+//Add security Guard
 router.post("/addsecurity",upload.fields([{ name: "profileimage", maxCount: 1 },{ name: "adhar_card", maxCount: 1 }, ]), CreateSecurityGuard);
 //get Guard
 router.get("/", GetSecurityGuard);
@@ -12,4 +12,5 @@ router.get("/:id", GetByIdGuard);
 router.delete("/deletesecurity/:id", DeleteGuard);
 //update Guard
 router.put("/updatesecurity/:id",upload.fields([{ name: "profileimage", maxCount: 1 },{ name: "adhar_card", maxCount: 1 },]),updateSecurityGuard );
+
 module.exports = router;

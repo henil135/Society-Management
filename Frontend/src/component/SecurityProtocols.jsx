@@ -312,7 +312,11 @@ function SecurityProtocols() {
                       </div>
                     </td>
                     <td style={{ verticalAlign: "middle", width: "300px" }}>{protocol.Description}</td>
-                    <td style={{ verticalAlign: "middle" }} className="text-center">{protocol.Date}</td>
+                    <td style={{ verticalAlign: "middle" }} className="text-center">{new Date(protocol.Date).toLocaleDateString("en-GB", {
+                                        day: "2-digit",
+                                        month: "2-digit",
+                                        year: "numeric",
+                                      })}</td>
                     <td style={{ verticalAlign: "middle" }} className="text-center">
                       <div className="d-flex align-items-center justify-content-center gap-2">
                         <div

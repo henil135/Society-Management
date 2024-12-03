@@ -1,6 +1,6 @@
 const router=require("express").Router();
 const { addTenantData, GetAllTenant } = require("../controller/tenantController");
-const upload = require("../utils/ownerImages")
+const upload = require("../utils/owner_Image")
 
 
 router.post("/addtenant", upload.fields([

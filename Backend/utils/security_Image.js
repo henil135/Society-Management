@@ -11,25 +11,24 @@ const storage = multer.diskStorage({
     }
 });
 
-// Initialize Multer with limits
+
 const upload = multer({
     storage,
     limits: {
-        fileSize: 10 * 1024 * 1024 // Limit file size to 10MB
+        fileSize: 10 * 1024 * 1024
     },
     fileFilter: (req, file, cb) => {
-        // Check for allowed file types (PDF and JPG only)
-        const filetypes = /pdf|jpg/;
+      
+        const filetypes = /jpeg|jpg|png|gif/;
         const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-        const mimetype = file.mimetype === 'application/pdf' || file.mimetype === 'image/jpeg';
-
+        const mimetype = filetypes.test(file.mimetype);
         if (mimetype && extname) {
-            cb(null, true);
+            return cb(null, true);
         } else {
-            cb(new Error('Error: Only PDF and JPG files are allowed!')); // Handle error for wrong file type
+            cb('Error: Images only!');
         }
     }
 });
 
-// Export the upload middleware for use in routes
+
 module.exports = upload;

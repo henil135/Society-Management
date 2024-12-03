@@ -9,13 +9,10 @@ const bodyParser = require("body-parser")
 
 require("./config/db");
 require("dotenv").config();
-
-
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const cookieParser = require('cookie-parser');
-
 app.use(cookieParser());
 
 const userRoutes = require("./routes/userRoutes");
@@ -61,7 +58,6 @@ app.use('/api/v2/requests', requestsRoute);
 //security management
 app.use('/api/v2/securityprotocol', securityprotocolRoute);
 
-
 // securityGuard
 app.use('/api/v2/security', securityGuardRoute);
 
@@ -70,5 +66,5 @@ app.use('/api/v2/annoucement', annoucementRoute);
 
 
   app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
+      console.log(`Server is running on port Number ${PORT}`);
     });
