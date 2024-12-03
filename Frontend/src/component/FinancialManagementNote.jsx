@@ -171,7 +171,6 @@ function FinancialManagementNote() {
           </div>
         </div>
 
-        {/* Add/Edit Modal */}
         <Modal show={show} onHide={handleClose} centered className="custom-modal">
           <Modal.Header>
             <Modal.Title className='Modal-Title'>

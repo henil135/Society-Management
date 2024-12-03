@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { Navbar, Nav, Button, InputGroup, FormControl, Container } from 'react-bootstrap';
 import { FiSearch } from "react-icons/fi";
 import avtar from '../assets/Avatar.png';
@@ -8,6 +8,8 @@ import notification1 from '../assets/Ellipse 1092.png'
 import notification2 from '../assets/Group 1000004305.png'
 import notification3 from '../assets/Group 1000004173.png'
 import { IoCheckmarkDoneSharp } from "react-icons/io5";
+import { IoClose } from "react-icons/io5";
+import noNotification from '../assets/Group 1000004472.png'
 
 function Header() {
     const [notifications, setNotifications] = useState([
@@ -60,43 +62,47 @@ function Header() {
         >
             <Navbar expand="lg" className="navbar bg-white border-bottom" style={{ height: "109px" }}>
                 <Container fluid>
-                    {/* Search Bar for Large Screens */}
+
                     <Navbar.Brand className="d-none d-lg-block w-20 ms-4">
                         <InputGroup
                             className="align-items-center search-bar rounded-2 px-3 py-2"
                             style={{ marginLeft: "290px", width: "300px" }}
                         >
-                            <FiSearch className="search-icon" />
-                            <FormControl
-                                className="border-0"
-                                placeholder="Search Here"
-                                aria-label="Search"
-                            />
+                            {/* Search Bar for Large Screens */}
+                            <div className="d-none d-md-block ">
+                                <div className="input-group">
+                                    <span className="input-group-text search-icon border " style={{ maxHeight: "37.5px" }}>
+                                        <FiSearch />
+                                    </span>
+
+                                    <FormControl
+                                        className="form-control border-start-0 ps-0 search-input"
+                                        placeholder="Search Here"
+                                        aria-label="Search"
+                                    />
+                                </div>
+                            </div>
                         </InputGroup>
                     </Navbar.Brand>
 
-                    {/* Right-aligned Icons (Always Visible) */}
+
                     <Nav className="ms-auto d-flex align-items-center justify-content-end flex-row py-sm-2 py-md-0 me-3">
-                        {/* Search Icon for Small Screens */}
+
                         <div className="d-lg-none me-3">
                             <FiSearch className="fs-4 text-dark" />
                         </div>
 
-                        {/* Notification Icon */}
+
                         <Button
                             variant="light"
-                            className="position-relative me-3 px-2 text-black notification-icon"
+                            className="position-relative me-3 px-2 text-black notification-icon mt-0"
                             onClick={() => setShowNotifications(!showNotifications)}
                         >
                             <FaBell />
-                            {notifications.length > 0 && (
-                                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                    {notifications.length}
-                                </span>
-                            )}
+
                         </Button>
 
-                        {/* Notification Dropdown */}
+
                         {showNotifications && (
                             <div
                                 className="notification-dropdown bg-white border shadow-sm px-3 py-2 rounded"
@@ -110,15 +116,22 @@ function Header() {
                                 }}
                             >
                                 <div className="d-flex justify-content-between align-items-center mb-2">
-                                    <h6 className="mb-0">Notifications</h6>
-                                    <Button
-                                        variant="link"
-                                        size="sm"
-                                        onClick={clearNotifications}
-                                        className="text-primary mt-0 text-decoration-none"
-                                    >
-                                        Clear All
-                                    </Button>
+                                    <h6 className="mb-0" style={{ fontSize: '20px' }}>Notifications</h6>
+                                    {notifications.length > 0 ? (
+                                        <Button
+                                            variant="link"
+                                            style={{ fontSize: '12px' }}
+                                            onClick={clearNotifications}
+                                            className="text-primary mt-0 text-decoration-none"
+                                        >
+                                            Clear All
+                                        </Button>
+                                    ) : (
+                                        <IoClose
+                                            className="cursor-pointer fs-4"
+                                            onClick={() => setShowNotifications(false)}
+                                        />
+                                    )}
                                 </div>
                                 <ul className="list-unstyled">
                                     {notifications.length > 0 ? (
@@ -131,37 +144,68 @@ function Header() {
                                                     <div className='pe-2'>
                                                         <img src={notification.img} />
                                                     </div>
-                                                    <div>
-                                                        <strong>{notification.title}</strong>
-                                                        <br />
-                                                        <small className="text-muted">
-                                                            {notification.dateTime}
-                                                        </small>
-                                                        <p className='mb-0'>{notification.amt}</p>
-                                                        <p className="mb-0">{notification.content}</p>
-
-
-                                                    </div>
+                                                    {
+                                                        notification.title == 'Update Maintenance' ? (
+                                                            <div>
+                                                                <strong>{notification.title}</strong>
+                                                                <div>
+                                                                    <div className='d-flex align-items-center justify-content-between p-2 my-2 rounded' style={{ width: '440px', background: 'rgba(246, 248, 251, 1)' }}>
+                                                                        <p className='mb-1'>Maintenance Amount : </p>
+                                                                        <p className='mb-1 text-success'>{notification.mamt}</p>
+                                                                    </div>
+                                                                    <div className='d-flex align-items-center justify-content-between p-2 rounded' style={{ width: '440px', background: 'rgba(246, 248, 251, 1)' }}>
+                                                                        <p className='mb-1'>Maintenance Penalty : </p>
+                                                                        <p className='mb-1 text-danger'>{notification.pamt}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        ) : (
+                                                            <div>
+                                                                <strong>{notification.title}</strong>
+                                                                <br />
+                                                                <small className="text-muted">
+                                                                    {notification.dateTime}
+                                                                </small>
+                                                                <p className='mb-0'>{notification.amt}</p>
+                                                                <p className="mb-0">{notification.content}</p>
+                                                            </div>
+                                                        )
+                                                    }
                                                 </div>
-                                                <div className='d-flex align-items-end justify-content-between'>
-                                                    <div className='mx-5 mb-2'>
-                                                        <Button className='me-3 mt-2 text-decoration-none bg-light text-dark' style={{ border: '1px solid rgba(211, 211, 211, 1)' }}>Accept</Button>
-                                                        <Button className='text-decoration-none mt-2'>Decline</Button>
-                                                    </div>
-                                                    <div className='mb-2'>
-                                                        <small className="text-muted d-flex align-items-center">{notification.timestamp}<IoCheckmarkDoneSharp className='ms-1' /></small>
-                                                    </div>
-                                                </div>
+                                                {
+                                                    notification.title == 'Update Maintenance' ? (
+                                                        <div>
+                                                            {<div className='d-flex align-items-end justify-content-between mt-2'>
+                                                                <div className='mx-5 mb-2'>
+
+                                                                </div>
+                                                                <div className='mb-2'>
+                                                                    <small className="text-muted d-flex align-items-center">{notification.timestamp}<IoCheckmarkDoneSharp className='ms-1' /></small>
+                                                                </div>
+                                                            </div>}
+                                                        </div>
+                                                    ) : (<div className='d-flex align-items-end justify-content-between'>
+                                                        <div className='mx-5 mb-2'>
+                                                            <Button className='me-3 mt-2 text-decoration-none bg-light text-dark' style={{ border: '1px solid rgba(211, 211, 211, 1)' }}>Accept</Button>
+                                                            <Button className='text-decoration-none mt-2'>Decline</Button>
+                                                        </div>
+                                                        <div className='mb-2'>
+                                                            <small className="text-muted d-flex align-items-center">{notification.timestamp}<IoCheckmarkDoneSharp className='ms-1' /></small>
+                                                        </div>
+                                                    </div>)
+                                                }
                                             </li>
                                         ))
                                     ) : (
-                                        <li className="text-muted">No new notifications</li>
+                                        <li className="text-center">
+                                            <img src={noNotification} />
+                                        </li>
                                     )}
                                 </ul>
                             </div>
                         )}
 
-                        {/* User Profile */}
+
                         <div className="d-flex align-items-center">
                             <Link
                                 to="/profile"
