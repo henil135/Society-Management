@@ -38,7 +38,7 @@ const ActivityParticipation = () => {
 
               <Link to="/activity-and-participation" className='btn btn-sm maintainance-income-btn maintainance-income-btn-bg complaint-btn'>Activity Participate</Link>
 
-              <div className="table-responsive rounded" style={{
+              <div className="table-responsive rounded custom-scrollbar" style={{
                 maxHeight: '730px',
                 overflowY: complaint.length > 10 ? 'scroll' : 'hidden',
               }}>

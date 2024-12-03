@@ -133,9 +133,9 @@ function Announcement() {
             <div className="flex-shrink-0" >
                 <Sidebar />
             </div>
-            <div className='dashboard-bg' style={{ width: "1920px" }} >
+            <div className='dashboard-bg' style={{ width: "1900px" }} >
                 <Navbar />
-                <div className='stickyHeader' style={{ marginLeft: "300px" }}>
+                <div className='stickyHeader p-2' style={{ marginLeft: "300px" }}>
                     <div className='container-fluid ' >
                         <div className='row ps-4 pe-4 pt-5'>
                             <div className='bg-light' style={{ borderRadius: "9px" }}>
