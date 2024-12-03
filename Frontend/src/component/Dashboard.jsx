@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Header from './Header';
 import Income from './Income';
 import TotalBalanceChart from './TotalBalanceChart';

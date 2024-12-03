@@ -267,14 +267,16 @@ input:focus {
 }
 
 .search-icon {
-  width: 24px;
-  height: 24px;
+  background: rgba(246, 248, 251, 1) !important;
 }
 
 .notification-icon {
   border: 1px solid rgba(211, 211, 211, 1)
 }
 
+.search-input::placeholder{
+  color: rgba(167, 167, 167, 1) !important;
+}
 
 /* header end */
 
@@ -855,13 +857,6 @@ input:focus {
   width: 183px !important;
 }
 
-.event-time-btn{
-  background: rgba(246, 248, 251, 1) !important;
-  width: 92px;
-  height: 34px;
-  border-radius: 80px;
-  text-align: center;
-}
 
 
 /* payment modal  */

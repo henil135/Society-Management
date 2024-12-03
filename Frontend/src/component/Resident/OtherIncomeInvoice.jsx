@@ -91,7 +91,7 @@ const OtherIncomeInvoices = () => {
 
     return (
         <div className='dashboard-bg w-100' >
-            <ResidentSidebar     />
+            <ResidentSidebar />
             <Navbar />
 
             <div style={{ marginLeft: '300px' }}>
@@ -102,7 +102,7 @@ const OtherIncomeInvoices = () => {
 
                             <div className='container-fluid stickyHeader' >
 
-                                <div className='row py-3 card-row ' >
+                                <div className='row py-3 card-row' >
                                     <div className='pe-0 bg-light'>
                                         <div className='d-flex justify-content-between align-items-center py-3 px-3'>
                                             <h3 className='mb-0 financial-income-title'>Due Event Payment</h3>
@@ -110,8 +110,6 @@ const OtherIncomeInvoices = () => {
                                                 View Invoice
                                             </button>
 
-
-                                            {/* View Modal */}
                                             <Modal show={showViewModal} onHide={handleCloseViewModal} centered>
                                                 <Modal.Header className='border-0 pb-0' closeButton>
                                                     <Modal.Title>Maintenance Invoice</Modal.Title>
@@ -119,7 +117,7 @@ const OtherIncomeInvoices = () => {
                                                 <Modal.Body>
                                                     {DueEventPayment && (
                                                         <div>
-                                                            {/* Invoice Details */}
+
                                                             <div className="d-flex flex-column gap-2">
                                                                 <div className='bg-light p-4'>
                                                                     <div className="row">
@@ -165,7 +163,7 @@ const OtherIncomeInvoices = () => {
                                                                     </div>
                                                                 </div>
 
-                                                                {/* Maintenance Amount, Penalty, and Total */}
+
                                                                 <div className='bg-light p-4'>
                                                                     <div className="col-12 d-flex justify-content-between">
                                                                         <p>Maintenance Amount:</p> <p className=' text-success'> ₹ 1500.00</p>
@@ -176,7 +174,7 @@ const OtherIncomeInvoices = () => {
                                                                     </div>
                                                                 </div>
 
-                                                                {/* Note Section */}
+
                                                                 <div className="row">
                                                                     <div className="col-12">
                                                                         <div className='bg-light p-4'>
@@ -187,7 +185,7 @@ const OtherIncomeInvoices = () => {
                                                                 </div>
                                                             </div>
 
-                                                            {/* Download Button */}
+
                                                             <div className="text-center mt-2 mb-2">
                                                                 <Button variant="warning" className="px-4 save maintainance-income-btn-bg w-100" onClick={handleDownloadInvoice}>
                                                                     <LuArrowDownSquare className='text-light me-1' />
@@ -198,7 +196,6 @@ const OtherIncomeInvoices = () => {
                                                     )}
                                                 </Modal.Body>
                                             </Modal>
-
 
                                         </div>
                                         <div className="row  px-3" style={{ borderRadius: "10px" }}>
@@ -237,10 +234,6 @@ const OtherIncomeInvoices = () => {
                                     </div>
                                 </div>
 
-
-
-
-                                {/* Payment Modal */}
                                 <Modal
                                     className="custom-modal"
                                     show={showPayNowModal}

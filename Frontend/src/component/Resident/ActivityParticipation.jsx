@@ -25,7 +25,7 @@ const ActivityParticipation = () => {
 
   return (
     <div className='dashboard-bg w-100' >
-      <ResidentSidebar   />
+      <ResidentSidebar />
       <Navbar />
 
       <div className="stickyHeader" style={{ marginLeft: '300px' }}>
@@ -39,7 +39,7 @@ const ActivityParticipation = () => {
               <Link to="/activity-and-participation" className='btn btn-sm maintainance-income-btn maintainance-income-btn-bg complaint-btn'>Activity Participate</Link>
 
               <div className="table-responsive rounded" style={{
-                maxHeight: '730px', // Adjust height as needed
+                maxHeight: '730px',
                 overflowY: complaint.length > 10 ? 'scroll' : 'hidden',
               }}>
 
@@ -64,7 +64,22 @@ const ActivityParticipation = () => {
                               <tr key={index} className='bg-light'>
                                 <td><img src={val.img} className='me-2' height={40} />{val.complainer}</td>
                                 <td>{val.des}</td>
-                                <td><Button className='event-time-btn border-0 text-dark mt-0'>{val.time}</Button></td>
+                                <td>
+                                  <div
+                                    style={{
+                                      width: "92px",
+                                      height: "34px",
+                                      padding: "5px 15px",
+                                      gap: "10px",
+                                      borderRadius: "50px",
+                                      backgroundColor: "#F6F8FB",
+                                      color: "#4F4F4F",
+                                      display: "inline-block",
+                                    }}
+                                  >
+                                    {val.time}
+                                  </div>
+                                </td>
 
                                 <td>{val.date}</td>
 

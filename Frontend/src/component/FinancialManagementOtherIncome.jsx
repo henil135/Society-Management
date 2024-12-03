@@ -50,14 +50,11 @@ function FinancialManagementOtherIncome() {
 
     const handleView = (index) => {
         console.log("View item:", note[index]);
-        // Implement view modal logic here
     };
 
-    // New state for delete confirmation modal
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [deleteIndex, setDeleteIndex] = useState(null);
 
-    // Functions for delete modal
     const handleShowDeleteModal = (index) => {
         setDeleteIndex(index);
         setShowDeleteModal(true);
@@ -124,7 +121,7 @@ function FinancialManagementOtherIncome() {
                                         </div>
                                     </div>
 
-                                    {/* Modal */}
+                                   
                                     {show && (
                                         <div className="modal fade show d-block  custom-modal" style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
                                             <div className="modal-dialog modal-dialog-centered">
@@ -177,7 +174,7 @@ function FinancialManagementOtherIncome() {
                                                     <div className="card-header card-title text-light d-flex align-items-center justify-content-between" style={{ background: "rgba(86, 120, 233, 1)" }}>
                                                         {val.title}
                                                         <div className='position-relative'>
-                                                            {/* Three dots button */}
+                                                           
                                                             <button
                                                                 className="btn btn-light p-0"
                                                                 onClick={() => setDropdownIndex(dropdownIndex === index ? null : index)}
@@ -186,7 +183,7 @@ function FinancialManagementOtherIncome() {
                                                                 <BsThreeDotsVertical />
                                                             </button>
 
-                                                            {/* Dropdown Menu */}
+                                                           
                                                             {dropdownIndex === index && (
                                                                 <div className="dropdown-menu show position-absolute" style={{ right: 0, top: '100%', zIndex: 10 }}>
                                                                     <button
@@ -197,7 +194,7 @@ function FinancialManagementOtherIncome() {
                                                                     </button>
 
 
-                                                                    {/* Edit Modal */}
+                                                                    
                                                                     {showEditModal && (
                                                                         <div className="modal fade show d-block custom-modal" style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
                                                                             <div className="modal-dialog modal-dialog-centered">
@@ -254,7 +251,7 @@ function FinancialManagementOtherIncome() {
                                                                         Delete
                                                                     </button>
 
-                                                                    {/* delete modal */}
+                                                                  
                                                                     <Modal className='custom-modal' show={showDeleteModal} onHide={handleCloseDeleteModal} centered>
 
                                                                         <Modal.Title className='Modal-Title px-3 pt-3'>Delete Number?</Modal.Title>
