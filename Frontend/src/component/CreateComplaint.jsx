@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import  { useState } from 'react';
 import { Button, Modal, Form, Table } from 'react-bootstrap';
-import { FaEdit, FaEye, FaPlus, FaTrash } from 'react-icons/fa';
+import {  FaPlus,} from 'react-icons/fa';
 
 import Avtar from "../assets/Avatar.png"
 import Header from './Navbar';
@@ -63,12 +63,7 @@ function ComplaintTracking() {
 
   const handleCloseViewModal = () => setShowViewModal(false);
 
-  const getPriorityByStatus = (status) => {
-    if (status === "Pending") return "Medium";
-    if (status === "Open") return "Low";
-    if (status === "Solve") return "High";
-    return "Medium";
-  };
+
 
   const badgeStyle = (priority) => {
     if (priority === "High") return { backgroundColor: "#E74C3C", color: "white" };

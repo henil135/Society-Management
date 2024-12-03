@@ -9,8 +9,6 @@ import EnterOtp from './component/Authentication/EnterOtp';
 import ResetPassword from './component/Authentication/ResetPassword';
 import ResidentManagement from './component/ResidentManagement';
 import Dashboard from './component/Dashboard';
-import ResidentForm from './component/ResidentForm';
-
 import FinancialManagementOtherIncome from './component/FinancialManagementOtherIncome';
 import FinancialManagementExp from './component/FinancialManagementExp';
 import FinancialManagementNote from './component/FinancialManagementNote';
@@ -43,6 +41,10 @@ import CommunityQuestion from './component/Resident/CommunityQuestion.jsx';
 import { ToastContainer } from 'react-toastify';
 import { Toaster } from 'react-hot-toast';
 
+import TenantForm from './component/TenantForm.jsx';
+import OwnerForm from './component/OwnerForm.jsx';
+
+
 
 function App() {
   return (
@@ -58,7 +60,8 @@ function App() {
           {/* layout */}
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path='/residentmanagement' element={<ResidentManagement />} />
-          <Route path='/residentForm' element={<ResidentForm />} />
+          <Route path='/tenant-form' element={<TenantForm />} />
+          <Route path="/ownerform" element={<OwnerForm />} />
           <Route path="/Financial-Maintenance" element={<FinancialManagementIncome />} />
           <Route path="/Other-Income" element={<FinancialManagementOtherIncome />} />
           <Route path="/Expense" element={<FinancialManagementExp />} />
@@ -82,7 +85,7 @@ function App() {
           <Route path='/activity-and-participation' element={<ActivityParticipation />} />
           <Route path='/maintenance-invoices' element={<MaintenanceInvoices />} />
           <Route path='/other-income-nvoice' element={<OtherIncomeInvoices />} />
-
+          
 
           <Route path='/security-Protocol' element={<SecurityProtocolsResident />} />
 
