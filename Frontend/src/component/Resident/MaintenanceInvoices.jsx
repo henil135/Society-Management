@@ -42,8 +42,8 @@ const MaintenanceInvoices = () => {
         if (selectedPaymentMethod === "cash") {
             alert("Cash payment option selected. Please pay in cash.");
         } else {
-            setShowPayNowModal(false); // Close the first modal
-            setShowCardDetailsModal(true); // Open the second modal
+            setShowPayNowModal(false); 
+            setShowCardDetailsModal(true); 
         }
     };
 
@@ -70,7 +70,7 @@ const MaintenanceInvoices = () => {
                                                 <h5 className="mb-0 financial-income-title p-3">Show Maintenance Details</h5>
                                             </div>
                                             <div className='d-flex w-100 justify-content-end'>
-                                                {/* Maintenance Amount Card */}
+                                               
                                                 <div className="col-12 col-sm-6 col-md-3 pt-3 px-1">
                                                     <div className="card">
                                                         <div className="card-body d-flex justify-content-between align-items-center px-4 py-3">
@@ -82,7 +82,7 @@ const MaintenanceInvoices = () => {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                {/* Penalty Amount Card */}
+                                              
                                                 <div className="col-12 col-sm-6 col-md-3 pt-3 px-1">
                                                     <div className="card">
                                                         <div className="card-body d-flex justify-content-between align-items-center px-4 py-3">
@@ -188,7 +188,7 @@ const MaintenanceInvoices = () => {
                                         </div>
                                     </div>
 
-                                    {/* Payment Modal */}
+                                 
                                     <Modal
                                         className="custom-modal"
                                         show={showPayNowModal}

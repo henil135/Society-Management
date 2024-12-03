@@ -156,7 +156,7 @@ function Announcement() {
                                     </div>
                                 </div>
 
-                                {/* Modal */}
+                               
                                 {show && (
                                     <div className="modal fade show d-block  custom-modal" style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
                                         <div className="modal-dialog modal-dialog-centered">
@@ -198,23 +198,23 @@ function Announcement() {
                                 )}
                                 <div className="row card-row g-3 ps-3">
 
-                                    {/* {note.map((val, index) => ( */}
+                                   
                                     {Array.isArray(note) && note.map((val, index) => (
                                         <div className="col-lg-3 mb-3" key={val.id}>
                                             <div className="card">
                                                 <div className="card-header card-title text-light d-flex align-items-center justify-content-between" style={{ height: "54px", fontSize: "16px", fontWeight: "500", background: " rgba(86, 120, 233, 1)" }}>
                                                     {val.Announcement_Title}
                                                     <div className='position-relative'>
-                                                        {/* Three dots button */}
+                                                       
                                                         <button
-                                                            className="btn btn-light p-0"
+                                                            className="btn btn-light p-0 mt-0"
                                                             onClick={() => setDropdownIndex(dropdownIndex === index ? null : index)}
                                                             style={{ width: '30px', height: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                                                         >
                                                             <BsThreeDotsVertical />
                                                         </button>
 
-                                                        {/* Dropdown Menu */}
+                                                     
                                                         {dropdownIndex === index && (
                                                             <div className="dropdown-menu show position-absolute" style={{ top: '100%', zIndex: 10 }}>
                                                                 <button
@@ -223,7 +223,7 @@ function Announcement() {
                                                                 >
                                                                     Edit
                                                                 </button>
-                                                                {/* Edit Modal */}
+                                                               
                                                                 {showEditModal && (
                                                                     <div className="modal fade show d-block custom-modal" style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
                                                                         <div className="modal-dialog modal-dialog-centered">
@@ -280,7 +280,7 @@ function Announcement() {
                                                                     Delete
                                                                 </button>
 
-                                                                {/* delete modal */}
+                                                                
                                                                 <Modal className='custom-modal' show={showDeleteModal} onHide={handleCloseDeleteModal} centered>
 
                                                                     <Modal.Title className='Modal-Title px-3 pt-3'>Delete Number?</Modal.Title>
@@ -295,7 +295,7 @@ function Announcement() {
                                                                     </Modal.Footer>
                                                                 </Modal>
 
-                                                                {/* View Modal */}
+                                                               
                                                                 <Modal show={showViewModal} className='custom-modal custom-modal' onHide={handleCloseViewModal} centered>
                                                                     <Modal.Header closeButton>
                                                                         <Modal.Title>View Security Protocol</Modal.Title>

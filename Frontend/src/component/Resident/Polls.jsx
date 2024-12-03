@@ -74,10 +74,10 @@ const Polls = () => {
             <div className="flex-shrink-0">
                 <ResidentSidebar/>
             </div>
-            <div className="dashboard-bg" style={{ width: "1920px" }}>
+            <div className="dashboard-bg">
                 <Header />
                 <div className="stickyHeader">
-                    <div className="income" style={{ marginLeft: "300px", width: "1608px" }}>
+                    <div className="income" style={{ marginLeft: "300px"}}>
                         <div className="row p-4">
                             <div className="table-responsive rounded pb-3">
                                 <Link to="/Polls" className="btn btn-sm maintainance-income-btn maintainance-income-btn-bg">Own Poll</Link>
@@ -92,7 +92,7 @@ const Polls = () => {
                                         </button>
                                     </div>
 
-                                    {/* Modal */}
+                                  
                                     {show && (
                                         <div className="modal fade show d-block custom-modal" style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
                                             <div className="modal-dialog modal-dialog-centered">

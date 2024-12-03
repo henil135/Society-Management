@@ -38,15 +38,17 @@ function FinancialManagementExp() {
     }
   };
 
+
   const [exp, setExp] = useState()
 
 
 
   // New state for delete confirmation modal
+
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteIndex, setDeleteIndex] = useState(null);
 
-  // Functions for delete modal
+
   const handleShowDeleteModal = (index) => {
     setDeleteIndex(index);
     setShowDeleteModal(true);
@@ -265,7 +267,7 @@ function FinancialManagementExp() {
 
                   </div>
 
-                  {/* Add/Edit Modal */}
+                  
                   <Modal show={show} onHide={handleClose} centered className="custom-modal">
                     <Modal.Header>
                       <Modal.Title className='Modal-Title'>
@@ -397,7 +399,7 @@ function FinancialManagementExp() {
                     </Modal.Body>
                   </Modal>
 
-                  {/* View Modal */}
+                 
                   <Modal show={showViewModal} onHide={handleCloseViewModal} centered>
                     <Modal.Header closeButton>
                       <Modal.Title>View Complain</Modal.Title>
@@ -418,7 +420,7 @@ function FinancialManagementExp() {
 
                           <p className='view-strong text-dark'><strong className='view-strong'>Bill</strong> <br /></p>
 
-                          {/* Display the file */}
+                          
                           {viewComplaint.file && (
                             <div>
                               {viewComplaint.format === 'JPG' || viewComplaint.format === 'PNG' ? (
@@ -444,7 +446,7 @@ function FinancialManagementExp() {
                     </Modal.Body>
                   </Modal>
 
-                  {/* delete modal */}
+                  
                   <Modal className='custom-modal' show={showDeleteModal} onHide={handleCloseDeleteModal} centered>
                     <Modal.Header>
                       <Modal.Title className='Modal-Title'>Delete Number?</Modal.Title>

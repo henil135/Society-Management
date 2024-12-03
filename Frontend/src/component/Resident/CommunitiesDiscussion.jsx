@@ -49,22 +49,7 @@ const CommunitiesDiscussion = () => {
             // Remove the new question from localStorage after using it
             localStorage.removeItem('newQuestion');
         }
-    }, []); // The useEffect will run only once when the component mounts
-
-
-
-    // locastorage 
-    // useEffect(() => {
-    //     // "newQuestions" તરીકે ઘણી બધી માહિતી localStorage માંથી મેળવો.
-    //     const newQuestions = JSON.parse(localStorage.getItem('newQuestions')) || [];
-        
-    //     if (newQuestions.length > 0) {
-    //         setCardData(prevData => [...prevData, ...newQuestions]);
-            
-    //         // localStorage માંથી જો બધું વાપરી લીધું હોય તો તેને સાફ કરો.
-    //         localStorage.removeItem('newQuestions');
-    //     }
-    // }, []); // ફક્ત કૉમ્પોનેન્ટનું માઉન્ટ સમયે ચાલે
+    }, []);
     
     return (
         <div className='dashboard-bg w-100'>
@@ -72,7 +57,7 @@ const CommunitiesDiscussion = () => {
             <Navbar />
             <div className="container-fluid stickyHeader p-3" style={{ marginLeft: "315px", width: "1590px" }}>
                 <div className="row">
-                    {/* Left Sidebar */}
+                   
                     <div className="col-md-3 chat-sidebar p-0">
                         <div className="sidebar-header p-3 border-bottom">
                             <h5 className="mb-0">Chat</h5>
@@ -80,7 +65,7 @@ const CommunitiesDiscussion = () => {
                         <ChatSidebar />
                     </div>
 
-                    {/* Chat Area */}
+                 
                     <div className="col-md-9 chat-area p-0">
                         <div className="chat-header p-3 border-bottom">
                             <div className="d-flex align-items-center justify-content-between">
@@ -104,7 +89,7 @@ const CommunitiesDiscussion = () => {
                             </div>
                         </div>  
 
-                        {/* Cards Section */}
+                       
                         <div className='ps-4 pe-2 py-3'>
                             {cardData.map((val, index) => (
                                 <div key={index} className='row community-card pt-4 pb-2 px-2 rounded mb-3'>

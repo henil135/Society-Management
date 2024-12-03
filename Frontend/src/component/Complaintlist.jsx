@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-
 import { useForm } from 'react-hook-form';
 import { Button, Modal, Form } from 'react-bootstrap';
 import SImg from '../assets/S.png';
@@ -10,6 +9,7 @@ import AvatarImg from '../assets/Avatar.png';
 import viewICon from '../Icons/view.png'
 import deleteIcon from '../Icons/delete.png'
 import editIcon from '../Icons/Edit.png'
+
 function Complaintlist() {
 
     const [activity, setActivity] = useState([
@@ -107,9 +107,12 @@ function Complaintlist() {
     const [viewComplaint, setViewComplaint] = useState(null);
 
     const handleShowViewModal = (index) => {
-        setViewComplaint(complaint[index]);
+        const complaintToView = complaint[index];
+        console.log(complaintToView);  // Check the data being passed
+        setViewComplaint(complaintToView);
         setShowViewModal(true);
     };
+
 
     const handleCloseViewModal = () => setShowViewModal(false);
 
@@ -146,11 +149,12 @@ function Complaintlist() {
                                                         <td style={{ textAlign: "center" }} ><Button className='priority-btn btn btn-sm mb-2' style={{ backgroundColor: val.priority === 'Low' ? 'rgba(57, 151, 61, 1)' : val.priority === 'High' ? ' rgba(231, 76, 60, 1)' : 'rgba(86, 120, 233, 1)' }}>{val.priority}</Button></td>
 
                                                         <td style={{ height: '55px', textAlign: "center" }}><Button className='status-btn btn btn-sm mb-2' style={{ color: val.status === 'Open' ? 'rgba(86, 120, 233, 1)' : val.status === 'Panding' ? 'rgba(255, 195, 19, 1)' : 'rgba(57, 151, 61, 1)', backgroundColor: val.status === 'Open' ? 'rgba(86, 120, 233, 0.1)' : val.status === 'Panding' ? 'rgba(255, 195, 19, 0.1)' : 'rgba(57, 151, 61, 0.1)' }}>{val.status}</Button></td>
+
                                                         <td style={{ height: '55px', textAlign: "center", verticalAlign: "middle" }}>
                                                             <div className="d-flex align-items-center justify-content-center">
                                                                 <img src={editIcon} className="text-success me-2" style={{ cursor: "pointer" }} onClick={() => handleEdit(complaint)} />
-                                                                <img src={viewICon} className="text-primary me-2" style={{ cursor: "pointer" }} onClick={() => handleView(complaint)} />
-                                                                <img src={deleteIcon} className="text-danger" style={{ cursor: "pointer" }} onClick={() => handleDelete(index)} />
+                                                                <img src={viewICon} className="text-primary me-2" style={{ cursor: "pointer" }} onClick={() => handleShowViewModal(index)} />
+                                                                <img src={deleteIcon} className="text-danger" style={{ cursor: "pointer" }} onClick={() => handleShowDeleteModal(index)} />
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -327,30 +331,71 @@ function Complaintlist() {
                         </Modal>
 
                         {/* View Modal */}
-                        <Modal show={showViewModal} onHide={handleCloseViewModal} centered>
+                        <Modal show={showViewModal} className='custom-modal' onHide={handleCloseViewModal} centered>
                             <Modal.Header closeButton>
-                                <Modal.Title>View Complain</Modal.Title>
+                                <Modal.Title>View Complain </Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
-                                {viewComplaint && (
+
+                                {viewComplaint ? (
                                     <div>
 
                                         <div className='d-flex align-items-center mb-4'>
-                                            <img src={viewComplaint.img} className='me-3' width={70} /><p className='mb-0 view-p'>{viewComplaint.complainer}<br /><span className='view-span'>{viewComplaint.date}</span></p>
+                                            <img src={viewComplaint.img} className='me-3' width={70} />
+                                            <p className='mb-0 view-p'>{viewComplaint.complainer}<br />
+                                                <span className='view-span'>{viewComplaint.date}</span>
+                                            </p>
                                         </div>
 
-                                        <p className='view-strong text-dark'><strong className='view-strong'>Complaint:</strong> <br />{viewComplaint.complaint}</p>
+                                        <div className='mb-4'>
+                                            <strong className='view-strong'>Request Name</strong>
+                                            <p>
+                                            Unethical Behavior
+                                            </p>
+                                        </div>
 
-                                        <strong className='view-strong'>Priority:</strong> <p className='view-strong priority-btn text-center mt-1' style={{ backgroundColor: viewComplaint.priority === 'Low' ? 'rgba(57, 151, 61, 1)' : viewComplaint.priority === 'High' ? ' rgba(231, 76, 60, 1)' : 'rgba(86, 120, 233, 1)' }}>{viewComplaint.priority}</p>
+                                        <div className='mb-4'>
+                                            <strong className='view-strong'>Description</strong>
+                                            <p>
+                                            Offering, giving, receiving, or soliciting  of value to influence the actions of an.
+                                            </p>
+                                        </div>
 
-                                        <strong className='view-strong'>Status:</strong><p className='view-strong mt-1 status-btn text-center' style={{ color: viewComplaint.status === 'Open' ? 'rgba(86, 120, 233, 1)' : viewComplaint.status === 'Panding' ? 'rgba(255, 195, 19, 1)' : 'rgba(57, 151, 61, 1)', backgroundColor: viewComplaint.status === 'Open' ? 'rgba(86, 120, 233, 0.1)' : viewComplaint.status === 'Panding' ? 'rgba(255, 195, 19, 0.1)' : 'rgba(57, 151, 61, 0.1)' }} > {viewComplaint.status}</p>
+                                        <div className='d-flex justify-content-between'>
+
+                                            <div className='text-center'>
+                                                <strong className='view-strong'>Wing</strong><p className='wing-name d-flex flex-column mt-1 status-btn text-center' >
+                                                    A
+                                                </p>
+                                            </div>
+                                            <div className='text-center'>
+                                                <strong className='view-strong'>Unit</strong><p className='financial-Pnumber mt-1 status-btn text-center' >
+                                                    1002
+                                                </p>
+                                            </div>
+
+                                            <div className='text-center me-2'>
+                                                <strong className='view-strong'>Priority</strong>
+                                                <p className='view-strong mt-1 status-btn text-center pt-1 text-light' style={{ backgroundColor: viewComplaint.priority === 'Low' ? 'rgba(57, 151, 61, 1)' : viewComplaint.priority === 'High' ? ' rgba(231, 76, 60, 1)' : 'rgba(86, 120, 233, 1)' }} >
+                                                    {viewComplaint.priority}
+                                                </p>
+                                            </div>
+
+                                            <div className='text-center'>
+                                                <strong className='view-strong'>Status</strong>
+                                                <p className='view-strong mt-1 status-btn text-center pt-1' style={{ color: viewComplaint.status === 'Open' ? 'rgba(86, 120, 233, 1)' : viewComplaint.status === 'Panding' ? 'rgba(255, 195, 19, 1)' : 'rgba(57, 151, 61, 1)', backgroundColor: viewComplaint.status === 'Open' ? 'rgba(86, 120, 233, 0.1)' : viewComplaint.status === 'Panding' ? 'rgba(255, 195, 19, 0.1)' : 'rgba(57, 151, 61, 0.1)' }} >
+                                                    {viewComplaint.status}
+                                                </p>
+                                            </div>
+
+                                        </div>
 
                                     </div>
+                                ) : (
+                                    <p>No data available</p>
                                 )}
                             </Modal.Body>
                         </Modal>
-
-
                     </div>
                 </div>
 
@@ -358,15 +403,12 @@ function Complaintlist() {
                     <div className="maintenances  px-2 bg-white rounded-lg shadow-md max-w-md mx-auto custom-scrollbar" style={{ borderRadius: '12px', overflowY: 'auto' }}>
                         <div className="d-flex justify-content-between align-items-center mb-2">
                             <h2 className='mt-4'>Upcoming Activity</h2>
-
                             <Button
                                 className='month-btn rounded-2 p-2 bg-light text-dark'
                             >
                                 Month
                             </Button>
-
                         </div>
-
                         <div>
                             {activity.map((activity, index) => (
                                 <div key={index} className="py-3 rounded-lg d-flex justify-content-between align-items-center shadow-sm ">

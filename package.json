@@ -12,6 +12,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "concurrently": "^9.1.0"
+    "concurrently": "^9.1.0",
+    "react-hot-toast": "^2.4.1",
+    "react-toastify": "^10.0.6"
   }
 }

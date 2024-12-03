@@ -85,12 +85,12 @@ const TenantPersonalDetails = () => {
 
                                     <div className="row card-row rounded mb-3">
                                         <div className="p-0 bg-light d-flex flex-wrap align-items-center rounded">
-                                            {/* Profile Image */}
+                                           
                                             <div className="col-12 col-md-2 px-3 py-3 text-left text-md-center">
                                                 <img src={residentprofile} alt="Resident Profile" className="img-fluid rounded-circle" />
                                             </div>
 
-                                            {/* Resident Info */}
+                                            
                                             <div className="col-12 col-md-7 text-start px-3">
                                                 <div className="row">
                                                     <div className="col-6 col-sm-6 col-lg-3 mb-2">
@@ -130,14 +130,14 @@ const TenantPersonalDetails = () => {
                                                 </div>
                                             </div>
 
-                                            {/* Files Section */}
+                                            
                                             <div className="col-12 col-md-3 pt-3 d-flex justify-content-md-end justify-content-left justify-content-md-center">
                                                 <div>
                                                     <button
                                                         onClick={() => handleViewFile()}
                                                         className="bg-light py-2 px-3 border-0 text-start w-100"
                                                     >
-                                                        {/* File 1 */}
+                                                      
                                                         <div className="d-flex align-items-center mb-3 bg-light py-2 px-3 border rounded">
                                                             <div className="text-primary pe-3"><FaImage /></div>
                                                             <div>
@@ -149,7 +149,7 @@ const TenantPersonalDetails = () => {
                                                                 </p>
                                                             </div>
                                                         </div>
-                                                        {/* File 2 */}
+                                                        
                                                         <div className="d-flex align-items-center mb-3 bg-light py-2 px-3 border rounded">
                                                             <div className="text-primary pe-3"><FaImage /></div>
                                                             <div>
@@ -244,7 +244,7 @@ const TenantPersonalDetails = () => {
                                                 <h3 className="mb-0 financial-income-title p-3">Show Maintenance Details</h3>
                                             </div>
                                             <div className='d-flex w-100 justify-content-end'>
-                                                {/* Maintenance Amount Card */}
+                                               
                                                 <div className="col-12 col-sm-6 col-md-3 pt-3 px-1">
                                                     <div className="card">
                                                         <div className="card-body d-flex justify-content-between align-items-center px-4 py-3">
@@ -256,7 +256,7 @@ const TenantPersonalDetails = () => {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                {/* Penalty Amount Card */}
+                                         
                                                 <div className="col-12 col-sm-6 col-md-3 pt-3 px-1">
                                                     <div className="card">
                                                         <div className="card-body d-flex justify-content-between align-items-center px-4 py-3">
