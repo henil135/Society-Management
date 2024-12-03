@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { Button, Modal, Form, Table } from 'react-bootstrap';
 import {  FaPlus,} from 'react-icons/fa';
 import { useEffect } from 'react';
@@ -18,7 +18,8 @@ function ComplaintTracking() {
   const [selectedComplaint, setSelectedComplaint] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [showViewModal, setShowViewModal] = useState(false);
-
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteComplainId, setDeleteComplainId] = useState(null);
   // New state for the "Create Complaint" feature
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [newComplaint, setNewComplaint] = useState({
@@ -64,8 +65,13 @@ function ComplaintTracking() {
 
   const handleCloseViewModal = () => setShowViewModal(false);
 
-
-
+  const handleClose = () =>{
+    setShowDeleteModal(false); 
+    setDeleteComplainId(null); 
+  }
+  const handleDelete = async () => {
+    setComplaints((prev) => prev.filter((complain) => complain._id !== deleteComplainId));
+  }
   const badgeStyle = (priority) => {
     if (priority === "High") return { backgroundColor: "#E74C3C", color: "white" };
     if (priority === "Medium") return { backgroundColor: "#5678E9", color: "white" };
@@ -172,10 +178,10 @@ function ComplaintTracking() {
     maxWidth: "350px",
   };
 
-  const handleDelete = (id) => {
-    setComplaints((prevComplaints) => prevComplaints.filter((complaint) => complaint.id !== id));
+  const handleShowDelete = (complaintId) => {
+    setDeleteComplainId(complaintId);
+    setShowDeleteModal(true);
   };
-
 
   return (
     <div className="d-flex flex-column flex-md-row">
@@ -187,8 +193,6 @@ function ComplaintTracking() {
         <Header />
 
         <div className="container-fluid stickyHeader p-3" style={{ marginLeft: "300px", width: "1600px" }}>
-
-
 
           <div className="table-responsive" style={{ border: "1px solid #ddd", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", overflow: "hidden", backgroundColor: "#fff", padding: "20px", marginTop: "20px" }}>
             <div className="d-flex flex-column flex-md-row justify-content-between align-items-center ">
@@ -204,7 +208,7 @@ function ComplaintTracking() {
 
               />Create Complaint</Button>
             </div>
-            <Table className="mt-3" style={{ width: "1542px" }}>
+            <Table className="mt-3" >
               <thead className="bg-light">
                 <tr className="rmHead">
                   <th className="text-start" style={{ padding: "10px", background: "rgb(185, 198, 242)" }}>Complainer Name</th>
@@ -256,7 +260,7 @@ function ComplaintTracking() {
                       >
                         {complaint.Complaint_name}
                       </td>
-                      <td
+                      <td className='text-center'
                         style={{
                           ...tableColumnStyle,
                           width: "250px",
@@ -374,7 +378,7 @@ function ComplaintTracking() {
                             src={deleteIcon}
                             className="text-danger"
                             style={{ cursor: "pointer" }}
-                            onClick={() => handleDelete(complaint.id)}
+                            onClick={() =>  handleShowDelete(complaint.id)}
                           />
                         </div>
                       </td>
@@ -394,6 +398,25 @@ function ComplaintTracking() {
         </div>
       </div>
 
+      <Modal show={showDeleteModal} onHide={handleClose} centered className='Round-modal'>
+            <Modal.Header >
+              <Modal.Title>Delete Protocol?</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <p>Are you sure you want to delete this protocol?</p>
+            </Modal.Body>
+            <Modal.Footer style={{ display: "flex", justifyContent: "space-between" }}>
+              <Button className='cancle' onClick={handleClose} style={{ width: "175px", height: "51px", border: "1px solid #202224", padding: "10px 55px 10px 55px", background: "#FFFFFF", color: "#202224", }}>
+                Cancel
+              </Button>
+              <Button onClick={handleDelete} style={{
+                width: "175px", height: "51px", border: "1px", padding: "10px 55px 10px 55px", color: "#202224", background: "rgba(231, 76, 60, 1)"
+              }}>
+                Delete
+              </Button>
+
+            </Modal.Footer>
+          </Modal>
       {/* Create Complaint Modal */}
       <Modal show={showCreateModal} onHide={handleCloseCreateModal} centered className='Round-modal'>
         <Modal.Header >

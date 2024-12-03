@@ -74,27 +74,27 @@ function TotalBalanceChart() {
 
     const [contacts, setContacts] = useState([]);
 
-  const ViewNumber = async () => {
-    try {
-      // Make a GET request to your backend endpoint
-      const response = await axios.get("http://localhost:5000/api/v2/important-numbers/getnumber");
+    const ViewNumber = async () => {
+        try {
+            // Make a GET request to your backend endpoint
+            const response = await axios.get("http://localhost:5000/api/v2/important-numbers/getnumber");
 
-      // Log and update state with the retrieved data
-      if (response.status === 200) {
-        console.log("API Response:", response.data.data); // Logs the retrieved data
-        setContacts(response.data.data); // Save data in state
-      } else {
-        console.error("Failed to retrieve important numbers:", response.data.message);
-      }
-    } catch (error) {
-      console.error("Error fetching important numbers:", error.message);
-    }
-  };
+            // Log and update state with the retrieved data
+            if (response.status === 200) {
+                console.log("API Response:", response.data.data); // Logs the retrieved data
+                setContacts(response.data.data); // Save data in state
+            } else {
+                console.error("Failed to retrieve important numbers:", response.data.message);
+            }
+        } catch (error) {
+            console.error("Error fetching important numbers:", error.message);
+        }
+    };
 
-  // Call ViewNumber once when the component mounts
-  useEffect(() => {
-    ViewNumber();
-  }, []);
+    // Call ViewNumber once when the component mounts
+    useEffect(() => {
+        ViewNumber();
+    }, []);
 
     const [show, setShow] = useState(false);
 
@@ -116,7 +116,7 @@ function TotalBalanceChart() {
                 // Update an existing contact
                 const contactToEdit = contacts[editIndex];
                 const response = await axios.put(`http://localhost:5000/api/v2/important-numbers/${contactToEdit._id}`, data);
-    
+
                 if (response.status === 200) {
                     const updatedContacts = contacts.map((contact, index) =>
                         index === editIndex ? { ...contact, ...data } : contact
@@ -137,10 +137,10 @@ function TotalBalanceChart() {
         } catch (error) {
             console.error('Error updating/creating number:', error.message);
         }
-    
+
         handleClose(); // Close modal after submission
     };
-    
+
 
 
 
@@ -173,13 +173,13 @@ function TotalBalanceChart() {
         if (deleteIndex !== null) {
             try {
                 const contactToDelete = contacts[deleteIndex];
-    
+
                 // API call to delete the contact
                 const response = await axios.delete(`http://localhost:5000/api/v2/important-numbers/${contactToDelete._id}`);
-    
+
                 if (response.status === 200) {
                     console.log('Number deleted successfully:', response.data.message);
-    
+
                     // Update state to reflect deletion
                     const updatedContacts = contacts.filter((_, index) => index !== deleteIndex);
                     setContacts(updatedContacts);
@@ -189,7 +189,7 @@ function TotalBalanceChart() {
             } catch (error) {
                 console.error('Error deleting number:', error.message);
             }
-    
+
             // Close delete modal
             handleCloseDeleteModal();
         }
@@ -224,13 +224,14 @@ function TotalBalanceChart() {
                     <div className="chart-container" style={{ borderRadius: '12px', background: '#f9fafb', maxWidth: '1000px' }}>
                         <div className='d-flex justify-content-between align-items-center mb-2 '>
                             <h2>Total Balance</h2>
-                            <div>
-                                <select className='month-btn rounded-2 d-flex align-items-center bg-light text-dark'>
+                           <div>
+                           <select className='month-btn rounded-2 d-flex align-items-center bg-light text-dark'>
                                     <option>Last week</option>
                                     <option>Last month</option>
                                     <option>Last year</option>
                                 </select>
-                            </div>
+                           </div>
+
                         </div>
                         <Line data={data} options={options} />
                     </div>
@@ -246,37 +247,37 @@ function TotalBalanceChart() {
                         </div>
 
                         <div>
-                            
-                             {contacts.length > 0 ? (
-                contacts.map((contact, index) => (
-                    <div
-                        key={index}
-                        className="py-3 rounded-lg d-flex justify-content-between align-items-center shadow-sm"
-                    >
-                        <div>
-                            <p><strong>Name:</strong> {contact.fullName}</p>
-                            <p><strong>Phone Number:</strong> {contact.phoneNumber}</p>
-                            <p><strong>Work:</strong> {contact.work}</p>
-                        </div>
-                        <div className="gap-3 d-flex">
-                            <button className='border-0'
-                                onClick={() => handleShowDeleteModal(index)}
-                               
-                            >
-                               <img src={Delete}/>
-                            </button>
-                            <button className='border-0'
-                             
-                                onClick={() => handleEdit(index)}
-                            >
-                                <img src={Edit}/>
-                            </button>
-                        </div>
-                    </div>
-                ))
-            ) : (
-                <p>No important numbers available.</p>
-            )}
+
+                            {contacts.length > 0 ? (
+                                contacts.map((contact, index) => (
+                                    <div
+                                        key={index}
+                                        className="py-3 rounded-lg d-flex justify-content-between align-items-center shadow-sm"
+                                    >
+                                        <div>
+                                            <p><strong>Name:</strong> {contact.fullName}</p>
+                                            <p><strong>Phone Number:</strong> {contact.phoneNumber}</p>
+                                            <p><strong>Work:</strong> {contact.work}</p>
+                                        </div>
+                                        <div className="gap-3 d-flex">
+                                            <button className='border-0'
+                                                onClick={() => handleShowDeleteModal(index)}
+
+                                            >
+                                                <img src={Delete} />
+                                            </button>
+                                            <button className='border-0'
+
+                                                onClick={() => handleEdit(index)}
+                                            >
+                                                <img src={Edit} />
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))
+                            ) : (
+                                <p>No important numbers available.</p>
+                            )}
                             {/* {contacts.map((contact, index) => (
                                 <div key={index} className="py-3 rounded-lg d-flex justify-content-between align-items-center shadow-sm ">
                                     <div>
