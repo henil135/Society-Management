@@ -73,9 +73,9 @@ function Header() {
             }}
         >
             <Navbar expand="lg" className="navbar bg-white border-bottom" style={{ height: "109px" }}>
-                <Container fluid style={{ marginLeft: "325px" }}>
+                <Container fluid className='navbar-marginLeft'>
                     
-                    <h5 className='home-routing'>
+                    <h5 className='home-routing d-none d-md-block'>
                         Home
                         <span className='home-routing-span'>
                             <FaGreaterThan style={{ fontSize: "12px" }} />

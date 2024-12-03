@@ -16,6 +16,7 @@ import serviceIcon from '../../Icons/2.png'
 import eventsIcon from '../../Icons/Events Participation.png'
 import commuityIcon from '../../Icons/Community.png'
 import paymentIcon from '../../Icons/wallet.png'
+
 function ResidentSidebar() {
   const location = useLocation();
   const [activeItem, setActiveItem] = useState("");
@@ -35,7 +36,7 @@ function ResidentSidebar() {
         item.subItems.forEach((subItem) => {
           if (currentPath === subItem.path) {
             setActiveItem(subItem.key);
-        
+
             if (item.key === "payment-portal") setPaymentPortalDropdownOpen(true);
             if (item.key === "Community") setCommunityDropdownOpen(true);
 
@@ -56,14 +57,14 @@ function ResidentSidebar() {
   const handleDropdownClick = (key) => {
 
 
-     if (key === "payment-portal") {
-   
- 
+    if (key === "payment-portal") {
+
+
       setPaymentPortalDropdownOpen(!isPaymentPortalDropdownOpen);
     }
 
     else if (key === "Community") {
-        
+
       setPaymentPortalDropdownOpen(false);
       setCommunityDropdownOpen(!isCommunityDropdownOpen);
 
@@ -92,8 +93,8 @@ function ResidentSidebar() {
       icon: <img src={dashboardIcon} />,
       path: "/dashboard",
     },
-   
-  
+
+
     {
       key: "personal-details",
       label: "Personal Details",
@@ -101,51 +102,51 @@ function ResidentSidebar() {
       path: "/personal-details",
     },
     {
-        key: "service-and-complaint",
-        label: "Service And Complaint",
-        icon: <img src={serviceIcon} />,
-        path: "/service-and-complaint",
-      },
-      {
-        key: "events-and-participation",
-        label: "Events Participation",
-        icon: <img src={eventsIcon} />,
-        path: "/events-and-participation",
-      },
-      
-  
-      {
-        key: "Community",
-        label: "Community",
-        icon: <img src={commuityIcon} />,
-        subItems: [
-          { key: "Access", label: "Access Forums", path: "/Access" },
-          { key: "Polls", label: "Polls", path: "/Polls" },
-          { key: "Community-Discussion", label: "Communities Discussion", path: "/Community-Discussion" },
-        ],
-      },
-      {
-        key: "payment-portal",
-        label: "Payment Portal",
-        icon: <img src={paymentIcon} />,
-        subItems: [
-          { key: "maintenance-invoices", label: "Maintenance Invoices", path: "/maintenance-invoices" },
-          { key: "other-income-nvoice", label: "Other Income Invoice", path: "/other-income-nvoice" },
-        ],
-      },
+      key: "service-and-complaint",
+      label: "Service And Complaint",
+      icon: <img src={serviceIcon} />,
+      path: "/service-and-complaint",
+    },
+    {
+      key: "events-and-participation",
+      label: "Events Participation",
+      icon: <img src={eventsIcon} />,
+      path: "/events-and-participation",
+    },
+
+
+    {
+      key: "Community",
+      label: "Community",
+      icon: <img src={commuityIcon} />,
+      subItems: [
+        { key: "Access", label: "Access Forums", path: "/Access" },
+        { key: "Polls", label: "Polls", path: "/Polls" },
+        { key: "Community-Discussion", label: "Communities Discussion", path: "/Community-Discussion" },
+      ],
+    },
+    {
+      key: "payment-portal",
+      label: "Payment Portal",
+      icon: <img src={paymentIcon} />,
+      subItems: [
+        { key: "maintenance-invoices", label: "Maintenance Invoices", path: "/maintenance-invoices" },
+        { key: "other-income-nvoice", label: "Other Income Invoice", path: "/other-income-nvoice" },
+      ],
+    },
     {
       key: "security-Protocols",
       label: "Security protocols",
       icon: <img src={FrameIcon} />,
       path: "/security-Protocol",
     },
-   
-    
+
+
 
   ];
 
   return (
-    <div style={{fontSize:'14px'}}>
+    <div style={{ fontSize: '14px' }}>
       <button
         className="btn btn-primary d-sm-none d-md-none d-lg-none"
         onClick={() => setSidebarOpen(!isSidebarOpen)}
@@ -207,53 +208,53 @@ function ResidentSidebar() {
                     </div>
 
 
-                   {
-  
-  (item.key === "payment-portal" && isPaymentPortalDropdownOpen) ||
-  (item.key === "Community" && isCommunityDropdownOpen) ? (
-    <img src={ArrowIcon}  />
-  ) : (
-    <img src={ArrowIcon} />
-  )
-}
+                    {
+
+                      (item.key === "payment-portal" && isPaymentPortalDropdownOpen) ||
+                        (item.key === "Community" && isCommunityDropdownOpen) ? (
+                        <img src={ArrowIcon} />
+                      ) : (
+                        <img src={ArrowIcon} />
+                      )
+                    }
 
 
                   </div>
                   {
 
                     (item.key === "payment-portal" && isPaymentPortalDropdownOpen) ||
-                    (item.key === "Community" && isCommunityDropdownOpen) ? (
+                      (item.key === "Community" && isCommunityDropdownOpen) ? (
 
-                    <ul className="list-unstyled ms-4">
-                      {item.subItems.map((subItem) => (
-                        <li key={subItem.key} className="p-2 rounded position-relative">
-                          {activeItem === subItem.key && (
-                            <img
-                              src={BlackImage}
-                              alt="Active Indicator" // Adding alt for better accessibility
+                      <ul className="list-unstyled ms-4">
+                        {item.subItems.map((subItem) => (
+                          <li key={subItem.key} className="p-2 rounded position-relative">
+                            {activeItem === subItem.key && (
+                              <img
+                                src={BlackImage}
+                                alt="Active Indicator" // Adding alt for better accessibility
+                                style={{
+                                  position: "absolute",
+                                  left: "-15px", // Adjust this value as needed
+                                  height: "30px",
+                                }}
+                              />
+                            )}
+                            <Link
+                              to={subItem.path}
+                              className="d-flex align-items-center"
                               style={{
-                                position: "absolute",
-                                left: "-15px", // Adjust this value as needed
-                                height: "30px",
+                                textDecoration: "none",
+                                fontWeight: activeItem === subItem.key ? "bold" : "normal", // Bold only active submenu item
+                                color: "black", // Ensure consistent text color for submenu
                               }}
-                            />
-                          )}
-                          <Link
-                            to={subItem.path}
-                            className="d-flex align-items-center"
-                            style={{
-                              textDecoration: "none",
-                              fontWeight: activeItem === subItem.key ? "bold" : "normal", // Bold only active submenu item
-                              color: "black", // Ensure consistent text color for submenu
-                            }}
-                            onClick={() => setActiveItem(subItem.key)} // Ensure submenu item gets set as active
-                          >
-                            <span>{subItem.label}</span>
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : null}
+                              onClick={() => setActiveItem(subItem.key)} // Ensure submenu item gets set as active
+                            >
+                              <span>{subItem.label}</span>
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
                 </li>
               ) : (
                 <li key={item.key} className={`p-3 rounded position-relative ${activeItem === item.key ? "mainColor2" : ""}`}>
