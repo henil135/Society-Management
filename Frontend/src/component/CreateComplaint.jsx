@@ -1,7 +1,7 @@
 import  { useState } from 'react';
 import { Button, Modal, Form, Table } from 'react-bootstrap';
 import {  FaPlus,} from 'react-icons/fa';
-
+import { useEffect } from 'react';
 import Avtar from "../assets/Avatar.png"
 import Header from './Navbar';
 import Sidebar from "../component/layout/Sidebar";
@@ -186,7 +186,7 @@ function ComplaintTracking() {
       <div className="flex-grow-1 dashboard-bg " >
         <Header />
 
-        <div className="container-fluid stickyHeader p-3" style={{ marginLeft: "300px", width: "1620px" }}>
+        <div className="container-fluid stickyHeader p-3" style={{ marginLeft: "300px", width: "1600px" }}>
 
 
 

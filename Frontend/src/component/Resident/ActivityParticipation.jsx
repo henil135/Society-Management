@@ -28,7 +28,7 @@ const ActivityParticipation = () => {
       <ResidentSidebar />
       <Navbar />
 
-      <div className="stickyHeader" style={{ marginLeft: '300px' }}>
+      <div className="stickyHeader marginLeft">
         <div className='container-fluid '>
 
           <div className='row p-4'>
