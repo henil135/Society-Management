@@ -64,39 +64,31 @@ const MaintenanceInvoices = () => {
 
                                 <div className='container-fluid' >
 
-                                    <div className="row py-3 card-row bg-light " style={{borderRadius:"10px"}}>
-                                        <div className='align-items-center d-flex' >
-                                            <div className='col-12 col-sm-6 col-md-3'>
-                                                <h5 className="mb-0 financial-income-title p-3">Show Maintenance Details</h5>
-                                            </div>
-                                            <div className='d-flex w-100 justify-content-end'>
-                                               
-                                                <div className="col-12 col-sm-6 col-md-3 pt-3 px-1">
-                                                    <div className="card">
-                                                        <div className="card-body d-flex justify-content-between align-items-center px-4 py-3">
-                                                            <img src={incomeRactangle} width={8} className="position-absolute start-0" />
-                                                            <div>
-                                                                <h6 className="card-subtitle mb-1">Maintenance Amount</h6>
-                                                                <p className="mb-0 text-success">₹ 1,500</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                <div className="amount-card mt-3">
+                                    <div>
+                                        <h3 className="mb-0 financial-income-title mb-3 mb-md-0">Show Maintenance Details</h3>
+                                    </div>
+                                    <div className="row d-flex">
+                                        <div className="col-12 col-md-6 owner-card">
+                                            <div className="card ps-4 py-3">
+                                                <img src={incomeRactangle} width={8} className="position-absolute start-0" />
+                                                <div>
+                                                    <h6 className="card-subtitle mb-1">Maintenance Amount</h6>
+                                                    <p className="mb-0 text-success">₹ 1,500</p>
                                                 </div>
-                                              
-                                                <div className="col-12 col-sm-6 col-md-3 pt-3 px-1">
-                                                    <div className="card">
-                                                        <div className="card-body d-flex justify-content-between align-items-center px-4 py-3">
-                                                            <img src={balanceRactangle} width={8} className="position-absolute start-0" />
-                                                            <div>
-                                                                <h6 className="card-subtitle mb-1">Penalty Amount</h6>
-                                                                <p className="mb-0 text-danger">₹ 500</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                            </div>
+                                        </div>
+                                        <div className="col-12 col-md-6 owner-card">
+                                            <div className="card px-4 py-3">
+                                            <img src={balanceRactangle} width={8} className="position-absolute start-0" />
+                                                <div>
+                                                <h6 className="card-subtitle mb-1">Penalty Amount</h6>
+                                                <p className="mb-0 text-danger">₹ 500</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
 
                                     <div className='row py-3 card-row rounded'>
                                         <div className='pe-0 bg-light'>
