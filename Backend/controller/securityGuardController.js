@@ -6,7 +6,8 @@ const sendOtpUi = require("../config/mailer");
 const Guard = require("../models/securityGuardModel");
 const moment = require('moment');
 const nodemailer = require("nodemailer")
-const bcryptjs=require("bcryptjs");
+const bcryptjs = require("bcryptjs");
+const jwt = require("jsonwebtoken")
 const { generateTokenAndSetCookie } = require('../config/auth');
 
 // add security guard
@@ -35,9 +36,12 @@ exports.CreateSecurityGuard = async (req, res) => {
             });
         }
 
-        const password = generatePassword();
-        console.log(password);
+        const existingUser = await Guard.findOne({ MailOrPhone });
+        if (existingUser) {
+            return res.status(400).json({ success: false, message: "Email already exists" });
+        }
 
+        const password = generatePassword();
         const hashpassword = await hash(password);
 
         const uploadAndDeleteLocal = async (fileArray) => {
@@ -61,7 +65,6 @@ exports.CreateSecurityGuard = async (req, res) => {
         const adhar_card = await uploadAndDeleteLocal(req.files?.adhar_card);
 
         if (!full_name || !MailOrPhone || !gender || !shift || !date || !time ) {
-
             return res.status(400).json({
                 success: false,
                 message: "All fields are required",
@@ -96,13 +99,13 @@ exports.CreateSecurityGuard = async (req, res) => {
             subject: "Registration Successful - Login Details",
             text: `Dear ${newOwner.full_name},\n\nYou have successfully registered as a resident. Your login details are:\n\nUsername: ${newOwner.MailOrPhone}\nPassword: ${password}\n\nKeep this information secure.\n\nBest Regards,\nManagement`,
         };
-        
+
         // Check if the Email_address is defined and valid
         if (!newOwner.MailOrPhone || typeof newOwner.MailOrPhone !== "string") {
             throw new Error("Invalid or missing Email_address for the Owner.");
 
         }
-        
+
         try {
             await transporter.sendMail(mailOptions);
         } catch (emailError) {
@@ -159,8 +162,11 @@ exports.GuardLogin = async (req, res) => {
             return res.status(400).json({ success: false, message: "Invalid credentials" });
         }
 
-        console.log("User ID:", user._id);
-        generateTokenAndSetCookie(user._id, res);
+        const token = jwt.sign({ id: user._id, role: "security" }, process.env.JWT_SECRET, {
+            expiresIn: "15d",
+        });
+
+        res.cookie("gaurdtoken", token);
 
         res.status(200).json({
             success: true,
@@ -236,6 +242,14 @@ exports.DeleteGuard = async (req, res) => {
         });
     }
 }
+
+
+exports.gaurdProfile = async (req, res) => {
+    let data = await Guard.findById(req.gaurd);
+    console.log("my data", data);
+    res.json(data);
+}
+
 
 //update security
 exports.updateSecurityGuard = async (req, res) => {

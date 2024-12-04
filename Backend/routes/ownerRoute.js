@@ -2,7 +2,7 @@
 const router=require("express").Router();
 
 const { addOwnerData, GetAllOwner, OwnerLogin, ownerProfile } = require("../controller/ownerController");
-const { protect } = require("../middleware/protect");
+const { protect, ownerpotect } = require("../middleware/protect");
 const upload=require("../utils/owner_Image")
 
 
@@ -20,7 +20,7 @@ router.get("/viewowner",GetAllOwner)
 
 // profile
 
-router.get("/Profile",protect,ownerProfile);
+router.get("/Profile",ownerpotect,ownerProfile);
 
 
 

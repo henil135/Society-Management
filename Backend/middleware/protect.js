@@ -4,47 +4,69 @@ const Owner = require("../models/ownerModel");
 const Guard = require("../models/securityGuardModel");
 const User = require("../models/userModel");
 
-const protect = async (req, res, next) => {
-    let token;
 
-    // Extract token
-    if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
-        token = req.headers.authorization.split(" ")[1];
-    } else if (req.cookies?.Token) {
-        token = req.cookies.Token;
-    }
+const ownerpotect = async (req , res , next) =>{
+    let {ownertoken} = req.cookies;
+    console.log(ownertoken);
+    
 
-    if (!token) {
-        return res.status(401).json({ message: "No token provided" });
-    }
-
-    try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET_OWNER);
-        console.log("Decoded Token:", decoded);
-
-        let user;
-        
-        if (decoded.role === "admin") {
-            user = await User.find(decoded._id).select("-password");
-        } else if (decoded.role === "resident") {
-            user = await Tenant.find(decoded._id).select("-password");
-        } else if (decoded.role === "security") {
-            user = await Guard.find(decoded._id).select("-password");
-        } else {
-            user = await Owner.find(decoded._id).select("-password");
+    if (ownertoken) {
+        try {
+            const decoded = jwt.verify(ownertoken, process.env.JWT_SECRET);
+            req.owner = decoded.id; // Set PatientID directly on req
+            console.log(decoded);       
+            next();
+        } catch (error) {
+            console.error("Token verification failed:", error);
+            return res.status(401).json({ message: "Invalid token signature" });
         }
-        if (!user) {
-            console.error("User not found for ID:", decoded.id);
-            return res.status(404).json({ message: "User not found" });
-        }
-
-        req.user = user;
-        next();
-    } catch (error) {
-        console.error("Token verification failed:", error.message);
-        res.status(401).json({ message: "Not authorized, token failed" });
+    } else {
+        console.warn("Authorization token not found");
+        return res.status(403).json({ message: "You are not authorized" });
     }
-};
+}
+
+const tenantprotect = async (req , res , next) =>{
+    let {tenanttoken} = req.cookies;
+    console.log(tenanttoken);
+    
+
+    if (tenanttoken) {
+        try {
+            const decoded = jwt.verify(tenanttoken, process.env.JWT_SECRET);
+            req.tenant = decoded.id; // Set PatientID directly on req
+            console.log(decoded);       
+            next();
+        } catch (error) {
+            console.error("Token verification failed:", error);
+            return res.status(401).json({ message: "Invalid token signature" });
+        }
+    } else {
+        console.warn("Authorization token not found");
+        return res.status(403).json({ message: "You are not authorized" });
+    }
+}
+
+const gaurdprotect = async (req , res , next) =>{
+    let {gaurdtoken} = req.cookies;
+    console.log(gaurdtoken);
+    
+
+    if (gaurdtoken) {
+        try {
+            const decoded = jwt.verify(gaurdtoken, process.env.JWT_SECRET);
+            req.gaurd = decoded.id; // Set PatientID directly on req
+            console.log(decoded);       
+            next();
+        } catch (error) {
+            console.error("Token verification failed:", error);
+            return res.status(401).json({ message: "Invalid token signature" });
+        }
+    } else {
+        console.warn("Authorization token not found");
+        return res.status(403).json({ message: "You are not authorized" });
+    }
+}
 
 
-module.exports = { protect };
+module.exports = {ownerpotect , tenantprotect , gaurdprotect};
