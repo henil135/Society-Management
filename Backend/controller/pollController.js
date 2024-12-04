@@ -14,8 +14,8 @@ exports.createPoll = async (req, res) => {
         await poll.save();
 
         // Notify all clients about the new poll
-        // const io = req.app.get('io');
-        // io.emit('newPoll', poll); // Emit the 'newPoll' event
+        const io = req.app.get('io');
+        io.emit('newPoll', poll); // Emit the 'newPoll' event
 
         res.status(201).json({ message: 'Poll created successfully.', poll });
     } catch (error) {
@@ -57,8 +57,8 @@ exports.votePoll = async (req, res) => {
         await poll.save();
 
         // Notify all clients about the poll update
-        // const io = req.app.get('io');
-        // io.emit('pollUpdated', poll); // Emit the 'pollUpdated' event
+        const io = req.app.get('io');
+        io.emit('pollUpdated', poll); // Emit the 'pollUpdated' event
 
         res.json({ message: 'Vote recorded successfully.', poll });
     } catch (error) {
