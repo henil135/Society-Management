@@ -4,6 +4,11 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 
+const {Server} = require("socket.io")
+const http = require("http")
+
+
+
 const PORT = process.env.PORT || 5000;
 const bodyParser = require("body-parser")
 
@@ -13,7 +18,7 @@ app.use(express.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
 const cookieParser = require('cookie-parser');
-app.use(cookieParser());
+app.use(cookieParser())
 
 const userRoutes = require("./routes/userRoutes");
 const societyRoutes = require("./routes/societyRoutes");
@@ -29,13 +34,51 @@ const securityprotocolRoute = require("./routes/securityProtocolRoutes")
 const annoucementRoute = require("./routes/annoucementRoutes")
 const securityGuardRoute = require("./routes/securityGuardRoutes")
 const incomeRoute = require("./routes/incomeeRoutes");
+
+const chatRoute = require("./routes/chatRoute")
+
+// const router = require("./routes/chatRoute");
+
+
+// chat server
+const server = http.createServer(app)
+const io = new Server( server , {
+  cors :{
+    origin : "*",
+    methods : ["GET" , "POST"],
+  }
+})
+
+io.on("connection" , (socket) =>{
+  console.log(`User connected : ${socket.id}`)
+})
+
+// chat connection 
+io.on("connection" , (socket) =>{
+  console.log(`User connected : ${socket.id}`)
+
+  socket.on("joinchat" , (chatId) =>{
+    socket.join(chatId);
+    console.log(`User joined chat : ${chatId}`);
+    
+  })
+
+  socket.on("sendMessage" , (data) =>{
+    const {chatId , message} = data;
+    io.to(chatId).emit("receivemessage" , message)
+  })
+
+
+  socket.on("disconnected" , () =>{
+    console.log("User disconnected")
+  })
+})
 const router = require("./routes/UniversalLogin");
 const visitor = require("./routes/VisitorRoute")
-const Poll = require("./routes/PollRoute");
 
 //user registration , login and update Profile
-app.use("/universal", router);
-app.use("/api/v1", userRoutes);
+app.use("/universal",router);
+app.use("/api/v1",userRoutes);
 
 //create society api
 app.use('/api/societies', societyRoutes);
@@ -68,11 +111,11 @@ app.use('/api/v2/security', securityGuardRoute);
 // Annoucement
 app.use('/api/v2/annoucement', annoucementRoute);
 
-// visitor tracking
-app.use("/api/v2/Visitor", visitor);
 
-// poll
-app.use("/api/v2/Polls", Poll);
+app.use('/chat' , chatRoute)
+
+// visitor tracking
+app.use("/api/v2/Visitor",visitor);
 
 
 app.listen(PORT, () => {
