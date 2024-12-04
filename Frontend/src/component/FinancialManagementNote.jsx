@@ -123,8 +123,8 @@ function FinancialManagementNote() {
       <div className='dashboard-bg w-100 ' >
 
         <Navbar />
-        <div className='container-fluid stickyHeader' style={{ marginLeft: "290px", width: "1630px" }}>
-          <div className='row p-5'>
+        <div className='container-fluid stickyHeader' style={{ marginLeft: "310px", width: "1580px" }}>
+          <div className='row p-4'>
             <div className='p-0 bg-light' >
               <div className='d-flex justify-content-between align-items-center ps-2 pe-3 pt-1' style={{ marginLeft: "10px" }}>
                 <h3 className='mb-0 financial-income-title'>Note</h3>
@@ -138,7 +138,7 @@ function FinancialManagementNote() {
                   <div className="col-lg-3 mb-3" key={val.id}>
                     <div className="card">
                       <div className="card-header  text-light d-flex align-items-center justify-content-between" style={{ height: "54px", fontSize: "16px", fontWeight: "500", background: " rgba(86, 120, 233, 1)" }}>
-                        {val.title}
+                        {val?.title}
                         <div className='position-relative'>
                           <button
                             className="btn btn-light p-0"
@@ -161,7 +161,7 @@ function FinancialManagementNote() {
                       </div>
                       <div className="card-body">
                         <h6 className="card-des-title">Description</h6>
-                        <p className="card-text card-des">{val.des}</p>
+                        <p className="card-text card-des">{val?.des}</p>
                       </div>
                     </div>
                   </div>

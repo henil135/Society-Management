@@ -59,17 +59,17 @@ function FinancialManagementExp() {
     setDeleteIndex(null);
   };
 
-  const confirmDelete = async(id) => {
+  const confirmDelete = async(_id) => {
     // if (deleteIndex !== null) {
     //   const updatedComplaint = exp.filter((_, i) => i !== deleteIndex);
     //   setExp(updatedComplaint);
     // }
     try {
-      const response = await axios.delete(`http://localhost:5000/api/v2/expenses/${id}`);
+      const response = await axios.delete(`http://localhost:5000/api/v2/expenses/${_id}`);
       console.log("Delete Response:", response.data); // Debug response
-      if (response.data.success) {
+      if (response.data.message) {
         // Remove the deleted expense from the state
-        setExp((prevExp) => prevExp.filter((expense) => expense._id !== id));
+        setExp((prevExp) => prevExp.filter((expense) => expense._id !== _id));
       } else {
         console.error("Failed to delete expense:", response.data.message);
         alert("Failed to delete expense. Please try again.");
@@ -190,11 +190,11 @@ function FinancialManagementExp() {
       <div className='dashboard-bg ' style={{ width: "1920px" }}>
         <Navbar />
         <div className='stickyHeader' style={{ width: "1630px", marginLeft: "290px" }}>
-          <div className='container-fluid income' >
+          <div className='container-fluid income ' >
 
-            <div className='row p-5'>
-              <div className='p-0'>
-                <div className="table-responsive rounded pb-3">
+            <div className='row p-5 '>
+              <div className='p-0 '>
+                <div className="table-responsive rounded pb-3 ">
 
                   <div className='bg-light'>
                     <div className='d-flex justify-content-between align-items-center p-3 pt-1'>
@@ -205,7 +205,7 @@ function FinancialManagementExp() {
                       </div>
                     </div>
 
-                    <div className="px-3 financial-maintainance-table">
+                    <div className="px-3 financial-maintainance-table custom-scrollbar">
                       {error ? (
                         <div>{error}</div>
                       ) : (
@@ -251,7 +251,7 @@ function FinancialManagementExp() {
                                     <button onClick={() => handleShowViewModal(index)}>View</button> */}
                                     <img src={editIcon} className="text-success me-2" style={{ cursor: "pointer" }} onClick={() => handleEdit(index)} />
                                     <img src={viewICon} className="text-primary me-2" style={{ cursor: "pointer" }} onClick={() => handleShowViewModal(index)} />
-                                    <img src={deleteIcon} className="text-danger" style={{ cursor: "pointer" }} onClick={() => handleShowDeleteModal(index)} />
+                                    <img src={deleteIcon} className="text-danger" style={{ cursor: "pointer" }} onClick={() => handleShowDeleteModal(index._id)} />
                                   </td>
                                 </tr>
                               ))

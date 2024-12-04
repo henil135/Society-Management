@@ -88,7 +88,7 @@ const RequestSubmission = () => {
         <div className='dashboard-bg w-100' >
             <ResidentSidebar />
             <Navbar />
-            <div style={{ marginLeft: '300px' }}>
+            <div className='marginLeft'>
 
                 <div className='container-fluid stickyHeader'>
 

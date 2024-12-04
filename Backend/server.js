@@ -9,8 +9,8 @@ const bodyParser = require("body-parser")
 
 require("./config/db");
 require("dotenv").config();
-app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());

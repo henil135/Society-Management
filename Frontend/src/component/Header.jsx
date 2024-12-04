@@ -76,7 +76,8 @@ function Header() {
                                     </span>
 
                                     <FormControl
-                                        className="form-control border-start-0 ps-0 search-input"
+                                        className="form-control border-start-0 ps-0 search-input
+                                        "
                                         placeholder="Search Here"
                                         aria-label="Search"
                                     />
@@ -99,7 +100,6 @@ function Header() {
                             onClick={() => setShowNotifications(!showNotifications)}
                         >
                             <FaBell />
-
                         </Button>
 
 
