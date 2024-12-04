@@ -31,10 +31,11 @@ const securityGuardRoute = require("./routes/securityGuardRoutes")
 const incomeRoute = require("./routes/incomeeRoutes");
 const router = require("./routes/UniversalLogin");
 const visitor = require("./routes/VisitorRoute")
+const Poll = require("./routes/PollRoute");
 
 //user registration , login and update Profile
-app.use("/universal",router);
-app.use("/api/v1",userRoutes);
+app.use("/universal", router);
+app.use("/api/v1", userRoutes);
 
 //create society api
 app.use('/api/societies', societyRoutes);
@@ -68,9 +69,12 @@ app.use('/api/v2/security', securityGuardRoute);
 app.use('/api/v2/annoucement', annoucementRoute);
 
 // visitor tracking
-app.use("/api/v2/Visitor",visitor);
+app.use("/api/v2/Visitor", visitor);
+
+// poll
+app.use("/api/v2/Polls", Poll);
 
 
-  app.listen(PORT, () => {
-      console.log(`Server is running on port Number ${PORT}`);
-    });
+app.listen(PORT, () => {
+  console.log(`Server is running on port Number ${PORT}`);
+});
