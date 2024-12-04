@@ -74,10 +74,15 @@ io.on("connection" , (socket) =>{
   })
 })
 const router = require("./routes/UniversalLogin");
+
+const PaymentRoute = require("./routes/paymentRoute");
+
 const visitor = require("./routes/VisitorRoute")
+
 
 //user registration , login and update Profile
 app.use("/universal",router);
+app.use("/payment",PaymentRoute);
 app.use("/api/v1",userRoutes);
 
 //create society api
