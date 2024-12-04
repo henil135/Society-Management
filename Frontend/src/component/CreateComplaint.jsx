@@ -1,7 +1,7 @@
 import  { useEffect, useState } from 'react';
 import { Button, Modal, Form, Table } from 'react-bootstrap';
 import {  FaPlus,} from 'react-icons/fa';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import Avtar from "../assets/Avatar.png"
 import Header from './Navbar';
 import Sidebar from "../component/layout/Sidebar";
@@ -94,9 +94,9 @@ function ComplaintTracking() {
     setShowDeleteModal(false); 
     setDeleteComplainId(null); 
   }
-  const handleDelete = async () => {
-    setComplaints((prev) => prev.filter((complain) => complain._id !== deleteComplainId));
-  }
+  // const handleDelete = async () => {
+  //   setComplaints((prev) => prev.filter((complain) => complain._id !== deleteComplainId));
+  // }
   const badgeStyle = (priority) => {
     if (priority === "High") return { backgroundColor: "#E74C3C", color: "white" };
     if (priority === "Medium") return { backgroundColor: "#5678E9", color: "white" };

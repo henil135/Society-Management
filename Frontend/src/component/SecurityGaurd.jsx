@@ -94,40 +94,34 @@ function SecurityGaurd() {
     });
     setEditGuardId(null);
   };
+  // const handleDelete = () => {
+  //   setGuards((prevGuards) =>
+  //     prevGuards.filter((guard) => guard.id !== deleteGuardId)
+  //   );
+  //   setDeleteGuardId(null); // Clear the ID of the protocol to delete
+  //   setShowDeleteGuard(false); // Close the delete confirmation modal
+  // };
+
   const handleDelete = () => {
-    setGuards((prevGuards) =>
-      prevGuards.filter((guard) => guard.id !== deleteGuardId)
-    );
-    setDeleteGuardId(null); // Clear the ID of the protocol to delete
-    setShowDeleteGuard(false); // Close the delete confirmation modal
+    if (!deleteGuardId) {
+      console.error("No guard ID specified for deletion.");
+      return;
+    }
+  
+    axios.delete(`http://localhost:5000/api/v2/security/deletesecurity/${deleteGuardId}`)
+      .then(() => {
+        setGuards((prevGuards) =>
+          prevGuards.filter((guard) => guard._id !== deleteGuardId)
+        );
+        handleClose(); // Close the modal
+      })
+      .catch((error) => console.error("Error deleting guard:", error));
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setGuardData((prev) => ({ ...prev, [name]: value }));
   };
-
-  // const handleSave = () => {
-  //   if (isEdit && editGuardId) {
-  //     setGuards((prevGuards) =>
-  //       prevGuards.map((guard) =>
-  //         guard.id === editGuardId ? { ...guard, ...newGuard } : guard
-  //       )
-  //     );
-  //   } else {
-  //     const newId = guards.length + 1;
-  //     const newEntry = { id: newId, ...newGuard };
-  //     setGuards((prevGuards) => [...prevGuards, newEntry]);
-  //   }
-  //   handleClose();
-  // };
-
-  // useEffect(() => {
-  //   // Fetch initial data
-  //   axios.get('http://localhost:5000/api/v2/security/')
-  //     .then((response) => setGuards(response.data))
-  //     .catch((error) => console.error('Error fetching guards:', error));
-  // }, []);
 
   useEffect(() => {
     axios.get('http://localhost:5000/api/v2/security/') // Replace with your API URL
@@ -148,11 +142,11 @@ function SecurityGaurd() {
   const handleSave = () => {
     if (isEdit && editGuardId) {
       // Update existing guard
-      axios.put(`http://localhost:5000/api/v2/security/updatesecurity/${editGuardId}`, newGuard)
+      axios.put(`http://localhost:5000/api/v2/security/updatesecurity/${editGuardId}`, formData)
         .then((response) => {
           setGuards((prevGuards) =>
             prevGuards.map((guard) =>
-              guard.id === editGuardId ? response.data : guard
+              guard._id === editGuardId ? response.data : guard
             )
           );
           handleClose();
@@ -160,7 +154,7 @@ function SecurityGaurd() {
         .catch((error) => console.error('Error updating guard:', error));
     } else {
       // Create new guard
-      axios.post("http://localhost:5000/api/v2/security/addsecurity", newGuard)
+      axios.post("http://localhost:5000/api/v2/security/addsecurity", formData)
         .then((response) => {
           setGuards((prevGuards) => [...prevGuards, response.data]);
           handleClose();
@@ -176,40 +170,49 @@ function SecurityGaurd() {
     const formattedTime = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour24: true });
     setNewGuard({ ...newGuard, time: formattedTime.toUpperCase() });
   };
-
-  
-  const handleAddGuard = () => {
-    if (newGuard.full_name && newGuard.Mail && newGuard.shift && newGuard.date && newGuard.time && newGuard.gender) {
-      setGuards([...guards, newGuard]); // Add the new guard to the guards array
-      setShowModal(false); // Close the modal
+  const formData = new FormData();
+  Object.keys(newGuard).forEach((key) => {
+    const value = newGuard[key];
+    if (key === "profileimage" || key === "adhar_card") {
+      formData.append(key, value.file); // Ensure the file object is passed
     } else {
-      alert("Please fill all the fields before adding the guard.");
+      formData.append(key, value);
     }
-  };
+  });
+  // const handleAddGuard = () => {
+  //   if (newGuard.full_name && newGuard.Mail && newGuard.shift && newGuard.date && newGuard.time && newGuard.gender) {
+  //     setGuards([...guards, newGuard]); // Add the new guard to the guards array
+  //     setShowModal(false); // Close the modal
+  //   } else {
+  //     alert("Please fill all the fields before adding the guard.");
+  //   }
+  // };
 
 
   const handleFileChange = (e, field) => {
     const file = e.target.files[0];
     if (!file) return;
-
+  
     const maxFileSize = 10 * 1024 * 1024; // 10 MB
     if (file.size > maxFileSize) {
       alert("File size exceeds 10 MB. Please upload a smaller file.");
       return;
     }
-
+  
+    // Update state with the file and preview
     const reader = new FileReader();
     reader.onloadend = () => {
       setNewGuard((prevState) => ({
         ...prevState,
         [field]: {
           file,
-          preview: file.type.startsWith('image/') ? reader.result : null,
+          preview: reader.result, // Base64 preview for images
         },
       }));
     };
-
-    if (file.type.startsWith('image/')) {
+  
+    // Generate preview only for image files
+    if (file.type.startsWith("image/")) {
       reader.readAsDataURL(file);
     } else {
       setNewGuard((prevState) => ({
@@ -346,10 +349,10 @@ function SecurityGaurd() {
                       )}
                     </td>
                     <td className='text-center' style={{ fontFamily: "Poppins", verticalAlign: "middle", padding: "15px" }}>{new Date(guard?.date).toLocaleDateString("en-GB", {
-                        day: "2-digit",
-                        month: "2-digit",
-                        year: "numeric",
-                      })}</td>
+                      day: "2-digit",
+                      month: "2-digit",
+                      year: "numeric",
+                    })}</td>
                     <td style={{ verticalAlign: "middle", padding: "15px" }} className="text-center">
                       <div className="d-flex align-items-center justify-content-center gap-2">
                         <div
@@ -397,7 +400,7 @@ function SecurityGaurd() {
                       <div className="d-flex align-items-center justify-content-center">
                         <img src={editIcon} className="text-success me-2" style={{ cursor: "pointer" }} onClick={() => handleShowEdit(guard)} />
                         <img src={viewICon} className="text-primary me-2" style={{ cursor: "pointer" }} onClick={() => handleShowView(guard)} />
-                        <img src={deleteIcon} className="text-danger" style={{ cursor: "pointer" }} onClick={() => handleShowDelete(guard.id)} />
+                        <img src={deleteIcon} className="text-danger" style={{ cursor: "pointer" }} onClick={() => handleShowDelete(guard._id)} />
                       </div>
                     </td>
                   </tr>
@@ -748,14 +751,14 @@ function SecurityGaurd() {
                       {/* Display file preview or name */}
                       {newGuard.adhar_card && (
                         <div style={{ marginTop: '15px', textAlign: 'center' }}>
-                          {newGuard.adhar_card.preview && newGuard.adhar_card.file.type.startsWith('image/') ? (
+                          {newGuard?.adhar_card.preview && newGuard?.adhar_card.file.type.startsWith('image/') ? (
                             <img
-                              src={newGuard.adhar_card.preview}
+                              src={newGuard?.adhar_card.preview}
                               alt="Aadhaar Preview"
                               style={{ width: '80px', height: '80px', borderRadius: '8px', objectFit: 'cover' }}
                             />
                           ) : (
-                            <div>{newGuard.adhar_card.file.name}</div>
+                            <div>{newGuard?.adhar_card?.file?.name}</div>
                           )}
                         </div>
                       )}
