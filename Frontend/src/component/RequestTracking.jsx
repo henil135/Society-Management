@@ -18,7 +18,10 @@ function RequestTracking() {
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [showViewModal, setShowViewModal] = useState(false);
-  // const [requests, setRequests] = useState([]);
+
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteRequestId, setDeleteRequestId] = useState(null);
+
   // New state for the "Create Request" feature
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [newRequest, setNewRequest] = useState({
@@ -63,7 +66,11 @@ function RequestTracking() {
     setSelectedRequest(request);
     setShowViewModal(true);
   };
-
+  const handleClose = () =>{
+    setShowDeleteModal(false); 
+    setDeleteRequestId(null); 
+  }
+ 
   const handleCloseViewModal = () => setShowViewModal(false);
 
   const getPriorityByStatus = (status) => {
@@ -150,11 +157,17 @@ function RequestTracking() {
       console.error("Error deleting request:", error);
       setErrorMessage("Failed to delete request. Please try again.");
     }
+
   };
 
+  const handleShowDelete = (requestId) => {
+    setDeleteRequestId(requestId);
+    setShowDeleteModal(true);
+  };
 
   return (
     <div className="d-flex flex-column flex-md-row">
+
 
       <div className="flex-shrink-0" >
         <Sidebar />
@@ -163,6 +176,7 @@ function RequestTracking() {
       <div className="flex-grow-1 dashboard-bg " style={{ width: "1920px" }}>
         <Header />
         <div className="container-fluid stickyHeader p-4" style={{ marginLeft: "295px", width: "1620px" }}>
+
 
 
           <div className="table-responsive" style={{ border: "1px solid #ddd", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", overflow: "hidden", backgroundColor: "#fff", padding: "5px", marginTop: "20px" }}>

@@ -190,11 +190,11 @@ function FinancialManagementExp() {
       <div className='dashboard-bg ' style={{ width: "1920px" }}>
         <Navbar />
         <div className='stickyHeader' style={{ width: "1630px", marginLeft: "290px" }}>
-          <div className='container-fluid income' >
+          <div className='container-fluid income ' >
 
-            <div className='row p-5'>
-              <div className='p-0'>
-                <div className="table-responsive rounded pb-3">
+            <div className='row p-5 '>
+              <div className='p-0 '>
+                <div className="table-responsive rounded pb-3 ">
 
                   <div className='bg-light'>
                     <div className='d-flex justify-content-between align-items-center p-3 pt-1'>
@@ -205,7 +205,7 @@ function FinancialManagementExp() {
                       </div>
                     </div>
 
-                    <div className="px-3 financial-maintainance-table">
+                    <div className="px-3 financial-maintainance-table custom-scrollbar">
                       {error ? (
                         <div>{error}</div>
                       ) : (
