@@ -110,7 +110,7 @@ const OtherIncomeInvoices = () => {
                                                 View Invoice
                                             </button>
 
-                                            <Modal show={showViewModal} onHide={handleCloseViewModal} centered>
+                                            <Modal show={showViewModal} onHide={handleCloseViewModal} centered className='square-modal'>
                                                 <Modal.Header className='border-0 pb-0' closeButton>
                                                     <Modal.Title>Maintenance Invoice</Modal.Title>
                                                 </Modal.Header>
@@ -154,6 +154,10 @@ const OtherIncomeInvoices = () => {
                                                                     <div className="col-12">
                                                                         <strong className='view-strong'>Email:</strong>
                                                                         <p>MaryDHurst@jourrapide.com</p>
+                                                                    </div>
+                                                                    <div className="col-12">
+                                                                        <strong className='view-strong'>Event Name:</strong>
+                                                                        <p>Navratri</p>
                                                                     </div>
 
 

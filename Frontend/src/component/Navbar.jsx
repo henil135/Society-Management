@@ -12,7 +12,7 @@ import { FaGreaterThan } from "react-icons/fa6";
 import { useLocation } from 'react-router-dom';
 import { IoClose } from "react-icons/io5";
 import noNotification from '../assets/Group 1000004472.png'
-
+import notificationIcon from '../Icons/notification.png'
 function Header() {
     const [notifications, setNotifications] = useState([
         {
@@ -92,11 +92,11 @@ function Header() {
 
                         
                         <Button
-                            variant="light"
+                            variant="none"
                             className="position-relative me-3 px-2 text-black notification-icon mt-0"
                             onClick={() => setShowNotifications(!showNotifications)}
                         >
-                            <FaBell />
+                            <img src={notificationIcon}  />
                             
                         </Button>
 
