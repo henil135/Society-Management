@@ -28,9 +28,11 @@ const requestsRoute = require("./routes/requestTrackingRoutes")
 const securityprotocolRoute = require("./routes/securityProtocolRoutes")
 const annoucementRoute = require("./routes/annoucementRoutes")
 const securityGuardRoute = require("./routes/securityGuardRoutes")
-const incomeRoute = require("./routes/incomeeRoutes")
+const incomeRoute = require("./routes/incomeeRoutes");
+const router = require("./routes/UniversalLogin");
 
 //user registration , login and update Profile
+app.use("/universal",router);
 app.use("/api/v1",userRoutes);
 
 //create society api
