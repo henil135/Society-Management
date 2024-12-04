@@ -12,8 +12,8 @@ const chatSchema = new mongoose.Schema({
   fileSize: { type: String },
   senderId: { type: mongoose.Schema.Types.ObjectId, required: true },
   receiverId: { type: mongoose.Schema.Types.ObjectId, required: true },
-  adminId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-  residentId: { type: mongoose.Schema.Types.ObjectId, ref: "Owner", required: true },
+  adminId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  residentId: { type: mongoose.Schema.Types.ObjectId, ref: "Owner"},
   timestamp: { type: Date, default: Date.now },
   status: { type: String, enum: ["read", "unread"], default: "unread" },
 });
