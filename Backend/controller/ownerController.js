@@ -10,9 +10,6 @@ const bcryptjs=require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { generateTokenAndSetCookie } = require('../config/auth');
 
-exports.addOwnerData = async (req, res) => {
-
-
 
 exports.addOwnerData = async (req, res) => {
     try {

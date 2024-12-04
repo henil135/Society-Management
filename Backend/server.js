@@ -30,6 +30,7 @@ const annoucementRoute = require("./routes/annoucementRoutes")
 const securityGuardRoute = require("./routes/securityGuardRoutes")
 const incomeRoute = require("./routes/incomeeRoutes");
 const router = require("./routes/UniversalLogin");
+const visitor = require("./routes/VisitorRoute")
 
 //user registration , login and update Profile
 app.use("/universal",router);
@@ -65,6 +66,9 @@ app.use('/api/v2/security', securityGuardRoute);
 
 // Annoucement
 app.use('/api/v2/annoucement', annoucementRoute);
+
+// visitor tracking
+app.use("/api/v2/Visitor",visitor);
 
 
   app.listen(PORT, () => {
