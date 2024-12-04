@@ -24,7 +24,7 @@ exports.CreateSecurityGuard = async (req, res) => {
         } = req.body;
 
         // Convert date string (DD/MM/YYYY) to Date object
-        const parsedDate = moment(date, "DD/MM/YYYY").toDate();
+        const parsedDate = moment(date,["DD/MM/YYYY", "YYYY-MM-DD"],true).toDate();
         if (!parsedDate || isNaN(parsedDate.getTime())) {
             return res.status(400).json({
                 success: false,
@@ -57,7 +57,7 @@ exports.CreateSecurityGuard = async (req, res) => {
         const profileimage = await uploadAndDeleteLocal(req.files?.profileimage);
         const adhar_card = await uploadAndDeleteLocal(req.files?.adhar_card);
 
-        if (!full_name || !MailOrPhone || !gender || !shift || !date || !time || !profileimage || !adhar_card) {
+        if (!full_name || !Mail || !gender || !shift || !date || !time || !profileimage || !adhar_card) {
             return res.status(400).json({
                 success: false,
                 message: "All fields are required",
@@ -65,7 +65,7 @@ exports.CreateSecurityGuard = async (req, res) => {
         }
         const newOwner = new Guard({
             full_name,
-            MailOrPhone,
+            Mail,
             gender,
             shift,
             date: parsedDate,  // Use the parsed date here
@@ -78,11 +78,11 @@ exports.CreateSecurityGuard = async (req, res) => {
 
         await newOwner.save();
 
-        if (MailOrPhone.includes("@")) {
+        if (Mail.includes("@")) {
             await sendOtpUi(
-                newOwner.MailOrPhone,
+                newOwner.Mail,
                 "Registration Successful - Login Details",
-                `Dear ${newOwner.full_name},\n\nYou have successfully registered as a security. Your login details are as follows:\n\nUsername: ${newOwner.MailOrPhone}\nPassword: <b> ${password}</b>\n\nPlease keep this information secure.\n\nBest Regards,\nManagement`
+                `Dear ${newOwner.full_name},\n\nYou have successfully registered as a security. Your login details are as follows:\n\nUsername: ${newOwner.Mail}\nPassword: <b> ${password}</b>\n\nPlease keep this information secure.\n\nBest Regards,\nManagement`
             );
         }
         return res.status(200).json({
@@ -167,7 +167,7 @@ exports.updateSecurityGuard = async (req, res) => {
     const { id } = req.params;
     const {
         full_name,
-        MailOrPhone,
+        Mail,
         gender,
         shift,
         date,
@@ -202,7 +202,7 @@ exports.updateSecurityGuard = async (req, res) => {
         };
 
         if (full_name) guard.full_name = full_name;
-        if (MailOrPhone) guard.MailOrPhone = MailOrPhone;
+        if (Mail) guard.Mail = Mail;
         if (gender) guard.gender = gender;
         if (shift) guard.shift = shift;
         if (date) {

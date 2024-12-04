@@ -9,7 +9,7 @@ const securityschema= new Schema({
         type:String,
         required:true
     },
-    MailOrPhone:{
+    Mail:{
         type:String,
         required:true
     },

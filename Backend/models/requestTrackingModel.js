@@ -11,6 +11,10 @@ const RequestSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
+    Description:{
+        type:String,
+        required:true,
+    },
     Request_date: {
         type: Date,
         required: true,
