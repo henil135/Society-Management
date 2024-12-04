@@ -86,7 +86,7 @@ function ResidentManagement() {
         <div className="container-fluid custom-scrollbar " style={{ marginTop: "20px", marginLeft: "310px", width: "1590px" }}>
 
 
-          <div className="table-responsive" style={{ border: "1px solid #ddd", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", overflow: "hidden", backgroundColor: "#fff", padding: "20px", marginTop: "20px", marginLeft: "10px" }}>
+          <div className="table-responsive custom-scrollbar" style={{ border: "1px solid #ddd", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", overflow: "hidden", backgroundColor: "#fff", padding: "20px", marginTop: "20px", marginLeft: "10px" }}>
             <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
 
               <h4>Resident Tenant and Owner Details</h4>
@@ -372,7 +372,7 @@ function ResidentManagement() {
           </Modal>
 
           
-          <Modal show={show} onHide={handleClose} cetered>
+          <Modal show={show} onHide={handleClose}  className="modal-right custom-scrollbar">
             <Modal.Header>
               <Modal.Title style={{fontSize: '20px'}}>View Owner Details</Modal.Title>
             </Modal.Header>

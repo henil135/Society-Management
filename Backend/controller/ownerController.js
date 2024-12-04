@@ -4,13 +4,14 @@ const fs = require("fs")
 const crypto = require("crypto");
 const sendOtpUi = require('../config/mailer');
 const { hash } = require('../utils/hashpassword');
+
 const nodemailer = require("nodemailer")
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { generateTokenAndSetCookie } = require('../config/auth');
 
-exports.addOwnerData = async (req, res) => {
 
+exports.addOwnerData = async (req, res) => {
     try {
 
         function generatePassword(length = 6) {
@@ -204,7 +205,7 @@ exports.addOwnerData = async (req, res) => {
         });
     } catch (error) {
         console.error("Error adding owner data:", error);
-        return res.status(500).json({
+       return res.status(500).json({
             success: false,
             message: "Failed to add owner data"
         });

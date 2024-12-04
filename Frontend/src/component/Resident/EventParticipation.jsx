@@ -29,7 +29,7 @@ const EventParticipation = () => {
 
       <Navbar />
 
-      <div style={{ marginLeft: '300px' }}>
+      <div className='marginLeft'>
 
         <div className='container-fluid stickyHeader'>
 
@@ -40,16 +40,16 @@ const EventParticipation = () => {
 
               <Link to="/activity-and-participation" className='btn btn-sm maintainance-income-btn maintainance-income-btn-withoutbg complaint-btn'>Activity Participate</Link>
 
-              <div className="table-responsive rounded" style={{
+              <div className="table-responsive rounded custom-scrollbar" style={{
                 maxHeight: '730px',
                 overflowY: complaint.length > 10 ? 'scroll' : 'hidden',
               }}>
 
-                <div className='bg-light'>
-                  <h3 className=' mb-0 py-3 ps-3 financial-income-title'>Events Participation</h3>
-                  <div className='px-3' style={{ overflowX: 'auto' }}>
+                <div className='bg-light '>
+                  <h3 className=' mb-0 py-3 ps-3 financial-income-title '>Events Participation</h3>
+                  <div className='px-3 ' style={{ overflowX: 'auto' }}>
 
-                    <table className="table">
+                    <table className="table ">
                       <thead className='table-primary'>
                         <tr style={{ height: '55px' }}>
                           <th scope="col"> Participator Name</th>

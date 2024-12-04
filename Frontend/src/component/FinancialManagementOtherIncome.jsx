@@ -1,23 +1,24 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Button, Modal, Form } from 'react-bootstrap';
 import Sidebar from "../component/layout/Sidebar";
-
+import axios from 'axios'
+import moment from 'moment'
 
 
 function FinancialManagementOtherIncome() {
 
     const [note, setNote] = useState([
-        { id: 1, title: 'Ganesh chaturthi', amtPerMember: '1,500', totalMember: '12', date: '01/02/2024', dueDate: '10/07/2024', des: 'A visual representation of your spending categories.', amt: '1200' },
+        // { id: 1, title: 'Ganesh chaturthi', amtPerMember: '1,500', totalMember: '12', date: '01/02/2024', dueDate: '10/07/2024', des: 'A visual representation of your spending categories.', amt: '1200' },
 
-        { id: 2, title: 'Navratri', amtPerMember: '1,500', totalMember: '12', date: '01/02/2024', dueDate: '10/07/2024', des: 'A visual representation of your spending categories.', amt: '800' },
+        // { id: 2, title: 'Navratri', amtPerMember: '1,500', totalMember: '12', date: '01/02/2024', dueDate: '10/07/2024', des: 'A visual representation of your spending categories.', amt: '800' },
 
-        { id: 3, title: 'Diwali', amtPerMember: '1,500', totalMember: '12', date: '01/02/2024', dueDate: '10/07/2024', des: 'A visual representation of your spending categories.', amt: '800' },
+        // { id: 3, title: 'Diwali', amtPerMember: '1,500', totalMember: '12', date: '01/02/2024', dueDate: '10/07/2024', des: 'A visual representation of your spending categories.', amt: '800' },
 
-        { id: 4, title: 'Ganesh chaturthi', amtPerMember: '1,500', totalMember: '12', date: '01/02/2024', dueDate: '10/07/2024', des: 'A visual representation of your spending categories.', amt: '1200' },
+        // { id: 4, title: 'Ganesh chaturthi', amtPerMember: '1,500', totalMember: '12', date: '01/02/2024', dueDate: '10/07/2024', des: 'A visual representation of your spending categories.', amt: '1200' },
 
     ]);
 
@@ -34,23 +35,81 @@ function FinancialManagementOtherIncome() {
 
     const handleShow = () => setShow(true);
 
-    const onSubmit = (data) => {
-        if (editIndex !== null) {
-            const updatedNotes = [...note];
-            updatedNotes[editIndex] = { ...updatedNotes[editIndex], ...data };
-            setNote(updatedNotes);
-        } else {
-            setNote([...note, { id: note.length + 1, ...data }]);
+    // const onSubmit = (data) => {
+    //     if (editIndex !== null) {
+    //         const updatedNotes = [...note];
+    //         updatedNotes[editIndex] = { ...updatedNotes[editIndex], ...data };
+    //         setNote(updatedNotes);
+    //     } else {
+    //         setNote([...note, { id: note.length + 1, ...data }]);
+    //     }
+    //     handleClose();
+    // };
+
+    // const onSubmit = async (data) => {
+    //     try {
+    //         if (editIndex !== null) {
+    //             const updatedNote = { ...note[editIndex], ...data };
+    //             await axios.put(`http://localhost:5000/api/v2/income/update/${updatedNote.id}`, updatedNote);
+    //             const updatedNotes = [...note];
+    //             updatedNotes[editIndex] = updatedNote;
+    //             setNote(updatedNotes);
+    //         } else {
+    //             const response = await axios.post('http://localhost:5000/api/v2/income/addincome', data);
+    //             setNote([...note, response.data]);
+    //         }
+    //         handleClose();
+    //     } catch (error) {
+    //         console.error("Error saving note:", error);
+    //     }
+    // };
+
+    const onSubmit = async (data) => {
+        try {
+            const formattedData = {
+                ...data,
+                date: moment(data.date).format("DD/MM/YYYY"),
+                dueDate: moment(data.dueDate).format("DD/MM/YYYY"),
+            };
+    
+            console.log("Formatted Data:", formattedData);
+    
+            if (editIndex !== null) {
+                const updatedNote = { ...note[editIndex], ...formattedData };
+                const id = note[editIndex]._id || note[editIndex].id; // Adjust based on your backend ID field
+                console.log("Updating Note ID:", id); // Debug log
+                await axios.put(`http://localhost:5000/api/v2/income/update/${id}`, formattedData);
+                const updatedNotes = [...note];
+                updatedNotes[editIndex] = updatedNote;
+                setNote(updatedNotes);
+            } else {
+                const response = await axios.post('http://localhost:5000/api/v2/income/addincome', formattedData);
+                setNote([...note, response.data.Income]);
+            }
+            handleClose();
+        } catch (error) {
+            console.error("Error saving note:", error);
         }
-        handleClose();
     };
 
+    useEffect(() => {
+        fetchNotes();
+    }, []);
+
+    const fetchNotes = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/api/v2/income/'); // Replace with actual API endpoint
+            setNote(response.data.Income);
+        } catch (error) {
+            console.error("Error fetching notes:", error);
+        }
+    };
 
     const [dropdownIndex, setDropdownIndex] = useState(null);
 
-    const handleView = (index) => {
-        console.log("View item:", note[index]);
-    };
+    // const handleView = (index) => {
+    //     console.log("View item:", note[index]);
+    // };
 
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [deleteIndex, setDeleteIndex] = useState(null);
@@ -77,10 +136,10 @@ function FinancialManagementOtherIncome() {
         setEditIndex(index);
         const selectedNote = note[index];
         setValue('title', selectedNote.title);
-        setValue('amtPerMember', selectedNote.amtPerMember);
+        setValue('amtPerMember', selectedNote.amount);
         setValue('date', selectedNote.date);
         setValue('dueDate', selectedNote.dueDate);
-        setValue('des', selectedNote.des);
+        setValue('description', selectedNote.description);
         setShowEditModal(true);
     };
 
@@ -121,7 +180,7 @@ function FinancialManagementOtherIncome() {
                                         </div>
                                     </div>
 
-                                   
+
                                     {show && (
                                         <div className="modal fade show d-block  custom-modal" style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
                                             <div className="modal-dialog modal-dialog-centered">
@@ -147,13 +206,13 @@ function FinancialManagementOtherIncome() {
                                                             </div>
                                                             <div className="mb-3">
                                                                 <label className='Form-Label'>Description <span className='text-danger'>*</span></label>
-                                                                <input type="text" className="form-control Form-Control" placeholder='Enter Description' {...register('des', { required: true })} />
-                                                                {errors.amt && <small className="text-danger">Description is required</small>}
+                                                                <input type="text" className="form-control Form-Control" placeholder='Enter Description' {...register('description', { required: true })} />
+                                                                {errors.description && <small className="text-danger">Description is required</small>}
                                                             </div>
                                                             <div className="mb-3">
                                                                 <label className='Form-Label'>Amount <span className='text-danger'>*</span></label>
-                                                                <input type="text" className="form-control Form-Control" placeholder="₹ 0000" {...register('amtPerMember', { required: true })} />
-                                                                {errors.amtPerMember && <small className="text-danger">Amount is required</small>}
+                                                                <input type="text" className="form-control Form-Control" placeholder="₹ 0000" {...register('amount', { required: true })} />
+                                                                {errors.amount && <small className="text-danger">Amount is required</small>}
                                                             </div>
                                                         </div>
                                                         <div className="px-3 pb-3 d-flex justify-content-between">
@@ -168,130 +227,134 @@ function FinancialManagementOtherIncome() {
 
 
                                     <div className="row card-row g-3 ps-3">
-                                        {note.map((val, index) => (
-                                            <div className="col-lg-3 mb-3" key={val.id}>
-                                                <div className="card">
-                                                    <div className="card-header card-title text-light d-flex align-items-center justify-content-between" style={{ background: "rgba(86, 120, 233, 1)" }}>
-                                                        {val.title}
-                                                        <div className='position-relative'>
-                                                           
-                                                            <button
-                                                                className="btn btn-light p-0"
-                                                                onClick={() => setDropdownIndex(dropdownIndex === index ? null : index)}
-                                                                style={{ width: '30px', height: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                                                            >
-                                                                <BsThreeDotsVertical />
-                                                            </button>
+                                        {note && note.length > 0 ? (
+                                            note.map((val, index) => (
+                                                <div className="col-lg-3 mb-3" key={val?.id}>
+                                                    <div className="card">
+                                                        <div className="card-header card-title text-light d-flex align-items-center justify-content-between" style={{ background: "rgba(86, 120, 233, 1)" }}>
+                                                            {val?.title}
+                                                            <div className='position-relative'>
 
-                                                           
-                                                            {dropdownIndex === index && (
-                                                                <div className="dropdown-menu show position-absolute" style={{ right: 0, top: '100%', zIndex: 10 }}>
-                                                                    <button
-                                                                        className="dropdown-item"
-                                                                        onClick={() => handleShowEditModal(index)}
-                                                                    >
-                                                                        Edit
-                                                                    </button>
+                                                                <button
+                                                                    className="btn btn-light p-0"
+                                                                    onClick={() => setDropdownIndex(dropdownIndex === index ? null : index)}
+                                                                    style={{ width: '30px', height: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                                                                >
+                                                                    <BsThreeDotsVertical />
+                                                                </button>
 
 
-                                                                    
-                                                                    {showEditModal && (
-                                                                        <div className="modal fade show d-block custom-modal" style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
-                                                                            <div className="modal-dialog modal-dialog-centered">
-                                                                                <div className="modal-content">
+                                                                {dropdownIndex === index && (
+                                                                    <div className="dropdown-menu show position-absolute" style={{ right: 0, top: '100%', zIndex: 10 }}>
+                                                                        <button
+                                                                            className="dropdown-item"
+                                                                            onClick={() => handleShowEditModal(index)}
+                                                                        >
+                                                                            Edit
+                                                                        </button>
 
-                                                                                    <h5 className="modal-title p-3 pb-0">Edit Other Income</h5>
 
 
-                                                                                    <form onSubmit={handleSubmit(onSubmit)}>
-                                                                                        <div className="modal-body">
-                                                                                            <div className="mb-3">
-                                                                                                <label className='Form-Label'>Amount<span className='text-danger'>*</span></label>
-                                                                                                <input type="text" className="form-control Form-Control" {...register('amtPerMember', { required: true })} placeholder="₹ 0.00" />
-                                                                                                {errors.amtPerMember && <small className="text-danger">Amount is required</small>}
-                                                                                            </div>
+                                                                        {showEditModal && (
+                                                                            <div className="modal fade show d-block custom-modal" style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
+                                                                                <div className="modal-dialog modal-dialog-centered">
+                                                                                    <div className="modal-content">
 
-                                                                                            <div className='d-flex justify-content-between'>
+                                                                                        <h5 className="modal-title p-3 pb-0">Edit Other Income</h5>
+
+
+                                                                                        <form onSubmit={handleSubmit(onSubmit)}>
+                                                                                            <div className="modal-body">
                                                                                                 <div className="mb-3">
-                                                                                                    <label className='Form-Label'>Date<span className='text-danger'>*</span></label>
-                                                                                                    <input type="date" className="form-control Form-Control" {...register('date', { required: true })} />
+                                                                                                    <label className='Form-Label'>Amount<span className='text-danger'>*</span></label>
+                                                                                                    <input type="text" className="form-control Form-Control" {...register('amount', { required: true })} placeholder="₹ 0.00" />
+                                                                                                    {errors.amount && <small className="text-danger">Amount is required</small>}
                                                                                                 </div>
-                                                                                                <div className="mb-3">
-                                                                                                    <label className='Form-Label'>Due Date<span className='text-danger'>*</span></label>
-                                                                                                    <input type="date" className="form-control Form-Control" {...register('dueDate', { required: true })} />
-                                                                                                </div>
-                                                                                            </div>
 
-                                                                                            <div className="mb-3">
-                                                                                                <label className='Form-Label'>Description <span className='text-danger'>*</span></label>
-                                                                                                <input type="text" className="form-control Form-Control" placeholder='Enter Description' {...register('des', { required: true })} />
-                                                                                                {errors.amt && <small className="text-danger">Description is required</small>}
+                                                                                                <div className='d-flex justify-content-between'>
+                                                                                                    <div className="mb-3">
+                                                                                                        <label className='Form-Label'>Date<span className='text-danger'>*</span></label>
+                                                                                                        <input type="date" className="form-control Form-Control" {...register('date', { required: true })} />
+                                                                                                    </div>
+                                                                                                    <div className="mb-3">
+                                                                                                        <label className='Form-Label'>Due Date<span className='text-danger'>*</span></label>
+                                                                                                        <input type="date" className="form-control Form-Control" {...register('dueDate', { required: true })} />
+                                                                                                    </div>
+                                                                                                </div>
+
+                                                                                                <div className="mb-3">
+                                                                                                    <label className='Form-Label'>Description <span className='text-danger'>*</span></label>
+                                                                                                    <input type="text" className="form-control Form-Control" placeholder='Enter Description' {...register('description', { required: true })} />
+                                                                                                    {errors.description && <small className="text-danger">Description is required</small>}
+                                                                                                </div>
                                                                                             </div>
-                                                                                        </div>
-                                                                                        <div className="px-3 pb-3 d-flex justify-content-between">
-                                                                                            <button type="button" className="btn btn-sm cancle" onClick={handleCloseEditModal}>Cancel</button>
-                                                                                            <button type="submit" className="btn btn-sm save">Save</button>
-                                                                                        </div>
-                                                                                    </form>
+                                                                                            <div className="px-3 pb-3 d-flex justify-content-between">
+                                                                                                <button type="button" className="btn btn-sm cancle" onClick={handleCloseEditModal}>Cancel</button>
+                                                                                                <button type="submit" className="btn btn-sm save">Save</button>
+                                                                                            </div>
+                                                                                        </form>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
-                                                                    )}
+                                                                        )}
 
-                                                                    <button
-                                                                        className="dropdown-item"
-                                                                    >
-                                                                        View
-                                                                    </button>
+                                                                        <button
+                                                                            className="dropdown-item"
+                                                                        >
+                                                                            View
+                                                                        </button>
 
-                                                                    <button
-                                                                        className="dropdown-item"
-                                                                        onClick={() => handleShowDeleteModal(index)}
-                                                                    >
-                                                                        Delete
-                                                                    </button>
+                                                                        <button
+                                                                            className="dropdown-item"
+                                                                            onClick={() => handleShowDeleteModal(index)}
+                                                                        >
+                                                                            Delete
+                                                                        </button>
 
-                                                                  
-                                                                    <Modal className='custom-modal' show={showDeleteModal} onHide={handleCloseDeleteModal} centered>
 
-                                                                        <Modal.Title className='Modal-Title px-3 pt-3'>Delete Number?</Modal.Title>
+                                                                        <Modal className='custom-modal' show={showDeleteModal} onHide={handleCloseDeleteModal} centered>
 
-                                                                        <Modal.Body>
-                                                                            <p className='Form-p mb-0'>Are you sure you want to delete this number?</p>
-                                                                        </Modal.Body>
+                                                                            <Modal.Title className='Modal-Title px-3 pt-3'>Delete Number?</Modal.Title>
 
-                                                                        <Modal.Footer className='d-flex justify-content-between'>
-                                                                            <Button variant="secondary" className='btn cancle  mt-2' onClick={handleCloseDeleteModal}>Cancel</Button>
-                                                                            <Button variant="danger" className='btn delete' onClick={confirmDelete}>Delete</Button>
-                                                                        </Modal.Footer>
-                                                                    </Modal>
-                                                                </div>
-                                                            )}
+                                                                            <Modal.Body>
+                                                                                <p className='Form-p mb-0'>Are you sure you want to delete this number?</p>
+                                                                            </Modal.Body>
+
+                                                                            <Modal.Footer className='d-flex justify-content-between'>
+                                                                                <Button variant="secondary" className='btn cancle  mt-2' onClick={handleCloseDeleteModal}>Cancel</Button>
+                                                                                <Button variant="danger" className='btn delete' onClick={confirmDelete}>Delete</Button>
+                                                                            </Modal.Footer>
+                                                                        </Modal>
+                                                                    </div>
+                                                                )}
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div className="card-body">
-                                                        <div className="d-flex justify-content-between align-items-center mb-2">
-                                                            <h6 className="card-body-title mb-0">Amount Per Member</h6>
-                                                            <span className="card-body-title card-body-button mb-0 fw-medium">₹ {val.amtPerMember}</span>
+                                                        <div className="card-body">
+                                                            <div className="d-flex justify-content-between align-items-center mb-2">
+                                                                <h6 className="card-body-title mb-0">Amount Per Member</h6>
+                                                                <span className="card-body-title card-body-button mb-0 fw-medium">₹ {val?.amount}</span>
+                                                            </div>
+                                                            <div className="d-flex justify-content-between align-items-center mb-2">
+                                                                <h6 className="card-body-title mb-0">Total Member</h6>
+                                                                <span className="card-body-title text-dark mb-0 fw-medium">{val?.member}</span>
+                                                            </div>
+                                                            <div className="d-flex justify-content-between align-items-center mb-2">
+                                                                <h6 className="card-body-title mb-0">Date</h6>
+                                                                <span className="card-body-title text-dark mb-0 fw-medium">{val?.date}</span>
+                                                            </div>
+                                                            <div className='d-flex justify-content-between align-items-center mb-2'>
+                                                                <h6 className="card-body-title mb-0">Due Date</h6>
+                                                                <span className="card-body-title text-dark fw-medium">{val?.dueDate}</span>
+                                                            </div>
+                                                            <h6 className="card-body-title">Description</h6>
+                                                            <p className="card-text card-des fw-medium">{val?.description}</p>
                                                         </div>
-                                                        <div className="d-flex justify-content-between align-items-center mb-2">
-                                                            <h6 className="card-body-title mb-0">Total Member</h6>
-                                                            <span className="card-body-title text-dark mb-0 fw-medium">{val.totalMember}</span>
-                                                        </div>
-                                                        <div className="d-flex justify-content-between align-items-center mb-2">
-                                                            <h6 className="card-body-title mb-0">Date</h6>
-                                                            <span className="card-body-title text-dark mb-0 fw-medium">{val.date}</span>
-                                                        </div>
-                                                        <div className='d-flex justify-content-between align-items-center mb-2'>
-                                                            <h6 className="card-body-title mb-0">Due Date</h6>
-                                                            <span className="card-body-title text-dark fw-medium">{val.dueDate}</span>
-                                                        </div>
-                                                        <h6 className="card-body-title">Description</h6>
-                                                        <p className="card-text card-des fw-medium">{val.des}</p>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        ))}
+                                            ))
+                                        ) : (
+                                            <p>No notes available.</p>
+                                        )}
 
                                     </div>
                                 </div>

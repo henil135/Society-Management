@@ -206,7 +206,7 @@ function FinancialManagementIncome() {
                 <div className='px-3 financial-maintainance-table '>
                   <table className="table ">
 
-                    <thead className='table-primary '>
+                    <thead className='table-primary custom-scrollbar'>
                       <tr >
                         <th scope="col">Name</th>
                         <th scope="col">Unit Number</th>

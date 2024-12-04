@@ -1,7 +1,7 @@
-import  { useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { Button, Modal, Form, Table } from 'react-bootstrap';
 import {  FaPlus,} from 'react-icons/fa';
-
+// import { useEffect } from 'react';
 import Avtar from "../assets/Avatar.png"
 import Header from './Navbar';
 import Sidebar from "../component/layout/Sidebar";
@@ -18,7 +18,8 @@ function ComplaintTracking() {
   const [selectedComplaint, setSelectedComplaint] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [showViewModal, setShowViewModal] = useState(false);
-
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteComplainId, setDeleteComplainId] = useState(null);
   // New state for the "Create Complaint" feature
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [newComplaint, setNewComplaint] = useState({
@@ -40,22 +41,47 @@ function ComplaintTracking() {
 
   const handleCloseModal = () => setShowModal(false);
 
-  const handleSave = () => {
+  // const handleSave = () => {
+  //   if (!selectedComplaint.Complainer_name || !selectedComplaint.Complaint_name || !selectedComplaint.Description || !selectedComplaint.Wing || !selectedComplaint.Unit) {
+  //     setErrorMessage("All fields are required.");
+  //     return;
+  //   }
+
+  //   setComplaints((prevComplaints) =>
+  //     prevComplaints.map((c) =>
+  //       c.id === selectedComplaint.id ? selectedComplaint : c
+  //     )
+  //   );
+
+  //   setShowModal(false);
+  //   setErrorMessage("");
+  // };
+
+  const handleSave = async () => {
     if (!selectedComplaint.Complainer_name || !selectedComplaint.Complaint_name || !selectedComplaint.Description || !selectedComplaint.Wing || !selectedComplaint.Unit) {
       setErrorMessage("All fields are required.");
       return;
     }
-
-    setComplaints((prevComplaints) =>
-      prevComplaints.map((c) =>
-        c.id === selectedComplaint.id ? selectedComplaint : c
-      )
-    );
-
-    setShowModal(false);
-    setErrorMessage("");
+  
+    try {
+      const response = await axios.put(
+        `http://localhost:5000/api/v2/complaint/updatecomplaint/${selectedComplaint._id}`,
+        selectedComplaint
+      );
+  
+      // Update the local state after successful update
+      setComplaints((prevComplaints) =>
+        prevComplaints.map((c) => (c.id === selectedComplaint.id ? response.data.updatedComplaint : c))
+      );
+  
+      setShowModal(false);
+      setErrorMessage("");
+      fetchComplaints();
+    } catch (error) {
+      console.error("Error updating complaint:", error);
+      setErrorMessage("Failed to update complaint. Please try again.");
+    }
   };
-
 
   const handleView = (complaint) => {
     setSelectedComplaint(complaint);
@@ -64,8 +90,13 @@ function ComplaintTracking() {
 
   const handleCloseViewModal = () => setShowViewModal(false);
 
-
-
+  const handleClose = () =>{
+    setShowDeleteModal(false); 
+    setDeleteComplainId(null); 
+  }
+  // const handleDelete = async () => {
+  //   setComplaints((prev) => prev.filter((complain) => complain._id !== deleteComplainId));
+  // }
   const badgeStyle = (priority) => {
     if (priority === "High") return { backgroundColor: "#E74C3C", color: "white" };
     if (priority === "Medium") return { backgroundColor: "#5678E9", color: "white" };
@@ -82,27 +113,6 @@ function ComplaintTracking() {
 
   const handleShowCreateModal = () => setShowCreateModal(true);
   const handleCloseCreateModal = () => setShowCreateModal(false);
-
-
-
-  // const handleCreateComplaint = () => {
-  //   // Basic form validation
-  //   if (!newComplaint.Complainer_name || !newComplaint.Complaint_name || !newComplaint.Description || !newComplaint.Wing || !newComplaint.Unit) {
-  //     setErrorMessage("All fields are required.");
-  //     return;
-  //   }
-
-  //   // Validate and set priority based on status
-
-  //   setErrorMessage(""); // Clear previous error message if any
-
-  //   const newId = complaints.length + 1;  // Auto-generate a new ID
-  //   const complaintToAdd = { ...newComplaint, id: newId };
-  //   setComplaints([...complaints, complaintToAdd]);
-
-  //   setNewComplaint({ Complainer_name: "", Complaint_name: "", Description: "", Wing: "", Unit: "", Priority: "Medium", Status: "Open" });
-  //   setShowCreateModal(false);
-  // };
 
 
   const handleCreateComplaint = async () => {
@@ -125,19 +135,6 @@ function ComplaintTracking() {
     }
   };
 
-
-  // useEffect(() => {
-  //   const fetchComplaints = async () => {
-  //     try {
-  //       const response = await axios.get("http://localhost:5000/api/v2/complaint/");
-  //       setComplaints(response.data); // Assuming response.data contains the list of complaints
-  //     } catch (error) {
-  //       console.error("Error fetching complaints:", error);
-  //     }
-  //   };
-
-  //   fetchComplaints();
-  // }, []);
   const fetchComplaints = async () => {
     try {
       const response = await axios.get("http://localhost:5000/api/v2/complaint/");
@@ -172,10 +169,25 @@ function ComplaintTracking() {
     maxWidth: "350px",
   };
 
-  const handleDelete = (id) => {
-    setComplaints((prevComplaints) => prevComplaints.filter((complaint) => complaint.id !== id));
-  };
 
+  // const handleDelete = (id) => {
+  //   setComplaints((prevComplaints) => prevComplaints.filter((complaint) => complaint.id !== id));
+  // };
+
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/v2/complaint/deletecomplaint/${id}`);
+      
+      // Update the local state after successful deletion
+      setComplaints((prevComplaints) => prevComplaints.filter((complaint) => complaint.id !== id));
+      fetchComplaints()
+    } catch (error) {
+      console.error("Error deleting complaint:", error);
+      setErrorMessage("Failed to delete complaint. Please try again.");
+    }
+
+  };
 
   return (
     <div className="d-flex flex-column flex-md-row">
@@ -186,9 +198,7 @@ function ComplaintTracking() {
       <div className="flex-grow-1 dashboard-bg " >
         <Header />
 
-        <div className="container-fluid stickyHeader p-3" style={{ marginLeft: "300px", width: "1620px" }}>
-
-
+        <div className="container-fluid stickyHeader p-3" style={{ marginLeft: "300px", width: "1600px" }}>
 
           <div className="table-responsive" style={{ border: "1px solid #ddd", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", overflow: "hidden", backgroundColor: "#fff", padding: "20px", marginTop: "20px" }}>
             <div className="d-flex flex-column flex-md-row justify-content-between align-items-center ">
@@ -204,7 +214,7 @@ function ComplaintTracking() {
 
               />Create Complaint</Button>
             </div>
-            <Table className="mt-3" style={{ width: "1542px" }}>
+            <Table className="mt-3" >
               <thead className="bg-light">
                 <tr className="rmHead">
                   <th className="text-start" style={{ padding: "10px", background: "rgb(185, 198, 242)" }}>Complainer Name</th>
@@ -219,7 +229,7 @@ function ComplaintTracking() {
               <tbody>
                 {complaints?.length > 0 ? (
                   complaints.map((complaint) => (
-                    <tr key={complaint.id}>
+                    <tr key={complaint?.id}>
                       <td style={tableColumnStyle}>
                         <div style={imageColumnStyle} className="text-center">
                           <img
@@ -242,7 +252,7 @@ function ComplaintTracking() {
                               textAlign: "left",
                             }}
                           >
-                            {complaint.Complainer_name}
+                            {complaint?.Complainer_name}
                           </span>
                         </div>
                       </td>
@@ -254,9 +264,9 @@ function ComplaintTracking() {
                         }}
                         className="text-start"
                       >
-                        {complaint.Complaint_name}
+                        {complaint?.Complaint_name}
                       </td>
-                      <td
+                      <td className='text-center'
                         style={{
                           ...tableColumnStyle,
                           width: "250px",
@@ -268,7 +278,7 @@ function ComplaintTracking() {
                           textAlign: "left",
                         }}
                       >
-                        {complaint.Description}
+                        {complaint?.Description}
                       </td>
                       <td
                         style={{
@@ -289,7 +299,7 @@ function ComplaintTracking() {
                             color: "skyblue",
                           }}
                         >
-                          {complaint.Wing}
+                          {complaint?.Wing}
                         </span>
                         <span
                           style={{
@@ -300,7 +310,7 @@ function ComplaintTracking() {
                             marginLeft: "8px",
                           }}
                         >
-                          {complaint.Unit}
+                          {complaint?.Unit}
                         </span>
                       </td>
                       <td
@@ -313,7 +323,7 @@ function ComplaintTracking() {
                         <span
                           className="badge"
                           style={{
-                            ...badgeStyle(complaint.Priority),
+                            ...badgeStyle(complaint?.Priority),
                             width: "100px",
                             height: "31px",
                             padding: "5px 12px",
@@ -324,7 +334,7 @@ function ComplaintTracking() {
                             alignItems: "center",
                           }}
                         >
-                          {complaint.Priority}
+                          {complaint?.Priority}
                         </span>
                       </td>
                       <td
@@ -336,7 +346,7 @@ function ComplaintTracking() {
                       >
                         <span
                           style={{
-                            ...statusBadgeStyle(complaint.Status),
+                            ...statusBadgeStyle(complaint?.Status),
                             width: "113px",
                             height: "31px",
                             padding: "5px 12px",
@@ -347,7 +357,7 @@ function ComplaintTracking() {
                             alignItems: "center",
                           }}
                         >
-                          {complaint.Status}
+                          {complaint?.Status}
                         </span>
                       </td>
                       <td
@@ -374,7 +384,9 @@ function ComplaintTracking() {
                             src={deleteIcon}
                             className="text-danger"
                             style={{ cursor: "pointer" }}
-                            onClick={() => handleDelete(complaint.id)}
+
+                            onClick={() => handleDelete(complaint._id)}
+
                           />
                         </div>
                       </td>
@@ -394,6 +406,25 @@ function ComplaintTracking() {
         </div>
       </div>
 
+      <Modal show={showDeleteModal} onHide={handleClose} centered className='Round-modal'>
+            <Modal.Header >
+              <Modal.Title>Delete Protocol?</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <p>Are you sure you want to delete this protocol?</p>
+            </Modal.Body>
+            <Modal.Footer style={{ display: "flex", justifyContent: "space-between" }}>
+              <Button className='cancle' onClick={handleClose} style={{ width: "175px", height: "51px", border: "1px solid #202224", padding: "10px 55px 10px 55px", background: "#FFFFFF", color: "#202224", }}>
+                Cancel
+              </Button>
+              <Button onClick={handleDelete} style={{
+                width: "175px", height: "51px", border: "1px", padding: "10px 55px 10px 55px", color: "#202224", background: "rgba(231, 76, 60, 1)"
+              }}>
+                Delete
+              </Button>
+
+            </Modal.Footer>
+          </Modal>
       {/* Create Complaint Modal */}
       <Modal show={showCreateModal} onHide={handleCloseCreateModal} centered className='Round-modal'>
         <Modal.Header >

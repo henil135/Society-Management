@@ -10,10 +10,9 @@ function Dashboard() {
   console.log("Dashboard rendered"); // Ensure this log appears when the component is loaded
   return (
     <div >
-        <Sidebar />
-      <Header/>
-      <div className="dashboard-bg " style={{ marginLeft: "300px",marginTop:"109px",width:"1600px" }}>
-
+      <Sidebar />
+      <Header />
+      <div className="dashboard-bg marginLeft" style={{ marginTop: "109px", width: "1600px" }}>
         <Income />
         <TotalBalanceChart />
         <Complaintlist />

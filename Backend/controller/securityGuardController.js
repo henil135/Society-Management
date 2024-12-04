@@ -19,7 +19,7 @@ exports.CreateSecurityGuard = async (req, res) => {
         }
         const {
             full_name,
-            MailOrPhone,
+            Mail,
             gender,
             shift,
             date,
@@ -28,7 +28,7 @@ exports.CreateSecurityGuard = async (req, res) => {
         } = req.body;
 
         // Convert date string (DD/MM/YYYY) to Date object
-        const parsedDate = moment(date, "DD/MM/YYYY").toDate();
+        const parsedDate = moment(date,["DD/MM/YYYY", "YYYY-MM-DD"],true).toDate();
         if (!parsedDate || isNaN(parsedDate.getTime())) {
             return res.status(400).json({
                 success: false,
@@ -64,7 +64,7 @@ exports.CreateSecurityGuard = async (req, res) => {
         const profileimage = await uploadAndDeleteLocal(req.files?.profileimage);
         const adhar_card = await uploadAndDeleteLocal(req.files?.adhar_card);
 
-        if (!full_name || !MailOrPhone || !gender || !shift || !date || !time) {
+        if (!full_name || !MailOrPhone || !gender || !shift || !date || !time ) {
             return res.status(400).json({
                 success: false,
                 message: "All fields are required",
@@ -72,7 +72,7 @@ exports.CreateSecurityGuard = async (req, res) => {
         }
         const newOwner = new Guard({
             full_name,
-            MailOrPhone,
+            Mail,
             gender,
             shift,
             date: parsedDate,  // Use the parsed date here
@@ -92,6 +92,7 @@ exports.CreateSecurityGuard = async (req, res) => {
             },
         });
 
+
         const mailOptions = {
             from: "sarvaliyapiyush@gmail.com",
             to: newOwner.MailOrPhone, // Ensure this is valid
@@ -102,6 +103,7 @@ exports.CreateSecurityGuard = async (req, res) => {
         // Check if the Email_address is defined and valid
         if (!newOwner.MailOrPhone || typeof newOwner.MailOrPhone !== "string") {
             throw new Error("Invalid or missing Email_address for the Owner.");
+
         }
 
         try {
@@ -236,7 +238,7 @@ exports.DeleteGuard = async (req, res) => {
         console.error(error);
         return res.status(500).json({
             success: false,
-            message: "error in Announcement deleting"
+            message: "error in SecurityGuard Deleting"
         });
     }
 }
@@ -254,7 +256,7 @@ exports.updateSecurityGuard = async (req, res) => {
     const { id } = req.params;
     const {
         full_name,
-        MailOrPhone,
+        Mail,
         gender,
         shift,
         date,
@@ -289,7 +291,7 @@ exports.updateSecurityGuard = async (req, res) => {
         };
 
         if (full_name) guard.full_name = full_name;
-        if (MailOrPhone) guard.MailOrPhone = MailOrPhone;
+        if (Mail) guard.Mail = Mail;
         if (gender) guard.gender = gender;
         if (shift) guard.shift = shift;
         if (date) {
