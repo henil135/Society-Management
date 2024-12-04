@@ -30,9 +30,11 @@ const annoucementRoute = require("./routes/annoucementRoutes")
 const securityGuardRoute = require("./routes/securityGuardRoutes")
 const incomeRoute = require("./routes/incomeeRoutes");
 const router = require("./routes/UniversalLogin");
+const PaymentRoute = require("./routes/paymentRoute");
 
 //user registration , login and update Profile
 app.use("/universal",router);
+app.use("/payment",PaymentRoute);
 app.use("/api/v1",userRoutes);
 
 //create society api
