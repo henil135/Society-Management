@@ -4,7 +4,6 @@ const { Schema, model } = require("mongoose");
 const Ownerschema= new Schema({
     profileImage:{
         type:String,
-         required:true
     },
     Full_name:{
         type:String,
@@ -41,19 +40,15 @@ const Ownerschema= new Schema({
     },
     Adhar_front:{
         type:String,
-        required:true
     },
     Adhar_back:{
         type:String,
-        required:true
     },
     Address_proof:{
         type:String,
-        required:true
     },
     Rent_Agreement:{
         type:String,
-        required:true
     },
     Member_Counting: [{
         Full_name: { type: String, required: true },
@@ -74,7 +69,7 @@ const Ownerschema= new Schema({
     role: {
         type: String,
         enum: ['admin', 'resident', 'security'], 
-        default: 'resident' 
+        default: '`resident`' 
     },
    password: {  // Add this field to store the hashed password
         type: String,

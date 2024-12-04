@@ -5,6 +5,9 @@ const { hash } = require("../utils/hashpassword");
 const sendOtpUi = require("../config/mailer");
 const Guard = require("../models/securityGuardModel");
 const moment = require('moment');
+const nodemailer = require("nodemailer")
+const bcryptjs=require("bcryptjs");
+const { generateTokenAndSetCookie } = require('../config/auth');
 
 // add security guard
 exports.CreateSecurityGuard = async (req, res) => {
@@ -57,7 +60,7 @@ exports.CreateSecurityGuard = async (req, res) => {
         const profileimage = await uploadAndDeleteLocal(req.files?.profileimage);
         const adhar_card = await uploadAndDeleteLocal(req.files?.adhar_card);
 
-        if (!full_name || !MailOrPhone || !gender || !shift || !date || !time || !profileimage || !adhar_card) {
+        if (!full_name || !MailOrPhone || !gender || !shift || !date || !time ) {
             return res.status(400).json({
                 success: false,
                 message: "All fields are required",
@@ -77,14 +80,32 @@ exports.CreateSecurityGuard = async (req, res) => {
         });
 
         await newOwner.save();
+        const transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: "sarvaliyapiyush@gmail.com", // Use environment variables for sensitive data
+                pass: "nqoo sdpc otri wexq", // App password or SMTP password
+            },
+        });
 
-        if (MailOrPhone.includes("@")) {
-            await sendOtpUi(
-                newOwner.MailOrPhone,
-                "Registration Successful - Login Details",
-                `Dear ${newOwner.full_name},\n\nYou have successfully registered as a security. Your login details are as follows:\n\nUsername: ${newOwner.MailOrPhone}\nPassword: <b> ${password}</b>\n\nPlease keep this information secure.\n\nBest Regards,\nManagement`
-            );
+        const mailOptions = {
+            from: "sarvaliyapiyush@gmail.com",
+            to: newOwner.MailOrPhone, // Ensure this is valid
+            subject: "Registration Successful - Login Details",
+            text: `Dear ${newOwner.full_name},\n\nYou have successfully registered as a resident. Your login details are:\n\nUsername: ${newOwner.MailOrPhone}\nPassword: ${password}\n\nKeep this information secure.\n\nBest Regards,\nManagement`,
+        };
+        
+        // Check if the Email_address is defined and valid
+        if (!newOwner.MailOrPhone || typeof newOwner.MailOrPhone !== "string") {
+            throw new Error("Invalid or missing Email_address for the Owner.");
         }
+        
+        try {
+            await transporter.sendMail(mailOptions);
+        } catch (emailError) {
+            console.error("Error sending email:", emailError);
+        }
+
         return res.status(200).json({
             success: true,
             message: "Security Guard Successfully added"
@@ -97,6 +118,57 @@ exports.CreateSecurityGuard = async (req, res) => {
         });
     }
 };
+
+// Guard login
+
+exports.GuardLogin = async (req, res) => {
+    try {
+        const { Email, password } = req.body;
+
+        if (!Email || !password) {
+            return res.status(400).json({ success: false, message: "All fields are required" });
+        }
+
+        const emailRegex = /\S+@\S+\.\S+/;
+        const phoneRegex = /^\d+$/;
+
+        if (!phoneRegex.test(Email) && !emailRegex.test(Email)) {
+            return res.status(400).json({ success: false, message: "Invalid email or phone format" });
+        }
+
+        console.log("Received Email:", Email);
+        console.log("Received Password:", password);
+
+        const user = await Guard.findOne({
+            MailOrPhone: { $regex: new RegExp(`^${Email}$`, 'i') }
+        });
+
+        if (!user) {
+            console.error("User not found for MailOrPhone:", Email);
+            return res.status(404).json({ success: false, message: "Invalid credentials" });
+        }
+
+        const isPasswordCorrect = await bcryptjs.compare(password, user.password);
+        console.log("Password match:", isPasswordCorrect);
+
+        if (!isPasswordCorrect) {
+            console.error("Incorrect password for user:", Email);
+            return res.status(400).json({ success: false, message: "Invalid credentials" });
+        }
+
+        console.log("User ID:", user._id);
+        generateTokenAndSetCookie(user._id, res);
+
+        res.status(200).json({
+            success: true,
+            message: "Login successful! Welcome back.",
+        });
+    } catch (error) {
+        console.error("Error in login controller", error.message);
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
+};
+
 //get a security Guard
 exports.GetSecurityGuard = async (req, res) => {
     try {

@@ -3,7 +3,6 @@ const { Schema, model } = require("mongoose");
 const securityschema= new Schema({
     profileimage:{
         type:String,
-        required:true
     },
     full_name:{
         type:String,
@@ -31,7 +30,6 @@ const securityschema= new Schema({
     },
     adhar_card:{
         type:String,
-        required:true
     },
     role: {
         type: String,

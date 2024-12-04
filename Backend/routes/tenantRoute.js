@@ -1,7 +1,9 @@
 const router=require("express").Router();
-const { addTenantData, GetAllTenant } = require("../controller/tenantController");
+const { addTenantData, GetAllTenant, TenantLogin } = require("../controller/tenantController");
 const upload = require("../utils/owner_Image")
 
+
+router.post("/Tentantlogin", TenantLogin);
 
 router.post("/addtenant", upload.fields([
     { name: 'Adhar_front', maxCount: 1 },
