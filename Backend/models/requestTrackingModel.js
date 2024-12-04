@@ -40,7 +40,7 @@ const RequestSchema = new mongoose.Schema({
     role: {
         type: String,
         enum: ['admin', 'resident', 'security'], 
-        default: 'resident' 
+        default: 'admin' 
     },
 }, {
     timestamps: true 

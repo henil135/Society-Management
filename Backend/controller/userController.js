@@ -9,7 +9,7 @@ const senData = require("../config/mailer"); // Adjust the path accordingly
 
 exports.Register = async (req, res) => {
   try {
-    const { First_Name, Last_Name, Email_Address, Phone_Number, Country, State, City,select_society, Password, Confirm_password } = req.body;
+    const { First_Name, Last_Name, Email_Address, Phone_Number, Country, State, City, select_society, Password, Confirm_password } = req.body;
 
     if (!First_Name || !Last_Name || !Email_Address || !Phone_Number || !Country || !State || !City || !select_society || !Password || !Confirm_password) {
       return res.status(400).json({ success: false, message: "All fields are required" });
@@ -41,8 +41,8 @@ exports.Register = async (req, res) => {
       State,
       City,
       select_society,
-      Password: hashedPassword,  
-      Confirm_password: hashedPassword,  
+      Password: hashedPassword,
+      Confirm_password: hashedPassword,
     });
 
     await user.save();
@@ -73,7 +73,7 @@ exports.Register = async (req, res) => {
 
 // Login Page
 
-exports.login = async (req, res) => {
+exports.Adminlogin = async (req, res) => {
   try {
     const { Email, password } = req.body;
 
@@ -97,16 +97,20 @@ exports.login = async (req, res) => {
     }
 
     const isPasswordCorrect = await bcryptjs.compare(password, user.Password);
-   
+
     if (!isPasswordCorrect) {
       return res.status(400).json({ success: false, message: "Invalid credentials" });
     }
 
     generateTokenAndSetCookie(user._id, res);
+    const token = jwt.sign({ _id: user._id , role:"admin"}, process.env.JWT_SECRET_OWNER, {
+      expiresIn: "15d",
+    });
+    res.cookie("Token",token)
     res.status(200).json({
       success: true,
       message: "Login successful! Welcome back.",
-    });
+    })
   } catch (error) {
     console.log("Error in login controller", error.message);
     res.status(500).json({ success: false, message: "Internal server error" });
@@ -171,7 +175,7 @@ exports.editProfile = async (req, res) => {
     const updatedUser = await User.findByIdAndUpdate(
       userId,
       { $set: req.body },
-      { new: true, runValidators: true } 
+      { new: true, runValidators: true }
     );
 
     if (!updatedUser) {
@@ -204,90 +208,90 @@ exports.findUserById = async (req, res) => {
 
 exports.SendOtp = async (req, res) => {
   try {
-      const { EmailOrPhone } = req.body;
-      const otp = otpGenerator.generate(6, { upperCaseAlphabets: false, lowerCaseAlphabets: false, specialChars: false });
-      const cdate = new Date();
+    const { EmailOrPhone } = req.body;
+    const otp = otpGenerator.generate(6, { upperCaseAlphabets: false, lowerCaseAlphabets: false, specialChars: false });
+    const cdate = new Date();
 
-      let user;
-      if (EmailOrPhone.includes('@')) {
-          // Find user by Email_Address instead of Email
-          user = await User.findOne({ Email_Address: EmailOrPhone });
-          if (!user) {
-              return res.status(404).json({
-                  success: false,
-                  message: "Email not registered"
-              });
-          }
-
-          await User.findOneAndUpdate(
-              { Email_Address: EmailOrPhone },
-              { otp, otpExpiration: new Date(cdate.getTime()) },
-              { upsert: true, new: true, setDefaultsOnInsert: true }
-          );
-
-          // Send OTP via email
-          senData(user.Email_Address, "Forgot your password", otp);
-
-          return res.status(200).json({
-              success: true,
-              message: "OTP sent successfully to email"
-          });
-
-      } else {
-          // For phone number handling (to be added later)
+    let user;
+    if (EmailOrPhone.includes('@')) {
+      // Find user by Email_Address instead of Email
+      user = await User.findOne({ Email_Address: EmailOrPhone });
+      if (!user) {
+        return res.status(404).json({
+          success: false,
+          message: "Email not registered"
+        });
       }
 
-  } catch (error) {
-      console.log(error);
-      return res.status(500).json({
-          success: false,
-          message: "Internal server error"
+      await User.findOneAndUpdate(
+        { Email_Address: EmailOrPhone },
+        { otp, otpExpiration: new Date(cdate.getTime()) },
+        { upsert: true, new: true, setDefaultsOnInsert: true }
+      );
+
+      // Send OTP via email
+      senData(user.Email_Address, "Forgot your password", otp);
+
+      return res.status(200).json({
+        success: true,
+        message: "OTP sent successfully to email"
       });
+
+    } else {
+      // For phone number handling (to be added later)
+    }
+
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error"
+    });
   }
 };
 
 
 exports.verifyOtp = async (req, res) => {
   try {
-      const { EmailOrPhone, otp } = req.body;
+    const { EmailOrPhone, otp } = req.body;
 
-      let user;
+    let user;
 
-      if (EmailOrPhone.includes('@')) {
-          user = await User.findOne({ Email_Address: EmailOrPhone });
-      } else {
-          user = await User.findOne({ Phone: EmailOrPhone });
-      }
-      
+    if (EmailOrPhone.includes('@')) {
+      user = await User.findOne({ Email_Address: EmailOrPhone });
+    } else {
+      user = await User.findOne({ Phone: EmailOrPhone });
+    }
 
-      if (!user) {
-          return res.status(404).json({
-              success: false,
-              message: "User not found"
-          });
-      }
 
-      // Check if OTP matches
-      if (user.otp !== otp) {
-          return res.status(400).json({
-              success: false,
-              message: "Invalid OTP"
-          });
-      }
-
-      // Clear OTP after successful verification
-      await User.findByIdAndUpdate(user._id, { otp: null, otpExpiration: null });
-
-      return res.status(200).json({
-          success: true,
-          message: "OTP verified successfully"
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found"
       });
+    }
+
+    // Check if OTP matches
+    if (user.otp !== otp) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid OTP"
+      });
+    }
+
+    // Clear OTP after successful verification
+    await User.findByIdAndUpdate(user._id, { otp: null, otpExpiration: null });
+
+    return res.status(200).json({
+      success: true,
+      message: "OTP verified successfully"
+    });
 
   } catch (error) {
-      console.log(error);
-      return res.status(500).json({
-          success: false,
-          message: "Internal server error"
-      });
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error"
+    });
   }
 };

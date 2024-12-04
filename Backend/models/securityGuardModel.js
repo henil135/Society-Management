@@ -3,7 +3,6 @@ const { Schema, model } = require("mongoose");
 const securityschema= new Schema({
     profileimage:{
         type:String,
-        required:true
     },
     full_name:{
         type:String,
@@ -31,7 +30,6 @@ const securityschema= new Schema({
     },
     adhar_card:{
         type:String,
-        required:true
     },
     role: {
         type: String,
@@ -45,12 +43,12 @@ const securityschema= new Schema({
     otp: {
         type: String,
       },
-      otpExpiration: {
-        type: Date,
-        default: Date.now,
-        get: (otpExpiration) => otpExpiration.getTime(),
-        set: (otpExpiration) => new Date(otpExpiration),
-      },
+    //   otpExpiration: {
+    //     type: Date,
+    //     default: Date.now,
+    //     get: (otpExpiration) => otpExpiration.getTime(),
+    //     set: (otpExpiration) => new Date(otpExpiration),
+    //   },
 },{timestamps:true})
 
 const Guard=model("SecurityGuard",securityschema)
