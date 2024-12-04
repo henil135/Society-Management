@@ -5,7 +5,8 @@ const crypto = require("crypto");
 const senData = require('../config/mailer');
 const { hash } = require('../utils/hashpassword');
 const nodemailer = require("nodemailer")
-const bcryptjs=require("bcryptjs");
+const bcryptjs = require("bcryptjs");
+const jwt = require("jsonwebtoken")
 const { generateTokenAndSetCookie } = require('../config/auth');
 
 
@@ -18,14 +19,14 @@ exports.TenantLogin = async (req, res) => {
         if (!Email || !password) {
             return res.status(400).json({ success: false, message: "All fields are required" });
         }
-        
+
         const emailRegex = /\S+@\S+\.\S+/;
         const phoneRegex = /^\d+$/;
-        
+
         if (!phoneRegex.test(Email) && !emailRegex.test(Email)) {
             return res.status(400).json({ success: false, message: "Invalid email or phone format" });
         }
-        
+
         const user = await Tenant.findOne({
             $or: [
                 { Email_address: { $regex: new RegExp(`^${Email}$`, 'i') } },
@@ -45,7 +46,12 @@ exports.TenantLogin = async (req, res) => {
             return res.status(400).json({ success: false, message: "Invalid credentials" });
         }
 
-        generateTokenAndSetCookie(user._id, res);
+        const token = jwt.sign({ id: user._id, role: "resident" }, process.env.JWT_SECRET, {
+            expiresIn: "15d",
+        });
+
+        res.cookie("tenanttoken", token);
+
         res.status(200).json({
             success: true,
             message: "Login successful! Welcome back.",
@@ -92,6 +98,11 @@ exports.addTenantData = async (req, res) => {
                 success: false,
                 message: "All required fields must be provided.",
             });
+        }
+
+        const existingUser = await Tenant.findOne({ Email_address });
+        if (existingUser) {
+            return res.status(400).json({ success: false, message: "Email already exists" });
         }
 
         const password = generatePassword();
@@ -147,18 +158,18 @@ exports.addTenantData = async (req, res) => {
             subject: "Registration Successful - Login Details",
             text: `Dear ${newTenant.Full_name},\n\nYou have successfully registered as a resident. Your login details are:\n\nUsername: ${newTenant.Email_address}\nPassword: ${password}\n\nKeep this information secure.\n\nBest Regards,\nManagement`,
         };
-        
+
         // Check if the Email_address is defined and valid
         if (!newTenant.Email_address || typeof newTenant.Email_address !== "string") {
             throw new Error("Invalid or missing Email_address for the tenant.");
         }
-        
+
         try {
             await transporter.sendMail(mailOptions);
         } catch (emailError) {
             console.error("Error sending email:", emailError);
         }
-        
+
         if (Member_Counting) {
             let members;
             if (typeof Member_Counting === "string") {
@@ -174,7 +185,7 @@ exports.addTenantData = async (req, res) => {
             } else if (Array.isArray(Member_Counting)) {
                 members = Member_Counting; // Directly assign if it's already an array
             }
-        
+
             if (Array.isArray(members)) {
                 await Tenant.updateOne(
                     { _id: newTenant._id },
@@ -182,7 +193,7 @@ exports.addTenantData = async (req, res) => {
                 );
             }
         }
-        
+
         // Handle Vehicle Counting
         if (Vehicle_Counting) {
             let vehicles;
@@ -199,7 +210,7 @@ exports.addTenantData = async (req, res) => {
             } else if (Array.isArray(Vehicle_Counting)) {
                 vehicles = Vehicle_Counting; // Directly assign if it's already an array
             }
-        
+
             if (Array.isArray(vehicles)) {
                 await Tenant.updateOne(
                     { _id: newTenant._id },
@@ -221,6 +232,12 @@ exports.addTenantData = async (req, res) => {
     }
 };
 
+// login person profile 
+exports.tenantProfile = async (req, res) => {
+    let data = await Tenant.findById(req.tenant);
+    console.log("my data", data);
+    res.json(data);
+}
 
 exports.GetAllTenant = async (req, res) => {
     try {

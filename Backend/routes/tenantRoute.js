@@ -1,5 +1,6 @@
 const router=require("express").Router();
-const { addTenantData, GetAllTenant, TenantLogin } = require("../controller/tenantController");
+const { addTenantData, GetAllTenant, TenantLogin, tenantProfile } = require("../controller/tenantController");
+const { tentprotect, tenantprotect } = require("../middleware/protect");
 const upload = require("../utils/owner_Image")
 
 
@@ -14,4 +15,6 @@ router.post("/addtenant", upload.fields([
 ]),addTenantData);
 
 router.get("/viewowner",GetAllTenant)
+// login user profile 
+router.get("/Profile",tenantprotect,tenantProfile);
 module.exports=router;
