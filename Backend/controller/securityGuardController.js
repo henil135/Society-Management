@@ -15,7 +15,7 @@ exports.CreateSecurityGuard = async (req, res) => {
         }
         const {
             full_name,
-            MailOrPhone,
+            Mail,
             gender,
             shift,
             date,
@@ -157,7 +157,7 @@ exports.DeleteGuard = async (req, res) => {
         console.error(error);
         return res.status(500).json({
             success: false,
-            message: "error in Announcement deleting"
+            message: "error in SecurityGuard Deleting"
         });
     }
 }
