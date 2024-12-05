@@ -39,6 +39,7 @@ const chatRoute = require("./routes/chatRoute")
 
 const Poll = require("./routes/PollRoute");
 
+
 // const router = require("./routes/chatRoute");
 
 
@@ -126,9 +127,12 @@ app.use('/chat', chatRoute)
 // visitor tracking
 app.use("/api/v2/Visitor", visitor);
 
-// poll
-
+// Poll
 app.use("/api/v2/Polls", Poll);
+
+
+
+
 
 
 app.listen(PORT, () => {
