@@ -24,6 +24,7 @@ const AnnouncementSchema = new mongoose.Schema({
         enum: ['admin', 'resident', 'security'], 
         default: 'resident' 
     },
+    acceptedUsers: [{ type: mongoose.Schema.Types.ObjectId, ref:['Tenant' , 'Owner'] }],
 }, {
     timestamps: true 
 });
