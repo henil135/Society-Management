@@ -43,6 +43,7 @@ import { Toaster } from 'react-hot-toast';
 
 import TenantForm from './component/TenantForm.jsx';
 import OwnerForm from './component/OwnerForm.jsx';
+import CommunityAnswer from './component/Resident/CommunityAnswer.jsx';
 
 
 
@@ -93,8 +94,7 @@ function App() {
           <Route path='/Polls' element={<Polls />} />
           <Route path='/Community-Discussion' element={<CommunitiesDiscussion />} />
           <Route path='/Community-Question' element={<CommunityQuestion />} />
-
-
+          <Route path='/Community-Answer' element={<CommunityAnswer />} />
 
           <Route path='/Access' element={<Access />} />
 

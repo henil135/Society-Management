@@ -74,8 +74,10 @@ const ViewInvoice = () => {
             <Sidebar />
             <Navbar />
 
-            <div style={{ marginLeft: '300px' }}>
-                <div className='container-fluid stickyHeader '>
+
+            <div className='marginLeft'>
+                <div className='container-fluid stickyHeader'>
+
                     <div className='row p-4'>
 
                         <div className='bg-light rounded '>

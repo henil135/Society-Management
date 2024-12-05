@@ -1,8 +1,12 @@
 
 const router=require("express").Router();
-const { addOwnerData, GetAllOwner } = require("../controller/ownerController");
+
+const { addOwnerData, GetAllOwner, OwnerLogin, ownerProfile } = require("../controller/ownerController");
+const { protect, ownerpotect } = require("../middleware/protect");
 const upload=require("../utils/owner_Image")
 
+
+router.post("/Ownerlogin", OwnerLogin);
 //add owner
 router.post("/addowner", upload.fields([
     { name: 'Adhar_front', maxCount: 1 },
@@ -13,4 +17,11 @@ router.post("/addowner", upload.fields([
 ]), addOwnerData);
 
 router.get("/viewowner",GetAllOwner)
+
+// profile
+
+router.get("/Profile",ownerpotect,ownerProfile);
+
+
+
 module.exports=router;

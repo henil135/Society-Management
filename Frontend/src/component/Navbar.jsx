@@ -15,24 +15,24 @@ import noNotification from '../assets/Group 1000004472.png'
 import notificationIcon from '../Icons/notification.png'
 function Header() {
     const [notifications, setNotifications] = useState([
-        {
-            img: notification1,
-            title: 'Evelyn Harper (A-101)',
-            dateTime: 'Monday 11:41 AM',
-            content: 'Evelyn Harper gave a fund of 1000 rupees for Navratri.',
-            timestamp: '32 Minutes ago'
-        },
-        {
-            img: notification2,
-            title: 'Evelyn Harper (A-101)',
-            dateTime: 'Tuesday 11:41 AM',
-            content: 'Evelyn Harper gave a Maintenance of 1000 rupees. ',
-            timestamp: '2 days ago'
-        },
+        // {
+        //     img: notification1,
+        //     title: 'Evelyn Harper (A-101)',
+        //     dateTime: 'Monday 11:41 AM',
+        //     content: 'Evelyn Harper gave a fund of 1000 rupees for Navratri.',
+        //     timestamp: '32 Minutes ago'
+        // },
+        // {
+        //     img: notification2,
+        //     title: 'Evelyn Harper (A-101)',
+        //     dateTime: 'Tuesday 11:41 AM',
+        //     content: 'Evelyn Harper gave a Maintenance of 1000 rupees. ',
+        //     timestamp: '2 days ago'
+        // },
         {
             img: notification3,
             title: 'Ganesh Chaturthi (A- 101)',
-            dateTime: 'Saturday 11:41 AM',
+            dateTime: 'Monday 11:41 AM',
             amt: 'Per Person Amount : ₹ 1,500',
             content: 'The celebration of Ganesh Chaturthi involves the installation of clay idols of Lord Ganesa in  OurResident. ',
             timestamp: '2 days ago'
@@ -40,6 +40,7 @@ function Header() {
         {
             img: notification2,
             title: 'Update Maintenance',
+            dateTime: 'Monday 11:41 AM',
             mamt: '₹ 1,500',
             pamt: '₹ 350',
             timestamp: '32 Minutes ago'
@@ -53,13 +54,13 @@ function Header() {
         setShowNotifications(false);
     };
 
-    
+
     const location = useLocation();
 
-    
+
     const getPageName = (path) => {
         const pathParts = path.split('/');
-        return pathParts[pathParts.length - 1] || 'Home'; 
+        return pathParts[pathParts.length - 1] || 'Home';
     };
 
     return (
@@ -74,51 +75,45 @@ function Header() {
         >
             <Navbar expand="lg" className="navbar bg-white border-bottom" style={{ height: "109px" }}>
                 <Container fluid className='navbar-marginLeft'>
-                    
+
                     <h5 className='home-routing d-none d-md-block'>
                         Home
                         <span className='home-routing-span'>
                             <FaGreaterThan style={{ fontSize: "12px" }} />
                         </span>
-                        <span className="current-page-routing"> {getPageName(location.pathname)}</span> 
+                        <span className="current-page-routing"> {getPageName(location.pathname)}</span>
                     </h5>
 
-                    
+
                     <Nav className="ms-auto d-flex align-items-center justify-content-end flex-row py-sm-2 py-md-0 me-3">
-                        
+
                         <div className="d-lg-none me-3">
                             <FiSearch className="fs-4 text-dark" />
                         </div>
 
-                        
+
                         <Button
                             variant="none"
                             className="position-relative me-3 px-2 text-black notification-icon mt-0"
                             onClick={() => setShowNotifications(!showNotifications)}
                         >
+
                             <img src={notificationIcon}  />
                             
+
                         </Button>
 
-                        
+
                         {showNotifications && (
                             <div
                                 className="notification-dropdown bg-white border shadow-sm px-3 pb-2 pt-3 rounded"
-                                style={{
-                                    position: 'absolute',
-                                    right: '150px',
-                                    top: '90px',
-                                    width: '280px',
-                                    zIndex: 1000,
-                                    width: '540px',
-                                }}
                             >
                                 <div className="d-flex justify-content-between  mb-2">
                                     <h6 className="mb-0" style={{ fontSize: '20px' }}>Notifications</h6>
                                     {notifications.length > 0 ? (
                                         <Button
                                             variant="link"
-                                            style={{ fontSize: '12px' }}
+                                            style={{ fontSize: '12px' , fontWeight:'600'}}
                                             onClick={clearNotifications}
                                             className="text-primary mt-0 text-decoration-none"
                                         >
@@ -138,38 +133,43 @@ function Header() {
                                                 key={index}
                                                 className="border-bottom text-dark"
                                             >
-                                                <div className='d-flex'>
-                                                    <div className='pe-2'>
-                                                        <img src={notification.img} />
+                                                <div className="d-flex">
+                                                    {/* Notification Image */}
+                                                    <div className="flex-shrink-0 pe-3">
+                                                        <img src={notification.img} alt="Notification" />
                                                     </div>
-                                                    {
-                                                        notification.title == 'Update Maintenance' ? (
-                                                            <div>
-                                                                <strong>{notification.title}</strong>
+
+                                                    {/* Notification Content */}
+                                                    <div className="flex-grow-1">
+                                                        {
+                                                            notification.title === 'Update Maintenance' ? (
                                                                 <div>
-                                                                    <div className='d-flex align-items-center justify-content-between p-2 my-2 rounded' style={{ width: '440px', background: 'rgba(246, 248, 251, 1)' }}>
-                                                                        <p className='mb-1'>Maintenance Amount : </p>
-                                                                        <p className='mb-1 text-success'>{notification.mamt}</p>
-                                                                    </div>
-                                                                    <div className='d-flex align-items-center justify-content-between p-2 rounded' style={{ width: '440px', background: 'rgba(246, 248, 251, 1)' }}>
-                                                                        <p className='mb-1'>Maintenance Penalty : </p>
-                                                                        <p className='mb-1 text-danger'>{notification.pamt}</p>
+                                                                    <strong className='mb-1'>{notification.title}</strong>
+                                                                    <p className="text-muted mb-0">{notification.dateTime}</p>
+                                                                    <div>
+                                                                        <div className='d-flex align-items-center justify-content-between p-2 my-2 rounded' style={{ background: 'rgba(246, 248, 251, 1)' }}>
+                                                                            <p className='mb-1'>Maintenance Amount:</p>
+                                                                            <p className='mb-1 text-success' style={{ fontWeight:'600' }}>{notification.mamt}</p>
+                                                                        </div>
+                                                                        <div className='d-flex align-items-center justify-content-between p-2 rounded' style={{ background: 'rgba(246, 248, 251, 1)' }}>
+                                                                            <p className='mb-1'>Maintenance Penalty:</p>
+                                                                            <p className='mb-1 text-danger' style={{ fontWeight:'600' }}>{notification.pamt}</p>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        ) : (
-                                                            <div>
-                                                                <strong>{notification.title}</strong>
-                                                                <br />
-                                                                <small className="text-muted">
-                                                                    {notification.dateTime}
-                                                                </small>
-                                                                <p className='mb-0'>{notification.amt}</p>
-                                                                <p className="mb-0">{notification.content}</p>
-                                                            </div>
-                                                        )
-                                                    }
+                                                            ) : (
+                                                                <div>
+                                                                    <strong>{notification.title}</strong>
+                                                                    <br />
+                                                                    <small className="text-muted">{notification.dateTime}</small>
+                                                                    <p className='mb-0'>{notification.amt}</p>
+                                                                    <p className="mb-0">{notification.content}</p>
+                                                                </div>
+                                                            )
+                                                        }
+                                                    </div>
                                                 </div>
+
                                                 {
                                                     notification.title == 'Update Maintenance' ? (
                                                         <div>
@@ -182,12 +182,12 @@ function Header() {
                                                                 </div>
                                                             </div>}
                                                         </div>
-                                                    ) : (<div className='d-flex align-items-end justify-content-between'>
+                                                    ) : (<div className='notificationButton-timestamp'>
                                                         <div className='mx-5 mb-2'>
-                                                            <Button className='me-3 mt-2 text-decoration-none bg-light text-dark' style={{ border: '1px solid rgba(211, 211, 211, 1)' }}>Accept</Button>
+                                                            <Button className='me-3 mt-2 text-decoration-none bg-light text-dark' style={{ border: '1px solid rgba(211, 211, 211, 1)', fontWeight:'600' }}>Accept</Button>
                                                             <Button className='text-decoration-none mt-2'>Decline</Button>
                                                         </div>
-                                                        <div className='mb-2'>
+                                                        <div className='mb-2 notification-timestamp'>
                                                             <small className="text-muted d-flex align-items-center">{notification.timestamp}<IoCheckmarkDoneSharp className='ms-1' /></small>
                                                         </div>
                                                     </div>)
@@ -203,7 +203,7 @@ function Header() {
                             </div>
                         )}
 
-                        
+
                         <div className="d-flex align-items-center">
                             <Link
                                 to="/profile"

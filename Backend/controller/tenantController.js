@@ -1,9 +1,74 @@
-const Tenant = require('../models/tenantModel'); 
-const cloudinary = require('../utils/cloudinary'); 
+const Tenant = require('../models/tenantModel');
+const cloudinary = require('../utils/cloudinary');
 const fs = require("fs");
 const crypto = require("crypto");
 const senData = require('../config/mailer');
 const { hash } = require('../utils/hashpassword');
+const nodemailer = require("nodemailer")
+const bcryptjs = require("bcryptjs");
+const jwt = require("jsonwebtoken")
+const { generateTokenAndSetCookie } = require('../config/auth');
+
+
+// Login Page
+
+exports.TenantLogin = async (req, res) => {
+    try {
+        const { Email, password } = req.body;
+
+        if (!Email || !password) {
+            return res.status(400).json({ success: false, message: "All fields are required" });
+        }
+
+        const emailRegex = /\S+@\S+\.\S+/;
+        const phoneRegex = /^\d+$/;
+
+        if (!phoneRegex.test(Email) && !emailRegex.test(Email)) {
+            return res.status(400).json({ success: false, message: "Invalid email or phone format" });
+        }
+
+        const user = await Tenant.findOne({
+            $or: [
+                { Email_address: { $regex: new RegExp(`^${Email}$`, 'i') } },
+                { Phone_number: Email }
+            ]
+        });
+
+        if (!user) {
+            return res.status(404).json({ success: false, message: "Invalid credentials" });
+        }
+
+        const isPasswordCorrect = await bcryptjs.compare(password, user.password);
+
+        console.log("Password match:", isPasswordCorrect); // Debugging
+
+        if (!isPasswordCorrect) {
+            return res.status(400).json({ success: false, message: "Invalid credentials" });
+        }
+
+        const token = jwt.sign({ id: user._id, role: "resident" }, process.env.JWT_SECRET, {
+            expiresIn: "15d",
+        });
+
+        res.cookie("tenanttoken", token);
+
+        res.status(200).json({
+            success: true,
+            message: "Login successful! Welcome back.",
+        });
+    } catch (error) {
+        console.log("Error in login controller", error.message);
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
+};
+
+
+// tenant registation
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 exports.addTenantData = async (req, res) => {
     try {
@@ -17,8 +82,28 @@ exports.addTenantData = async (req, res) => {
         const {
             Owner_full_name, Owner_phone_number, Owner_address,
             Full_name, Phone_number, Email_address, Age, Gender,
-            Wing, Unit, Relation, Member_Counting, Vehicle_Counting, role
+            Wing, Unit, Relation, Member_Counting, Vehicle_Counting, role,
         } = req.body;
+
+        // Validate required fields
+        if (!Email_address) {
+            return res.status(400).json({
+                success: false,
+                message: "Email address is required.",
+            });
+        }
+
+        if (!Full_name || !Phone_number || !Age || !Gender || !Wing || !Unit || !Relation) {
+            return res.status(400).json({
+                success: false,
+                message: "All required fields must be provided.",
+            });
+        }
+
+        const existingUser = await Tenant.findOne({ Email_address });
+        if (existingUser) {
+            return res.status(400).json({ success: false, message: "Email already exists" });
+        }
 
         const password = generatePassword();
         const hashpassword = await hash(password);
@@ -38,7 +123,7 @@ exports.addTenantData = async (req, res) => {
                     throw error;
                 }
             }
-            return '';
+            return "";
         };
 
         // Upload images
@@ -53,20 +138,54 @@ exports.addTenantData = async (req, res) => {
             Tenant_image, Owner_full_name, Owner_phone_number, Owner_address,
             Full_name, Phone_number, Email_address, Age, Gender, Wing, Unit, Relation,
             Adhar_front, Adhar_back, Address_proof, Rent_Agreement, role: role || "resident",
-            password: hashpassword
+            password: hashpassword,
         });
 
         await newTenant.save();
 
-        await sendOtpUi(
-            newTenant.Email_address,
-            "Registration Successful - Login Details",
-            `Dear ${newTenant.Full_name},\n\nYou have successfully registered as a resident. Your login details are:\n\nUsername: ${newTenant.Email_address}\nPassword: ${password}\n\nKeep this information secure.\n\nBest Regards,\nManagement`
-        );
+        // Email configuration and sending
+        const transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: "sarvaliyapiyush@gmail.com", // Use environment variables for sensitive data
+                pass: "nqoo sdpc otri wexq", // App password or SMTP password
+            },
+        });
 
-        // Handle Member Counting
+        const mailOptions = {
+            from: "sarvaliyapiyush@gmail.com",
+            to: newTenant.Email_address, // Ensure this is valid
+            subject: "Registration Successful - Login Details",
+            text: `Dear ${newTenant.Full_name},\n\nYou have successfully registered as a resident. Your login details are:\n\nUsername: ${newTenant.Email_address}\nPassword: ${password}\n\nKeep this information secure.\n\nBest Regards,\nManagement`,
+        };
+
+        // Check if the Email_address is defined and valid
+        if (!newTenant.Email_address || typeof newTenant.Email_address !== "string") {
+            throw new Error("Invalid or missing Email_address for the tenant.");
+        }
+
+        try {
+            await transporter.sendMail(mailOptions);
+        } catch (emailError) {
+            console.error("Error sending email:", emailError);
+        }
+
         if (Member_Counting) {
-            const members = JSON.parse(Member_Counting);
+            let members;
+            if (typeof Member_Counting === "string") {
+                try {
+                    members = JSON.parse(Member_Counting); // Parse only if it's a JSON string
+                } catch (parseError) {
+                    console.error("Invalid JSON in Member_Counting:", parseError);
+                    return res.status(400).json({
+                        success: false,
+                        message: "Invalid format for Member_Counting.",
+                    });
+                }
+            } else if (Array.isArray(Member_Counting)) {
+                members = Member_Counting; // Directly assign if it's already an array
+            }
+
             if (Array.isArray(members)) {
                 await Tenant.updateOne(
                     { _id: newTenant._id },
@@ -77,7 +196,21 @@ exports.addTenantData = async (req, res) => {
 
         // Handle Vehicle Counting
         if (Vehicle_Counting) {
-            const vehicles = JSON.parse(Vehicle_Counting);
+            let vehicles;
+            if (typeof Vehicle_Counting === "string") {
+                try {
+                    vehicles = JSON.parse(Vehicle_Counting); // Parse only if it's a JSON string
+                } catch (parseError) {
+                    console.error("Invalid JSON in Vehicle_Counting:", parseError);
+                    return res.status(400).json({
+                        success: false,
+                        message: "Invalid format for Vehicle_Counting.",
+                    });
+                }
+            } else if (Array.isArray(Vehicle_Counting)) {
+                vehicles = Vehicle_Counting; // Directly assign if it's already an array
+            }
+
             if (Array.isArray(vehicles)) {
                 await Tenant.updateOne(
                     { _id: newTenant._id },
@@ -88,36 +221,42 @@ exports.addTenantData = async (req, res) => {
 
         return res.status(201).json({
             success: true,
-            message: "Tenant data added successfully",
+            message: "Tenant data added successfully.",
         });
     } catch (error) {
         console.error("Error adding Tenant data:", error);
         return res.status(500).json({
             success: false,
-            message: "Failed to add Tenant data"
+            message: "Failed to add Tenant data.",
         });
     }
 };
 
+// login person profile 
+exports.tenantProfile = async (req, res) => {
+    let data = await Tenant.findById(req.tenant);
+    console.log("my data", data);
+    res.json(data);
+}
 
-exports.GetAllTenant= async(req,res)=>{
+exports.GetAllTenant = async (req, res) => {
     try {
-        const find= await Tenant.find();
-        if(!find){
+        const find = await Tenant.find();
+        if (!find) {
             return res.status(400).json({
-                success:false,
-                message:"No data found"
+                success: false,
+                message: "No data found"
             })
         }
         return res.json({
-            success:true,
-            Owner:find
+            success: true,
+            Owner: find
         })
     } catch (error) {
         console.error(error);
         return res.status(500).json({
-             success: false,
-             message: "Failed to add Tenant data"
-         });
+            success: false,
+            message: "Failed to add Tenant data"
+        });
     }
 }
