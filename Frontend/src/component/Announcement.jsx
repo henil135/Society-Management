@@ -7,6 +7,7 @@ import { MdAccessTimeFilled } from "react-icons/md";
 import Sidebar from "../component/layout/Sidebar";
 import { FaPlus } from 'react-icons/fa6';
 import axios from 'axios';
+import { FaAngleDown } from "react-icons/fa";
 
 function Announcement() {
 
@@ -140,7 +141,16 @@ function Announcement() {
 
                                                 <h5 className="modal-title Modal-Title p-3 pb-0">Add Announcement</h5>
                                                 <form onSubmit={handleSubmit(onSubmit)}>
-                                                    <div className="modal-body">
+                                                    <div className="modal-body pb-0">
+                                                    <div className="mb-3 position-relative">
+                                                            <label className='Form-Label'>Announcement Type<span className='text-danger'>*</span></label>
+                                                            <select name="" id="" className='announcement-type d-block w-100 form-control Form-Control'>
+                                                                <option value="Event">Event</option>
+                                                                <option value="Activity">Activity</option>
+                                                            </select>
+                                                            <FaAngleDown className='position-absolute' style={{bottom: '10px', right: '10px'}} />
+                                                            {errors.Announcement_Type && <small className="text-danger">Title is required</small>}
+                                                        </div>
                                                         <div className="mb-3">
                                                             <label className='Form-Label'>Announcement Title<span className='text-danger'>*</span></label>
                                                             <input type="text" className="form-control Form-Control"
@@ -159,7 +169,8 @@ function Announcement() {
                                                             </div>
                                                             <div className="mb-3 w-50 ms-2">
                                                                 <label className='Form-Label'>Announcement Time <span className='text-danger position-relative'>*</span></label>
-                                                                <input type="time" id="appt" name="appt" className="form-control Form-Control timePicker" {...register('Announcement_Time', { required: true })} /><MdAccessTimeFilled className='position-absolute anouncement-icon' />
+                                                                <input type="time" id="appt" name="appt" className="form-control Form-Control timePicker" {...register('Announcement_Time', { required: true })} />
+                                                                {/* <MdAccessTimeFilled className='position-absolute anouncement-icon' /> */}
                                                             </div>
                                                         </div>
                                                     </div>

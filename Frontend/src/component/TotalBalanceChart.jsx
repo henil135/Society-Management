@@ -226,9 +226,9 @@ function TotalBalanceChart() {
                             <h2>Total Balance</h2>
                            <div>
                            <select className='month-btn rounded-2 d-flex align-items-center bg-light text-dark'>
-                                    <option>Last week</option>
-                                    <option>Last month</option>
-                                    <option>Last year</option>
+                                    <option> month</option>
+                                    <option> week</option>
+                                    <option>year</option>
                                 </select>
                            </div>
 

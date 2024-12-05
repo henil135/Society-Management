@@ -444,7 +444,7 @@ function ComplaintTracking() {
               />
             </Form.Group>
             <Form.Group className='mt-2'>
-              <Form.Label>Complaint Type<span className="text-danger">*</span></Form.Label>
+              <Form.Label>Complaint Name<span className="text-danger">*</span></Form.Label>
               <Form.Control
                 type="text"
                 value={newComplaint.Complaint_name}
@@ -861,7 +861,7 @@ function ComplaintTracking() {
               />
             </Form.Group>
             <Form.Group className='mt-3'>
-              <Form.Label>Complaint Type<span className="text-danger">*</span></Form.Label>
+              <Form.Label>Complaint Name<span className="text-danger">*</span></Form.Label>
               <Form.Control
                 type="text"
                 value={selectedComplaint?.Complaint_name || ""}

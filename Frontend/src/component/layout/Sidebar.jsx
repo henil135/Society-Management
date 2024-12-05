@@ -219,6 +219,7 @@ function Sidebar() {
         <hr />
 
         <div className="offcanvas-body custom-scrollbar">
+
           <ul className="list-unstyled">
             {menuItems.map((item) =>
               item.subItems ? (
@@ -262,67 +263,97 @@ function Sidebar() {
                     (item.key === "security-management" && isSecurityDropdownOpen) ||
                     (item.key === "financialmanagement" && isFinancialDropdownOpen) ? (
 
-                    <ul className="list-unstyled ms-4">
-                      {item.subItems.map((subItem) => (
-                        <li key={subItem.key} className="p-2 rounded position-relative">
-                          {activeItem === subItem.key && (
-                            <img
-                              src={BlackImage}
-                              alt="Active Indicator" // Adding alt for better accessibility
-                              style={{
-                                position: "absolute",
-                                left: "-15px", // Adjust this value as needed
-                                height: "30px",
-                              }}
-                            />
-                          )}
-                          <Link
-                            to={subItem.path}
-                            className="d-flex align-items-center"
-                            style={{
-                              textDecoration: "none",
-                              fontWeight: activeItem === subItem.key ? "bold" : "normal", // Bold only active submenu item
-                              color: "black", // Ensure consistent text color for submenu
-                            }}
-                            onClick={() => setActiveItem(subItem.key)} // Ensure submenu item gets set as active
-                          >
-                            <span>{subItem.label}</span>
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : null}
-                </li>
-              ) : (
-                <li key={item.key} className={`p-3 rounded position-relative ${activeItem === item.key ? "mainColor2" : ""}`}>
-                  {activeItem === item.key && (
-                    <img
-                      src={HideBgCopy}
-                      alt="Active Indicator"
-                      style={{
-                        position: "absolute",
-                        left: "-15px", // Adjust this value as needed
-                        height: "50px",
-                        top: "2px"
-                      }}
-                    />
-                  )}
-                  <Link
-                    to={item.path}
-                    className="d-flex align-items-center"
+
+          <img
+            src={ArrowIcon}
+            alt="Dropdown Icon"
+            style={{
+              transform:
+                (item.key === "complaint-tracking" && isComplaintDropdownOpen) ||
+                (item.key === "security-management" && isSecurityDropdownOpen) ||
+                (item.key === "financialmanagement" && isFinancialDropdownOpen)
+                  ? "rotate(180deg)" // Rotate when dropdown is open
+                  : "rotate(0deg)",
+              transition: "transform 0.2s",
+            }}
+          />
+        </div>
+        {(item.key === "complaint-tracking" && isComplaintDropdownOpen) ||
+        (item.key === "security-management" && isSecurityDropdownOpen) ||
+        (item.key === "financialmanagement" && isFinancialDropdownOpen) ? (
+          <ul className="list-unstyled ms-4">
+            {item.subItems.map((subItem) => (
+              <li
+                key={subItem.key}
+                className={`p-2 rounded position-relative ${
+                  activeItem === subItem.key ? "mainColor2" : "" // Apply mainColor2 to active submenu items
+                }`}
+              >
+                {activeItem === subItem.key && (
+                  <img
+                    src={BlackImage}
+                    alt="Active Indicator"
                     style={{
-                      textDecoration: "none",
-                      color: activeItem === item.key ? "white" : "black",
+                      position: "absolute",
+                      left: "-15px",
+                      height: "30px",
                     }}
-                    onClick={() => setActiveItem(item.key)}
-                  >
-                    {item.icon}
-                    <span className="ms-2">{item.label}</span>
-                  </Link>
-                </li>
-              )
-            )}
+                  />
+                )}
+                <Link
+                  to={subItem.path}
+                  className="d-flex align-items-center"
+                  style={{
+                    textDecoration: "none",
+                    fontWeight:
+                      activeItem === subItem.key ? "bold" : "normal",
+                    color: "black",
+                  }}
+                  onClick={() => setActiveItem(subItem.key)}
+                >
+                  <span>{subItem.label}</span>
+                </Link>
+              </li>
+            ))}
           </ul>
+        ) : null}
+      </li>
+    ) : (
+      <li
+        key={item.key}
+        className={`p-3 rounded position-relative ${
+          activeItem === item.key ? "mainColor2" : ""
+        }`}
+      >
+        {activeItem === item.key && (
+          <img
+            src={HideBgCopy}
+            alt="Active Indicator"
+            style={{
+              position: "absolute",
+              left: "-15px",
+              height: "50px",
+              top: "2px",
+            }}
+          />
+        )}
+        <Link
+          to={item.path}
+          className="d-flex align-items-center"
+          style={{
+            textDecoration: "none",
+            color: activeItem === item.key ? "white" : "black",
+          }}
+          onClick={() => setActiveItem(item.key)}
+        >
+          {item.icon}
+          <span className="ms-2">{item.label}</span>
+        </Link>
+      </li>
+    )
+  )}
+</ul>
+
 
         </div>
 

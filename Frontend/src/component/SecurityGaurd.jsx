@@ -357,7 +357,7 @@ function SecurityGaurd() {
                       <div className="d-flex align-items-center justify-content-center gap-2">
                         <div
                           style={{
-                            width: "100px",
+                            width: "110px",
                             height: "34px",
                             padding: "5px 15px",
                             gap: "10px",
@@ -511,7 +511,7 @@ function SecurityGaurd() {
                     <p className="mb-0 text-center">Shift Time</p>
                     <div className='text-center'
                       style={{
-                        width: "100px",
+                        width: "110px",
                         height: "34px",
                         padding: "5px 15px",
                         fontWeight: "500",
