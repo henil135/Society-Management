@@ -1,4 +1,4 @@
-const Request = require('../models/requestTrackingModel');
+const serviceTracking = require('../models/serviceTrackingModel');
 
 // Create a new request
 exports.createRequest = async (req, res) => {
@@ -10,7 +10,7 @@ exports.createRequest = async (req, res) => {
             return res.status(400).json({ message: 'All fields are required' });
         }
 
-        const request = new Request({
+        const request = new serviceTracking({
             Requester_name,
             Request_name,
             Description,
@@ -20,7 +20,8 @@ exports.createRequest = async (req, res) => {
             Priority,
             Status,
             role,
-            createdBy:req.admin
+            createdBy: req.member, 
+            userType: req.userType, 
         });
 
         await request.save();
@@ -33,7 +34,10 @@ exports.createRequest = async (req, res) => {
 // Get all requests
 exports.getAllRequests = async (req, res) => {
     try {
-        const requests = await Request.find().populate("createdBy");
+        const requests = await serviceTracking.find().populate({
+            path: 'createdBy',
+            select: 'Full_name',  
+        });
         res.status(200).json({ message: 'Requests retrieved successfully', requests });
     } catch (error) {
         res.status(500).json({ message: 'Error retrieving requests', error });
@@ -43,7 +47,7 @@ exports.getAllRequests = async (req, res) => {
 // Get a request by ID
 exports.getRequestById = async (req, res) => {
     try {
-        const request = await Request.findById(req.params.id);
+        const request = await serviceTracking.findById(req.params.id);
         if (!request) {
             return res.status(404).json({ message: 'Request not found' });
         }
@@ -53,35 +57,10 @@ exports.getRequestById = async (req, res) => {
     }
 };
 
-// Update a request by ID
-exports.updateRequest = async (req, res) => {
-    try {
-        const { Requester_name, Request_name,Description, Request_date, Wing, Unit, Priority, Status, role } = req.body;
-
-        // Check if all required fields are provided for the update
-        if (!Requester_name || !Request_name ||!Description|| !Request_date || !Wing || !Unit || !Priority || !Status) {
-            return res.status(400).json({ message: 'All fields are required' });
-        }
-
-        const request = await Request.findByIdAndUpdate(
-            req.params.id,
-            { Requester_name, Request_name, Description,Request_date, Wing, Unit, Priority, Status, role },
-            { new: true, runValidators: true }
-        );
-
-        if (!request) {
-            return res.status(404).json({ message: 'Request not found' });
-        }
-
-        res.status(200).json({ message: 'Request updated successfully', request });
-    } catch (error) {
-        res.status(400).json({ message: 'Error updating request', error });
-    }
-};
 // Delete a request by ID
 exports.deleteRequest = async (req, res) => {
     try {
-        const request = await Request.findByIdAndDelete(req.params.id);
+        const request = await serviceTracking.findByIdAndDelete(req.params.id);
         if (!request) {
             return res.status(404).json({ message: 'Request not found' });
         }
