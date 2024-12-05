@@ -42,7 +42,7 @@ const CommunitiesDiscussion = () => {
         if (newQuestion) {
             // Parse the new question from localStorage
             const parsedQuestion = JSON.parse(newQuestion);
-            
+
             // Add the new question to the existing cardData
             setCardData(prevData => [...prevData, parsedQuestion]);
 
@@ -50,14 +50,14 @@ const CommunitiesDiscussion = () => {
             localStorage.removeItem('newQuestion');
         }
     }, []);
-    
+
     return (
         <div className='dashboard-bg w-100'>
             <ResidentSidebar />
             <Navbar />
             <div className="container-fluid stickyHeader p-3" style={{ marginLeft: "315px", width: "1590px" }}>
                 <div className="row">
-                   
+
                     <div className="col-md-3 chat-sidebar p-0">
                         <div className="sidebar-header p-3 border-bottom">
                             <h5 className="mb-0">Chat</h5>
@@ -65,7 +65,7 @@ const CommunitiesDiscussion = () => {
                         <ChatSidebar />
                     </div>
 
-                 
+
                     <div className="col-md-9 chat-area p-0">
                         <div className="chat-header p-3 border-bottom">
                             <div className="d-flex align-items-center justify-content-between">
@@ -87,41 +87,43 @@ const CommunitiesDiscussion = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>  
+                        </div>
 
-                       
+
                         <div className='ps-4 pe-2 py-3'>
                             {cardData.map((val, index) => (
-                                <div key={index} className='row community-card pt-4 pb-2 px-2 rounded mb-3'>
-                                    <div className='col-lg-1 text-end'>
-                                        {
-                                            val.votes > 0 ? (
-                                                <p className='community-votes mb-2 text-success'>{val.votes} votes</p>
-                                            ) : (
-                                                <p className='community-votes mb-2'>{val.votes} votes</p>
-                                            )
-                                        }
-                                        {
-                                            val.answers > 0 ? (
-                                                <p className='community-votes text-primary'>{val.answers} answers</p>
-                                            ) : (
-                                                <p className='community-votes'>{val.answers} answers</p>
-                                            )
-                                        }
-                                    </div>
-                                    <div className='col-lg-10'>
-                                        <h6 className='community-que'>{val.title}</h6>
-                                        <p className='community-ans text-muted'>{val.content}</p>
-                                    </div>
-                                    <div className='col-lg-1'>
-                                        <div className='community-view'>
-                                            <p className='d-flex align-items-center bg-light justify-content-center rounded-pill' style={{ padding: "5px" }}>
-                                                <IoEyeSharp className='community-icon' style={{ marginRight: "5px" }} />
-                                                {val.views}
-                                            </p>
+                                <Link to={'/Community-Answer'} className='text-decoration-none'>
+                                    <div key={index} className='row community-card pt-4 pb-2 px-2 rounded mb-3'>
+                                        <div className='col-lg-1 text-end'>
+                                            {
+                                                val.votes > 0 ? (
+                                                    <p className='community-votes mb-2 text-success'>{val.votes} votes</p>
+                                                ) : (
+                                                    <p className='community-votes mb-2'>{val.votes} votes</p>
+                                                )
+                                            }
+                                            {
+                                                val.answers > 0 ? (
+                                                    <p className='community-votes text-primary'>{val.answers} answers</p>
+                                                ) : (
+                                                    <p className='community-votes'>{val.answers} answers</p>
+                                                )
+                                            }
+                                        </div>
+                                        <div className='col-lg-10'>
+                                            <h6 className='community-que text-dark'>{val.title}</h6>
+                                            <p className='community-ans text-muted'>{val.content}</p>
+                                        </div>
+                                        <div className='col-lg-1'>
+                                            <div className='community-view'>
+                                                <p className='d-flex align-items-center bg-light justify-content-center rounded-pill' style={{ padding: "5px" }}>
+                                                    <IoEyeSharp className='community-icon' style={{ marginRight: "5px" }} />
+                                                    {val.views}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </Link>
                             ))}
                         </div>
                     </div>

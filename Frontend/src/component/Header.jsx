@@ -10,27 +10,27 @@ import notification3 from '../assets/Group 1000004173.png'
 import { IoCheckmarkDoneSharp } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
 import noNotification from '../assets/Group 1000004472.png'
-
+import notificationIcon from '../Icons/notification.png'
 function Header() {
     const [notifications, setNotifications] = useState([
-        {
-            img: notification1,
-            title: 'Evelyn Harper (A-101)',
-            dateTime: 'Monday 11:41 AM',
-            content: 'Evelyn Harper gave a fund of 1000 rupees for Navratri.',
-            timestamp: '32 Minutes ago'
-        },
-        {
-            img: notification2,
-            title: 'Evelyn Harper (A-101)',
-            dateTime: 'Tuesday 11:41 AM',
-            content: 'Evelyn Harper gave a Maintenance of 1000 rupees. ',
-            timestamp: '2 days ago'
-        },
+        // {
+        //     img: notification1,
+        //     title: 'Evelyn Harper (A-101)',
+        //     dateTime: 'Monday 11:41 AM',
+        //     content: 'Evelyn Harper gave a fund of 1000 rupees for Navratri.',
+        //     timestamp: '32 Minutes ago'
+        // },
+        // {
+        //     img: notification2,
+        //     title: 'Evelyn Harper (A-101)',
+        //     dateTime: 'Tuesday 11:41 AM',
+        //     content: 'Evelyn Harper gave a Maintenance of 1000 rupees. ',
+        //     timestamp: '2 days ago'
+        // },
         {
             img: notification3,
             title: 'Ganesh Chaturthi (A- 101)',
-            dateTime: 'Saturday 11:41 AM',
+            dateTime: 'Monday 11:41 AM',
             amt: 'Per Person Amount : ₹ 1,500',
             content: 'The celebration of Ganesh Chaturthi involves the installation of clay idols of Lord Ganesa in  OurResident. ',
             timestamp: '2 days ago'
@@ -38,6 +38,7 @@ function Header() {
         {
             img: notification2,
             title: 'Update Maintenance',
+            dateTime: 'Monday 11:41 AM',
             mamt: '₹ 1,500',
             pamt: '₹ 350',
             timestamp: '32 Minutes ago'
@@ -71,7 +72,7 @@ function Header() {
                             {/* Search Bar for Large Screens */}
                             <div className="d-none d-md-block ">
                                 <div className="input-group">
-                                    <span className="input-group-text search-icon border " style={{ maxHeight: "37.5px" }}>
+                                    <span className="input-group-text search-icon border " style={{ maxHeight: "38px" }}>
                                         <FiSearch />
                                     </span>
 
@@ -95,11 +96,11 @@ function Header() {
 
 
                         <Button
-                            variant="light"
+                            variant="none"
                             className="position-relative me-3 px-2 text-black notification-icon mt-0"
                             onClick={() => setShowNotifications(!showNotifications)}
                         >
-                            <FaBell />
+                            <img src={notificationIcon}  />
                         </Button>
 
 
@@ -120,7 +121,7 @@ function Header() {
                                     {notifications.length > 0 ? (
                                         <Button
                                             variant="link"
-                                            style={{ fontSize: '12px' }}
+                                            style={{ fontSize: '12px', fontWeight: '600' }}
                                             onClick={clearNotifications}
                                             className="text-primary mt-0 text-decoration-none"
                                         >
@@ -140,38 +141,43 @@ function Header() {
                                                 key={index}
                                                 className="border-bottom text-dark"
                                             >
-                                                <div className='d-flex'>
-                                                    <div className='pe-2'>
-                                                        <img src={notification.img} />
+                                                <div className="d-flex">
+                                                    {/* Notification Image */}
+                                                    <div className="flex-shrink-0 pe-3">
+                                                        <img src={notification.img} alt="Notification" />
                                                     </div>
-                                                    {
-                                                        notification.title == 'Update Maintenance' ? (
-                                                            <div>
-                                                                <strong>{notification.title}</strong>
+
+                                                    {/* Notification Content */}
+                                                    <div className="flex-grow-1">
+                                                        {
+                                                            notification.title === 'Update Maintenance' ? (
                                                                 <div>
-                                                                    <div className='d-flex align-items-center justify-content-between p-2 my-2 rounded' style={{ width: '440px', background: 'rgba(246, 248, 251, 1)' }}>
-                                                                        <p className='mb-1'>Maintenance Amount : </p>
-                                                                        <p className='mb-1 text-success'>{notification.mamt}</p>
-                                                                    </div>
-                                                                    <div className='d-flex align-items-center justify-content-between p-2 rounded' style={{ width: '440px', background: 'rgba(246, 248, 251, 1)' }}>
-                                                                        <p className='mb-1'>Maintenance Penalty : </p>
-                                                                        <p className='mb-1 text-danger'>{notification.pamt}</p>
+                                                                    <strong className='mb-1'>{notification.title}</strong>
+                                                                    <p className="text-muted mb-0">{notification.dateTime}</p>
+                                                                    <div>
+                                                                        <div className='d-flex align-items-center justify-content-between p-2 my-2 rounded' style={{ background: 'rgba(246, 248, 251, 1)' }}>
+                                                                            <p className='mb-1'>Maintenance Amount:</p>
+                                                                            <p className='mb-1 text-success' style={{ fontWeight:'600' }}>{notification.mamt}</p>
+                                                                        </div>
+                                                                        <div className='d-flex align-items-center justify-content-between p-2 rounded' style={{ background: 'rgba(246, 248, 251, 1)' }}>
+                                                                            <p className='mb-1'>Maintenance Penalty:</p>
+                                                                            <p className='mb-1 text-danger' style={{ fontWeight:'600' }}>{notification.pamt}</p>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        ) : (
-                                                            <div>
-                                                                <strong>{notification.title}</strong>
-                                                                <br />
-                                                                <small className="text-muted">
-                                                                    {notification.dateTime}
-                                                                </small>
-                                                                <p className='mb-0'>{notification.amt}</p>
-                                                                <p className="mb-0">{notification.content}</p>
-                                                            </div>
-                                                        )
-                                                    }
+                                                            ) : (
+                                                                <div>
+                                                                    <strong>{notification.title}</strong>
+                                                                    <br />
+                                                                    <small className="text-muted">{notification.dateTime}</small>
+                                                                    <p className='mb-0'>{notification.amt}</p>
+                                                                    <p className="mb-0">{notification.content}</p>
+                                                                </div>
+                                                            )
+                                                        }
+                                                    </div>
                                                 </div>
+
                                                 {
                                                     notification.title == 'Update Maintenance' ? (
                                                         <div>
@@ -184,12 +190,12 @@ function Header() {
                                                                 </div>
                                                             </div>}
                                                         </div>
-                                                    ) : (<div className='d-flex align-items-end justify-content-between'>
+                                                    ) : (<div className='notificationButton-timestamp'>
                                                         <div className='mx-5 mb-2'>
-                                                            <Button className='me-3 mt-2 text-decoration-none bg-light text-dark' style={{ border: '1px solid rgba(211, 211, 211, 1)' }}>Accept</Button>
+                                                            <Button className='me-3 mt-2 text-decoration-none bg-light text-dark' style={{ border: '1px solid rgba(211, 211, 211, 1)', fontWeight:'600' }}>Accept</Button>
                                                             <Button className='text-decoration-none mt-2'>Decline</Button>
                                                         </div>
-                                                        <div className='mb-2'>
+                                                        <div className='mb-2 notification-timestamp'>
                                                             <small className="text-muted d-flex align-items-center">{notification.timestamp}<IoCheckmarkDoneSharp className='ms-1' /></small>
                                                         </div>
                                                     </div>)

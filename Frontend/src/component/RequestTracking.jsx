@@ -315,7 +315,7 @@ function RequestTracking() {
                   />
                 </Form.Group>
                 <Form.Group className='mt-2'>
-                  <Form.Label>Request Type<span className="text-danger">*</span></Form.Label>
+                  <Form.Label>Request Name<span className="text-danger">*</span></Form.Label>
                   <Form.Control
                     type="text"
                     value={newRequest.Request_name}
@@ -723,7 +723,7 @@ function RequestTracking() {
                   />
                 </Form.Group>
                 <Form.Group className='mt-2'>
-                  <Form.Label>Request Type<span className="text-danger">*</span></Form.Label>
+                  <Form.Label>Request Name<span className="text-danger">*</span></Form.Label>
                   <Form.Control
                     type="text"
                     value={selectedRequest?.Request_name || ""}
