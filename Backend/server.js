@@ -83,6 +83,7 @@ const PaymentRoute = require("./routes/paymentRoute");
 
 const visitor = require("./routes/VisitorRoute")
 
+const communityRoute = require("./routes/communitychatRoutes")
 
 //user registration , login and update Profile
 app.use("/universal", router);
@@ -120,8 +121,11 @@ app.use('/api/v2/security', securityGuardRoute);
 // Annoucement
 app.use('/api/v2/annoucement', annoucementRoute);
 
-
+// chat 
 app.use('/chat', chatRoute)
+
+// communication chat 
+app.use("/community" , communityRoute)
 
 // visitor tracking
 app.use("/api/v2/Visitor", visitor);
