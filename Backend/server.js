@@ -7,8 +7,6 @@ app.use(cors());
 const { Server } = require("socket.io")
 const http = require("http")
 
-
-
 const PORT = process.env.PORT || 5000;
 const bodyParser = require("body-parser")
 
@@ -55,7 +53,16 @@ const io = new Server(server, {
   }
 })
 
+// Middleware to share Socket.IO instance
+app.use((req, res, next) => {
+  req.io = io;
+  next();
+});
+
+
+
 io.on("connection", (socket) => {
+
   console.log(`User connected : ${socket.id}`)
 })
 
