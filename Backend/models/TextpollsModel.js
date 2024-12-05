@@ -12,6 +12,14 @@ const TextPollSchema = new mongoose.Schema({
         type: String,
         
     },
+    voters: [{
+        type: mongoose.Schema.Types.ObjectId,
+        refPath: 'userType', // Dynamic reference based on userType
+    }],
+    userType: {
+        type: String,
+        enum: ['Owner', 'Tenant'], // Valid models for reference
+    },
 
 }, { timestamps: true });
 

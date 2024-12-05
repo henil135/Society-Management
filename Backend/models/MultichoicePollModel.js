@@ -22,6 +22,14 @@ const MultichoicePollSchema = new mongoose.Schema({
                 default: 0, 
                 min: 0, 
             },
+            voters: [{
+                type: mongoose.Schema.Types.ObjectId,
+                refPath: 'userType', // Dynamic reference based on userType
+            }],
+            userType: {
+                type: String,
+                enum: ['Owner', 'Tenant'], // Valid models for reference
+            },
         }],
         validate: [array => array.length > 1, "A poll must have at least two options"], // Ensures minimum options
     }
