@@ -59,7 +59,6 @@ app.use((req, res, next) => {
   next();
 });
 
-io.on("connection" , (socket) =>{
 
 io.on("connection", (socket) => {
 
