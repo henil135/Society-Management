@@ -12,20 +12,20 @@ import { jsPDF } from 'jspdf';
 const ViewInvoice = () => {
 
     const [complaint, setComplaint] = useState([
-        { id: '152563', name: 'Terry Rhiel Madsen', bdate: '10/02/2024', pdate: '10/02/2024', pnumber: '9764816457', email: 'FrancesLHarris@rhyta.com', mamt: '1500', pamt: '2500' },
-        { id: '152564', name: 'John Doe', bdate: '11/02/2024', pdate: '11/02/2024', pnumber: '9876543210', email: 'john@example.com', mamt: '2000', pamt: '3000' },
-        { id: '152565', name: 'Jane Smith', bdate: '12/02/2024', pdate: '12/02/2024', pnumber: '9898765432', email: 'jane@example.com', mamt: '1200', pamt: '2200' },
-        { id: '152566', name: 'Michael Brown', bdate: '13/02/2024', pdate: '13/02/2024', pnumber: '9876547890', email: 'michael@example.com', mamt: '1800', pamt: '2800' },
-        { id: '152566', name: 'Michael Brown', bdate: '13/02/2024', pdate: '13/02/2024', pnumber: '9876547890', email: 'michael@example.com', mamt: '1800', pamt: '2800' },
-        { id: '152566', name: 'Michael Brown', bdate: '13/02/2024', pdate: '13/02/2024', pnumber: '9876547890', email: 'michael@example.com', mamt: '1800', pamt: '2800' },
-        { id: '152566', name: 'Michael Brown', bdate: '13/02/2024', pdate: '13/02/2024', pnumber: '9876547890', email: 'michael@example.com', mamt: '1800', pamt: '2800' },
-        { id: '152566', name: 'Michael Brown', bdate: '13/02/2024', pdate: '13/02/2024', pnumber: '9876547890', email: 'michael@example.com', mamt: '1800', pamt: '2800' },
-        { id: '152566', name: 'Michael Brown', bdate: '13/02/2024', pdate: '13/02/2024', pnumber: '9876547890', email: 'michael@example.com', mamt: '1800', pamt: '2800' },
-        { id: '152566', name: 'Michael Brown', bdate: '13/02/2024', pdate: '13/02/2024', pnumber: '9876547890', email: 'michael@example.com', mamt: '1800', pamt: '2800' },
-        { id: '152566', name: 'Michael Brown', bdate: '13/02/2024', pdate: '13/02/2024', pnumber: '9876547890', email: 'michael@example.com', mamt: '1800', pamt: '2800' },
-        { id: '152566', name: 'Michael Brown', bdate: '13/02/2024', pdate: '13/02/2024', pnumber: '9876547890', email: 'michael@example.com', mamt: '1800', pamt: '2800' },
-        { id: '152566', name: 'Michael Brown', bdate: '13/02/2024', pdate: '13/02/2024', pnumber: '9876547890', email: 'michael@example.com', mamt: '1800', pamt: '2800' },
-        { id: '152566', name: 'Michael Brown', bdate: '13/02/2024', pdate: '13/02/2024', pnumber: '9876547890', email: 'michael@example.com', mamt: '1800', pamt: '2800' }
+        { id: '152563', bdate: '10/02/2024', pdate: '10/02/2024',  mamt: '1500', pamt: '2500' },
+        { id: '152564',bdate: '11/02/2024', pdate: '11/02/2024',  mamt: '2000', pamt: '3000' },
+        { id: '152565', bdate: '12/02/2024', pdate: '12/02/2024', mamt: '1200', pamt: '2200' },
+        { id: '152566',bdate: '13/02/2024', pdate: '13/02/2024', mamt: '1800', pamt: '2800' },
+        { id: '152566', bdate: '13/02/2024', pdate: '13/02/2024',  mamt: '1800', pamt: '2800' },
+        { id: '152566', bdate: '13/02/2024', pdate: '13/02/2024',  mamt: '1800', pamt: '2800' },
+        { id: '152566',bdate: '13/02/2024', pdate: '13/02/2024', mamt: '1800', pamt: '2800' },
+        { id: '152566',bdate: '13/02/2024', pdate: '13/02/2024',  mamt: '1800', pamt: '2800' },
+        { id: '152566',bdate: '13/02/2024', pdate: '13/02/2024',  mamt: '1800', pamt: '2800' },
+        { id: '152566', bdate: '13/02/2024', pdate: '13/02/2024',  mamt: '1800', pamt: '2800' },
+        { id: '152566',bdate: '13/02/2024', pdate: '13/02/2024',  mamt: '1800', pamt: '2800' },
+        { id: '152566',bdate: '13/02/2024', pdate: '13/02/2024',  mamt:'1800', pamt: '2800' },
+        { id: '152566', bdate: '13/02/2024', pdate: '13/02/2024', mamt: '1800', pamt: '2800' },
+        { id: '152566',bdate: '13/02/2024', pdate: '13/02/2024',  mamt: '1800', pamt: '2800' }
     ]);
 
     const [showViewModal, setShowViewModal] = useState(false);
@@ -74,19 +74,21 @@ const ViewInvoice = () => {
             <Sidebar />
             <Navbar />
 
+
             <div className='marginLeft'>
                 <div className='container-fluid stickyHeader'>
+
                     <div className='row p-4'>
 
-                        <div className='bg-light rounded'>
-                            <div className="table-responsive rounded" style={{
+                        <div className='bg-light rounded '>
+                            <div className="table-responsive rounded custom-scrollbar" style={{
                                 maxHeight: '760px', // Adjust height as needed
                                 overflowY: complaint.length > 10 ? 'scroll' : 'hidden',
                             }}>
 
-                                <div>
-                                    <div className='d-flex justify-content-between align-items-center mb-0 py-4 ps-1'>
-                                        <h5 className='financial-income-title'>Maintenance Invoices</h5>
+                                <div >
+                                    <div className='d-flex justify-content-between align-items-center mb-0 py-4 ps-1 '>
+                                        <h5 className='financial-income-title '>Maintenance Invoices</h5>
                                         <div>
                                             <select className='month-btn rounded-2 d-flex align-items-center bg-light text-dark me-4'>
                                                 <option>Month</option>
@@ -94,18 +96,15 @@ const ViewInvoice = () => {
                                         </div>
                                     </div>
 
-                                    <table className="table">
-                                        <thead className='table-primary'>
+                                    <table className="table  ">
+                                        <thead className='table-primary '>
                                             <tr>
                                                 <th scope="col">Invoice ID</th>
-                                                <th scope="col">Owner Name</th>
-                                                <th scope="col">Bill Date</th>
+                                                <th scope="col">Due Date</th>
                                                 <th scope="col" className='text-center'>Payment Date</th>
-                                                <th scope="col" className='text-center'>Phone Number</th>
-                                                <th scope="col" className='text-center'>Email</th>
-                                                <th scope="col">Maintenance Amount</th>
-                                                <th scope="col">Pending Amount</th>
-                                                <th scope="col">Action</th>
+                                                <th scope="col" className='text-center'>Maintenance Amount</th>
+                                                <th scope="col" className='text-center'>Pending Amount</th>
+                                                <th scope="col" className='text-center'>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -114,11 +113,8 @@ const ViewInvoice = () => {
                                                     return (
                                                         <tr key={index}>
                                                             <td style={{ height: '55px' }}>{val.id}</td>
-                                                            <td style={{ height: '55px' }}>{val.name}</td>
                                                             <td style={{ height: '55px' }}>{val.bdate}</td>
                                                             <td style={{ height: '55px' }} className='text-center'>{val.pdate}</td>
-                                                            <td style={{ height: '55px' }} className='text-center'>{val.pnumber}</td>
-                                                            <td style={{ height: '55px' }} className='text-center'>{val.email}</td>
                                                             <td style={{ height: '55px' }} className='text-success text-center'>₹ {val.mamt}</td>
                                                             <td style={{ height: '55px' }} className='text-danger text-center'>{val.pamt}</td>
                                                             <td style={{ height: '55px', textAlign: "center", verticalAlign: "middle" }}>
@@ -135,7 +131,7 @@ const ViewInvoice = () => {
                                 </div>
 
                                 {/* View Modal */}
-                                <Modal show={showViewModal} onHide={handleCloseViewModal} centered>
+                                <Modal show={showViewModal} onHide={handleCloseViewModal} centered className='square-modal'>
                                     <Modal.Header className='border-0 pb-0' closeButton>
                                         <Modal.Title>Maintenance Invoice</Modal.Title>
                                     </Modal.Header>

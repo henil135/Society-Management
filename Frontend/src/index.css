@@ -697,8 +697,10 @@ input:focus {
   border-radius: 50%;
 }
 
-.financial-income-title {
-  font-size: 25px;
+
+.financial-income-title{
+  font-size: 20px;
+
   font-weight: 600;
 }
 

@@ -10,7 +10,7 @@ import notification3 from '../assets/Group 1000004173.png'
 import { IoCheckmarkDoneSharp } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
 import noNotification from '../assets/Group 1000004472.png'
-
+import notificationIcon from '../Icons/notification.png'
 function Header() {
     const [notifications, setNotifications] = useState([
         // {
@@ -72,7 +72,7 @@ function Header() {
                             {/* Search Bar for Large Screens */}
                             <div className="d-none d-md-block ">
                                 <div className="input-group">
-                                    <span className="input-group-text search-icon border " style={{ maxHeight: "37.5px" }}>
+                                    <span className="input-group-text search-icon border " style={{ maxHeight: "38px" }}>
                                         <FiSearch />
                                     </span>
 
@@ -96,11 +96,11 @@ function Header() {
 
 
                         <Button
-                            variant="light"
+                            variant="none"
                             className="position-relative me-3 px-2 text-black notification-icon mt-0"
                             onClick={() => setShowNotifications(!showNotifications)}
                         >
-                            <FaBell />
+                            <img src={notificationIcon}  />
                         </Button>
 
 

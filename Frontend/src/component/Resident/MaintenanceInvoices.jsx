@@ -182,7 +182,7 @@ const MaintenanceInvoices = () => {
 
                                  
                                     <Modal
-                                        className="custom-modal"
+                                        className="custom-modal "
                                         show={showPayNowModal}
                                         onHide={handleClosePayNowModal}
                                         centered
