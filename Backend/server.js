@@ -4,7 +4,7 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 
-const {Server} = require("socket.io")
+const { Server } = require("socket.io")
 const http = require("http")
 
 
@@ -44,37 +44,39 @@ const Poll = require("./routes/PollRoute");
 
 // chat server
 const server = http.createServer(app)
-const io = new Server( server , {
-  cors :{
-    origin : "*",
-    methods : ["GET" , "POST"],
+
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
   }
 })
 
-io.on("connection" , (socket) =>{
+io.on("connection", (socket) => {
   console.log(`User connected : ${socket.id}`)
 })
 
 // chat connection 
-io.on("connection" , (socket) =>{
+io.on("connection", (socket) => {
   console.log(`User connected : ${socket.id}`)
 
-  socket.on("joinchat" , (chatId) =>{
+  socket.on("joinchat", (chatId) => {
     socket.join(chatId);
     console.log(`User joined chat : ${chatId}`);
-    
+
   })
 
-  socket.on("sendMessage" , (data) =>{
-    const {chatId , message} = data;
-    io.to(chatId).emit("receivemessage" , message)
+  socket.on("sendMessage", (data) => {
+    const { chatId, message } = data;
+    io.to(chatId).emit("receivemessage", message)
   })
 
 
-  socket.on("disconnected" , () =>{
+  socket.on("disconnected", () => {
     console.log("User disconnected")
   })
 })
+app.set('io', io)
 const router = require("./routes/UniversalLogin");
 
 const PaymentRoute = require("./routes/paymentRoute");
@@ -83,9 +85,9 @@ const visitor = require("./routes/VisitorRoute")
 
 
 //user registration , login and update Profile
-app.use("/universal",router);
-app.use("/payment",PaymentRoute);
-app.use("/api/v1",userRoutes);
+app.use("/universal", router);
+app.use("/payment", PaymentRoute);
+app.use("/api/v1", userRoutes);
 
 //create society api
 app.use('/api/societies', societyRoutes);
@@ -119,14 +121,14 @@ app.use('/api/v2/security', securityGuardRoute);
 app.use('/api/v2/annoucement', annoucementRoute);
 
 
-app.use('/chat' , chatRoute)
+app.use('/chat', chatRoute)
 
 // visitor tracking
-app.use("/api/v2/Visitor",visitor);
+app.use("/api/v2/Visitor", visitor);
 
 // poll
 
-app.use("/api/v2/Polls",Poll);
+app.use("/api/v2/Polls", Poll);
 
 
 app.listen(PORT, () => {

@@ -1,8 +1,9 @@
 const Poll = require("../models/PollModel");
 
+
 // Create a new poll
 exports.createPoll = async (req, res) => {
-    const { polls, question, options, createdBy } = req.body;
+    const { polls, question, options } = req.body;
 
     // Validation for required fields
     if (!polls || !question || !options || options.length < 2) {
@@ -10,7 +11,7 @@ exports.createPoll = async (req, res) => {
     }
 
     try {
-        const poll = new Poll({ polls, question, options, createdBy  });
+        const poll = new Poll({ polls, question, options, createdBy:req.owner});
         await poll.save();
 
         // Notify all clients about the new poll
@@ -19,7 +20,7 @@ exports.createPoll = async (req, res) => {
 
         res.status(201).json({ message: 'Poll created successfully.', poll });
     } catch (error) {
-        res.status(500).json({ error: 'Failed to create poll.' });
+        res.status(500).json({ error: error.message });
     }
 }
 
