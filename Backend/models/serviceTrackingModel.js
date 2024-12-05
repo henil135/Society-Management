@@ -1,20 +1,23 @@
 const mongoose = require('mongoose');
 
-const CamplaintSchema = new mongoose.Schema({
-    Complainer_name: {
+const RequestSchema = new mongoose.Schema({
+    Requester_name: {
         type: String,
         required: true,
         trim: true,
     },
-    Complaint_name: {
+    Request_name: {
         type: String,
         required: true,
         trim: true,
     },
-    Description: {
-        type: String,
+    Description:{
+        type:String,
+        required:true,
+    },
+    Request_date: {
+        type: Date,
         required: true,
-        trim: true,
     },
     Wing:{
         type:String,
@@ -37,16 +40,21 @@ const CamplaintSchema = new mongoose.Schema({
     role: {
         type: String,
         enum: ['admin', 'resident', 'security'], 
-        default: 'resident' 
+        default: 'admin' 
     },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+        refPath: 'userType', // Dynamic reference based on userType
+    },
+    userType: {
+        type: String,
+        required: true,
+        enum: ['Owner', 'Tenant'], // Valid models for reference
     },
 }, {
     timestamps: true 
 });
 
-const Camplaint = mongoose.model('Camplaint', CamplaintSchema);
+const serviceTracking = mongoose.model('serviceTracking', RequestSchema);
 
-module.exports = Camplaint;
+module.exports = serviceTracking;

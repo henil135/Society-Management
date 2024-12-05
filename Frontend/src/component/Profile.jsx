@@ -47,12 +47,12 @@ export default function Profile() {
       <div className="flex-shrink-0">
         <Sidebar />
       </div>
-      <div className="profile-dashboard-bg dashboard-bg" style={{ width: "1910px" }}>
+      <div className="profile-dashboard-bg dashboard-bg">
         <Navbar />
-        <div className="stickyHeader" style={{ marginLeft: "280px" }}>
-          <div className="d-flex justify-content-center profile-bg">
-            <div className="col-lg-8">
-              <div className="d-flex align-items-center justify-content-between">
+        <div className="stickyHeader marginLeft">
+          <div className="d-flex justify-content-center profile-bg"> 
+            <div className="col-12 px-3 px-lg-0 col-lg-8">
+              <div className="d-flex align-items-center justify-content-between mb-3 mb-lg-0">
                 <h3 className="mb-3 mt-5 profile-title">Profile</h3>
                 <div className="d-flex justify-content-end mt-3">
                   <Link to="/EditProfile" className="text-decoration-none">
@@ -63,8 +63,8 @@ export default function Profile() {
                   </Link>
                 </div>
               </div>
-              <form onSubmit={handleSubmit(onSubmit)} className="form-group bg-light p-5 rounded d-flex justify-content-center">
-                <div className="me-5 text-center">
+              <form onSubmit={handleSubmit(onSubmit)} className="profile-form form-group bg-light  p-3 p-lg-5 rounded ">
+                <div className="me-lg-5 text-center profile-img-section">
                   {/* Profile Image */}
                   <label htmlFor="profileImage" style={{ cursor: "pointer" }}>
                     <img
@@ -84,10 +84,10 @@ export default function Profile() {
                   <h5 className="mt-3">Arlene McCoy</h5>
                 </div>
 
-                <div className="ms-5">
+                <div className="ms-lg-5 ms-0 my-3 mt-lg-0 w-100">
                   {/* First Name & Last Name */}
-                  <div className="d-flex">
-                    <div className="mb-2 w-50 me-2">
+                  <div className="d-lg-flex d-block ">
+                    <div className="mb-2 w-100 w-lg-50 me-2">
                       <label htmlFor="fname" className="form-label mb-0">
                         First Name <span className="text-danger">*</span>
                       </label>
@@ -101,7 +101,7 @@ export default function Profile() {
                       {errors.fname && <div className="invalid-feedback">{errors.fname.message}</div>}
                     </div>
 
-                    <div className="mb-2 w-50 ms-2">
+                    <div className="mb-2 w-100 w-lg-50 ms-lg-2">
                       <label htmlFor="lname" className="form-label mb-0">
                         Last Name <span className="text-danger">*</span>
                       </label>
@@ -117,8 +117,8 @@ export default function Profile() {
                   </div>
 
                   {/* Phone & Email */}
-                  <div className="d-flex">
-                    <div className="mb-2 w-50 me-2">
+                  <div className="d-lg-flex d-block">
+                    <div className="mb-2 w-100 w-lg-50 me-2">
                       <label htmlFor="phone" className="form-label mb-0">
                         Phone Number <span className="text-danger">*</span>
                       </label>
@@ -132,7 +132,7 @@ export default function Profile() {
                       {errors.phone && <div className="invalid-feedback">{errors.phone.message}</div>}
                     </div>
 
-                    <div className="mb-2 w-50 ms-2">
+                    <div className="mb-2 w-100 w-lg-50 ms-lg-2">
                       <label htmlFor="email" className="form-label mb-0">
                         Email Address <span className="text-danger">*</span>
                       </label>
@@ -148,8 +148,8 @@ export default function Profile() {
                   </div>
 
                   {/* Society & Country */}
-                  <div className="d-flex">
-                    <div className="mb-2 w-50 me-2">
+                  <div className="d-lg-flex d-block">
+                    <div className="mb-2 w-100 w-lg-50 me-2">
                       <label htmlFor="society" className="form-label mb-0">
                         Society <span className="text-danger">*</span>
                       </label>
@@ -163,7 +163,7 @@ export default function Profile() {
                       {errors.society && <div className="invalid-feedback">{errors.society.message}</div>}
                     </div>
 
-                    <div className="mb-2 w-50 ms-2">
+                    <div className="mb-2 w-100 w-lg-50 ms-lg-2">
                       <label htmlFor="country" className="form-label mb-0">
                         Country <span className="text-danger">*</span>
                       </label>
@@ -179,8 +179,8 @@ export default function Profile() {
                   </div>
 
                   {/* State & City */}
-                  <div className="d-flex">
-                    <div className="mb-2 w-50 me-2">
+                  <div className="d-lg-flex d-block">
+                    <div className="mb-2 w-100 w-lg-50 me-2">
                       <label htmlFor="state" className="form-label mb-0">
                         State <span className="text-danger">*</span>
                       </label>
@@ -194,7 +194,7 @@ export default function Profile() {
                       {errors.state && <div className="invalid-feedback">{errors.state.message}</div>}
                     </div>
 
-                    <div className="mb-2 w-50 ms-2">
+                    <div className="mb-2 w-100 w-lg-50 ms-lg-2">
                       <label htmlFor="city" className="form-label mb-0">
                         City <span className="text-danger">*</span>
                       </label>

@@ -123,7 +123,7 @@ function Complaintlist() {
                     <div className="table-responsive Complaint-table rounded custom-scrollbar" >
 
                         <div >
-                            <h5 className=' mb-0 py-3 ps-1  financial-income-title'>Maintenance  Details</h5>
+                            <p className=' mb-0 py-3 ps-1  financial-income-title'>Complaint List</p>
                             <div className=' financial-maintainance-table '>
 
                                 <table className="table">

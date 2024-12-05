@@ -13,23 +13,29 @@ const createmessage = async (req, res) => {
 }
 
 const getChathistory = async (req, res) => {
-  const { adminId, residentId } = req.params
+  const { adminId, residentId } = req.params;
 
   try {
-    const history = await Chat.find(adminId, residentId).sort({ Timestamp: 1 })
-    res.status(201).json(history)
+      // Query the database for chat history between the admin and resident
+      const history = await Chat.find({
+          $or: [
+              { senderId: adminId, receiverId: residentId },
+              { senderId: residentId, receiverId: adminId }
+          ]
+      }).sort({ Timestamp: 1 });
 
+      res.status(200).json(history);
   } catch (error) {
-    res.status(500).json({ error: error.message })
+      res.status(500).json({ error: error.message });
   }
-}
+};
+
 
 const updatechatstatus = async (req, res) => {
   const { chatId } = req.params
 
   try {
     const updatedchat = await Chat.findByIdAndUpdate(chatId, { status: "read" }, { new: true })
-    const chat = new Chat({ senderId, receiverId, messageContent })
     res.status(201).json(updatedchat)
   } catch (error) {
     res.status(500).json({ error: error.message })
@@ -41,7 +47,6 @@ const deletechat = async (req, res) => {
 
   try {
     await Chat.findByIdAndDelete(chatId)
-    const chat = new Chat({ senderId, receiverId, messageContent })
     res.status(201).json({ message: "message deleted" })
   }
   catch (error) {

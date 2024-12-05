@@ -77,7 +77,7 @@ const Polls = () => {
             <div className="dashboard-bg">
                 <Header />
                 <div className="stickyHeader">
-                    <div className="income marginLeft">
+                    <div className="income marginLeft" style={{width:"1605px"}}>
                         <div className="row p-4">
                             <div className="table-responsive rounded pb-3">
                                 <Link to="/Polls" className="btn btn-sm maintainance-income-btn maintainance-income-btn-bg">Own Poll</Link>
