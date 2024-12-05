@@ -60,9 +60,9 @@ app.use((req, res, next) => {
 });
 
 
+
 io.on("connection", (socket) => {
 
-  
   console.log(`User connected : ${socket.id}`)
 })
 
