@@ -1,4 +1,6 @@
-const Complaint = require('../models/createCamplaintModel');
+const ServiceComplaint = require("../models/serviceComplaintModel");
+
+
 
 // Create a new complaint
 exports.createComplaint = async (req, res) => {
@@ -11,16 +13,16 @@ exports.createComplaint = async (req, res) => {
             Unit,
             Priority,
             Status,
-            role
+            role,
         } = req.body;
 
-        console.log(req.admin);
-        // Ensure all required fields are provided
+        // Ensure required fields are present
         if (!Complainer_name || !Complaint_name || !Description || !Wing || !Unit || !Priority || !Status) {
             return res.status(400).json({ message: 'All fields are required' });
         }
 
-        const complaint = new Complaint({
+        // Create complaint using authenticated user's ID and type
+        const complaint = new ServiceComplaint({
             Complainer_name,
             Complaint_name,
             Description,
@@ -29,35 +31,42 @@ exports.createComplaint = async (req, res) => {
             Priority,
             Status,
             role,
-            createdBy:req.admin
+            createdBy: req.member,
+            userType: req.userType, 
         });
+        console.log(req.member);
+        
 
         await complaint.save();
-        res.status(201).json({ message: 'Complaint created successfully' });
-        console.log(complaint);
-        
-        
+
+        res.status(201).json({
+            message: 'Complaint created successfully',
+            complaint,
+        });
     } catch (error) {
-        res.status(400).json( error.message );
-        console.log(error);
-        
+        console.error("Error creating complaint:", error);
+        res.status(500).json({ message: 'Error creating complaint', error: error.message });
     }
 };
+
 
 // Get all complaints
 exports.getAllComplaints = async (req, res) => {
     try {
-        const complaints = await Complaint.find().populate("createdBy");
+        const complaints = await ServiceComplaint.find().populate({
+            path: 'createdBy',
+            select: 'Full_name',  
+        });
         res.status(200).json({ message: 'Complaints retrieved successfully', complaints });
     } catch (error) {
-        res.status(500).json({ message: 'Error retrieving complaints', error });
+        res.status(500).json( error.message );
     }
 };
 
 // Get a complaint by ID
 exports.getComplaintById = async (req, res) => {
     try {
-        const complaint = await Complaint.findById(req.params.id);
+        const complaint = await ServiceComplaint.findById(req.params.id);
         if (!complaint) {
             return res.status(404).json({ message: 'Complaint not found' });
         }
@@ -67,39 +76,10 @@ exports.getComplaintById = async (req, res) => {
     }
 };
 
-// Update a complaint by ID
-exports.updateComplaint = async (req, res) => {
-    try {
-        const {
-            Complainer_name,
-            Complaint_name,
-            Description,
-            Wing,
-            Unit,
-            Priority,
-            Status,
-            role
-        } = req.body;
-
-        const complaint = await Complaint.findByIdAndUpdate(
-            req.params.id,
-            { Complainer_name, Complaint_name, Description, Wing, Unit, Priority, Status, role },
-            { new: true, runValidators: true }
-        );
-
-        if (!complaint) {
-            return res.status(404).json({ message: 'Complaint not found' });
-        }
-        res.status(200).json({ message: 'Complaint updated successfully', complaint });
-    } catch (error) {
-        res.status(400).json({ message: 'Error updating complaint', error });
-    }
-};
-
 // Delete a complaint by ID
 exports.deleteComplaint = async (req, res) => {
     try {
-        const complaint = await Complaint.findByIdAndDelete(req.params.id);
+        const complaint = await ServiceComplaint.findByIdAndDelete(req.params.id);
         if (!complaint) {
             return res.status(404).json({ message: 'Complaint not found' });
         }
