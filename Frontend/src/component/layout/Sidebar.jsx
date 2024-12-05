@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { FaSignOutAlt, FaBars } from "react-icons/fa";
 import "../../style.css";
 import dashboardIcon from "../../Icons/image.png";
@@ -17,7 +17,13 @@ import HideBgCopy from "../../assets/HideBgCopy.png";
 import BlackImage from '../../assets/Rectangle 1888.png'
 
 import ArrowIcon from '../../Icons/arrow-down.png'
+import { logout } from "../../services/authentication";
+import {useDispatch} from "react-redux"
+// import { Toast } from "bootstrap";
+import toast from 'react-hot-toast'
+import axios from "axios";
 function Sidebar() {
+  const dispatch = useDispatch()
   const location = useLocation();
   const [activeItem, setActiveItem] = useState("");
   const [isComplaintDropdownOpen, setComplaintDropdownOpen] = useState(false);
@@ -25,7 +31,7 @@ function Sidebar() {
   const [isFinancialDropdownOpen, setFinancialDropdownOpen] = useState(false);
   const [isSidebarOpen, setSidebarOpen] = useState(false); // Mobile sidebar toggle state
   const [isMobile, setIsMobile] = useState(window.innerWidth < 576); // Mobile screen check
-  
+
 
   // Update active item on location change
   useEffect(() => {
@@ -39,7 +45,7 @@ function Sidebar() {
             if (item.key === "complaint-tracking") setComplaintDropdownOpen(true);
             if (item.key === "security-management") setSecurityDropdownOpen(true);
             if (item.key === "financialmanagement") setFinancialDropdownOpen(true);
-            
+
 
             foundActiveItem = true;
           }
@@ -60,7 +66,7 @@ function Sidebar() {
       setComplaintDropdownOpen(!isComplaintDropdownOpen);
       setSecurityDropdownOpen(false);
       setFinancialDropdownOpen(false);
-     
+
     } else if (key === "security-management") {
       setSecurityDropdownOpen(!isSecurityDropdownOpen);
       setComplaintDropdownOpen(false);
@@ -70,12 +76,38 @@ function Sidebar() {
       setFinancialDropdownOpen(!isFinancialDropdownOpen);
       setComplaintDropdownOpen(false);
       setSecurityDropdownOpen(false);
-     
-    } 
+
+    }
 
     setActiveItem(key);
   };
 
+  // const handleLogout = async()=>{
+  //   try {
+  //     const response = await axios.get(`http://localhost:5000/api/v1/logout`)
+  //     Navigate('/login')
+  //     dispatchEvent(logout())
+  //     toast.success(response.data.message)
+  //   } catch (error) {
+  //     toast.error(error.response.data.message)
+  //   }
+  // }
+
+  const handleLogout = async () => {
+    const navigate = useNavigate();
+  
+    try {
+      const response = await axios.get(`http://localhost:5000/api/v1/logout`, {
+        withCredentials: true, // Include credentials if required (e.g., cookies)
+      });
+      dispatch(logout()); // Ensure this is defined
+      toast.success(response.data.message);
+      navigate('/login'); // Redirect to login page
+    } catch (error) {
+      console.error('Logout error:', error);
+      toast.error(error.response?.data?.message || 'Logout failed. Please try again.');
+    }
+  };
   // Update the mobile screen state on window resize
   useEffect(() => {
     const handleResize = () => {
@@ -148,11 +180,11 @@ function Sidebar() {
       icon: <img src={announcementIcon} />,
       path: "/announcement",
     },
-    
+
   ];
 
   return (
-    <div style={{fontSize:'14px'}}>
+    <div style={{ fontSize: '14px' }}>
       <button
         className="btn btn-primary d-sm-none d-md-none d-lg-none"
         onClick={() => setSidebarOpen(!isSidebarOpen)}
@@ -187,40 +219,50 @@ function Sidebar() {
         <hr />
 
         <div className="offcanvas-body custom-scrollbar">
-      <ul className="list-unstyled">
-  {menuItems.map((item) =>
-    item.subItems ? (
-      <li
-        key={item.key}
-        className={`position-relative p-3 rounded ${
-          activeItem === item.key || 
-          (item.key === "complaint-tracking" && isComplaintDropdownOpen) ||
-          (item.key === "security-management" && isSecurityDropdownOpen) ||
-          (item.key === "financialmanagement" && isFinancialDropdownOpen)
-            ? "mainColor2" // Keep mainColor2 applied to active main menu items
-            : ""
-        }`}
-      >
-        <div
-          className="d-flex align-items-center justify-content-between"
-          style={{ cursor: "pointer", color: "black" }}
-          onClick={() => handleDropdownClick(item.key)}
-        >
-          {activeItem === item.key && (
-            <img
-              src={HideBgCopy}
-              alt="Active Indicator"
-              style={{
-                position: "absolute",
-                left: "-15px", // Adjust this value as needed
-                height: "50px",
-              }}
-            />
-          )}
-          <div className="d-flex align-items-center">
-            {item.icon}
-            <span className="ms-2">{item.label}</span>
-          </div>
+
+          <ul className="list-unstyled">
+            {menuItems.map((item) =>
+              item.subItems ? (
+                <li key={item.key} className="position-relative p-3 rounded">
+                  <div
+                    className="d-flex align-items-center justify-content-between"
+                    style={{ cursor: "pointer", color: "black" }}
+                    onClick={() => handleDropdownClick(item.key)}
+                  >
+                    {activeItem === item.key && (
+                      <img
+                        src={HideBgCopy}
+                        alt="Active Indicator"
+                        style={{
+                          position: "absolute",
+                          left: "-15px", // Adjust this value as needed
+                          height: "50px",
+
+                        }}
+                      />
+                    )}
+                    <div className="d-flex align-items-center">
+                      {item.icon}
+                      <span className="ms-2">{item.label}</span>
+                    </div>
+
+
+                    {
+                      (item.key === "complaint-tracking" && isComplaintDropdownOpen) ||
+                        (item.key === "security-management" && isSecurityDropdownOpen) ||
+                        (item.key === "financialmanagement" && isFinancialDropdownOpen) ? (
+                        <img src={ArrowIcon} />
+                      ) : (
+                        <img src={ArrowIcon} />
+                      )
+                    }
+
+
+                  </div>
+                  {(item.key === "complaint-tracking" && isComplaintDropdownOpen) ||
+                    (item.key === "security-management" && isSecurityDropdownOpen) ||
+                    (item.key === "financialmanagement" && isFinancialDropdownOpen) ? (
+
 
           <img
             src={ArrowIcon}
@@ -316,7 +358,7 @@ function Sidebar() {
         </div>
 
         <div className="p-3">
-          <Link to="/login" className="d-flex align-items-center text-danger" style={{ textDecoration: "none" }}>
+          <Link to="/login" className="d-flex align-items-center text-danger" onClick={handleLogout} style={{ textDecoration: "none" }}>
             <FaSignOutAlt className="me-3" />
             <span>Logout</span>
           </Link>
