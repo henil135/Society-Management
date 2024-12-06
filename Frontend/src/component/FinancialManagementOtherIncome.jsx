@@ -28,6 +28,12 @@ function FinancialManagementOtherIncome() {
     const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm();
     const [showViewModal, setShowViewModal] = useState(false);
 
+
+    const handleShowView = () => {
+        setShowViewModal(true);
+    };
+
+
     const handleClose = () => {
         setShow(false);
         reset();
@@ -144,6 +150,9 @@ function FinancialManagementOtherIncome() {
         }
         handleCloseDeleteModal();
     };
+    const handleCloseViewModal = () => {
+        setShowViewModal(false);
+    };
 
     const handleShowEditModal = (index) => {
         setEditIndex(index);
@@ -209,20 +218,22 @@ function FinancialManagementOtherIncome() {
                                                                     placeholder='Enter Title' {...register('title', { required: true })} />
                                                                 {errors.title && <small className="text-danger">Title is required</small>}
                                                             </div>
-                                                            <div className="mb-3">
-                                                                <label className='Form-Label'>Date <span className='text-danger'>*</span></label>
-                                                                <input type="date" className="form-control Form-Control" {...register('date', { required: true })} />
-                                                            </div>
-                                                            <div className="mb-3">
-                                                                <label className='Form-Label'>Due Date <span className='text-danger'>*</span></label>
-                                                                <input type="date" className="form-control Form-Control" {...register('dueDate', { required: true })} />
+                                                            <div className='d-flex gap-2'>
+                                                                <div className="mb-3 w-50">
+                                                                    <label className='Form-Label'>Date <span className='text-danger'>*</span></label>
+                                                                    <input type="date" className="form-control Form-Control" {...register('date', { required: true })} />
+                                                                </div>
+                                                                <div className="mb-3 w-50">
+                                                                    <label className='Form-Label'>Due Date <span className='text-danger'>*</span></label>
+                                                                    <input type="date" className="form-control Form-Control" {...register('dueDate', { required: true })} />
+                                                                </div>
                                                             </div>
                                                             <div className="mb-3">
                                                                 <label className='Form-Label'>Description <span className='text-danger'>*</span></label>
                                                                 <input type="text" className="form-control Form-Control" placeholder='Enter Description' {...register('description', { required: true })} />
                                                                 {errors.description && <small className="text-danger">Description is required</small>}
                                                             </div>
-                                                            <div className="mb-3">
+                                                            <div >
                                                                 <label className='Form-Label'>Amount <span className='text-danger'>*</span></label>
                                                                 <input type="text" className="form-control Form-Control" placeholder="₹ 0000" {...register('amount', { required: true })} />
                                                                 {errors.amount && <small className="text-danger">Amount is required</small>}
@@ -284,18 +295,18 @@ function FinancialManagementOtherIncome() {
                                                                                                     {errors.amount && <small className="text-danger">Amount is required</small>}
                                                                                                 </div>
 
-                                                                                                <div className='d-flex justify-content-between'>
-                                                                                                    <div className="mb-3">
+                                                                                                <div className='d-flex gap-2'>
+                                                                                                    <div className="mb-3 w-50">
                                                                                                         <label className='Form-Label'>Date<span className='text-danger'>*</span></label>
                                                                                                         <input type="date" className="form-control Form-Control" {...register('date', { required: true })} />
                                                                                                     </div>
-                                                                                                    <div className="mb-3">
+                                                                                                    <div className="mb-3 w-50">
                                                                                                         <label className='Form-Label'>Due Date<span className='text-danger'>*</span></label>
                                                                                                         <input type="date" className="form-control Form-Control" {...register('dueDate', { required: true })} />
                                                                                                     </div>
                                                                                                 </div>
 
-                                                                                                <div className="mb-3">
+                                                                                                <div >
                                                                                                     <label className='Form-Label'>Description <span className='text-danger'>*</span></label>
                                                                                                     <input type="text" className="form-control Form-Control" placeholder='Enter Description' {...register('description', { required: true })} />
                                                                                                     {errors.description && <small className="text-danger">Description is required</small>}
@@ -314,9 +325,11 @@ function FinancialManagementOtherIncome() {
                                                                         <button
                                                                             className="dropdown-item"
                                                                             onClick={() => handleShowView(index)}
-                                                                        >
-                                                                            View
-                                                                        </button>
+
+                                                                        >View</button>
+
+
+
 
                                                                         <button
                                                                             className="dropdown-item"
@@ -325,7 +338,93 @@ function FinancialManagementOtherIncome() {
                                                                             Delete
                                                                         </button>
 
+                                                                        <Modal show={showViewModal} onHide={handleCloseViewModal} centered className='Round-modal'>
+                                                                            <Modal.Header closeButton>
+                                                                                <Modal.Title>View Security Protocols</Modal.Title>
+                                                                            </Modal.Header>
+                                                                            <Modal.Body>
+                                                                                <p>Title<br />
+                                                                                    <strong style={{
+                                                                                        fontSize: "16px",
+                                                                                        fontWeight: "600",
+                                                                                        lineHeight: "24px",
+                                                                                        textAlign: "left",
+                                                                                        textUnderlinePosition: "from-font",
+                                                                                        textDecorationSkipInk: "none",
+                                                                                        color: "black",
+                                                                                    }}>
+                                                                                        {note.amt}
+                                                                                    </strong>
 
+                                                                                </p>
+                                                                                <p> Description<br />
+                                                                                    <strong style={{
+                                                                                        fontSize: "16px",
+                                                                                        fontWeight: "600",
+                                                                                        lineHeight: "24px",
+                                                                                        textAlign: "left",
+                                                                                        textUnderlinePosition: "from-font",
+                                                                                        textDecorationSkipInk: "none",
+                                                                                        color: "black",
+                                                                                    }}>{note.description}</strong>
+                                                                                </p>
+                                                                                <div className="d-flex" style={{ gap: "70px" }}>
+                                                                                    <div>
+                                                                                        <p>Date</p>
+                                                                                        <strong style={{
+
+                                                                                            fontSize: "16px",
+                                                                                            fontWeight: "600",
+                                                                                            lineHeight: "24px",
+                                                                                            textAlign: "left",
+                                                                                            textUnderlinePosition: "from-font",
+                                                                                            textDecorationSkipInk: "none",
+                                                                                            color: "black",
+                                                                                        }}>{note.Date}</strong>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <p>Due Date</p>
+                                                                                        <strong style={{
+                                                                                            fontSize: "16px",
+                                                                                            fontWeight: "600",
+                                                                                            lineHeight: "24px",
+                                                                                            textAlign: "left",
+                                                                                            textUnderlinePosition: "from-font",
+                                                                                            textDecorationSkipInk: "none",
+                                                                                            color: "black",
+                                                                                        }}>{note.Time}</strong>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="d-flex" style={{ gap: "70px" }}>
+                                                                                    <div>
+                                                                                        <p>Total Member</p>
+                                                                                        <strong style={{
+
+                                                                                            fontSize: "16px",
+                                                                                            fontWeight: "600",
+                                                                                            lineHeight: "24px",
+                                                                                            textAlign: "left",
+                                                                                            textUnderlinePosition: "from-font",
+                                                                                            textDecorationSkipInk: "none",
+                                                                                            color: "black",
+                                                                                        }}>{note.Date}</strong>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <p>Amt Per Member</p>
+                                                                                        <strong style={{
+                                                                                            fontSize: "16px",
+                                                                                            fontWeight: "600",
+                                                                                            lineHeight: "24px",
+                                                                                            textAlign: "left",
+                                                                                            textUnderlinePosition: "from-font",
+                                                                                            textDecorationSkipInk: "none",
+                                                                                            color: "black",
+                                                                                        }}>{note.Time}</strong>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </Modal.Body>
+
+                                                                        </Modal>
                                                                         <Modal className='custom-modal' show={showDeleteModal} onHide={handleCloseDeleteModal} centered>
 
                                                                             <Modal.Title className='Modal-Title px-3 pt-3'>Delete Number?</Modal.Title>

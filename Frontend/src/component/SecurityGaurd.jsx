@@ -9,6 +9,7 @@ import Sidebar from "../component/layout/Sidebar";
 import viewICon from '../Icons/view.png'
 import deleteIcon from '../Icons/delete.png'
 import editIcon from '../Icons/Edit.png'
+import addIcon from '../Icons/add-square.png'
 function SecurityGaurd() {
   const [guards, setGuards] = useState([
     // { id: 1, name: 'Brooklyn Simmons ', phone: '94564 96321', shift: 'Day', date: '2024-11-28', time: '2:45 PM', gender: 'Male' },
@@ -239,12 +240,10 @@ function SecurityGaurd() {
             <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3">
               <h4 className="mb-0">Security Guard Details</h4>
               <Button className="btn mainColor2 d-flex align-items-center justify-content-center p-2" style={{ border: "none" }} onClick={() => setShowModal(true)}>
-                <FaPlus
+                <img src={addIcon}
                   style={{
                     fontSize: "18px",
-                    borderRadius: "5px",
-                    background: "rgba(255, 255, 255, 1)",
-                    color: "#FE512E",
+                 
                     marginRight: "8px",
                   }}
                 />
