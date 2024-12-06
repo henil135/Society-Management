@@ -84,14 +84,14 @@ function ResidentManagement() {
   ])
 
   return (
-    <div className="d-flex flex-column flex-md-row dashboard-bg">
+    <div className="d-flex flex-column flex-md-row dashboard-bg w-100">
       <div className="flex-shrink-0" >
         <Sidebar />
       </div>
 
-      <div className="flex-grow-1  stickyHeader container-fluid " >
+      <div className="flex-grow-1  stickyHeader container-fluid" >
         <Header />
-        <div className="container-fluid custom-scrollbar " style={{ marginTop: "20px", marginLeft: "310px", width: "1590px" }}>
+        <div className="container-fluid custom-scrollbar" style={{ marginTop: "20px", marginLeft: "310px" , width: '1580px' }}>
 
 
           <div className="table-responsive custom-scrollbar" style={{ border: "1px solid #ddd", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", overflow: "hidden", backgroundColor: "#fff", padding: "20px", marginTop: "20px", marginLeft: "10px" }}>

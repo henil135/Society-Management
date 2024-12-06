@@ -26,6 +26,7 @@ function FinancialManagementOtherIncome() {
     const [editIndex, setEditIndex] = useState(null);
     const [showEditModal, setShowEditModal] = useState(false);
     const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm();
+    const [showViewModal, setShowViewModal] = useState(false);
 
     const handleClose = () => {
         setShow(false);
@@ -34,6 +35,14 @@ function FinancialManagementOtherIncome() {
     };
 
     const handleShow = () => setShow(true);
+
+    const handleShowView = () => {
+        setShowViewModal(true);
+      };
+
+      const handleCloseViewModal = () => {
+        setShowViewModal(false);
+    };
 
     // const onSubmit = (data) => {
     //     if (editIndex !== null) {
@@ -72,7 +81,7 @@ function FinancialManagementOtherIncome() {
                 dueDate: moment(data.dueDate).format("DD/MM/YYYY"),
             };
             console.log("Formatted Data:", formattedData);
-    
+
             if (editIndex !== null) {
                 const updatedNote = { ...note[editIndex], ...formattedData };
                 const id = note[editIndex]._id || note[editIndex].id;
@@ -94,7 +103,7 @@ function FinancialManagementOtherIncome() {
             console.error("Error saving note:", error);
         }
     };
-    
+
 
     useEffect(() => {
         fetchNotes();
@@ -240,7 +249,7 @@ function FinancialManagementOtherIncome() {
                                                             <div className='position-relative'>
 
                                                                 <button
-                                                                    className="btn btn-light p-0"
+                                                                    className="btn btn-light p-0 mt-0"
                                                                     onClick={() => setDropdownIndex(dropdownIndex === index ? null : index)}
                                                                     style={{ width: '30px', height: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                                                                 >
@@ -304,6 +313,7 @@ function FinancialManagementOtherIncome() {
 
                                                                         <button
                                                                             className="dropdown-item"
+                                                                            onClick={() => handleShowView(index)}
                                                                         >
                                                                             View
                                                                         </button>
@@ -328,6 +338,94 @@ function FinancialManagementOtherIncome() {
                                                                                 <Button variant="secondary" className='btn cancle  mt-2' onClick={handleCloseDeleteModal}>Cancel</Button>
                                                                                 <Button variant="danger" className='btn delete' onClick={confirmDelete}>Delete</Button>
                                                                             </Modal.Footer>
+                                                                        </Modal>
+
+                                                                        <Modal show={showViewModal} onHide={handleCloseViewModal} centered className='Round-modal'>
+                                                                            <Modal.Header closeButton>
+                                                                                <Modal.Title>View Security Protocols</Modal.Title>
+                                                                            </Modal.Header>
+                                                                            <Modal.Body>
+                                                                                <p>Title<br />
+                                                                                    <strong style={{
+                                                                                        fontSize: "16px",
+                                                                                        fontWeight: "600",
+                                                                                        lineHeight: "24px",
+                                                                                        textAlign: "left",
+                                                                                        textUnderlinePosition: "from-font",
+                                                                                        textDecorationSkipInk: "none",
+                                                                                        color: "black",
+                                                                                    }}>
+                                                                                        {note.amt}
+                                                                                    </strong>
+
+                                                                                </p>
+                                                                                <p> Description<br />
+                                                                                    <strong style={{
+                                                                                        fontSize: "16px",
+                                                                                        fontWeight: "600",
+                                                                                        lineHeight: "24px",
+                                                                                        textAlign: "left",
+                                                                                        textUnderlinePosition: "from-font",
+                                                                                        textDecorationSkipInk: "none",
+                                                                                        color: "black",
+                                                                                    }}>{note.description}</strong>
+                                                                                </p>
+                                                                                <div className="d-flex" style={{ gap: "70px" }}>
+                                                                                    <div>
+                                                                                        <p>Date</p>
+                                                                                        <strong style={{
+
+                                                                                            fontSize: "16px",
+                                                                                            fontWeight: "600",
+                                                                                            lineHeight: "24px",
+                                                                                            textAlign: "left",
+                                                                                            textUnderlinePosition: "from-font",
+                                                                                            textDecorationSkipInk: "none",
+                                                                                            color: "black",
+                                                                                        }}>{note.Date}</strong>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <p>Due Date</p>
+                                                                                        <strong style={{
+                                                                                            fontSize: "16px",
+                                                                                            fontWeight: "600",
+                                                                                            lineHeight: "24px",
+                                                                                            textAlign: "left",
+                                                                                            textUnderlinePosition: "from-font",
+                                                                                            textDecorationSkipInk: "none",
+                                                                                            color: "black",
+                                                                                        }}>{note.Time}</strong>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="d-flex" style={{ gap: "70px" }}>
+                                                                                    <div>
+                                                                                        <p>Total Member</p>
+                                                                                        <strong style={{
+
+                                                                                            fontSize: "16px",
+                                                                                            fontWeight: "600",
+                                                                                            lineHeight: "24px",
+                                                                                            textAlign: "left",
+                                                                                            textUnderlinePosition: "from-font",
+                                                                                            textDecorationSkipInk: "none",
+                                                                                            color: "black",
+                                                                                        }}>{note.Date}</strong>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <p>Amt Per Member</p>
+                                                                                        <strong style={{
+                                                                                            fontSize: "16px",
+                                                                                            fontWeight: "600",
+                                                                                            lineHeight: "24px",
+                                                                                            textAlign: "left",
+                                                                                            textUnderlinePosition: "from-font",
+                                                                                            textDecorationSkipInk: "none",
+                                                                                            color: "black",
+                                                                                        }}>{note.Time}</strong>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </Modal.Body>
+
                                                                         </Modal>
                                                                     </div>
                                                                 )}
