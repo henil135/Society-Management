@@ -146,10 +146,6 @@ app.use("/api/v2/Visitor", visitor);
 app.use("/api/v2/Polls", Poll);
 
 
-
-
-
-
 app.listen(PORT, () => {
   console.log(`Server is running on port Number ${PORT}`);
 });
