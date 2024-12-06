@@ -188,16 +188,7 @@ function RequestTracking() {
             <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mt-2 mb-4">
               <h4 className="mb-0" style={{ marginLeft: "20px" }}>Request Tracking</h4>
               <Button className="btn mainColor2 d-flex align-items-center justify-content-center p-2" style={{ marginRight: "20px", border: "none" }} onClick={handleShowCreateModal}>
-                <FaPlus
-                  style={{
-                    fontSize: "18px",
-                    borderRadius: "5px",
-                    background: "rgba(255, 255, 255, 1)",
-                    color: "#FE512E",
-                    marginRight: "8px",
-                  }}
-
-                />Create Request</Button>
+          Create Request</Button>
             </div>
             <Table style={{ width: "1535px", marginLeft: "15px" }}>
               <thead >

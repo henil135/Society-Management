@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.js";
 import { Link, useLocation } from "react-router-dom";
 import { FaSignOutAlt, FaBars } from "react-icons/fa";
 import "../../style.css";
@@ -17,6 +18,7 @@ import HideBgCopy from "../../assets/HideBgCopy.png";
 import BlackImage from '../../assets/Rectangle 1888.png'
 
 import ArrowIcon from '../../Icons/arrow-down.png'
+
 function Sidebar() {
   const location = useLocation();
   const [activeItem, setActiveItem] = useState("");
@@ -25,10 +27,17 @@ function Sidebar() {
   const [isFinancialDropdownOpen, setFinancialDropdownOpen] = useState(false);
   const [isSidebarOpen, setSidebarOpen] = useState(false); // Mobile sidebar toggle state
   const [isMobile, setIsMobile] = useState(window.innerWidth < 576); // Mobile screen check
-  
 
-  // Update active item on location change
+  // Check the stored sidebar state on mount
   useEffect(() => {
+    const savedSidebarState = localStorage.getItem("sidebarState");
+    if (savedSidebarState === "open") {
+      setSidebarOpen(true);
+    } else {
+      setSidebarOpen(false);
+    }
+
+    // Update active item on location change
     const currentPath = location.pathname;
     let foundActiveItem = false;
     menuItems.forEach((item) => {
@@ -39,8 +48,6 @@ function Sidebar() {
             if (item.key === "complaint-tracking") setComplaintDropdownOpen(true);
             if (item.key === "security-management") setSecurityDropdownOpen(true);
             if (item.key === "financialmanagement") setFinancialDropdownOpen(true);
-            
-
             foundActiveItem = true;
           }
         });
@@ -60,18 +67,15 @@ function Sidebar() {
       setComplaintDropdownOpen(!isComplaintDropdownOpen);
       setSecurityDropdownOpen(false);
       setFinancialDropdownOpen(false);
-     
     } else if (key === "security-management") {
       setSecurityDropdownOpen(!isSecurityDropdownOpen);
       setComplaintDropdownOpen(false);
       setFinancialDropdownOpen(false);
-
     } else if (key === "financialmanagement") {
       setFinancialDropdownOpen(!isFinancialDropdownOpen);
       setComplaintDropdownOpen(false);
       setSecurityDropdownOpen(false);
-     
-    } 
+    }
 
     setActiveItem(key);
   };
@@ -88,6 +92,15 @@ function Sidebar() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  const handleSidebarToggle = () => {
+    setSidebarOpen((prev) => {
+      const newState = !prev;
+      // Save sidebar state in localStorage
+      localStorage.setItem("sidebarState", newState ? "open" : "closed");
+      return newState;
+    });
+  };
 
   const menuItems = [
     {
@@ -148,14 +161,13 @@ function Sidebar() {
       icon: <img src={announcementIcon} />,
       path: "/announcement",
     },
-    
   ];
 
   return (
-    <div style={{fontSize:'14px'}}>
+    <div style={{ fontSize: '14px' }}>
       <button
-        className="btn btn-primary d-sm-none d-md-none d-lg-none"
-        onClick={() => setSidebarOpen(!isSidebarOpen)}
+        className="btn  d-sm-none d-md-none d-lg-none mt-3"
+        onClick={handleSidebarToggle}
         style={{
           position: "fixed",
           top: "10px",
@@ -204,7 +216,6 @@ function Sidebar() {
                           position: "absolute",
                           left: "-15px", // Adjust this value as needed
                           height: "50px",
-
                         }}
                       />
                     )}
@@ -213,30 +224,26 @@ function Sidebar() {
                       <span className="ms-2">{item.label}</span>
                     </div>
 
-
-                   {
-  (item.key === "complaint-tracking" && isComplaintDropdownOpen) ||
-  (item.key === "security-management" && isSecurityDropdownOpen) ||
-  (item.key === "financialmanagement" && isFinancialDropdownOpen)  ? (
-    <img src={ArrowIcon}  />
-  ) : (
-    <img src={ArrowIcon} />
-  )
-}
-
-
+                    {
+                      (item.key === "complaint-tracking" && isComplaintDropdownOpen) ||
+                      (item.key === "security-management" && isSecurityDropdownOpen) ||
+                      (item.key === "financialmanagement" && isFinancialDropdownOpen) ? (
+                        <img src={ArrowIcon} />
+                      ) : (
+                        <img src={ArrowIcon} />
+                      )
+                    }
                   </div>
                   {(item.key === "complaint-tracking" && isComplaintDropdownOpen) ||
                     (item.key === "security-management" && isSecurityDropdownOpen) ||
-                    (item.key === "financialmanagement" && isFinancialDropdownOpen)  ? (
-
+                    (item.key === "financialmanagement" && isFinancialDropdownOpen) ? (
                     <ul className="list-unstyled ms-4">
                       {item.subItems.map((subItem) => (
                         <li key={subItem.key} className="p-2 rounded position-relative">
                           {activeItem === subItem.key && (
                             <img
                               src={BlackImage}
-                              alt="Active Indicator" // Adding alt for better accessibility
+                              alt="Active Indicator"
                               style={{
                                 position: "absolute",
                                 left: "-15px", // Adjust this value as needed
@@ -291,7 +298,6 @@ function Sidebar() {
               )
             )}
           </ul>
-
         </div>
 
         <div className="p-3">

@@ -28,6 +28,7 @@ function ResidentManagement() {
     { id: 3, name: "Evelyn Harper", unit: 'A', Number: "1001", unitStatus: "Occupied", residentStatus: "Owner", phoneNumber: "97587 85828", members: 1, vehicles: 2 },
     { id: 4, name: "", unit: "B", Number: "1002", unitStatus: "Vacate", residentStatus: "", phoneNumber: "", members: "", vehicles: "" },
 
+
   ]);
 
   const [showModal, setShowModal] = useState(false);
@@ -84,17 +85,19 @@ function ResidentManagement() {
   ])
 
   return (
-    <div className="d-flex flex-column flex-md-row dashboard-bg">
+    <div className="d-flex flex-column flex-md-row dashboard-bg w-100">
       <div className="flex-shrink-0" >
         <Sidebar />
       </div>
 
-      <div className="flex-grow-1  stickyHeader container-fluid " >
+      <div className="flex-grow-1  stickyHeader container-fluid" >
         <Header />
-        <div className="container-fluid custom-scrollbar " style={{ marginTop: "20px", marginLeft: "310px", width: "1590px" }}>
+
+        <div className="container-fluid custom-scrollbar" style={{ marginTop: "20px", marginLeft: "310px" , width: '1580px' }}>
 
 
-          <div className="table-responsive custom-scrollbar" style={{ border: "1px solid #ddd", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", overflow: "hidden", backgroundColor: "#fff", padding: "20px", marginTop: "20px", marginLeft: "10px" }}>
+
+          <div className="table-responsive" style={{ border: "1px solid #ddd", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", overflow: "hidden", backgroundColor: "#fff", padding: "20px", marginTop: "20px", marginLeft: "10px"}}>
             <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
 
               <h4 style={{marginTop:"10px"}}>Resident Tenant and Owner Details</h4>
@@ -105,7 +108,7 @@ function ResidentManagement() {
               </Button>
 
             </div>
-            <table className="table striped hover responsive" >
+            <table className="table striped hover responsive " >
 
               <thead >
                 <tr className="rmHead"  >
