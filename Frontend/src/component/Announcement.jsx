@@ -11,11 +11,9 @@ import { FaAngleDown } from "react-icons/fa";
 
 function Announcement() {
 
-    const [note, setNote] = useState(
-        []
-    );
-    // This will run when the component mounts
+    const [note, setNote] = useState([]);
 
+    // Fetch the data when the component mounts
     const fetchData = async () => {
         try {
             const response = await axios.get('http://localhost:5000/api/v2/annoucement/getannouncement');
@@ -25,86 +23,115 @@ function Announcement() {
             console.error('Error fetching data:', error);
         }
     };
+    
     useEffect(() => {
         fetchData();
     }, []);
+    
     const [show, setShow] = useState(false);
     const [editIndex, setEditIndex] = useState(null);
     const [showEditModal, setShowEditModal] = useState(false);
     const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm();
-
+    
+    // Close the modal and reset the form
     const handleClose = () => {
         setShow(false);
         reset();
         setEditIndex(null);
     };
+    
+    // Open the modal
     const handleShow = () => setShow(true);
+    
+    // Handle form submission
     const onSubmit = async (data) => {
-        const response = await axios.post("http://localhost:5000/api/v2/annoucement/addannouncement", data)
-        console.log(response.data);
-        if (editIndex !== null) {
-            const updatedNotes = [...note];
-            updatedNotes[editIndex] = { ...updatedNotes[editIndex], ...data };
-            setNote(updatedNotes);
-        } else {
-            setNote([...note, { id: note.length + 1, ...data }]);
+        try {
+            const response = await axios.post("http://localhost:5000/api/v2/annoucement/addannouncement", data);
+            console.log(response.data);
+    
+            if (editIndex !== null) {
+                const updatedNotes = [...note];
+                updatedNotes[editIndex] = { ...updatedNotes[editIndex], ...data };  // Update the note
+                setNote(updatedNotes);
+            } else {
+                setNote([...note, { id: note.length + 1, ...data }]);  // Add a new note
+            }
+    
+            handleClose();  // Close the modal
+        } catch (error) {
+            console.error('Error submitting data:', error);
         }
     };
-
+    
+    // Handle dropdown index
     const [dropdownIndex, setDropdownIndex] = useState(null);
-
-    // New state for delete confirmation modal
+    
+    // Handle delete modal state
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [deleteIndex, setDeleteIndex] = useState(null);
-
-    // Functions for delete modal
+    
+    // Show delete modal
     const handleShowDeleteModal = (index) => {
         setDeleteIndex(index);
         setShowDeleteModal(true);
     };
-
+    
+    // Close delete modal
     const handleCloseDeleteModal = () => {
         setShowDeleteModal(false);
         setDeleteIndex(null);
     };
-
+    
+    // Confirm delete operation
     const confirmDelete = async (_id) => {
-        if (deleteIndex !== null) {
-            const response = await axios.delete(`http://localhost:5000/api/v2/annoucement/deleteannouncement/${_id}`)
+        try {
+            const response = await axios.delete(`http://localhost:5000/api/v2/annoucement/deleteannouncement/${_id}`);
             console.log(response.message._id);
-            const updatedNotes = note.filter((_, i) => i !== deleteIndex);
+    
+            const updatedNotes = note.filter((_, i) => i !== deleteIndex);  // Remove the deleted note
             setNote(updatedNotes);
+        } catch (error) {
+            console.error('Error deleting note:', error);
         }
-        handleCloseDeleteModal();
+    
+        handleCloseDeleteModal();  // Close the modal after deletion
     };
-
+    
+    // Show edit modal
     const handleShowEditModal = (index) => {
         setEditIndex(index);
         const selectedNote = note[index];
+    
         setValue('Announcement_Title', selectedNote.Announcement_Title);
-        // setValue('amtPerMember', selectedNote.amtPerMember);
         setValue('Announcement_Date', selectedNote.Announcement_Date);
         setValue('Announcement_Time', selectedNote.Announcement_Time);
-        // setValue('dueDate', selectedNote.dueDate);
         setValue('Description', selectedNote.Description);
+    
         setShowEditModal(true);
-    };  
+       
+    };
+    
+    // Close edit modal
     const handleCloseEditModal = () => {
         setShowEditModal(false);
         reset();
         setEditIndex(null);
     };
-
+    
+    // View modal state
     const [showViewModal, setShowViewModal] = useState(false);
     const [viewComplaint, setViewComplaint] = useState(null);
-
+    
+    // Show view modal
     const handleShowViewModal = (index) => {
         setViewComplaint(note[index]);
         setShowViewModal(true);
     };
-
+    
+    // Close view modal
     const handleCloseViewModal = () => setShowViewModal(false);
-
+    
+    
     return (
         <div className="d-flex flex-column flex-md-row">
             <div className="flex-shrink-0" >
@@ -212,6 +239,7 @@ function Announcement() {
                                                                 </button>
 
                                                                 {showEditModal && (
+                                                                    
                                                                     <div className="modal fade show d-block custom-modal" style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
                                                                         <div className="modal-dialog modal-dialog-centered">
                                                                             <div className="modal-content">

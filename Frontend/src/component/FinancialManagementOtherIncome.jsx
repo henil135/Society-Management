@@ -71,26 +71,30 @@ function FinancialManagementOtherIncome() {
                 date: moment(data.date).format("DD/MM/YYYY"),
                 dueDate: moment(data.dueDate).format("DD/MM/YYYY"),
             };
-    
             console.log("Formatted Data:", formattedData);
     
             if (editIndex !== null) {
                 const updatedNote = { ...note[editIndex], ...formattedData };
-                const id = note[editIndex]._id || note[editIndex].id; // Adjust based on your backend ID field
-                console.log("Updating Note ID:", id); // Debug log
+                const id = note[editIndex]._id || note[editIndex].id;
+                console.log("Updating Note ID:", id);
                 await axios.put(`http://localhost:5000/api/v2/income/update/${id}`, formattedData);
                 const updatedNotes = [...note];
                 updatedNotes[editIndex] = updatedNote;
                 setNote(updatedNotes);
             } else {
                 const response = await axios.post('http://localhost:5000/api/v2/income/addincome', formattedData);
-                setNote([...note, response.data.Income]);
+                if (response.data && response.data.Income) {
+                    setNote(prevNotes => [...prevNotes, response.data.Income]); // Update state with new data
+                }
             }
             handleClose();
+            handleCloseEditModal();
+            fetchNotes()
         } catch (error) {
             console.error("Error saving note:", error);
         }
     };
+    
 
     useEffect(() => {
         fetchNotes();
@@ -154,12 +158,12 @@ function FinancialManagementOtherIncome() {
             <div className="flex-shrink-0" >
                 <Sidebar />
             </div>
-            <div className='dashboard-bg ' style={{ width: "1920px" }} >
+            <div className='dashboard-bg ' style={{ width: "1900px" }} >
                 <Navbar />
 
                 <div className='stickyHeader'>
 
-                    <div className='income' style={{ marginLeft: "300px", width: "1608px" }}>
+                    <div className='income' style={{ marginLeft: "300px", width: "1590px" }}>
 
                         <div className='row p-4'>
 
@@ -176,7 +180,7 @@ function FinancialManagementOtherIncome() {
                                         <h3 className=' mb-0  financial-income-title'>Other Income</h3>
 
                                         <div style={{ marginBottom: "20px" }}>
-                                            <button className='set-maintainance-btn d-flex align-items-center other-income-btn p-3' onClick={handleShow}> Create Other Income </button>
+                                            <button className='set-maintainance-btn d-flex align-items-center other-income-btn p-2' onClick={handleShow}> Create Other Income </button>
                                         </div>
                                     </div>
 
