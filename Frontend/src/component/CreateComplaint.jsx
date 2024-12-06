@@ -190,7 +190,7 @@ function ComplaintTracking() {
     };
 
   return (
-    <div className="d-flex flex-column flex-md-row">
+    <div className="d-flex flex-column flex-md-row ">
       <div className="flex-shrink-0" >
         <Sidebar />
       </div>
@@ -198,21 +198,12 @@ function ComplaintTracking() {
       <div className="flex-grow-1 dashboard-bg " >
         <Header />
 
-        <div className="container-fluid stickyHeader p-3">
+        <div className="container-fluid stickyHeader p-3" style={{ marginLeft: "310px", width: "1590px" }}>
 
           <div className="table-responsive" style={{ border: "1px solid #ddd", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", overflow: "hidden", backgroundColor: "#fff", padding: "20px", marginTop: "20px" }}>
             <div className="d-flex flex-column flex-md-row justify-content-between align-items-center ">
               <h4 className="mb-0" >Complaint Tracking</h4>
-              <Button className="btn mainColor2 d-flex align-items-center justify-content-center p-2" style={{ border: "none" }} onClick={handleShowCreateModal}><FaPlus
-                style={{
-                  fontSize: "18px",
-                  borderRadius: "5px",
-                  background: "rgba(255, 255, 255, 1)",
-                  color: "#FE512E",
-                  marginRight: "8px",
-                }}
-
-              />Create Complaint</Button>
+              <Button className="btn mainColor2 d-flex align-items-center justify-content-center p-2" style={{ border: "none" }} onClick={handleShowCreateModal}>Create Complaint</Button>
             </div>
             <Table className="mt-3" >
               <thead className="bg-light">

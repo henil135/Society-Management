@@ -179,16 +179,7 @@ const FacilityManagement = () => {
                         <Button className="btn mainColor2 d-flex align-items-center justify-content-center p-2" style={{ border: "none" }} onClick={() => {
                             setIsEditing(false);
                             handleShowModal();
-                        }}> <FaPlus
-                                style={{
-                                    fontSize: "18px",
-                                    borderRadius: "5px",
-                                    background: "rgba(255, 255, 255, 1)",
-                                    color: "#FE512E",
-                                    marginRight: "8px",
-                                }}
-
-                            />
+                        }}>
                             Create Facility
                         </Button>
                     </div>
