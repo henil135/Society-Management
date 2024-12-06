@@ -39,6 +39,7 @@ const chatRoute = require("./routes/chatRoute")
 
 const Poll = require("./routes/PollRoute");
 
+const questions = require("./routes/AskQuestionRoute");
 
 // const router = require("./routes/chatRoute");
 
@@ -145,6 +146,8 @@ app.use("/api/v2/Visitor", visitor);
 // Poll
 app.use("/api/v2/Polls", Poll);
 
+// Ask Qustion
+app.use("/api/v2/Question",questions);
 
 
 
