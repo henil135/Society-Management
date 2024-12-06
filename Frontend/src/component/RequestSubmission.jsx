@@ -201,12 +201,12 @@ const RequestSubmission = () => {
                                     <Form.Control.Feedback type="invalid">{errors.des?.message}</Form.Control.Feedback>
                                 </Form.Group>
 
-                                <div className='d-flex justify-content-between'>
-                                    <div className="mb-3 me-3">
+                                <div className='d-flex gap-2'>
+                                    <div className="mb-3 w-50">
                                         <label className='Form-Label'>Wing<span className='text-danger'> *</span></label>
                                         <input type="text" placeholder='Enter Wing' className="form-control Form-Control" {...register('date', { required: true })} />
                                     </div>
-                                    <div className="mb-3">
+                                    <div className="mb-3 w-50">
                                         <label className='Form-Label'>Unit<span className='text-danger'> *</span></label>
                                         <input type="text" placeholder='Enter Unit' className="form-control Form-Control" {...register('dueDate', { required: true })} />
                                     </div>

@@ -10,8 +10,7 @@ import income from '../assets/total-income.png'
 import incomeRactangle from '../assets/Rectangle 1063 (1).png'
 import penaltyRectangle from '../assets/penaltyRectangle.png'
 import residentprofile from '../assets/resident-profile.png'
-import { FaImage } from "react-icons/fa";
-
+import imgIcon from '../Icons/Component 54.png'
 const TenantPersonalDetails = () => {
 
     const [note, setNote] = useState([
@@ -139,7 +138,7 @@ const TenantPersonalDetails = () => {
                                                 >
 
                                                     <div className="d-flex align-items-center mb-3 bg-light py-2 px-3 border rounded">
-                                                        <div className="text-primary pe-3"><FaImage /></div>
+                                                        <div className="text-primary pe-3"><img src={imgIcon} /></div>
                                                         <div>
                                                             <p className="font-semibold text-gray-800 text-lg mb-0">
                                                                 Essential Aadharcard Front Side.JPG
@@ -151,7 +150,7 @@ const TenantPersonalDetails = () => {
                                                     </div>
 
                                                     <div className="d-flex align-items-center mb-3 bg-light py-2 px-3 border rounded">
-                                                        <div className="text-primary pe-3"><FaImage /></div>
+                                                        <div className="text-primary pe-3"><img src={imgIcon} /></div>
                                                         <div>
                                                             <p className="font-semibold text-gray-800 text-lg mb-0">
                                                                 Essential Aadharcard Front Side.JPG

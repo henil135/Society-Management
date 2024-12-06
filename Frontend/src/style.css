@@ -527,12 +527,10 @@ body {
   @media (max-width: 576px) {
     .sidebar {
       transform: translateX(-100%); /* Hide the sidebar by default on mobile */
-      visibility: hidden !important;
     }
 
     .sidebar.show {
       transform: translateX(0); /* Show sidebar when toggled */
-      visibility: visible;
     }
   }
 

@@ -10,9 +10,9 @@ const ServiceComplaint = () => {
 
     const [note, setNote] = useState([
         { id: 1, title: 'Unethical Behavior', des: 'Regular waste collection services.', date: '01/07/2024', status: 'Open' },
-        { id: 2, title: 'Preventive Measures', des: 'Expenses will way sense for you..', date: '01/07/2024', status: 'Open' },
+        { id: 2, title: 'Preventive Measures', des: 'Expenses will way sense for you..', date: '01/07/2024', status: 'solve' },
         { id: 3, title: 'Unethical Behavior', des: 'Regular waste collection services.', date: '01/07/2024', status: 'Open' },
-        { id: 4, title: 'Preventive Measures', des: 'Expenses will way sense for you..', date: '01/07/2024', status: 'Open' },
+        { id: 4, title: 'Preventive Measures', des: 'Expenses will way sense for you..', date: '01/07/2024', status: 'pending' },
         { id: 5, title: 'Unethical Behavior', des: 'Regular waste collection services.', date: '01/07/2024', status: 'Open' },
         { id: 6, title: 'Preventive Measures', des: 'Expenses will way sense for you..', date: '01/07/2024', status: 'Open' },
     ]);
@@ -202,12 +202,12 @@ const ServiceComplaint = () => {
                                     <Form.Control.Feedback type="invalid">{errors.des?.message}</Form.Control.Feedback>
                                 </Form.Group>
 
-                                <div className='d-flex justify-content-between'>
-                                    <div className="mb-3">
+                                <div className='d-flex gap-2'>
+                                    <div className="mb-3 w-50">
                                         <label className='Form-Label'>Wing<span className='text-danger'> *</span></label>
                                         <input type="text" placeholder='Enter Wing' className="form-control Form-Control" {...register('date', { required: true })} />
                                     </div>
-                                    <div className="mb-3">
+                                    <div className="mb-3 w-50">
                                         <label className='Form-Label'>Unit<span className='text-danger'> *</span></label>
                                         <input type="text" placeholder='Enter Unit' className="form-control Form-Control" {...register('dueDate', { required: true })} />
                                     </div>

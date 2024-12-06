@@ -177,7 +177,7 @@ exports.createRatingPoll = async (req, res) => {
             voters: [], // Initialize empty voters array
             userType: option.userType, // Include userType (e.g., 'Owner', 'Tenant')
         }));
-
+    
         // Create poll
         const poll = new RankingPoll({
             question,
