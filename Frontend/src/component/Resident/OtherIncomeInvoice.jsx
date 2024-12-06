@@ -106,7 +106,7 @@ const OtherIncomeInvoices = () => {
                                     <div className='pe-0 bg-light'>
                                         <div className='d-flex justify-content-between align-items-center py-3 px-3'>
                                             <h3 className='mb-0 financial-income-title'>Due Event Payment</h3>
-                                            <button className='set-maintainance-btn d-flex align-items-center p-2' onClick={() => handleShowViewModal()}>
+                                            <button className='set-maintainance-btn d-flex align-items-center p-md-2 px-1 py-2 mt-0' onClick={() => handleShowViewModal()}>
                                                 View Invoice
                                             </button>
 

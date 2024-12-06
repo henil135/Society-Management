@@ -321,6 +321,13 @@ input:focus {
 .dashboard-bg {
   background: #F0F5FB !important;
   min-height: 100vh;
+  width: 1600px;
+}
+
+@media (max-width: 576px) {
+  .dashboard-bg {
+    width: 100%; 
+  }
 }
 
 .card h6 {
@@ -536,7 +543,7 @@ input:focus {
 /* delete modal */
 
 .delete {
-  /* background: rgba(246, 248, 251, 1) !important; */
+  background: #E74C3C !important;
   color: rgba(32, 34, 36, 1) !important;
   padding: 12px 53px;
   border-radius: 10px;
@@ -545,11 +552,20 @@ input:focus {
   font-size: 18px;
   font-weight: 600 !important;
   border: none !important;
+  color: white !important;
 }
 
 .delete:hover {
   background-color: rgba(231, 76, 60, 1) !important;
-  /* color: white !important; */
+}
+
+@media (max-width: 575px) {
+  .delete{
+    width: 150px;
+  }
+  .cancle {
+    width: 150px;
+  }
 }
 
 /* edit modal */
@@ -715,7 +731,6 @@ input:focus {
   font-weight: 600 !important;
   padding: 18px 8px !important;
   width: 135px;
-
   border-top-left-radius: 10px !important;
   border-top-right-radius: 10px !important;
 }
@@ -941,6 +956,12 @@ input:focus {
 /* service and complaint  */
 .complaint-btn {
   width: 183px !important;
+}
+
+@media (max-width: 575px) {
+  .complaint-btn{
+    width: 150px !important;
+  }
 }
 
 
@@ -1194,3 +1215,32 @@ input:focus {
 .announcement-type:focus{
   border: 1px solid red !important;
 }
+
+/* .border-card {
+  position: relative;
+}
+
+.border-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 2px;
+  height: 40px;
+  background-color: red;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px; 
+}
+
+.border-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 2px;
+  background-color: red; 
+  border-top-right-radius: 12px;
+} */
+

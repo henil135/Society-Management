@@ -92,9 +92,10 @@ const MaintenanceInvoices = () => {
 
                                     <div className='row py-3 card-row rounded'>
                                         <div className='pe-0 bg-light'>
-                                            <div className='d-flex justify-content-between align-items-center py-3 px-3'>
+                                            <div className='d-flex justify-content-between align-items-center p-3'>
                                                 <h3 className='mb-0 financial-income-title'>Pending Maintanance</h3>
-                                                <Link to="/view-invoice" className='text-decoration-none'><button className='set-maintainance-btn d-flex align-items-center p-2'>
+                                                <Link to="/view-invoice" className='text-decoration-none'><button className='set-maintainance-btn d-flex align-items-center py-2 px-1 px-md-2 mt-0
+                                                '>
                                                     View Invoice
                                                 </button></Link>
                                             </div>
