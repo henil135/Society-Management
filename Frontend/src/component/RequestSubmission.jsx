@@ -215,38 +215,38 @@ const RequestSubmission = () => {
                                 <Form.Group className="mb-3" controlId="formPriority">
                                     <Form.Label className='Form-Label'>Priority<span className="text-danger"> *</span></Form.Label>
                                     <div className="d-flex justify-content-start">
-                                        <div className="me-3 radio-btn-box">
+                                        <div className="me-3 radio-btn-box d-flex align-items-center">
                                             <Form.Check
                                                 type="radio"
                                                 id="priorityHigh"
-                                                label="High"
                                                 {...register('priority', { required: "Priority is required" })}
                                                 value="High"
                                                 isInvalid={errors.priority}
-                                                className="custom-radio"
+                                                 className="radio-group"
                                             />
+                                            <label htmlFor="priorityHigh" className="ms-2">High</label>
                                         </div>
-                                        <div className="me-3 radio-btn-box">
+                                        <div className="me-3 radio-btn-box d-flex align-items-center">
                                             <Form.Check
                                                 type="radio"
                                                 id="priorityMedium"
-                                                label="Medium"
                                                 {...register('priority', { required: "Priority is required" })}
                                                 value="Medium"
                                                 isInvalid={errors.priority}
-                                                className="custom-radio"
+                                                 className="radio-group"
                                             />
+                                            <label htmlFor="priorityMedium" className="ms-2">Medium</label>
                                         </div>
-                                        <div className='radio-btn-box'>
+                                        <div className='radio-btn-box d-flex align-items-center'>
                                             <Form.Check
                                                 type="radio"
                                                 id="priorityLow"
-                                                label="Low"
                                                 {...register('priority', { required: "Priority is required" })}
                                                 value="Low"
                                                 isInvalid={errors.priority}
-                                                className="custom-radio"
+                                                className="radio-group"
                                             />
+                                            <label htmlFor="priorityLow" className="ms-2">Low</label>
                                         </div>
                                     </div>
                                     <Form.Control.Feedback type="invalid">
@@ -257,38 +257,38 @@ const RequestSubmission = () => {
                                 <Form.Group className="mb-3" controlId="formStatus">
                                     <Form.Label className='Form-Label'>Status<span className="text-danger"> *</span></Form.Label>
                                     <div className="d-flex justify-content-start">
-                                        <div className="me-3 radio-btn-box">
+                                        <div className="me-3 radio-btn-box d-flex align-items-center">
                                             <Form.Check
                                                 type="radio"
                                                 id="statusOpen"
-                                                label="Open"
                                                 {...register('status', { required: "Status is required" })}
                                                 value="Open"
                                                 isInvalid={errors.status}
-                                                className="custom-radio"
+                                                 className="radio-group"
                                             />
+                                             <label htmlFor="priorityLow" className="ms-2">Open</label>
                                         </div>
-                                        <div className="me-3 radio-btn-box">
+                                        <div className="me-3 radio-btn-box d-flex align-items-center">
                                             <Form.Check
                                                 type="radio"
                                                 id="statusPending"
-                                                label="Pending"
                                                 {...register('status', { required: "Status is required" })}
                                                 value="Pending"
                                                 isInvalid={errors.status}
-                                                className="custom-radio"
+                                                 className="radio-group"
                                             />
+                                             <label htmlFor="priorityLow" className="ms-2">Pending</label>
                                         </div>
-                                        <div className='radio-btn-box'>
+                                        <div className='radio-btn-box d-flex align-items-center'>
                                             <Form.Check
                                                 type="radio"
                                                 id="statusSolved"
-                                                label="Solve"
                                                 {...register('status', { required: "Status is required" })}
                                                 value="Solve"
                                                 isInvalid={errors.status}
-                                                className="custom-radio"
+                                                 className="radio-group"
                                             />
+                                             <label htmlFor="priorityLow" className="ms-2">Solve</label>
                                         </div>
                                     </div>
                                     <Form.Control.Feedback type="invalid">

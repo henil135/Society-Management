@@ -9,8 +9,8 @@ import expense from '../assets/total-exp.png';
 import expenseRectangle from '../assets/dashboard card4.png';
 import balanceRactangle1 from '../assets/Rectangle 1063.png';
 import incomeRactangle1 from '../assets/Rectangle 1063 (1).png'
-import expRactangle1 from '../assets/Rectangle 1063 (3).png'
-import unitRactangle1 from '../assets/Rectangle 1063 (2).png'
+import expRactangle1 from '../assets/Rectangle 1063 (2).png'
+import unitRactangle1 from '../assets/Rectangle 1063 (3).png'
 function Income() {
     return (
         <div className="container-fluid income">

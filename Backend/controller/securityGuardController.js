@@ -36,7 +36,7 @@ exports.CreateSecurityGuard = async (req, res) => {
             });
         }
 
-        const existingUser = await Guard.findOne({ MailOrPhone });
+        const existingUser = await Guard.findOne({ Mail });
         if (existingUser) {
             return res.status(400).json({ success: false, message: "Email already exists" });
         }
@@ -64,7 +64,7 @@ exports.CreateSecurityGuard = async (req, res) => {
         const profileimage = await uploadAndDeleteLocal(req.files?.profileimage);
         const adhar_card = await uploadAndDeleteLocal(req.files?.adhar_card);
 
-        if (!full_name || !MailOrPhone || !gender || !shift || !date || !time ) {
+        if (!full_name || !Mail|| !gender || !shift || !date || !time ) {
             return res.status(400).json({
                 success: false,
                 message: "All fields are required",
@@ -101,7 +101,7 @@ exports.CreateSecurityGuard = async (req, res) => {
         };
 
         // Check if the Email_address is defined and valid
-        if (!newOwner.MailOrPhone || typeof newOwner.MailOrPhone !== "string") {
+        if (!newOwner.Mail|| typeof newOwner.Mail!== "string") {
             throw new Error("Invalid or missing Email_address for the Owner.");
 
         }

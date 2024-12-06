@@ -52,6 +52,7 @@ function FinancialManagementNote() {
           // console.log(updatedNotes);
           updatedNotes[editIndex] = response.data; // Assume the API returns the updated note
           setNote(updatedNotes);
+          
         }
       } else {
         // Add Note API Call

@@ -15,17 +15,23 @@ import { Link, useNavigate } from 'react-router-dom';
 import Sidebar from "../component/layout/Sidebar";
 import AvatarImg from '../assets/Avatar.png';
 import viewicon from '../Icons/view.png'
-
-
+import componentIcon from '../Icons/Component 60.png'
+import eyeclose from '../Icons/eye-slash.png'
+import tenantIcon from '../Icons/user.png'
+import ownerIcon from '../Icons/tag-user.png'
+import pendingIcon from '../Icons/timer.png'
+import verifyIcon from '../Icons/verify.png'
+import wallateIcon from '../Icons/wallet-2.png'
+import moneyIcon from '../Icons/moneys.png'
 function FinancialManagementIncome() {
   const navigate = useNavigate()
 
   const [maintenance, setMaintenance] = useState([
-    { img: AvatarImg, name: 'Evelyn Harper', wing: 'A', Unumber: '1001', date: '01/02/2024', status: 'Tenant', Pnumber: '92524 34522', amt: '₹ 1000', penalty: '--', status1: 'Pending', payment: 'Online' },
+    { img: AvatarImg, name: 'Evelyn Harper', wing: 'A', Unumber: '1001', date: '01/02/2024', status: 'Tenant', Pnumber: '92524 34522', amt: '₹ 1000', penalty: '', status1: 'Pending', payment: 'Online' },
     { img: AvatarImg, name: 'Evelyn', wing: 'B', Unumber: '1002', date: '11/02/2024', status: 'Owner', Pnumber: '92524 12365', amt: '₹ 1000', penalty: '250', status1: 'Done', payment: 'Cash' },
-    { img: AvatarImg, name: 'Evelyn Harper', wing: 'A', Unumber: '1001', date: '01/02/2024', status: 'Tenant', Pnumber: '92524 34522', amt: '₹ 1000', penalty: '--', status1: 'Pending', payment: 'Online' },
+    { img: AvatarImg, name: 'Evelyn Harper', wing: 'A', Unumber: '1001', date: '01/02/2024', status: 'Tenant', Pnumber: '92524 34522', amt: '₹ 1000', penalty: '', status1: 'Pending', payment: 'Online' },
     { img: AvatarImg, name: 'Evelyn', wing: 'B', Unumber: '1002', date: '11/02/2024', status: 'Owner', Pnumber: '92524 12365', amt: '₹ 1000', penalty: '250', status1: 'Done', payment: 'Cash' },
-    { img: AvatarImg, name: 'Evelyn Harper', wing: 'A', Unumber: '1001', date: '01/02/2024', status: 'Tenant', Pnumber: '92524 34522', amt: '₹ 1000', penalty: '--', status1: 'Pending', payment: 'Online' },
+    { img: AvatarImg, name: 'Evelyn Harper', wing: 'A', Unumber: '1001', date: '01/02/2024', status: 'Tenant', Pnumber: '92524 34522', amt: '₹ 1000', penalty: '', status1: 'Pending', payment: 'Online' },
 
   ]);
 
@@ -103,7 +109,7 @@ function FinancialManagementIncome() {
               {/* Set Maintenance Button */}
               <div className="col-auto" style={{ marginBottom: "20px", marginRight: "20px" }}>
                 <button
-                  className="btn btn-primary set-maintainance-btn border-0 py-3 px-3"
+                  className="btn btn-primary set-maintainance-btn border-0 p-2"
                   onClick={handleShowSetMaintenanceModal}
                 >
                   Set Maintenance
@@ -138,7 +144,7 @@ function FinancialManagementIncome() {
                           color: '#6c757d'
                         }}
                       >
-                        {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        {showPassword ? <img src={eyeclose} /> : <FaEye />}
                       </span>
                     </div>
                   </Form.Group>
@@ -229,7 +235,16 @@ function FinancialManagementIncome() {
                               <td className='financial-Pnumber'><img src={val.img} className='me-2' height={40} />{val.name}</td>
 
 
-                              <td className='financial-Pnumber'><span className='wing-name'>{val.wing}</span> {val.Unumber}</td>
+                              <td className='financial-Pnumber'><span className='wing-name' style={{
+                            border: "1px solid",
+                            borderRadius: "50%",
+                            width: "28px",
+                            height: "28px",
+                            display: "inline-flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            color: "skyblue",
+                          }}>{val.wing}</span> {val.Unumber}</td>
 
                               <td style={{ textAlign: "center" }} className='financial-Pnumber'>{val.date}</td>
 
@@ -242,7 +257,7 @@ function FinancialManagementIncome() {
                                   backgroundColor: val.status === 'Tenant' ? 'rgba(255, 241, 248, 1)' : 'rgba(241, 240, 255, 1)',
                                   color: val.status === 'Tenant' ? 'rgba(236, 72, 153, 1)' : 'rgba(79, 70, 229, 1)',
                                 }}>
-                                  {val.status === 'Tenant' ? <FaUser className='me-1' style={{ fontSize: '16px' }} /> : <BiSolidUserPin className='me-1' style={{ fontSize: '16px' }} />}
+                                  {val.status === 'Tenant' ? <img src={tenantIcon} className='me-1' style={{ fontSize: '16px' }} /> : <img src={ownerIcon} className='me-1' style={{ fontSize: '16px' }} />}
                                   {val.status}
                                 </span>
                               </td>
@@ -253,16 +268,28 @@ function FinancialManagementIncome() {
                               <td className='amt'>{val.amt}</td>
 
                               <td style={{ textAlign: "center" }}>
-                                <span
-                                  className='financial-penalty-btn btn btn-sm r'
-                                  style={{
-                                    backgroundColor: val.penalty === '--' ? 'rgba(246, 248, 251, 1)' : 'rgba(231, 76, 60, 1)',
-                                    color: val.penalty === '--' ? 'rgba(79, 79, 79, 1)' : 'rgba(255, 255, 255, 1)',
-                                  }}
-                                >
-                                  {val.penalty}
-                                </span>
-                              </td>
+  {val.penalty === '' ? (
+    <img
+      src={componentIcon} // Use an appropriate image here
+      alt="Penalty Placeholder"
+      style={{
+        width: "70px",
+       
+      }}
+    />
+  ) : (
+    <span
+      className="financial-penalty-btn btn btn-sm "
+      style={{
+        backgroundColor: 'rgba(231, 76, 60, 1)',
+        color: 'rgba(255, 255, 255, 1)',
+      }}
+    >
+      {val.penalty}
+    </span>
+  )}
+</td>
+
 
                               <td style={{ textAlign: "center" }} >
                                 <span
@@ -272,7 +299,7 @@ function FinancialManagementIncome() {
                                     color: val.status1 === 'Pending' ? 'rgba(255, 195, 19, 1)' : 'rgba(57, 151, 61, 1)',
                                   }}
                                 >
-                                  {val.status1 === 'Pending' ? <FaStopwatch className='me-1' style={{ fontSize: '16px' }} /> : <RiVerifiedBadgeFill className='me-1' style={{ fontSize: '16px' }} />}
+                                  {val.status1 === 'Pending' ? <img src={pendingIcon} className='me-1' style={{ fontSize: '16px' }} /> : <img src={verifyIcon} className='me-1' style={{ fontSize: '16px' }} />}
                                   {val.status1}
                                 </span>
                               </td>
@@ -285,7 +312,7 @@ function FinancialManagementIncome() {
                                     color: val.payment === 'Online' ? 'rgba(86, 120, 233, 1)' : 'rgba(32, 34, 36, 1)',
                                   }}
                                 >
-                                  {val.payment === 'Online' ? <FaWallet className='me-1' style={{ fontSize: '16px' }} /> : <FaMoneyBill className='me-1' style={{ fontSize: '16px' }} />}
+                                  {val.payment === 'Online' ? <img src={wallateIcon} className='me-1' style={{ fontSize: '16px' }} /> : <img src={moneyIcon} className='me-1' style={{ fontSize: '16px' }} />}
                                   {val.payment}
                                 </span>
                               </td>
