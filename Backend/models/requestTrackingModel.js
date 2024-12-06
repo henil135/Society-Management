@@ -42,6 +42,10 @@ const RequestSchema = new mongoose.Schema({
         enum: ['admin', 'resident', 'security'], 
         default: 'admin' 
     },
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    },
 }, {
     timestamps: true 
 });

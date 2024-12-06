@@ -3,7 +3,9 @@ const bcryptjs = require("bcryptjs");
 const { generateTokenAndSetCookie } = require("../config/auth");
 const otpGenerator = require('otp-generator');
 const senData = require("../config/mailer"); // Adjust the path accordingly
+
 const jwt = require('jsonwebtoken');
+
 
 // Registration page
 
@@ -99,14 +101,14 @@ exports.Adminlogin = async (req, res) => {
     const isPasswordCorrect = await bcryptjs.compare(password, user.Password);
 
     if (!isPasswordCorrect) {
-      return res.status(400).json({ success: false, message: "Invalid credentials" });
+      return res.status(400).json({ success: false, message: "Password is incorrect" });
     }
 
     generateTokenAndSetCookie(user._id, res);
-    const token = jwt.sign({ _id: user._id , role:"admin"}, process.env.JWT_SECRET_OWNER, {
+    const token = jwt.sign({ _id: user._id , role:"admin"}, process.env.JWT_SECRET, {
       expiresIn: "15d",
     });
-    res.cookie("Token",token)
+    res.cookie("admintoken",token)
     res.status(200).json({
       success: true,
       message: "Login successful! Welcome back.",
