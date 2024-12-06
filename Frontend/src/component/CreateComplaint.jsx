@@ -190,7 +190,9 @@ function ComplaintTracking() {
     };
 
   return (
-    <div className="d-flex flex-column flex-md-row ">
+
+    <div className="d-flex flex-column flex-md-row w-100">
+
       <div className="flex-shrink-0" >
         <Sidebar />
       </div>
@@ -198,7 +200,9 @@ function ComplaintTracking() {
       <div className="flex-grow-1 dashboard-bg " >
         <Header />
 
-        <div className="container-fluid stickyHeader p-3" style={{ marginLeft: "310px", width: "1590px" }}>
+
+        <div className="container-fluid stickyHeader p-3" style={{marginLeft: "310px" , width: '1595px' }}>
+
 
           <div className="table-responsive" style={{ border: "1px solid #ddd", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", overflow: "hidden", backgroundColor: "#fff", padding: "20px", marginTop: "20px" }}>
             <div className="d-flex flex-column flex-md-row justify-content-between align-items-center ">

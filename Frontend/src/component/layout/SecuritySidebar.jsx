@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.js";
 import { Link, useLocation } from "react-router-dom";
 import { FaSignOutAlt, FaBars } from "react-icons/fa";
 import "../../style.css";

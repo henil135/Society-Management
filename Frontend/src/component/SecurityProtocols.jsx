@@ -135,6 +135,7 @@ function SecurityProtocols() {
 
     handleClose();
   };
+  
   return (
     <div className="d-flex flex-column flex-md-row">
       <div className="flex-shrink-0" >

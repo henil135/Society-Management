@@ -90,9 +90,11 @@ function ResidentManagement() {
         <Sidebar />
       </div>
 
-      <div className="flex-grow-1  stickyHeader container-fluid " >
+      <div className="flex-grow-1  stickyHeader container-fluid" >
         <Header />
-        <div className="container-fluid  " style={{ marginTop: "20px", marginLeft: "310px", width: "1590px" }}>
+
+        <div className="container-fluid custom-scrollbar" style={{ marginTop: "20px", marginLeft: "310px" , width: '1580px' }}>
+
 
 
           <div className="table-responsive" style={{ border: "1px solid #ddd", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", overflow: "hidden", backgroundColor: "#fff", padding: "20px", marginTop: "20px", marginLeft: "10px"}}>
