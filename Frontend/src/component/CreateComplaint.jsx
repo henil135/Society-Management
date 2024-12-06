@@ -198,7 +198,7 @@ function ComplaintTracking() {
       <div className="flex-grow-1 dashboard-bg " >
         <Header />
 
-        <div className="container-fluid stickyHeader p-3" style={{ marginLeft: "300px", width: "1600px" }}>
+        <div className="container-fluid stickyHeader p-3">
 
           <div className="table-responsive" style={{ border: "1px solid #ddd", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", overflow: "hidden", backgroundColor: "#fff", padding: "20px", marginTop: "20px" }}>
             <div className="d-flex flex-column flex-md-row justify-content-between align-items-center ">

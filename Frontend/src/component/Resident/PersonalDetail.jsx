@@ -220,11 +220,12 @@ const PersonalDetail = () => {
 
                                 <div className="amount-card mt-3">
                                     <div>
-                                        <h3 className="mb-0 financial-income-title mb-3 mb-md-0">Show Maintenance Details</h3>
+                                        <h3 className="mb-0 financial-income-title 
+                                        mb-3 mb-md-0">Show Maintenance Details</h3>
                                     </div>
                                     <div className="row d-flex">
                                         <div className="col-12 col-md-6 owner-card">
-                                            <div className="card ps-4 py-3">
+                                            <div className="card ps-4 py-3 border-0 border-card" style={{ boxShadow: '0px 0px 40px 0px #0000000F' }}>
                                                 <img src={incomeRactangle} width={8} className="position-absolute start-0" />
                                                 <div>
                                                     <h6 className="card-subtitle mb-1">Maintenance Amount</h6>
@@ -233,11 +234,11 @@ const PersonalDetail = () => {
                                             </div>
                                         </div>
                                         <div className="col-12 col-md-6 owner-card">
-                                            <div className="card px-4 py-3">
-                                            <img src={balanceRactangle} width={8} className="position-absolute start-0" />
+                                            <div className="card px-4 py-3 border-0 border-card" style={{ boxShadow: '0px 0px 40px 0px #0000000F' }}>
+                                                <img src={balanceRactangle} width={8} className="position-absolute start-0" />
                                                 <div>
-                                                <h6 className="card-subtitle mb-1">Penalty Amount</h6>
-                                                <p className="mb-0 text-danger">₹ 500</p>
+                                                    <h6 className="card-subtitle mb-1">Penalty Amount</h6>
+                                                    <p className="mb-0 text-danger">₹ 500</p>
                                                 </div>
                                             </div>
                                         </div>
