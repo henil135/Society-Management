@@ -42,14 +42,9 @@ function FinancialManagementOtherIncome() {
 
     const handleShow = () => setShow(true);
 
-    const handleShowView = () => {
-        setShowViewModal(true);
-      };
+    
 
-      const handleCloseViewModal = () => {
-        setShowViewModal(false);
-    };
-
+    
     // const onSubmit = (data) => {
     //     if (editIndex !== null) {
     //         const updatedNotes = [...note];
