@@ -82,7 +82,7 @@ function SecuritySidebar() {
   return (
     <div style={{fontSize:'14px'}}>
       <button
-        className="btn btn-primary d-sm-none d-md-none d-lg-none"
+        className="btn d-sm-none d-md-none d-lg-none"
         onClick={() => setSidebarOpen(!isSidebarOpen)}
         style={{
           position: "fixed",

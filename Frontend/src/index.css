@@ -1183,12 +1183,12 @@ input:focus {
 /* for responsive all page */
 
 .marginLeft {
-  margin-left: 300px;
+  margin-left: 300px !important;
 }
 
 @media (max-width: 576px) {
   .marginLeft {
-    margin-left: 0px;
+    margin-left: 0px !important;
   }
 }
 
