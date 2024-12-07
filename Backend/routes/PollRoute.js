@@ -1,5 +1,5 @@
 const express = require('express');
-const { createMultichoicePoll, MultichoiceAllPolls, MultichoicevotePoll, createRankingPoll, createRatingPoll, createTextPoll, RankingVotePoll, RatingVotePoll, createNumericPoll, voteOnNumericPoll } = require("../controller/PollController");
+const { createMultichoicePoll, MultichoiceAllPolls, MultichoicevotePoll, createRankingPoll, createRatingPoll, createTextPoll, RankingVotePoll, RatingVotePoll, createNumericPoll, voteOnNumericPoll } = require("../controller/pollController");
 const { ownerOrTenantProtect } = require('../middleware/protect');
 
 const router = express.Router();

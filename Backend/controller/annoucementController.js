@@ -1,4 +1,6 @@
 const Announcement = require('../models/annoucementModel');
+const Owner = require('../models/ownerModel');
+const Tenant = require('../models/tenantModel');
 
 // Create a new announcement
 exports.createAnnouncement = async (req, res) => {
@@ -98,53 +100,87 @@ exports.deleteAnnouncement = async (req, res) => {
 
 
 // Accept Annoucement
-exports.acceptannoucement = async (req , res) =>{
-    let {userId , announcementId } = req.body
+exports.acceptAnnouncement = async (req, res) => {
+    const { userId, announcementId } = req.body;
 
-    try{
-        if(!userId || !announcementId){
-            return res.status(400).json({ message: 'User ID and Announcement ID are required' });
+    try {
+        // Validate input
+        if (!userId || !announcementId) {
+            return res.status(400).json({ message: 'User Id or Announcement ID is required' });
         }
 
+        // Find the announcement by ID
         const announcement = await Announcement.findById(announcementId);
         if (!announcement) {
             return res.status(404).json({ message: 'Announcement not found' });
         }
 
+        // Add userId to acceptedUsers if not already present
         if (!announcement.acceptedUsers.includes(userId)) {
             announcement.acceptedUsers.push(userId);
             await announcement.save();
 
-            // Emit an update to all connected clients
+            // Emit update to connected clients
             req.io.emit('announcementAccepted', {
                 announcementId,
                 userId,
             });
         }
 
+        console.log(announcement);
+
         res.status(200).json({ message: 'Announcement accepted successfully' });
-
-    }catch(error){
-        res.status(501).json({error : error.message})
+    } catch (error) {
+        res.status(500).json({ message: 'Error retrieving announcement', error: error.message });
     }
-}
+};
 
-exports.declineAnnouncement = async(req , res) =>{
-    res.status(200).json({ message: 'Announcement declined' });
-}
+exports.declineAnnouncement = async (req, res) => {
+    const { announcementId } = req.body; // Extract from request body
+
+    try {
+        // Validate input
+        if (!announcementId) {
+            return res.status(400).json({ message: 'Announcement ID is required' });
+        }
+
+        // Find the announcement by ID
+        const announcement = await Announcement.findById(announcementId);
+        if (!announcement) {
+            return res.status(404).json({ message: 'Announcement not found' });
+        }
+
+        // Optional: Perform any other operations (e.g., log the decline action)
+
+        res.status(200).json({ message: 'Announcement declined successfully' });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Error processing request',
+            error: error.message,
+        });
+    }
+};
 
 
 exports.getAcceptedUsers = async (req, res) => {
     try {
         const { announcementId } = req.params;
 
-        const announcement = await Announcement.findById(announcementId).populate('acceptedUsers', 'name email');
+        // Find the announcement
+        const announcement = await Announcement.findById(announcementId)
         if (!announcement) {
             return res.status(404).json({ message: 'Announcement not found' });
         }
 
-        res.status(200).json({ acceptedUsers: announcement.acceptedUsers });
+        // Fetch accepted users from both Tenant and Owner models
+        const tenantUsers = await Tenant.find({ _id: { $in: announcement.acceptedUsers } }, 'Full_name');
+        const ownerUsers = await Owner.find({ _id: { $in: announcement.acceptedUsers } }, 'Full_name');
+
+        // Combine tenant and owner data into one array
+        const acceptedUsers = [...tenantUsers, ...ownerUsers];
+
+        res.status(200).json({ acceptedUsers });
     } catch (error) {
-        res.status(400).json({ message: 'Error fetching accepted users', error });
+        res.status(400).json({ message: 'Error fetching accepted users', error: error.message });
     }
 };
