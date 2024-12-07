@@ -16,24 +16,24 @@ function ResetPassword() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  // const onSubmit = (data) => {
-  //   console.log('Form Data:', data);
-  //   // Simulate password reset logic, replace this with real API call
-  //   setTimeout(() => {
-  //     alert('Password reset successful!');
-  //     navigate('/'); // Redirect to login page
-  //   }, 1000);
-  // };
+  
   const getLocalEmailOrPhone = () => {
     // Replace with your logic to retrieve email/phone from local storage
     const EmailOrPhone = localStorage.getItem('forgotPasswordEmailOrPhone');
     return EmailOrPhone;
   };
+ 
   const onSubmit = async (data) => {
     try {
       const EmailOrPhone = getLocalEmailOrPhone(); 
-      const response = await axios.post("http://localhost:5000/api/v1/reset-password", {...data,EmailOrPhone}); // Replace with your API endpoint
-
+      const payload = { 
+        email: EmailOrPhone, // Use 'email' to match the backend
+        newPassword: data.newPassword, 
+        confirmPassword: data.confirmPassword 
+      };
+  
+      const response = await axios.post("http://localhost:5000/api/v1/resetpassword", payload);
+  
       if (response.data.success) {
         toast.success('Password reset successful!');
         navigate('/login');
@@ -41,7 +41,7 @@ function ResetPassword() {
         toast.error(response.data.message || 'Password reset failed. Please try again.');
       }
     } catch (error) {
-      console.error(error);
+      console.error('API error:', error);
       toast.error('An error occurred. Please try again.');
     }
   };

@@ -3,6 +3,7 @@ const bcryptjs = require("bcryptjs");
 const { generateTokenAndSetCookie } = require("../config/auth");
 const otpGenerator = require('otp-generator');
 const senData = require("../config/mailer"); // Adjust the path accordingly
+const jwt = require("jsonwebtoken")
 
 
 // Registration page
@@ -106,7 +107,7 @@ exports.Adminlogin = async (req, res) => {
     const token = jwt.sign({ _id: user._id , role:"admin"}, process.env.JWT_SECRET_OWNER, {
       expiresIn: "15d",
     });
-    res.cookie("Token",token)
+    // res.cookie("Token",token)
     res.status(200).json({
       success: true,
       message: "Login successful! Welcome back.",
@@ -129,17 +130,53 @@ exports.logout = async (req, res) => {
 };
 
 // Reset Password
+// exports.resetPassword = async (req, res) => {
+//   try {
+//     const { email, newPassword, confirmPassword } = req.body;
+//     const id = req.params.id;
+
+//     if (!newPassword || !confirmPassword) {
+//       return res.status(400).json({ success: false, message: "All fields are required" });
+//     }
+
+//     // Find user by email
+//     const finddata = await User.findOne({ Email_Address: email });
+//     if (!finddata) {
+//       return res.status(404).json({ success: false, message: "User not found" });
+//     }
+
+//     if (newPassword !== confirmPassword) {
+//       return res.status(400).json({ success: false, message: "Passwords do not match" });
+//     }
+
+//     // Hash the new password
+//     const salt = await bcryptjs.genSalt(10);
+//     const hashedPassword = await bcryptjs.hash(newPassword, salt);
+
+//     // Update user's password
+//     finddata.Password = hashedPassword;
+//     await finddata.save();
+
+//     return res.status(200).json({
+//       success: true,
+//       message: "Password reset successfully",
+//     });
+//   } catch (error) {
+//     console.log("Error in reset password controller:", error.message);
+//     return res.status(500).json({ success: false, message: "Internal server error" });
+//   }
+// };
+
 exports.resetPassword = async (req, res) => {
   try {
-    const { email, newPassword, confirmPassword } = req.body;
-    const id = req.params.id;
+    const { EmailOrPhone, newPassword, confirmPassword } = req.body;
 
     if (!newPassword || !confirmPassword) {
       return res.status(400).json({ success: false, message: "All fields are required" });
     }
 
     // Find user by email
-    const finddata = await User.findOne({ Email_Address: email });
+    const finddata = await User.findOne({ Email_Address: EmailOrPhone  });
     if (!finddata) {
       return res.status(404).json({ success: false, message: "User not found" });
     }
@@ -161,11 +198,10 @@ exports.resetPassword = async (req, res) => {
       message: "Password reset successfully",
     });
   } catch (error) {
-    console.log("Error in reset password controller:", error.message);
+    console.error("Error in reset password controller:", error.message);
     return res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
-
 // Edit profile 
 
 exports.editProfile = async (req, res) => {

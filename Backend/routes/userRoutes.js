@@ -5,7 +5,7 @@ const router = express.Router();
 router.post("/Registration", Register);
 router.post("/login", Adminlogin);
 router.post("/logout", logout);
-router.post("/reset-password", resetPassword);
+router.post("/resetpassword", resetPassword);
 router.put('/edit/:id', editProfile);
 router.get('/:id', findUserById);
 router.post('/send-otp', SendOtp);
