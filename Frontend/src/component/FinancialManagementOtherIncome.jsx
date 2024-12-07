@@ -42,9 +42,6 @@ function FinancialManagementOtherIncome() {
 
     const handleShow = () => setShow(true);
 
-    const handleShowView = () => {
-        setShowViewModal(true);
-      };
 
       const handleCloseViewModal = () => {
         setShowViewModal(false);
@@ -149,9 +146,6 @@ function FinancialManagementOtherIncome() {
             setNote(updatedNotes);
         }
         handleCloseDeleteModal();
-    };
-    const handleCloseViewModal = () => {
-        setShowViewModal(false);
     };
 
     const handleShowEditModal = (index) => {
@@ -532,7 +526,8 @@ function FinancialManagementOtherIncome() {
                                                         </div>
                                                         <div className="card-body">
                                                             <div className="d-flex justify-content-between align-items-center mb-2">
-                                                                <h6 className="card-body-title mb-0">Amount Per Member</h6>
+                                                                <h6 className="card-body-title mb-0">Amount 
+                                                                    Per Member</h6>
                                                                 <span className="card-body-title card-body-button mb-0 fw-medium">₹ {val?.amount}</span>
                                                             </div>
                                                             <div className="d-flex justify-content-between align-items-center mb-2">

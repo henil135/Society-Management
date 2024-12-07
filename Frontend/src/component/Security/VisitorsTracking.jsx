@@ -75,11 +75,11 @@ function VisitorsTracking() {
         <SecuritySidebar />
       </div>
 
-      <div className="flex-grow-1" style={{ width: "1920px" }}>
+      <div className="flex-grow-1">
         <Header />
 
 
-        <div className="container-fluid p-3 stickyHeader" style={{width: "1620px",marginLeft:"300px" }}>
+        <div className="container-fluid p-3 stickyHeader marginLeft">
 
           <div
             className="table-responsive"
@@ -87,7 +87,6 @@ function VisitorsTracking() {
               border: "1px solid #ddd",
               borderRadius: "8px",
               boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)",
-              overflow: "hidden",
               backgroundColor: "#fff",
               padding: "20px",
               marginTop: "20px",
