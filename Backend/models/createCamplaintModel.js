@@ -39,6 +39,10 @@ const CamplaintSchema = new mongoose.Schema({
         enum: ['admin', 'resident', 'security'], 
         default: 'resident' 
     },
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    },
 }, {
     timestamps: true 
 });

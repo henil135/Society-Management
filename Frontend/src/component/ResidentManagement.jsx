@@ -1,10 +1,13 @@
 
 import { useState } from 'react';
-import {  useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Button, Modal, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FaUser, FaHome, FaTag,  FaPlus } from 'react-icons/fa'; // Using react-icons as placeholders
-
+import { FaUser, FaHome, FaTag, FaPlus } from 'react-icons/fa'; // Using react-icons as placeholders
+import occupideIcon from '../Icons/buildings-2.png'
+import vacateIcon from '../Icons/building-4.png'
+import tenantIcon from '../Icons/user.png'
+import ownerIcon from '../Icons/tag-user.png'
 import '../style.css';
 import Avtar from '../assets/Avatar.png';
 import Header from './Navbar';
@@ -14,12 +17,18 @@ import viewicon from '../Icons/view.png'
 import { IoEyeSharp } from "react-icons/io5";
 import viewFile1 from '../assets/Component 54.png';
 import viewFile2 from '../assets/Component 55.png';
-
+import addIcon from '../Icons/add-square.png'
+import componentIcon from '../Icons/Component 60.png'
+import VacateAVtar from '../assets/Avatar plain.png'
 function ResidentManagement() {
 
   const [residents] = useState([
-    {id:1, name: "Evelyn Harper", unit: 'A', Number: "1001", unitStatus: "Occupied", residentStatus: "Tenant", phoneNumber: "97587 85828", members: 1, vehicles: 2 },
-    {id:2, name: "-", unit: "B", Number: "1002", unitStatus: "Vacate", residentStatus: "--", phoneNumber: "--", members: "-", vehicles: "-" }
+    { id: 1, name: "Evelyn Harper", unit: 'A', Number: "1001", unitStatus: "Occupied", residentStatus: "Tenant", phoneNumber: "97587 85828", members: 1, vehicles: 2 },
+    { id: 2, name: "", unit: "B", Number: "1002", unitStatus: "Vacate", residentStatus: "", phoneNumber: "", members: "", vehicles: "" },
+    { id: 3, name: "Evelyn Harper", unit: 'A', Number: "1001", unitStatus: "Occupied", residentStatus: "Owner", phoneNumber: "97587 85828", members: 1, vehicles: 2 },
+    { id: 4, name: "", unit: "B", Number: "1002", unitStatus: "Vacate", residentStatus: "", phoneNumber: "", members: "", vehicles: "" },
+
+
   ]);
 
   const [showModal, setShowModal] = useState(false);
@@ -76,30 +85,32 @@ function ResidentManagement() {
   ])
 
   return (
-    <div className="d-flex flex-column flex-md-row dashboard-bg">
+    <div className="d-flex flex-column flex-md-row dashboard-bg w-100">
       <div className="flex-shrink-0" >
         <Sidebar />
       </div>
 
-      <div className="flex-grow-1  stickyHeader container-fluid " style={{ width: "1900px" }}>
+      <div className="flex-grow-1  stickyHeader container-fluid" >
         <Header />
-        <div className="container-fluid custom-scrollbar " style={{ marginTop: "20px", marginLeft: "310px", width: "1590px" }}>
+
+        <div className="container-fluid custom-scrollbar" style={{ marginTop: "20px", marginLeft: "310px" , width: '1580px' }}>
 
 
-          <div className="table-responsive custom-scrollbar" style={{ border: "1px solid #ddd", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", overflow: "hidden", backgroundColor: "#fff", padding: "20px", marginTop: "20px", marginLeft: "10px" }}>
+
+          <div className="table-responsive" style={{ border: "1px solid #ddd", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", overflow: "hidden", backgroundColor: "#fff", padding: "20px", marginTop: "20px", marginLeft: "10px"}}>
             <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
 
-              <h4>Resident Tenant and Owner Details</h4>
+              <h4 style={{marginTop:"10px"}}>Resident Tenant and Owner Details</h4>
 
               <Button onClick={handleOpenModal} className="mainColor2 mt-3 mt-md-0 justify-content-center p-2" style={{ border: "none" }}>
-                <FaPlus style={{ fontSize: "18px", borderRadius: "5px", background: "rgba(255, 255, 255, 1)", color: "#FE512E", marginRight: "8px" }} />
+                <img src={addIcon} style={{ marginRight: "8px" }} />
                 Add New Resident Details
               </Button>
 
             </div>
-            <table className="table striped hover responsive">
+            <table className="table striped hover responsive " >
 
-              <thead>
+              <thead >
                 <tr className="rmHead"  >
                   <th
                     className="text-start"
@@ -189,8 +200,8 @@ function ResidentManagement() {
                     <td className="px-3">
                       <div style={imageColumnStyle} className="text-center">
                         <img
-                          src={Avtar}
-                          alt="avatar"
+                          src={resident.unitStatus === "Occupied" ? Avtar : VacateAVtar}
+                          alt={resident.unitStatus === "Occupied" ? "Occupied Avatar" : "Vacant Avatar"}
                           className="rounded-circle"
                           style={{
                             width: "40px",
@@ -199,18 +210,31 @@ function ResidentManagement() {
                             border: "2px solid #F4F4F4",
                           }}
                         />
-                        <span
-                          style={{
-                            fontFamily: "Poppins",
-                            fontSize: "16px",
-                            fontWeight: "500",
-                            lineHeight: "24px",
-                            textAlign: "left",
-                          }}
-                        >
-                          {resident.name}
-                        </span>
+
+                        {resident.unitStatus === "Occupied" ? (
+                          <span
+                            style={{
+                              fontFamily: "Poppins",
+                              fontSize: "16px",
+                              fontWeight: "500",
+                              lineHeight: "24px",
+                              textAlign: "left",
+                            }}
+                          >
+                            {resident.name}
+                          </span>
+                        ) : (
+                          <img
+                            src={componentIcon} // Replace with your image source for non-occupied
+                            alt="Vacant Avatar"
+                            style={{
+                              width: "40px",
+
+                            }}
+                          />
+                        )}
                       </div>
+
                     </td>
                     <td style={{ padding: "15px", textAlign: "center", verticalAlign: "middle" }}>
                       <span style={{ border: "1px solid ", borderRadius: "50%", width: "28px", height: "28px", display: "inline-flex", justifyContent: "center", alignItems: "center", color: "skyblue" }}>
@@ -230,7 +254,7 @@ function ResidentManagement() {
                             resident.unitStatus === "Vacate" ? "#9333EA" : "#202224",
                         }}
                       >
-                        {resident.unitStatus === 'Occupied' ? <span><FaHome />  Occupide</span> : (resident.unitStatus === 'Vacate' ? <span><FaTag />  Vacate</span> : <FaHome />)}
+                        {resident.unitStatus === 'Occupied' ? <span><img src={occupideIcon} />  Occupide</span> : (resident.unitStatus === 'Vacate' ? <span><img src={vacateIcon} />  Vacate</span> : <FaHome />)}
                       </span>
                     </td>
                     <td className="text-center">
@@ -243,21 +267,86 @@ function ResidentManagement() {
                             resident.residentStatus === "Owner" ? "#4F46E5" : "#202224",
                         }}
                       >
-                        {resident.residentStatus === "Tenant" ? <span><FaUser />  Tenant</span> : (resident.residentStatus === "Owner" ? <FaTag /> : "--")}
+                        {resident.residentStatus === "Tenant" ? <span><img src={tenantIcon} />  Tenant</span> : (resident.residentStatus === "Owner" ? <span> <img src={ownerIcon} /> Owner</span> : <img src={componentIcon} style={{ width: "70px" }} />)}
                       </span>
                     </td>
-                    <td className="text-center px-3">{resident.phoneNumber}</td>
-                    <td className="text-center">{resident.members}</td>
-                    <td className="text-center">{resident.vehicles}</td>
+                    <td className="text-center px-3">
+                      {resident.unitStatus === "Occupied" ? (
+                        <span>{resident.phoneNumber}</span>
+                      ) : (
+                        <img
+                          src={componentIcon} // Replace with an image or placeholder if needed
+                          alt="Placeholder Avatar"
+                          style={{
+                            width: "70px",
 
-                    <td className="text-center"
-                      style={{ verticalAlign: "middle" }}>
+                          }}
+                        />
+                      )}
+                    </td>
+
+                    <td className="text-center">
+                      {resident.unitStatus === "Occupied" ? (
+                        <span>{resident.members}</span>
+                      ) : (
+                        <img
+                          src={componentIcon} // Replace with an image or placeholder text
+                          alt="Placeholder Avatar"
+                          style={{
+                            width: "40px",
+
+                          }}
+                        />
+                      )}
+                    </td>
+
+                    <td className="text-center">
+                      {resident.unitStatus === "Occupied" ? (
+                        <span>{resident.vehicles}</span>
+                      ) : (
+                        <img
+                          src={componentIcon} // Replace with an image or placeholder text
+                          alt="Placeholder Avatar"
+                          style={{
+                            width: "40px",
+
+                          }}
+                        />
+                      )}
+                    </td>
+
+                    <td className="text-center" style={{ verticalAlign: "middle" }}>
                       <div className="d-flex align-items-center justify-content-center">
-                        <img src={editIcon} className="text-success me-2" style={{ cursor: "pointer" }} onClick={handleOpenModal} />
-                        <img src={viewicon} className="text-success me-2" style={{ cursor: "pointer" }} onClick={handleShow} />
-
+                        {resident.unitStatus === "Occupied" ? (
+                          <>
+                            <img
+                              src={editIcon} // Replace with your delete icon if needed
+                              className="text-danger me-2"
+                              style={{ cursor: "pointer" }}
+                              onClick={handleOpenModal} // Add your delete logic here
+                              alt="Edit Icon"
+                            />
+                            <img
+                              src={viewicon}
+                              className="text-success me-2"
+                              style={{ cursor: "pointer" }}
+                              onClick={handleShow}
+                              alt="View Icon"
+                            />
+                          </>
+                        ) : (
+                          /* Only View Button for non-Occupied */
+                          <img
+                            src={componentIcon}
+                            className="text-success me-2"
+                            style={{ cursor: "pointer", width: "90px" }}
+                            onClick={handleShow}
+                            alt="View Icon"
+                          />
+                        )}
                       </div>
                     </td>
+
                   </tr>
                 ))}
               </tbody>
@@ -371,10 +460,10 @@ function ResidentManagement() {
             </Modal.Footer>
           </Modal>
 
-          
-          <Modal show={show} onHide={handleClose}  className="modal-right custom-scrollbar">
+
+          <Modal show={show} onHide={handleClose} className="modal-right custom-scrollbar">
             <Modal.Header>
-              <Modal.Title style={{fontSize: '20px'}}>View Owner Details</Modal.Title>
+              <Modal.Title style={{ fontSize: '20px' }}>View Owner Details</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <div className="text-center mb-0">
@@ -384,7 +473,7 @@ function ResidentManagement() {
                   className="rounded-circle mb-1"
                   width={90}
                 />
-                <h3 style={{fontSize: '24px'}} className='mb-1'>Roger Lubin</h3>
+                <h3 style={{ fontSize: '24px' }} className='mb-1'>Roger Lubin</h3>
                 <p>RogerLubin@gmail.com</p>
               </div>
 
@@ -425,42 +514,42 @@ function ResidentManagement() {
 
                 <div className="row card-row g-3 pe-0">
                   <div className="card-header card-title "  >
-                      <h6 className='rounded-top p-3 ps-4 pt-0' style={{ fontWeight: '600' }}>Document</h6>
+                    <h6 className='rounded-top p-3 ps-4 pt-0' style={{ fontWeight: '600' }}>Document</h6>
 
-                      <div className="d-flex align-items-center justify-content-between mb-3 py-2 px-3 ms-3 border rounded">
-                        <div className='d-flex align-items-center'>
-                          <div className="pe-3">
-                            <img src={viewFile1} alt="" />
-                          </div>
-                          <div>
-                            <p className="font-semibold text-gray-800 text-lg mb-0">
-                              Essential Aadharcard Front Side.JPG
-                            </p>
-                            <p className="text-sm text-gray-600 mb-0">
-                              3.5 MB
-                            </p>
-                          </div>
+                    <div className="d-flex align-items-center justify-content-between mb-3 py-2 px-3 ms-3 border rounded">
+                      <div className='d-flex align-items-center'>
+                        <div className="pe-3">
+                          <img src={viewFile1} alt="" />
                         </div>
-                        <div><IoEyeSharp style={{ color: 'rgba(167, 167, 167, 1)', fontSize: '20px' }} /></div>
-                      </div>
-
-                      <div className="d-flex align-items-center justify-content-between mb-3 py-2 px-3 ms-3 border rounded">
-                        <div className='d-flex align-items-center'>
-                          <div className="pe-3" >
-                            <img src={viewFile2} alt="" />
-                          </div>
-                          <div>
-                            <p className="font-semibold text-gray-800 text-lg mb-0">
-                              Essential Aadharcard Front Side.JPG
-                            </p>
-                            <p className="text-sm text-gray-600 mb-0">
-                              3.5 MB
-                            </p>
-                          </div>
+                        <div>
+                          <p className="font-semibold text-gray-800 text-lg mb-0">
+                            Essential Aadharcard Front Side.JPG
+                          </p>
+                          <p className="text-sm text-gray-600 mb-0">
+                            3.5 MB
+                          </p>
                         </div>
-                        <div><IoEyeSharp style={{ color: 'rgba(167, 167, 167, 1)', fontSize: '20px' }} /></div>
                       </div>
+                      <div><IoEyeSharp style={{ color: 'rgba(167, 167, 167, 1)', fontSize: '20px' }} /></div>
                     </div>
+
+                    <div className="d-flex align-items-center justify-content-between mb-3 py-2 px-3 ms-3 border rounded">
+                      <div className='d-flex align-items-center'>
+                        <div className="pe-3" >
+                          <img src={viewFile2} alt="" />
+                        </div>
+                        <div>
+                          <p className="font-semibold text-gray-800 text-lg mb-0">
+                            Essential Aadharcard Front Side.JPG
+                          </p>
+                          <p className="text-sm text-gray-600 mb-0">
+                            3.5 MB
+                          </p>
+                        </div>
+                      </div>
+                      <div><IoEyeSharp style={{ color: 'rgba(167, 167, 167, 1)', fontSize: '20px' }} /></div>
+                    </div>
+                  </div>
 
 
                 </div>
@@ -548,7 +637,7 @@ function ResidentManagement() {
                 </Table>
               </div> */}
             </Modal.Body>
-            
+
           </Modal>
 
         </div>

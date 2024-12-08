@@ -76,8 +76,9 @@ const FacilityManagement = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [editIndex, setEditIndex] = useState(null);
     const [facilityData, setFacilityData] = useState({ Facility_name: "", Date: "", Description: "", Remind_Before: "" });
+   
     const [validationError, setValidationError] = useState("");
-
+    
     const handleShowModal = () => setShowModal(true);
     const handleCloseModal = () => {
         setShowModal(false);
@@ -86,71 +87,64 @@ const FacilityManagement = () => {
         setEditIndex(null);
         setValidationError(""); // Clear validation error
     };
-
+    
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFacilityData({ ...facilityData, [name]: value });
     };
-
+    
     const handleSave = async () => {
         const { Facility_name, Date, Description, Remind_Before } = facilityData;
-
+    
         // Field validation
         if (!Facility_name || !Date || !Description || !Remind_Before) {
             setValidationError("All fields are required.");
             return;
         }
-
+    
         // Validation for reminderBefore input
         if (isNaN(Remind_Before) || Remind_Before <= 0) {
             setValidationError("Reminder Before must be a positive number.");
             return;
         }
-
-        // If there's no validation error, proceed with saving the facility
-        if (isEditing) {
-            const updatedFacilities = [...facilities];
-            updatedFacilities[editIndex] = facilityData;
-            setFacilities(updatedFacilities);
-        } else {
-            setFacilities([...facilities, facilityData]);
-        }
-
+    
         try {
             if (isEditing) {
+                // Update the existing facility in the list
                 const updatedFacilities = [...facilities];
                 updatedFacilities[editIndex] = facilityData;
                 setFacilities(updatedFacilities);
             } else {
-                // create a facility
+                // Create a new facility
                 const response = await createFacility(facilityData);
                 console.log("Create Facility API Response:", response);
                 if (response && response.data.facility) {
+                    // Add the new facility to the state
                     setFacilities([...facilities, response.data.facility]); // Update state with the newly created facility
                 } else {
                     console.error("Failed to create facility.");
                 }
             }
-
-            handleCloseModal();
         } catch (error) {
             console.log("Error while creating/updating the facility:", error.message);
+        } finally {
+            handleCloseModal(); // Ensure modal closes after save
         }
-
     };
-
+    
     useEffect(() => {
         FetchFacilities();
-    }, []);
+    }, []); // Fetch facilities on initial load
+    
     const FetchFacilities = async () => {
         try {
             const response = await getFacilities(); // Assuming this is your API call
-            console.log("API Response:", response); // Debug response
+            console.log("API Response:", response);
             
-            // Access facilities directly if the structure matches your log
+            // Check for the response and ensure the facilities list is fetched properly
             if (response && response.success && Array.isArray(response.facilities)) {
                 console.log("Facilities fetched:", response.facilities);
-                setFacilities(response.facilities); // Update state
+                setFacilities(response.facilities); // Update state with fetched facilities
             } else {
                 console.error("Unexpected response format: ", response);
             }
@@ -158,14 +152,14 @@ const FacilityManagement = () => {
             console.error("Error fetching facilities:", error.message);
         }
     };
-
+    
     const handleEdit = (index) => {
         setFacilityData(facilities[index]);
         setEditIndex(index);
         setIsEditing(true);
         handleShowModal();
     };
-
+    
     return (
         <div className="d-flex flex-column flex-md-row">
             <div className="flex-shrink-0" >
@@ -185,16 +179,7 @@ const FacilityManagement = () => {
                         <Button className="btn mainColor2 d-flex align-items-center justify-content-center p-2" style={{ border: "none" }} onClick={() => {
                             setIsEditing(false);
                             handleShowModal();
-                        }}> <FaPlus
-                                style={{
-                                    fontSize: "18px",
-                                    borderRadius: "5px",
-                                    background: "rgba(255, 255, 255, 1)",
-                                    color: "#FE512E",
-                                    marginRight: "8px",
-                                }}
-
-                            />
+                        }}>
                             Create Facility
                         </Button>
                     </div>

@@ -65,7 +65,6 @@ exports.CreateMaintenance= async (req,res)=>{
             message:"Maintenance Successfully Added"
         })
     } catch (error) {
-        console.error(error);
         return res.status(500).json({
             success: false,
             message: "Internal Server Error"
@@ -82,7 +81,7 @@ exports.GetMaintenance =async (req,res)=>{
           Maintenance: maintenance,
         });
       } catch (error) {
-        console.error("Error fetching Maintenance:", error);
+
         return res.status(500).json({
           success: false,
           message: "Error fetching Maintenance",

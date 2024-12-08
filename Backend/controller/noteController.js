@@ -29,7 +29,6 @@ exports.createNote = async (req, res) => {
             note: newNote,
         });
     } catch (error) {
-        console.error("Error creating note:", error);
         return res.status(500).json({
             success: false,
             message: "Failed to create note",
@@ -109,7 +108,6 @@ exports.updateNote = async (req, res) => {
             note: updatedNote,
         });
     } catch (error) {
-        console.error("Error updating note:", error);
         return res.status(500).json({
             success: false,
             message: "Failed to update note",

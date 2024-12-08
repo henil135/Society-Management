@@ -57,7 +57,6 @@ exports.GetIncome =async (req,res)=>{
           Income: income,
         });
       } catch (error) {
-        console.error("Error fetching Income:", error);
         return res.status(500).json({
           success: false,
           message: "Error fetching Income",
@@ -138,7 +137,6 @@ exports.UpdateIncome = async (req, res) => {
             message: "Income Successfully updated"
         });
     } catch (error) {
-        console.error(error);
         return res.status(500).json({
             success: false,
             message: "Internal Server Error"

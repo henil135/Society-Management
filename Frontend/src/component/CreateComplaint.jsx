@@ -10,187 +10,189 @@ import deleteIcon from '../Icons/delete.png'
 import editIcon from '../Icons/Edit.png'
 import axios from 'axios'
 function ComplaintTracking() {
-  const [complaints, setComplaints] = useState([
-    // { id: 1, name: "Evelyn Harper", type: "Unethical Behavior", description: "Providing false information or  ", unit: "A", number: "1001", priority: "Medium", status: "Pending" },
-    // { id: 2, name: "Esther Howard", type: "Preventive Measures", description: "Regular waste collection services  ", unit: "B", number: "1002", priority: "High", status: "Solve" },
-  ]);
+    const [complaints, setComplaints] = useState([
+      // { id: 1, name: "Evelyn Harper", type: "Unethical Behavior", description: "Providing false information or  ", unit: "A", number: "1001", priority: "Medium", status: "Pending" },
+      // { id: 2, name: "Esther Howard", type: "Preventive Measures", description: "Regular waste collection services  ", unit: "B", number: "1002", priority: "High", status: "Solve" },
+    ]);
 
-  const [selectedComplaint, setSelectedComplaint] = useState(null);
-  const [showModal, setShowModal] = useState(false);
-  const [showViewModal, setShowViewModal] = useState(false);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [deleteComplainId, setDeleteComplainId] = useState(null);
-  // New state for the "Create Complaint" feature
-  const [showCreateModal, setShowCreateModal] = useState(false);
-  const [newComplaint, setNewComplaint] = useState({
-    Complainer_name: "",
-    Complaint_name: "",
-    Description: "",
-    Wing: "",
-    Unit: "",
-    Priority: "Medium",
-    Status: "Open",
-  });
+    const [selectedComplaint, setSelectedComplaint] = useState(null);
+    const [showModal, setShowModal] = useState(false);
+    const [showViewModal, setShowViewModal] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [deleteComplainId, setDeleteComplainId] = useState(null);
+    // New state for the "Create Complaint" feature
+    const [showCreateModal, setShowCreateModal] = useState(false);
+    const [newComplaint, setNewComplaint] = useState({
+      Complainer_name: "",
+      Complaint_name: "",
+      Description: "",
+      Wing: "",
+      Unit: "",
+      Priority: "Medium",
+      Status: "Open",
+    });
 
 
-  const [errorMessage, setErrorMessage] = useState("");
-  const handleEdit = (complaint) => {
-    setSelectedComplaint(complaint);
-    setShowModal(true);
-  };
+    const [errorMessage, setErrorMessage] = useState("");
+    const handleEdit = (complaint) => {
+      setSelectedComplaint(complaint);
+      setShowModal(true);
+    };
 
-  const handleCloseModal = () => setShowModal(false);
+    const handleCloseModal = () => setShowModal(false);
 
-  // const handleSave = () => {
-  //   if (!selectedComplaint.Complainer_name || !selectedComplaint.Complaint_name || !selectedComplaint.Description || !selectedComplaint.Wing || !selectedComplaint.Unit) {
-  //     setErrorMessage("All fields are required.");
-  //     return;
-  //   }
+    // const handleSave = () => {
+    //   if (!selectedComplaint.Complainer_name || !selectedComplaint.Complaint_name || !selectedComplaint.Description || !selectedComplaint.Wing || !selectedComplaint.Unit) {
+    //     setErrorMessage("All fields are required.");
+    //     return;
+    //   }
 
-  //   setComplaints((prevComplaints) =>
-  //     prevComplaints.map((c) =>
-  //       c.id === selectedComplaint.id ? selectedComplaint : c
-  //     )
-  //   );
+    //   setComplaints((prevComplaints) =>
+    //     prevComplaints.map((c) =>
+    //       c.id === selectedComplaint.id ? selectedComplaint : c
+    //     )
+    //   );
 
-  //   setShowModal(false);
-  //   setErrorMessage("");
-  // };
+    //   setShowModal(false);
+    //   setErrorMessage("");
+    // };
 
-  const handleSave = async () => {
-    if (!selectedComplaint.Complainer_name || !selectedComplaint.Complaint_name || !selectedComplaint.Description || !selectedComplaint.Wing || !selectedComplaint.Unit) {
-      setErrorMessage("All fields are required.");
-      return;
+    const handleSave = async () => {
+      if (!selectedComplaint.Complainer_name || !selectedComplaint.Complaint_name || !selectedComplaint.Description || !selectedComplaint.Wing || !selectedComplaint.Unit) {
+        setErrorMessage("All fields are required.");
+        return;
+      }
+    
+      try {
+        const response = await axios.put(
+          `http://localhost:5000/api/v2/complaint/updatecomplaint/${selectedComplaint._id}`,
+          selectedComplaint
+        );
+    
+        // Update the local state after successful update
+        setComplaints((prevComplaints) =>
+          prevComplaints.map((c) => (c.id === selectedComplaint.id ? response.data.updatedComplaint : c))
+        );
+    
+        setShowModal(false);
+        setErrorMessage("");
+        fetchComplaints();
+      } catch (error) {
+        console.error("Error updating complaint:", error);
+        setErrorMessage("Failed to update complaint. Please try again.");
+      }
+    };
+
+    const handleView = (complaint) => {
+      setSelectedComplaint(complaint);
+      setShowViewModal(true);
+    };
+
+    const handleCloseViewModal = () => setShowViewModal(false);
+
+    const handleClose = () =>{
+      setShowDeleteModal(false); 
+      setDeleteComplainId(null); 
     }
-  
-    try {
-      const response = await axios.put(
-        `http://localhost:5000/api/v2/complaint/updatecomplaint/${selectedComplaint._id}`,
-        selectedComplaint
-      );
-  
-      // Update the local state after successful update
-      setComplaints((prevComplaints) =>
-        prevComplaints.map((c) => (c.id === selectedComplaint.id ? response.data.updatedComplaint : c))
-      );
-  
-      setShowModal(false);
-      setErrorMessage("");
+    // const handleDelete = async () => {
+    //   setComplaints((prev) => prev.filter((complain) => complain._id !== deleteComplainId));
+    // }
+    const badgeStyle = (priority) => {
+      if (priority === "High") return { backgroundColor: "#E74C3C", color: "white" };
+      if (priority === "Medium") return { backgroundColor: "#5678E9", color: "white" };
+      if (priority === "Low") return { backgroundColor: "#39973D", color: "white" };
+      return { backgroundColor: "#28a745", color: "white" };
+    };
+
+    const statusBadgeStyle = (status) => {
+      if (status === "Pending") return { backgroundColor: " #FFC3131A", color: "#FFC313" };
+      if (status === "Open") return { backgroundColor: "#5678E91A", color: "#5678E9" };
+      if (status === "Solve") return { backgroundColor: "#39973D1A", color: "#39973D" };
+      return { backgroundColor: "#f8f9fa", color: "black" };
+    };
+
+    const handleShowCreateModal = () => setShowCreateModal(true);
+    const handleCloseCreateModal = () => setShowCreateModal(false);
+
+
+    const handleCreateComplaint = async () => {
+      // Basic form validation
+      if (!newComplaint.Complainer_name || !newComplaint.Complaint_name || !newComplaint.Description || !newComplaint.Wing || !newComplaint.Unit) {
+        setErrorMessage("All fields are required.");
+        return;
+      }
+
+      try {
+        const response = await axios.post("http://localhost:5000/api/v2/complaint/addcomplaint", newComplaint);
+        setComplaints(response.data.complaints); // Assuming response.data contains the created complaint
+        setNewComplaint({ Complainer_name: "", Complaint_name: "", Description: "", Wing: "", Unit: "", Priority: "Medium", Status: "Open" });
+        setShowCreateModal(false);
+        setErrorMessage("");
+        fetchComplaints();
+      } catch (error) {
+        console.error("Error creating complaint:", error);
+        setErrorMessage("Failed to create complaint. Please try again.");
+      }
+    };
+
+    const fetchComplaints = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/v2/complaint/");
+        console.log(response.data.complaints); // Log API response
+        setComplaints(response.data.complaints); // Ensure it's an array
+      } catch (error) {
+        console.error("Error fetching complaints:", error);
+      }
+    };
+
+    useEffect(() => {
+
       fetchComplaints();
-    } catch (error) {
-      console.error("Error updating complaint:", error);
-      setErrorMessage("Failed to update complaint. Please try again.");
-    }
-  };
+    }, []);
 
-  const handleView = (complaint) => {
-    setSelectedComplaint(complaint);
-    setShowViewModal(true);
-  };
-
-  const handleCloseViewModal = () => setShowViewModal(false);
-
-  const handleClose = () =>{
-    setShowDeleteModal(false); 
-    setDeleteComplainId(null); 
-  }
-  // const handleDelete = async () => {
-  //   setComplaints((prev) => prev.filter((complain) => complain._id !== deleteComplainId));
-  // }
-  const badgeStyle = (priority) => {
-    if (priority === "High") return { backgroundColor: "#E74C3C", color: "white" };
-    if (priority === "Medium") return { backgroundColor: "#5678E9", color: "white" };
-    if (priority === "Low") return { backgroundColor: "#39973D", color: "white" };
-    return { backgroundColor: "#28a745", color: "white" };
-  };
-
-  const statusBadgeStyle = (status) => {
-    if (status === "Pending") return { backgroundColor: " #FFC3131A", color: "#FFC313" };
-    if (status === "Open") return { backgroundColor: "#5678E91A", color: "#5678E9" };
-    if (status === "Solve") return { backgroundColor: "#39973D1A", color: "#39973D" };
-    return { backgroundColor: "#f8f9fa", color: "black" };
-  };
-
-  const handleShowCreateModal = () => setShowCreateModal(true);
-  const handleCloseCreateModal = () => setShowCreateModal(false);
-
-
-  const handleCreateComplaint = async () => {
-    // Basic form validation
-    if (!newComplaint.Complainer_name || !newComplaint.Complaint_name || !newComplaint.Description || !newComplaint.Wing || !newComplaint.Unit) {
-      setErrorMessage("All fields are required.");
-      return;
-    }
-
-    try {
-      const response = await axios.post("http://localhost:5000/api/v2/complaint/addcomplaint", newComplaint);
-      setComplaints(response.data.complaints); // Assuming response.data contains the created complaint
-      setNewComplaint({ Complainer_name: "", Complaint_name: "", Description: "", Wing: "", Unit: "", Priority: "Medium", Status: "Open" });
-      setShowCreateModal(false);
-      setErrorMessage("");
-      fetchComplaints();
-    } catch (error) {
-      console.error("Error creating complaint:", error);
-      setErrorMessage("Failed to create complaint. Please try again.");
-    }
-  };
-
-  const fetchComplaints = async () => {
-    try {
-      const response = await axios.get("http://localhost:5000/api/v2/complaint/");
-      console.log(response.data.complaints); // Log API response
-      setComplaints(response.data.complaints); // Ensure it's an array
-    } catch (error) {
-      console.error("Error fetching complaints:", error);
-    }
-  };
-
-  useEffect(() => {
-
-    fetchComplaints();
-  }, []);
-
-  // Trigger this effect whenever priority changes
+    // Trigger this effect whenever priority changes
 
 
 
-  const imageColumnStyle = {
-    display: "flex",
-    alignItems: "center", // Aligns the image and text horizontally
-    justifyContent: "flex-start", // Ensures the content starts from the left
-    gap: "10px", // Space between the image and the name
-  };
-  const tableColumnStyle = {
-    whiteSpace: "normal",
-    wordWrap: "break-word",
-    padding: "15px",
-    textAlign: "center",
-    verticalAlign: "middle",
-    maxWidth: "350px",
-  };
+    const imageColumnStyle = {
+      display: "flex",
+      alignItems: "center", // Aligns the image and text horizontally
+      justifyContent: "flex-start", // Ensures the content starts from the left
+      gap: "10px", // Space between the image and the name
+    };
+    const tableColumnStyle = {
+      whiteSpace: "normal",
+      wordWrap: "break-word",
+      padding: "15px",
+      textAlign: "center",
+      verticalAlign: "middle",
+      maxWidth: "350px",
+    };
 
 
-  // const handleDelete = (id) => {
-  //   setComplaints((prevComplaints) => prevComplaints.filter((complaint) => complaint.id !== id));
-  // };
+    // const handleDelete = (id) => {
+    //   setComplaints((prevComplaints) => prevComplaints.filter((complaint) => complaint.id !== id));
+    // };
 
 
-  const handleDelete = async (id) => {
-    try {
-      await axios.delete(`http://localhost:5000/api/v2/complaint/deletecomplaint/${id}`);
-      
-      // Update the local state after successful deletion
-      setComplaints((prevComplaints) => prevComplaints.filter((complaint) => complaint.id !== id));
-      fetchComplaints()
-    } catch (error) {
-      console.error("Error deleting complaint:", error);
-      setErrorMessage("Failed to delete complaint. Please try again.");
-    }
+    const handleDelete = async (id) => {
+      try {
+        await axios.delete(`http://localhost:5000/api/v2/complaint/deletecomplaint/${id}`);
+        
+        // Update the local state after successful deletion
+        setComplaints((prevComplaints) => prevComplaints.filter((complaint) => complaint.id !== id));
+        fetchComplaints()
+      } catch (error) {
+        console.error("Error deleting complaint:", error);
+        setErrorMessage("Failed to delete complaint. Please try again.");
+      }
 
-  };
+    };
 
   return (
-    <div className="d-flex flex-column flex-md-row">
+
+    <div className="d-flex flex-column flex-md-row w-100">
+
       <div className="flex-shrink-0" >
         <Sidebar />
       </div>
@@ -198,21 +200,14 @@ function ComplaintTracking() {
       <div className="flex-grow-1 dashboard-bg " >
         <Header />
 
-        <div className="container-fluid stickyHeader p-3" style={{ marginLeft: "300px", width: "1600px" }}>
+
+        <div className="container-fluid stickyHeader p-3" style={{marginLeft: "310px" , width: '1595px' }}>
+
 
           <div className="table-responsive" style={{ border: "1px solid #ddd", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", overflow: "hidden", backgroundColor: "#fff", padding: "20px", marginTop: "20px" }}>
             <div className="d-flex flex-column flex-md-row justify-content-between align-items-center ">
               <h4 className="mb-0" >Complaint Tracking</h4>
-              <Button className="btn mainColor2 d-flex align-items-center justify-content-center p-2" style={{ border: "none" }} onClick={handleShowCreateModal}><FaPlus
-                style={{
-                  fontSize: "18px",
-                  borderRadius: "5px",
-                  background: "rgba(255, 255, 255, 1)",
-                  color: "#FE512E",
-                  marginRight: "8px",
-                }}
-
-              />Create Complaint</Button>
+              <Button className="btn mainColor2 d-flex align-items-center justify-content-center p-2" style={{ border: "none" }} onClick={handleShowCreateModal}>Create Complaint</Button>
             </div>
             <Table className="mt-3" >
               <thead className="bg-light">
@@ -444,7 +439,7 @@ function ComplaintTracking() {
               />
             </Form.Group>
             <Form.Group className='mt-2'>
-              <Form.Label>Complaint Type<span className="text-danger">*</span></Form.Label>
+              <Form.Label>Complaint Name<span className="text-danger">*</span></Form.Label>
               <Form.Control
                 type="text"
                 value={newComplaint.Complaint_name}
@@ -861,7 +856,7 @@ function ComplaintTracking() {
               />
             </Form.Group>
             <Form.Group className='mt-3'>
-              <Form.Label>Complaint Type<span className="text-danger">*</span></Form.Label>
+              <Form.Label>Complaint Name<span className="text-danger">*</span></Form.Label>
               <Form.Control
                 type="text"
                 value={selectedComplaint?.Complaint_name || ""}
@@ -918,30 +913,35 @@ function ComplaintTracking() {
               </Form.Group>
             </div>
             <Form.Group className='mt-3 radio-group'>
-              <Form.Label>Priority<span className="text-danger">*</span></Form.Label>
-              <div className="d-flex justify-content-around  " >
+  <Form.Label>Priority<span className="text-danger">*</span></Form.Label>
+  <div className="d-flex justify-content-around">
+    {["High", "Medium", "Low"].map((Priority) => (
+      <Form.Check
+        style={{
+          border: "1px solid rgba(211, 211, 211, 1)",
+          paddingLeft: "30px",
+          paddingRight: "30px",
+          borderRadius: "5px",
+          paddingTop: "8px",
+          paddingBottom: "8px",
+        }}
+        type="radio"
+        label={Priority}
+        name="Priority"
+        value={Priority}
+        checked={selectedComplaint?.Priority === Priority}
+        onChange={(e) =>
+          setSelectedComplaint((prev) => ({
+            ...prev,
+            Priority: e.target.value, // Fixed to "Priority" (uppercase P)
+          }))
+        }
+        key={Priority}
+      />
+    ))}
+  </div>
+</Form.Group>
 
-                {["High", "Medium", "Low"].map((Priority) => (
-                  <Form.Check
-                    style={{ border: "1px solid rgba(211, 211, 211, 1)", paddingLeft: "30px", paddingRight: "30px", borderRadius: "5px", paddingTop: "8px", paddingBottom: "8px" }}
-                    type="radio"
-                    label={Priority}
-                    name="Priority"
-                    value={Priority}
-                    checked={selectedComplaint?.Priority === Priority}
-                    onChange={(e) =>
-                      setSelectedComplaint((prev) => ({
-                        ...prev,
-                        priority: e.target.value,
-                      }))
-                    }
-                    key={Priority}
-                  />
-
-                ))}
-
-              </div>
-            </Form.Group>
             <Form.Group className='mt-3 radio-group'>
               <Form.Label>Status<span className="text-danger">*</span></Form.Label>
               <div className="d-flex justify-content-around">

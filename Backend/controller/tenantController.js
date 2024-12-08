@@ -40,7 +40,7 @@ exports.TenantLogin = async (req, res) => {
 
         const isPasswordCorrect = await bcryptjs.compare(password, user.password);
 
-        console.log("Password match:", isPasswordCorrect); // Debugging
+         // Debugging
 
         if (!isPasswordCorrect) {
             return res.status(400).json({ success: false, message: "Invalid credentials" });
@@ -57,7 +57,6 @@ exports.TenantLogin = async (req, res) => {
             message: "Login successful! Welcome back.",
         });
     } catch (error) {
-        console.log("Error in login controller", error.message);
         res.status(500).json({ success: false, message: "Internal server error" });
     }
 };
@@ -65,9 +64,9 @@ exports.TenantLogin = async (req, res) => {
 
 // tenant registation
 cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET,
+    cloud_name: process.env.cloud_name,
+    api_key: process.env.api_key,
+    api_secret: process.env.api_secret,
 });
 
 exports.addTenantData = async (req, res) => {
@@ -115,11 +114,13 @@ exports.addTenantData = async (req, res) => {
                 try {
                     const result = await cloudinary.uploader.upload(filePath);
                     fs.unlink(filePath, (err) => {
-                        if (err) console.error("Error deleting file from server:", err);
+                        if (err) {
+
+                        }
                     });
                     return result.secure_url;
                 } catch (error) {
-                    console.error("Error uploading to Cloudinary:", error);
+              
                     throw error;
                 }
             }
@@ -167,7 +168,7 @@ exports.addTenantData = async (req, res) => {
         try {
             await transporter.sendMail(mailOptions);
         } catch (emailError) {
-            console.error("Error sending email:", emailError);
+            
         }
 
         if (Member_Counting) {
@@ -176,7 +177,7 @@ exports.addTenantData = async (req, res) => {
                 try {
                     members = JSON.parse(Member_Counting); // Parse only if it's a JSON string
                 } catch (parseError) {
-                    console.error("Invalid JSON in Member_Counting:", parseError);
+                    
                     return res.status(400).json({
                         success: false,
                         message: "Invalid format for Member_Counting.",
@@ -201,7 +202,6 @@ exports.addTenantData = async (req, res) => {
                 try {
                     vehicles = JSON.parse(Vehicle_Counting); // Parse only if it's a JSON string
                 } catch (parseError) {
-                    console.error("Invalid JSON in Vehicle_Counting:", parseError);
                     return res.status(400).json({
                         success: false,
                         message: "Invalid format for Vehicle_Counting.",
@@ -235,7 +235,6 @@ exports.addTenantData = async (req, res) => {
 // login person profile 
 exports.tenantProfile = async (req, res) => {
     let data = await Tenant.findById(req.tenant);
-    console.log("my data", data);
     res.json(data);
 }
 
@@ -253,7 +252,7 @@ exports.GetAllTenant = async (req, res) => {
             Owner: find
         })
     } catch (error) {
-        console.error(error);
+ 
         return res.status(500).json({
             success: false,
             message: "Failed to add Tenant data"

@@ -14,6 +14,7 @@ exports.createComplaint = async (req, res) => {
             role
         } = req.body;
 
+       
         // Ensure all required fields are provided
         if (!Complainer_name || !Complaint_name || !Description || !Wing || !Unit || !Priority || !Status) {
             return res.status(400).json({ message: 'All fields are required' });
@@ -27,20 +28,26 @@ exports.createComplaint = async (req, res) => {
             Unit,
             Priority,
             Status,
-            role
+            role,
+            createdBy:req.admin
         });
 
         await complaint.save();
         res.status(201).json({ message: 'Complaint created successfully' });
+        console.log(complaint);
+        
+        
     } catch (error) {
-        res.status(400).json({ message: 'Error creating complaint', error });
+        res.status(400).json( error.message );
+        console.log(error);
+        
     }
 };
 
 // Get all complaints
 exports.getAllComplaints = async (req, res) => {
     try {
-        const complaints = await Complaint.find();
+        const complaints = await Complaint.find().populate("createdBy");
         res.status(200).json({ message: 'Complaints retrieved successfully', complaints });
     } catch (error) {
         res.status(500).json({ message: 'Error retrieving complaints', error });

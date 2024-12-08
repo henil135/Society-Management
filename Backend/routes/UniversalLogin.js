@@ -55,7 +55,7 @@ router.post("/login", async (req, res) => {
 
     return res.status(400).json({ message: "Invalid credentials" });
   } catch (error) {
-    console.error("Error during universal login:", error);
+
     res.status(500).json({ message: "Server error" });
   }
 });

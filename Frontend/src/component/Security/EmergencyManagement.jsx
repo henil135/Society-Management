@@ -35,6 +35,7 @@ const EmergencyManagement = () => {
           <form onSubmit={handleSubmit} style={styles.form}>
             <div style={styles.formGroup}>
               <label style={styles.label}>Alert Type *</label>
+              
               <select
                 name="alertType"
                 value={formData.alertType}

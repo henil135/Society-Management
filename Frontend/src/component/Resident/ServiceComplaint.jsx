@@ -10,9 +10,9 @@ const ServiceComplaint = () => {
 
     const [note, setNote] = useState([
         { id: 1, title: 'Unethical Behavior', des: 'Regular waste collection services.', date: '01/07/2024', status: 'Open' },
-        { id: 2, title: 'Preventive Measures', des: 'Expenses will way sense for you..', date: '01/07/2024', status: 'Open' },
+        { id: 2, title: 'Preventive Measures', des: 'Expenses will way sense for you..', date: '01/07/2024', status: 'solve' },
         { id: 3, title: 'Unethical Behavior', des: 'Regular waste collection services.', date: '01/07/2024', status: 'Open' },
-        { id: 4, title: 'Preventive Measures', des: 'Expenses will way sense for you..', date: '01/07/2024', status: 'Open' },
+        { id: 4, title: 'Preventive Measures', des: 'Expenses will way sense for you..', date: '01/07/2024', status: 'pending' },
         { id: 5, title: 'Unethical Behavior', des: 'Regular waste collection services.', date: '01/07/2024', status: 'Open' },
         { id: 6, title: 'Preventive Measures', des: 'Expenses will way sense for you..', date: '01/07/2024', status: 'Open' },
     ]);
@@ -96,16 +96,16 @@ const ServiceComplaint = () => {
                      
                             <div className="table-responsive rounded pb-3">
 
-                                <Link to="/service-and-complaint" className='btn btn-sm text-decoration-none border-0 maintainance-income-btn maintainance-income-btn-bg complaint-btn ms-1'>Complaint Submission</Link>
+                                <Link to="/service-and-complaint" className='btn btn-sm text-decoration-none border-0 maintainance-income-btn maintainance-income-btn-bg complaint-btn ms-0 ms-md-1' >Complaint Submission</Link>
 
                                 <Link to="/request-and-submission" className='btn btn-sm maintainance-income-btn maintainance-income-btn-withoutbg complaint-btn'>Request Submission</Link>
 
                                 <div className='container-fluid mx-0'>
                                     <div className='row p-3 py-0 overflow-hidden'>
                                         <div className='p-0 bg-light'>
-                                            <div className='d-flex justify-content-between align-items-center pb-3 px-3'>
+                                            <div className='d-flex justify-content-between align-items-center pb-3 px-2 px-md-3 mt-4'>
                                                 <h3 className='mb-0 financial-income-title'>Complaint</h3>
-                                                <button className='set-maintainance-btn d-flex align-items-center p-2' onClick={handleShow}>
+                                                <button className='set-maintainance-btn d-flex align-items-center p-2 mt-0' onClick={handleShow}>
                                                     Create Complaint
                                                 </button>
                                             </div>
@@ -202,12 +202,12 @@ const ServiceComplaint = () => {
                                     <Form.Control.Feedback type="invalid">{errors.des?.message}</Form.Control.Feedback>
                                 </Form.Group>
 
-                                <div className='d-flex justify-content-between'>
-                                    <div className="mb-3">
+                                <div className='d-flex gap-2'>
+                                    <div className="mb-3 w-50">
                                         <label className='Form-Label'>Wing<span className='text-danger'> *</span></label>
                                         <input type="text" placeholder='Enter Wing' className="form-control Form-Control" {...register('date', { required: true })} />
                                     </div>
-                                    <div className="mb-3">
+                                    <div className="mb-3 w-50">
                                         <label className='Form-Label'>Unit<span className='text-danger'> *</span></label>
                                         <input type="text" placeholder='Enter Unit' className="form-control Form-Control" {...register('dueDate', { required: true })} />
                                     </div>
@@ -216,38 +216,40 @@ const ServiceComplaint = () => {
                                 <Form.Group className="mb-3" controlId="formPriority">
                                     <Form.Label className='Form-Label'>Priority<span className="text-danger"> *</span></Form.Label>
                                     <div className="d-flex justify-content-start">
-                                        <div className="me-3 radio-btn-box">
+                                        <div className="me-3 radio-btn-box d-flex align-items-center">
                                             <Form.Check
                                                 type="radio"
                                                 id="priorityHigh"
-                                                label="High"
                                                 {...register('priority', { required: "Priority is required" })}
                                                 value="High"
                                                 isInvalid={errors.priority}
-                                                className="custom-radio"
+                                                className="radio-group"
                                             />
+                                            <label htmlFor="priorityLow" className="ms-2">High</label>
                                         </div>
-                                        <div className="me-3 radio-btn-box">
+                                        <div className="me-3 radio-btn-box d-flex align-items-center">
                                             <Form.Check
                                                 type="radio"
                                                 id="priorityMedium"
-                                                label="Medium"
+                                              
                                                 {...register('priority', { required: "Priority is required" })}
                                                 value="Medium"
                                                 isInvalid={errors.priority}
-                                                className="custom-radio"
+                                                className="radio-group"
                                             />
+                                             <label htmlFor="priorityLow" className="ms-2">Medium</label>
                                         </div>
-                                        <div className='radio-btn-box'>
+                                        <div className='radio-btn-box d-flex align-items-center'>
                                             <Form.Check
                                                 type="radio"
                                                 id="priorityLow"
-                                                label="Low"
+                                              
                                                 {...register('priority', { required: "Priority is required" })}
                                                 value="Low"
                                                 isInvalid={errors.priority}
-                                                className="custom-radio"
+                                                 className="radio-group"
                                             />
+                                             <label htmlFor="priorityLow" className="ms-2">Low</label>
                                         </div>
                                     </div>
                                     <Form.Control.Feedback type="invalid">
@@ -258,38 +260,41 @@ const ServiceComplaint = () => {
                                 <Form.Group className="mb-3" controlId="formStatus">
                                     <Form.Label className='Form-Label'>Status<span className="text-danger"> *</span></Form.Label>
                                     <div className="d-flex justify-content-start">
-                                        <div className="me-3 radio-btn-box">
+                                        <div className="me-3 radio-btn-box d-flex align-items-center">
                                             <Form.Check
                                                 type="radio"
                                                 id="statusOpen"
-                                                label="Open"
+                                              
                                                 {...register('status', { required: "Status is required" })}
                                                 value="Open"
                                                 isInvalid={errors.status}
-                                                className="custom-radio"
+                                                 className="radio-group"
                                             />
+                                             <label htmlFor="priorityLow" className="ms-2">Open</label>
                                         </div>
-                                        <div className="me-3 radio-btn-box">
+                                        <div className="me-3 radio-btn-box d-flex align-items-center">
                                             <Form.Check
                                                 type="radio"
                                                 id="statusPending"
-                                                label="Pending"
+                                                
                                                 {...register('status', { required: "Status is required" })}
                                                 value="Pending"
                                                 isInvalid={errors.status}
-                                                className="custom-radio"
+                                                 className="radio-group"
                                             />
+                                             <label htmlFor="priorityLow" className="ms-2">Pending</label>
                                         </div>
-                                        <div className='radio-btn-box'>
+                                        <div className='radio-btn-box d-flex align-items-center'>
                                             <Form.Check
                                                 type="radio"
                                                 id="statusSolved"
-                                                label="Solve"
+                                                
                                                 {...register('status', { required: "Status is required" })}
                                                 value="Solve"
                                                 isInvalid={errors.status}
-                                                className="custom-radio"
+                                                 className="radio-group"
                                             />
+                                             <label htmlFor="priorityLow" className="ms-2">Solve</label>
                                         </div>
                                     </div>
                                     <Form.Control.Feedback type="invalid">

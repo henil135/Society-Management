@@ -11,8 +11,8 @@ import editIcon from '../Icons/Edit.png'
 
 function RequestTracking() {
   const [requests, setRequests] = useState([
-    // { id: 1, name: "Evelyn Harper", type: "Unethical Behavior", description: "Providing false information or", date: "20/10/2002", unit: "A", number: "1001", priority: "Medium", status: "Pending" },
-    // { id: 2, name: "Esther Howard", type: "Preventive Measures", description: "Regular waste collection services", date: "20/10/2002", unit: "B", number: "1002", priority: "High", status: "Solve" },
+    // { id: 1, name: "Evelyn Harper", type: "Unethical Behavior", description: "Providing false information or", date: "20/10/2002", unit: "A", number: "1001", Priority: "Medium", Status: "Pending" },
+    // { id: 2, name: "Esther Howard", type: "Preventive Measures", description: "Regular waste collection services", date: "20/10/2002", unit: "B", number: "1002", Priority: "High", Status: "Solve" },
   ]);
 
   const [selectedRequest, setSelectedRequest] = useState(null);
@@ -73,24 +73,24 @@ function RequestTracking() {
  
   const handleCloseViewModal = () => setShowViewModal(false);
 
-  const getPriorityByStatus = (status) => {
-    if (status === "Pending") return "Medium";
-    if (status === "Open") return "Low";
-    if (status === "Solve") return "High";
+  const getPriorityByStatus = (Status) => {
+    if (Status === "Pending") return "Medium";
+    if (Status === "Open") return "Low";
+    if (Status === "Solve") return "High";
     return "Medium";
   };
 
-  const badgeStyle = (priority) => {
-    if (priority === "High") return { backgroundColor: "#E74C3C", color: "white" };
-    if (priority === "Medium") return { backgroundColor: "#5678E9", color: "white" };
-    if (priority === "Low") return { backgroundColor: "#39973D", color: "white" };
+  const badgeStyle = (Priority) => {
+    if (Priority === "High") return { backgroundColor: "#E74C3C", color: "white" };
+    if (Priority === "Medium") return { backgroundColor: "#5678E9", color: "white" };
+    if (Priority === "Low") return { backgroundColor: "#39973D", color: "white" };
     return { backgroundColor: "#28a745", color: "white" };
   };
 
-  const statusBadgeStyle = (status) => {
-    if (status === "Pending") return { backgroundColor: " #FFC3131A", color: "#FFC313" };
-    if (status === "Open") return { backgroundColor: "#5678E91A", color: "#5678E9" };
-    if (status === "Solve") return { backgroundColor: "#39973D1A", color: "#39973D" };
+  const StatusBadgeStyle = (Status) => {
+    if (Status === "Pending") return { backgroundColor: " #FFC3131A", color: "#FFC313" };
+    if (Status === "Open") return { backgroundColor: "#5678E91A", color: "#5678E9" };
+    if (Status === "Solve") return { backgroundColor: "#39973D1A", color: "#39973D" };
     return { backgroundColor: "#f8f9fa", color: "black" };
   };
 
@@ -115,17 +115,22 @@ function RequestTracking() {
       setErrorMessage("All fields are required.");
       return;
     }
+  
     try {
       const response = await axios.post("http://localhost:5000/api/v2/requests/addrequest", newRequest);
-      setRequests((prevRequests) => [...prevRequests, response.data.request]); // Assuming `request` is returned in the response
-      setNewRequest({ Requester_name: "", Request_name: "", Request_date: "", Wing: "", Unit: "", Priority: "Medium", Status: "Open" });
-      setShowCreateModal(false);
-      setErrorMessage("");
+      if (response.status === 201) {
+        // Re-fetch the data after adding a request
+        fetchRequests(); // Assuming you have a `fetchRequests` function that fetches the latest requests
+        setNewRequest({ Requester_name: "", Request_name: "", Request_date: "", Wing: "", Unit: "", Priority: "Medium", Status: "Open" });
+        setShowCreateModal(false);
+        setErrorMessage("");
+      }
     } catch (error) {
       console.error("Error creating request:", error);
       setErrorMessage("Failed to create request. Please try again.");
     }
   };
+  
 
 
 
@@ -183,16 +188,7 @@ function RequestTracking() {
             <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mt-2 mb-4">
               <h4 className="mb-0" style={{ marginLeft: "20px" }}>Request Tracking</h4>
               <Button className="btn mainColor2 d-flex align-items-center justify-content-center p-2" style={{ marginRight: "20px", border: "none" }} onClick={handleShowCreateModal}>
-                <FaPlus
-                  style={{
-                    fontSize: "18px",
-                    borderRadius: "5px",
-                    background: "rgba(255, 255, 255, 1)",
-                    color: "#FE512E",
-                    marginRight: "8px",
-                  }}
-
-                />Create Request</Button>
+          Create Request</Button>
             </div>
             <Table style={{ width: "1535px", marginLeft: "15px" }}>
               <thead >
@@ -270,12 +266,12 @@ function RequestTracking() {
                       </span>
                     </td>
                     <td style={{ padding: "15px", textAlign: "center", verticalAlign: "middle" }}>
-                      <span className="badge" style={{ ...badgeStyle(request.priority), width: "100px", height: "31px", padding: "5px 12px", gap: "8px", borderRadius: "50px", display: "inline-flex", justifyContent: "center", alignItems: "center" }}>
+                      <span className="badge" style={{ ...badgeStyle(request.Priority), width: "100px", height: "31px", padding: "5px 12px", gap: "8px", borderRadius: "50px", display: "inline-flex", justifyContent: "center", alignItems: "center" }}>
                         {request?.Priority}
                       </span>
                     </td>
                     <td style={{ padding: "15px", textAlign: "center", verticalAlign: "middle" }}>
-                      <span style={{ ...statusBadgeStyle(request.status), width: "113px", height: "31px", padding: "5px 12px", gap: "5px", borderRadius: "50px", display: "inline-flex", justifyContent: "center", alignItems: "center" }}>
+                      <span style={{ ...StatusBadgeStyle(request.Status), width: "113px", height: "31px", padding: "5px 12px", gap: "5px", borderRadius: "50px", display: "inline-flex", justifyContent: "center", alignItems: "center" }}>
                         {request?.Status}
                       </span>
                     </td>
@@ -315,7 +311,7 @@ function RequestTracking() {
                   />
                 </Form.Group>
                 <Form.Group className='mt-2'>
-                  <Form.Label>Request Type<span className="text-danger">*</span></Form.Label>
+                  <Form.Label>Request Name<span className="text-danger">*</span></Form.Label>
                   <Form.Control
                     type="text"
                     value={newRequest.Request_name}
@@ -367,7 +363,7 @@ function RequestTracking() {
                         className='radio-group'
                         type="radio"
                         label="High"
-                        name="priority"
+                        name="Priority"
                         value="High"
                         checked={newRequest.Priority === "High"}
                         onChange={(e) => setNewRequest({ ...newRequest, Priority: e.target.value })}
@@ -378,7 +374,7 @@ function RequestTracking() {
                         className='radio-group'
                         type="radio"
                         label="Medium"
-                        name="priority"
+                        name="Priority"
                         value="Medium"
                         checked={newRequest.Priority === "Medium"}
                         onChange={(e) => setNewRequest({ ...newRequest, Priority: e.target.value })}
@@ -389,7 +385,7 @@ function RequestTracking() {
                         className='radio-group'
                         type="radio"
                         label="Low"
-                        name="priority"
+                        name="Priority"
                         value="Low"
                         checked={newRequest.Priority === "Low"}
                         onChange={(e) => setNewRequest({ ...newRequest, Priority: e.target.value })}
@@ -406,10 +402,10 @@ function RequestTracking() {
                         className='radio-group'
                         type="radio"
                         label="Open"
-                        name="status"
+                        name="Status"
                         value="Open"
                         checked={newRequest.Status === "Open"}
-                        onChange={(e) => setNewRequest({ ...newRequest, status: e.target.value })}
+                        onChange={(e) => setNewRequest({ ...newRequest, Status: e.target.value })}
                       />
                     </div>
                     <div style={{ width: "113px", height: "41px", border: "1px solid #ccc", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "5px", paddingTop: "10px", paddingRight: "15px", paddingBottom: "10px", paddingLeft: "15px" }}>
@@ -417,7 +413,7 @@ function RequestTracking() {
                         className='radio-group'
                         type="radio"
                         label="Pending"
-                        name="status"
+                        name="Status"
                         value="Pending"
                         checked={newRequest.Status === "Pending"}
                         onChange={(e) => setNewRequest({ ...newRequest, Status: e.target.value })}
@@ -427,10 +423,10 @@ function RequestTracking() {
                       <Form.Check
                         className='radio-group'
                         type="radio"
-                        label="Solved"
-                        name="status"
-                        value="Solved"
-                        checked={newRequest.Status === "Solved"}
+                        label="Solve"
+                        name="Status"
+                        value="Solve"
+                        checked={newRequest.Status === "Solve"}
                         onChange={(e) => setNewRequest({ ...newRequest, Status: e.target.value })}
                       />
                     </div>
@@ -680,8 +676,8 @@ function RequestTracking() {
                           textAlign: "center",
                           padding: "2px 10px",
                           borderRadius: "50px",
-                          backgroundColor: statusBadgeStyle(selectedRequest.Status).backgroundColor,
-                          color: statusBadgeStyle(selectedRequest.Status).color
+                          backgroundColor: StatusBadgeStyle(selectedRequest.Status).backgroundColor,
+                          color: StatusBadgeStyle(selectedRequest.Status).color
                         }}
                       >
                         {selectedRequest.Status}
@@ -723,7 +719,7 @@ function RequestTracking() {
                   />
                 </Form.Group>
                 <Form.Group className='mt-2'>
-                  <Form.Label>Request Type<span className="text-danger">*</span></Form.Label>
+                  <Form.Label>Request Name<span className="text-danger">*</span></Form.Label>
                   <Form.Control
                     type="text"
                     value={selectedRequest?.Request_name || ""}
@@ -798,7 +794,7 @@ function RequestTracking() {
                         type="radio"
                         style={{ border: "1px solid rgba(211, 211, 211, 1)", paddingLeft: "30px", paddingTop: "8px", paddingBottom: "8px", paddingRight: "30px", borderRadius: "5px" }}
                         label={Priority}
-                        name="priority"
+                        name="Priority"
                         value={Priority}
                         checked={selectedRequest?.Priority === Priority}
                         onChange={(e) =>
@@ -815,13 +811,13 @@ function RequestTracking() {
                 <Form.Group className='mt-2'>
                   <Form.Label>Status<span className="text-danger">*</span></Form.Label>
                   <div className="d-flex justify-content-around">
-                    {["Open", "Pending", "Resolved"].map((Status) => (
+                    {["Open", "Pending", "Solve"].map((Status) => (
                       <Form.Check
                         className='radio-group'
                         type="radio"
                         style={{ border: "1px solid rgba(211, 211, 211, 1)", paddingLeft: "30px", paddingTop: "8px", paddingBottom: "8px", paddingRight: "30px", borderRadius: "5px" }}
                         label={Status}
-                        name="status"
+                        name="Status"
                         value={Status}
                         checked={selectedRequest?.Status === Status}
                         onChange={(e) =>

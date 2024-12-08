@@ -74,90 +74,92 @@ function TotalBalanceChart() {
 
     const [contacts, setContacts] = useState([]);
 
-    const ViewNumber = async () => {
-        try {
-            // Make a GET request to your backend endpoint
-            const response = await axios.get("http://localhost:5000/api/v2/important-numbers/getnumber");
+// Fetch contacts when the component mounts
+const ViewNumber = async () => {
+    try {
+        const response = await axios.get("http://localhost:5000/api/v2/important-numbers/getnumber");
 
-            // Log and update state with the retrieved data
+        if (response.status === 200) {
+            console.log("API Response:", response.data.data);
+            setContacts(response.data.data); // Update the state with fetched contacts
+        } else {
+            console.error("Failed to retrieve important numbers:", response.data.message);
+        }
+    } catch (error) {
+        console.error("Error fetching important numbers:", error.message);
+    }
+};
+
+// Call ViewNumber once when the component mounts
+useEffect(() => {
+    ViewNumber();
+}, []);
+
+// Modal and form state
+const [show, setShow] = useState(false);
+const { register, handleSubmit, formState: { errors }, reset } = useForm();
+const [editIndex, setEditIndex] = useState(null);
+
+// Show modal
+const handleShow = () => setShow(true);
+
+// Close modal
+const handleClose = () => {
+    setShow(false);
+    reset(); // Reset the form fields
+    setEditIndex(null); // Reset the edit index
+};
+
+// Add or edit a contact
+const onSubmit = async (data) => {
+    try {
+        if (editIndex !== null) {
+            // Update existing contact
+            const contactToEdit = contacts[editIndex];
+            const response = await axios.put(`http://localhost:5000/api/v2/important-numbers/${contactToEdit._id}`, data);
+
             if (response.status === 200) {
-                console.log("API Response:", response.data.data); // Logs the retrieved data
-                setContacts(response.data.data); // Save data in state
+                // Optimistically update the UI with the edited contact
+                const updatedContacts = contacts.map((contact, index) =>
+                    index === editIndex ? { ...contact, ...data } : contact
+                );
+                setContacts(updatedContacts);
+                console.log('Number updated successfully:', response.data.message);
             } else {
-                console.error("Failed to retrieve important numbers:", response.data.message);
+                console.error('Failed to update number:', response.data.message);
             }
-        } catch (error) {
-            console.error("Error fetching important numbers:", error.message);
-        }
-    };
-
-    // Call ViewNumber once when the component mounts
-    useEffect(() => {
-        ViewNumber();
-    }, []);
-
-    const [show, setShow] = useState(false);
-
-    const { register, handleSubmit, formState: { errors }, reset } = useForm();
-
-    const [editIndex, setEditIndex] = useState(null);
-
-    const handleShow = () => setShow(true);
-
-    const handleClose = () => {
-        setShow(false);
-        reset();
-        setEditIndex(null);
-        // setContacts()
-    };
-    const onSubmit = async (data) => {
-        try {
-            if (editIndex !== null) {
-                // Update an existing contact
-                const contactToEdit = contacts[editIndex];
-                const response = await axios.put(`http://localhost:5000/api/v2/important-numbers/${contactToEdit._id}`, data);
-
-                if (response.status === 200) {
-                    const updatedContacts = contacts.map((contact, index) =>
-                        index === editIndex ? { ...contact, ...data } : contact
-                    );
-                    setContacts(updatedContacts);
-                    console.log('Number updated successfully:', response.data.message);
-                } else {
-                    console.error('Failed to update number:', response.data.message);
-                }
-            } else {
-                // Add a new contact
-                const response = await axios.post("http://localhost:5000/api/v2/important-numbers/create", data);
-                if (response.status === 200) {
-                    setContacts([...contacts, response.data.data]);
-                    console.log('Number added successfully:', response.data.message);
-                }
+        } else {
+            // Add new contact
+            const response = await axios.post("http://localhost:5000/api/v2/important-numbers/create", data);
+            if (response.status === 200) {
+                // Optimistically add the new contact to the state
+                setContacts([...contacts, response.data.data]);
+                console.log('Number added successfully:', response.data.message);
             }
-        } catch (error) {
-            console.error('Error updating/creating number:', error.message);
         }
+        // Re-fetch data to ensure the latest state (optional)
+        await ViewNumber(); // Fetch latest data from the backend after the operation
+    } catch (error) {
+        console.error('Error updating/creating number:', error.message);
+    }
 
-        handleClose(); // Close modal after submission
-    };
+    handleClose(); // Close the modal after submission
+};
 
+// Handle editing a contact
+const handleEdit = (index) => {
+    const contact = contacts[index];
+    setEditIndex(index);
+    setShow(true); // Show modal for editing
 
+    // Populate the form with contact details for editing
+    reset({
+        fullName: contact.fullName,
+        phoneNumber: contact.phoneNumber,
+        work: contact.work,
+    });
+};
 
-
-
-    // Handle editing a contact
-    const handleEdit = (index) => {
-        const contact = contacts[index];
-        setEditIndex(index);
-        setShow(true);
-
-        // Populate the form with contact details for editing
-        reset({
-            fullName: contact.fullName,
-            phoneNumber: contact.phoneNumber,
-            work: contact.work,
-        });
-    };
 
     // New state for delete confirmation modal
     const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -226,9 +228,9 @@ function TotalBalanceChart() {
                             <h2>Total Balance</h2>
                            <div>
                            <select className='month-btn rounded-2 d-flex align-items-center bg-light text-dark'>
-                                    <option>Last week</option>
-                                    <option>Last month</option>
-                                    <option>Last year</option>
+                                    <option> month</option>
+                                    <option> week</option>
+                                    <option>year</option>
                                 </select>
                            </div>
 

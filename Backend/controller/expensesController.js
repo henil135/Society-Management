@@ -23,12 +23,11 @@ exports.createExpense = async (req, res) => {
                         const result = await cloudinary.uploader.upload(filePath);
                         // Delete from local server
                         fs.unlink(filePath, (err) => {
-                            if (err) console.error("Error deleting file from server:", err);
-                            else console.log("File deleted from server:", filePath);
+            
                         });
                         return result.secure_url;
                     } catch (error) {
-                        console.error("Error uploading to Cloudinary:", error);
+
                         throw error;
                     }
                 }
@@ -60,7 +59,7 @@ exports.createExpense = async (req, res) => {
             
         });
     } catch (error) {
-        console.error("Error adding expenses data:", error);
+
        return res.status(500).json({
             success: false,
             message: "Failed to add Expenses data"
@@ -82,7 +81,6 @@ exports.GetAllExpenses= async(req,res)=>{
             Expense:find
         })
     } catch (error) {
-        console.error(error);
         return res.status(500).json({
              success: false,
              message: "Failed to add expenses data"
@@ -122,12 +120,10 @@ const uploadAndDeleteLocal = async (fileArray) => {
             const result = await cloudinary.uploader.upload(filePath);
             // Delete from local server
             fs.unlink(filePath, (err) => {
-                if (err) console.error("Error deleting file from server:", err);
-                else console.log("File deleted from server:", filePath);
             });
             return result.secure_url;
         } catch (error) {
-            console.error("Error uploading to Cloudinary:", error);
+
             throw error;
         }
     }
@@ -199,7 +195,6 @@ exports.DeleteExpense = async (req, res) => {
             message: "Expense deleted successfully"
         });
     } catch (error) {
-        console.error("Error deleting expense data:", error);
         return res.status(500).json({
             success: false,
             message: "Failed to delete expense data"

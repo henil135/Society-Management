@@ -10,7 +10,7 @@ import income from '../../assets/total-income.png'
 import incomeRactangle from '../../assets/Rectangle 1063 (1).png'
 import penaltyRectangle from '../../assets/penaltyRectangle.png'
 import residentprofile from '../../assets/resident-profile.png'
-import { FaImage } from "react-icons/fa";
+import imgIcon from '../../Icons/Component 54.png'
 
 const PersonalDetail = () => {
 
@@ -119,7 +119,7 @@ const PersonalDetail = () => {
                                                 >
 
                                                     <div className="d-flex align-items-center mb-3 bg-light py-2 px-3 border rounded">
-                                                        <div className="text-primary pe-3"><FaImage /></div>
+                                                        <div className="text-primary pe-3"><img src={imgIcon} /></div>
                                                         <div>
                                                             <p className="font-semibold text-gray-800 text-lg mb-0">
                                                                 Essential Aadharcard Front Side.JPG
@@ -131,7 +131,7 @@ const PersonalDetail = () => {
                                                     </div>
 
                                                     <div className="d-flex align-items-center mb-3 bg-light py-2 px-3 border rounded">
-                                                        <div className="text-primary pe-3"><FaImage /></div>
+                                                        <div className="text-primary pe-3"><img src={imgIcon} /></div>
                                                         <div>
                                                             <p className="font-semibold text-gray-800 text-lg mb-0">
                                                                 Essential Aadharcard Front Side.JPG
@@ -220,11 +220,12 @@ const PersonalDetail = () => {
 
                                 <div className="amount-card mt-3">
                                     <div>
-                                        <h3 className="mb-0 financial-income-title mb-3 mb-md-0">Show Maintenance Details</h3>
+                                        <h3 className="mb-0 financial-income-title 
+                                        mb-3 mb-md-0">Show Maintenance Details</h3>
                                     </div>
                                     <div className="row d-flex">
                                         <div className="col-12 col-md-6 owner-card">
-                                            <div className="card ps-4 py-3">
+                                            <div className="card ps-4 py-3 border-0 border-card" style={{ boxShadow: '0px 0px 40px 0px #0000000F' }}>
                                                 <img src={incomeRactangle} width={8} className="position-absolute start-0" />
                                                 <div>
                                                     <h6 className="card-subtitle mb-1">Maintenance Amount</h6>
@@ -233,11 +234,11 @@ const PersonalDetail = () => {
                                             </div>
                                         </div>
                                         <div className="col-12 col-md-6 owner-card">
-                                            <div className="card px-4 py-3">
-                                            <img src={balanceRactangle} width={8} className="position-absolute start-0" />
+                                            <div className="card px-4 py-3 border-0 border-card" style={{ boxShadow: '0px 0px 40px 0px #0000000F' }}>
+                                                <img src={balanceRactangle} width={8} className="position-absolute start-0" />
                                                 <div>
-                                                <h6 className="card-subtitle mb-1">Penalty Amount</h6>
-                                                <p className="mb-0 text-danger">₹ 500</p>
+                                                    <h6 className="card-subtitle mb-1">Penalty Amount</h6>
+                                                    <p className="mb-0 text-danger">₹ 500</p>
                                                 </div>
                                             </div>
                                         </div>

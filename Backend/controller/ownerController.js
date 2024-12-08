@@ -53,12 +53,11 @@ exports.addOwnerData = async (req, res) => {
                     const result = await cloudinary.uploader.upload(filePath);
                     // Delete from local server
                     fs.unlink(filePath, (err) => {
-                        if (err) console.error("Error deleting file from server:", err);
-                        else console.log("File deleted from server:", filePath);
+                       
                     });
                     return result.secure_url;
                 } catch (error) {
-                    console.error("Error uploading to Cloudinary:", error);
+
                     throw error;
                 }
             }
@@ -144,9 +143,7 @@ exports.addOwnerData = async (req, res) => {
 
         try {
             await transporter.sendMail(mailOptions);
-        } catch (emailError) {
-            console.error("Error sending email:", emailError);
-        }
+        } catch (emailError) {        }
 
         if (Member_Counting) {
             let members;
@@ -154,7 +151,6 @@ exports.addOwnerData = async (req, res) => {
                 try {
                     members = JSON.parse(Member_Counting); // Parse only if it's a JSON string
                 } catch (parseError) {
-                    console.error("Invalid JSON in Member_Counting:", parseError);
                     return res.status(400).json({
                         success: false,
                         message: "Invalid format for Member_Counting.",
@@ -204,7 +200,6 @@ exports.addOwnerData = async (req, res) => {
 
         });
     } catch (error) {
-        console.error("Error adding owner data:", error);
        return res.status(500).json({
             success: false,
             message: "Failed to add owner data"
@@ -251,7 +246,7 @@ exports.OwnerLogin = async (req, res) => {
             token,
         });
     } catch (error) {
-        console.error("Error in login controller", error.message);
+
         res.status(500).json({ success: false, message: "Internal server error" });
     }
 };
@@ -270,7 +265,7 @@ exports.GetAllOwner = async (req, res) => {
             Owner: find
         })
     } catch (error) {
-        console.error(error);
+
         return res.status(500).json({
             success: false,
             message: "Failed to add owner data"
@@ -281,6 +276,6 @@ exports.GetAllOwner = async (req, res) => {
 // owner profile
 exports.ownerProfile = async (req, res) => {
     let data = await Owner.findById(req.owner);
-    console.log("my data", data);
+
     res.json(data);
 }

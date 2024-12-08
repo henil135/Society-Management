@@ -72,7 +72,7 @@ input[type=email]:focus,
 .form-group input,
 .form-group select {
   border-radius: 10px;
- 
+
   border: 1px solid #D3D3D3;
   padding: 9px 13px;
   height: 43.6px;
@@ -223,9 +223,39 @@ input[type=checkbox]:focus {
 
 .notification-dropdown {
   border-radius: 6px;
-  max-height: 741px;
+  /* max-height: 741px; */
   overflow-y: auto;
   font-size: 0.9rem;
+  width: 540px;
+  position: absolute;
+  right: 150px;
+  top: 90px;
+  z-index: 1000;
+}
+
+.notificationButton-timestamp {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+
+@media (max-width: 575px) {
+  .notification-dropdown {
+    width: 100vw;
+    position: absolute;
+    right: 0px;
+    top: 90px;
+    height: 100vh;
+  }
+
+  .notificationButton-timestamp {
+    display: block;
+  }
+
+  .notification-timestamp{
+    display: flex;
+    justify-content: end;
+  }
 }
 
 .notification-dropdown ul {
@@ -271,10 +301,10 @@ input:focus {
 }
 
 .notification-icon {
-  border: 1px solid rgba(211, 211, 211, 1)
+  border: 1px solid rgba(211, 211, 211, 1);
 }
 
-.search-input::placeholder{
+.search-input::placeholder {
   color: rgba(167, 167, 167, 1) !important;
 }
 
@@ -291,6 +321,13 @@ input:focus {
 .dashboard-bg {
   background: #F0F5FB !important;
   min-height: 100vh;
+  width: 1600px;
+}
+
+@media (max-width: 576px) {
+  .dashboard-bg {
+    width: 100%; 
+  }
 }
 
 .card h6 {
@@ -313,7 +350,7 @@ input:focus {
   height: 450px;
 }
 
-.chart-container h2{
+.chart-container h2 {
   font-size: 20px;
   font-weight: 600;
 }
@@ -321,7 +358,7 @@ input:focus {
 
 /* important members start */
 
-.important-member{
+.important-member {
   height: 450px;
 }
 
@@ -329,25 +366,26 @@ input:focus {
   color: #ef4444;
 }
 
-.important-member h2{
+.important-member h2 {
   font-size: 20px;
   font-weight: 600;
 }
 
-.add-btn{
+.add-btn {
   padding: 4px;
   font-size: 18px;
   font-weight: 600;
   border: none;
   color: white !important;
   background: linear-gradient(90deg, #FE512E 0%, #F09619 100%) !important;
-  border: none !important;  
+  border: none !important;
 }
 
-.important-member p{
+.important-member p {
   font-size: 13px;
   font-weight: 400 !important;
-  color: rgba(167, 167, 167, 1);}
+  color: rgba(167, 167, 167, 1);
+}
 
 .important-member strong {
   color: black;
@@ -383,32 +421,32 @@ input:focus {
 
 /* maintenances start */
 
-.maintenances{
+.maintenances {
   height: 450px;
 }
 
-.maintenances h2{
+.maintenances h2 {
   font-size: 20px;
   font-weight: 600;
 }
 
-.maintenances p{
+.maintenances p {
   font-size: 14px;
   font-weight: 600;
 }
 
-.maintenances h6{
+.maintenances h6 {
   color: rgba(231, 76, 60, 1);
   font-weight: 700;
   font-size: 16px;
 }
 
-.maintenances .maintenances-p{
+.maintenances .maintenances-p {
   font-size: 14px;
   font-weight: 500;
 }
 
-.maintenances .maintenances-panding{
+.maintenances .maintenances-panding {
   font-size: 12px;
   font-weight: 400;
   color: rgba(167, 167, 167, 1);
@@ -417,30 +455,31 @@ input:focus {
 
 /* activity start */
 
-.maintenances .activity-date{
+.maintenances .activity-date {
   font-size: 14px;
   font-weight: 400;
   color: rgba(79, 79, 79, 1);
 }
 
-.month-btn{
-    padding: 4px !important;
-    font-size: 18px;
-    font-weight: 600;
-    border: none;
-    border: 1px solid rgba(211, 211, 211, 1) !important;
-    padding: 12px 14px;
+.month-btn {
+  padding: 4px !important;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  border: 1px solid rgba(211, 211, 211, 1) !important;
+  padding: 12px 14px;
 }
 
 /* table complaint */
 
 
-.Complaint-table{
+.Complaint-table {
   height: 378px;
   overflow-y: auto;
 }
 
-.table td, .table th {
+.table td,
+.table th {
   vertical-align: middle;
 }
 
@@ -458,24 +497,24 @@ input:focus {
 
 } */
 
-.priority-btn{
+.priority-btn {
   width: 100px;
   height: 31px;
   font-size: 14px;
   font-weight: 500;
   color: white !important;
   border-radius: 20px !important;
-  border: none !important; 
+  border: none !important;
 }
 
-.status-btn{
+.status-btn {
   width: 113px;
   height: 31px !important;
   font-size: 14px;
   font-weight: 500;
   border-radius: 20px !important;
-  border: none !important; 
-  
+  border: none !important;
+
 }
 
 /* Centered Add Form Modal */
@@ -484,17 +523,17 @@ input:focus {
   max-width: 410px;
 }
 
-.custom-modal .Modal-Title{
+.custom-modal .Modal-Title {
   font-size: 20px !important;
   font-weight: 600 !important;
 }
 
-.custom-modal .Form-Label{
+.custom-modal .Form-Label {
   font-size: 14px !important;
   font-weight: 500 !important;
 }
 
-.custom-modal .Form-Control{
+.custom-modal .Form-Control {
   font-size: 14px;
   font-weight: 400;
   color: rgba(167, 167, 167, 1);
@@ -503,8 +542,8 @@ input:focus {
 
 /* delete modal */
 
-.delete{
-  /* background: rgba(246, 248, 251, 1) !important; */
+.delete {
+  background: #E74C3C !important;
   color: rgba(32, 34, 36, 1) !important;
   padding: 12px 53px;
   border-radius: 10px;
@@ -513,22 +552,31 @@ input:focus {
   font-size: 18px;
   font-weight: 600 !important;
   border: none !important;
+  color: white !important;
 }
 
-.delete:hover{
+.delete:hover {
   background-color: rgba(231, 76, 60, 1) !important;
-  /* color: white !important; */
+}
+
+@media (max-width: 575px) {
+  .delete{
+    width: 150px;
+  }
+  .cancle {
+    width: 150px;
+  }
 }
 
 /* edit modal */
 
-.custom-modal .Form-p{
+.custom-modal .Form-p {
   font-size: 14px;
   font-weight: 400;
   color: rgba(167, 167, 167, 1);
 }
 
-.radio-btn-box{
+.radio-btn-box {
   border: 1px solid rgba(211, 211, 211, 1);
   padding: 10px 15px;
   border-radius: 10px;
@@ -539,7 +587,7 @@ input:focus {
   color: rgba(167, 167, 167, 1);
 }
 
-.custom-radio .form-check-input:checked{
+.custom-radio .form-check-input:checked {
   background-color: rgb(255, 165, 0);
   border: none;
 }
@@ -553,18 +601,18 @@ input:focus {
 
 /* view modal */
 
-.view-p{
+.view-p {
   font-size: 18px;
   font-weight: 600;
 }
 
-.view-span{
+.view-span {
   font-size: 16px;
   font-weight: 500;
   color: rgba(167, 167, 167, 1);
 }
 
-.view-strong{
+.view-strong {
   font-size: 16px;
   font-weight: 400;
   color: rgba(167, 167, 167, 1);
@@ -573,23 +621,23 @@ input:focus {
 
 /* navbar start */
 
-.home-routing{
+.home-routing {
   color: rgba(167, 167, 167, 1);
   font-weight: 400;
   font-size: 18px;
 }
 
-.home-routing-span{
+.home-routing-span {
   color: rgba(32, 34, 36, 1);
   width: 12px !important;
   display: inline-block !important;
 }
 
-.current-page-routing{
+.current-page-routing {
   color: rgba(86, 120, 233, 1);
 }
 
-.navbar-span{
+.navbar-span {
   font-size: 16px;
   font-weight: 700;
   color: black;
@@ -597,11 +645,11 @@ input:focus {
 
 /* financial management start */
 
-.financial-amt-card-shadow{
+.financial-amt-card-shadow {
   box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.06);
 }
 
-.set-maintainance-btn{
+.set-maintainance-btn {
   background: linear-gradient(90deg, #FE512E 0%, #F09619 100%);
   border-radius: 10px;
   color: white;
@@ -610,7 +658,7 @@ input:focus {
   font-weight: 600;
 }
 
-.amt{
+.amt {
   color: rgba(57, 151, 61, 1);
   font-weight: 500;
   font-size: 16px;
@@ -629,7 +677,7 @@ input:focus {
   align-items: center;
 }
 
-.financial-penalty-btn{
+.financial-penalty-btn {
   width: 65px;
   height: 30px !important;
   font-size: 14px !important;
@@ -642,13 +690,13 @@ input:focus {
   align-items: center;
 }
 
-.financial-Pnumber{
+.financial-Pnumber {
   color: rgba(79, 79, 79, 1) !important;
   font-size: 16px;
   font-weight: 500;
 }
 
-.exp-amt-color{
+.exp-amt-color {
   color: rgba(57, 151, 61, 1) !important;
 }
 
@@ -656,21 +704,23 @@ input:focus {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: 28px; 
-  height: 28px; 
+  width: 28px;
+  height: 28px;
   font-size: 14px;
   font-weight: 700;
   color: rgba(86, 120, 233, 1);
   background: rgba(246, 248, 251, 1);
-  border-radius: 50%; 
+  border-radius: 50%;
 }
 
+
 .financial-income-title{
-  font-size: 25px;
+  font-size: 20px;
+
   font-weight: 600;
 }
 
-.financial-maintainance-table{
+.financial-maintainance-table {
   max-height: 545px !important;
   overflow-y: auto !important;
   overflow-x: hidden !important;
@@ -681,17 +731,16 @@ input:focus {
   font-weight: 600 !important;
   padding: 18px 8px !important;
   width: 135px;
- 
   border-top-left-radius: 10px !important;
   border-top-right-radius: 10px !important;
 }
 
-.maintainance-income-btn-bg{
+.maintainance-income-btn-bg {
   background: linear-gradient(90deg, #FE512E 0%, #F09619 100%) !important;
   color: #fff !important;
 }
 
-.maintainance-income-btn-withoutbg{
+.maintainance-income-btn-withoutbg {
   color: black !important;
   background-color: white !important;
   border-bottom: 2px solid orange !important;
@@ -703,39 +752,41 @@ input:focus {
   color: #fff !important;
 }
 
-.pdf-btn{
+.pdf-btn {
   color: rgba(231, 76, 60, 1);
 }
 
-.jpg-btn{
+.jpg-btn {
   color: #007bff;
 }
 
 
 
-.card-des{
+.card-des {
   font-size: 14px !important;
   font-weight: 400 !important;
 }
 
-.card-des-title{
+.card-des-title {
   font-size: 14px !important;
   font-weight: 500 !important;
   color: rgba(79, 79, 79, 1);
 }
 
-.card-header-btn{
+.card-header-btn {
   color: rgba(86, 120, 233, 1) !important;
 }
 
 
 /* profile start */
 
-.profile-dashboard-bg{
+.profile-dashboard-bg {
   height: 100vh !important;
+  width: 1910px;
+  overflow-x: hidden !important;
 }
 
-.profile-bg{
+.profile-bg {
   background-image: url('./assets/profile-bg.png');
   background-position: center;
   background-repeat: no-repeat;
@@ -743,7 +794,28 @@ input:focus {
   height: 309px !important;
 }
 
-.profile-btn{
+.profile-form{
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 576px) {
+  .profile-dashboard-bg {
+    width: 100vw;
+  }
+  .profile-form{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .profile-img-section{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+}
+
+
+.profile-btn {
   background: linear-gradient(90deg, #FE512E 0%, #F09619 100%);
   color: white !important;
   /* padding: 12px 15px !important; */
@@ -752,23 +824,23 @@ input:focus {
   border-radius: 10px !important;
 }
 
-.profile-title{
+.profile-title {
   font-size: 20px;
   font-weight: 600;
 }
 
-.other-income-btn{
+.other-income-btn {
   font-size: 18px !important;
 }
 
-.card-body-title{
+.card-body-title {
   font-size: 14px !important;
   font-weight: 400 !important;
   color: rgba(79, 79, 79, 1);
 }
 
 
-.card-body-button{
+.card-body-button {
   color: rgba(86, 120, 233, 1) !important;
   background-color: rgba(86, 120, 233, 0.1) !important;
   padding: 5px 10px;
@@ -778,26 +850,26 @@ input:focus {
 /* other income dropdown start */
 
 .dropdown-menu {
-    width: 120px !important;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 0;
+  width: 120px !important;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 0;
 }
 
 .dropdown-item {
-    padding: 10px 0 0 10px !important;
-    cursor: pointer;
-    font-size: 14px !important;
-    font-weight: 400 !important;
-    color: rgba(167, 167, 167, 1) !important;
-    transition: all 0.2s !important;
-    margin-top: 0px !important;
+  padding: 10px 0 0 10px !important;
+  cursor: pointer;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  color: rgba(167, 167, 167, 1) !important;
+  transition: all 0.2s !important;
+  margin-top: 0px !important;
 }
 
 .dropdown-item:hover {
-    color: black !important;
-    font-weight: 600 !important;
+  color: black !important;
+  font-weight: 600 !important;
 }
 
 .dropdown-item:focus {
@@ -805,7 +877,7 @@ input:focus {
 }
 
 .dropdown-item.text-danger {
-    color: red;
+  color: red;
 }
 
 
@@ -815,26 +887,26 @@ input:focus {
   overflow-x: hidden;
 }
 
-.anouncement-icon{
+.anouncement-icon {
   bottom: 40px;
   right: 28px;
 }
 
-.anouncement-view-title{
+.anouncement-view-title {
   font-size: 16px;
   font-weight: 400;
   color: rgba(167, 167, 167, 1);
 }
 
-.anouncement-view-p{
+.anouncement-view-p {
   font-size: 18px;
   font-weight: 400 !important;
 }
 
 /* personal details */
-.text-gray{
+.text-gray {
   color: #A7A7A7;
-  font-weight: 400;
+  font-weight: 400;
 }
 
 .amount-card {
@@ -850,38 +922,46 @@ input:focus {
   background: #FFFFFF;
 }
 
-.owner-card{
+.owner-card {
   width: 300px !important;
 }
 
 @media (max-width: 576px) {
   .amount-card {
-    display: block  
+    display: block
   }
 }
 
 @media (max-width: 1324px) {
-  .owner-card{
+  .owner-card {
     margin-bottom: 10px;
     width: 100% !important;
   }
 }
 
-.Owner1{
+.Owner1 {
   background: #FFFFFF1A;
   color: #ffffff;
 }
+
 .badge1 {
   display: inline-block;
   padding: 6px 12px;
   border-radius: 20px;
   font-size: 14px;
-  text-align: center; /* Center text within badge */
+  text-align: center;
+  /* Center text within badge */
 }
 
- /* service and complaint  */
- .complaint-btn{
+/* service and complaint  */
+.complaint-btn {
   width: 183px !important;
+}
+
+@media (max-width: 575px) {
+  .complaint-btn{
+    width: 150px !important;
+  }
 }
 
 
@@ -900,12 +980,12 @@ input:focus {
   align-items: center;
   padding: 10px;
   margin-bottom: 10px;
- 
+
   border-radius: 8px;
   cursor: pointer;
 }
 
-.payment-option{
+.payment-option {
   box-shadow: 0px 0px 35px 0px rgba(0, 0, 0, 0.07);
 }
 
@@ -1031,7 +1111,7 @@ input:focus {
 
 /* community discussion */
 
-.ask-que-btn{
+.ask-que-btn {
   background: linear-gradient(90deg, #FE512E 0%, #F09619 100%);
   color: white !important;
   padding: 12px 14px !important;
@@ -1041,75 +1121,126 @@ input:focus {
   font-weight: 600 !important;
 }
 
-.community-card{
+.post-ans-btn{
+  background: linear-gradient(90deg, #FE512E 0%, #F09619 100%);
+  color: white !important;
+  padding: 12px 14px !important;
+  width: 236px !important;
+  height: 51px !important;
+  border: none !important;
+  font-weight: 600 !important;
+}
+
+.community-card {
   background: rgba(86, 120, 233, 0.1);
 }
 
-.community-votes{
+.community-votes {
   color: rgba(167, 167, 167, 1);
 }
 
-.community-que{
+.community-que {
   font-size: 16px;
   font-weight: 500 !important;
 }
 
-.community-ans{
+.community-ans {
   font-weight: 300;
   color: rgba(167, 167, 167, 1);
 }
 
-.community-view{
+.community-view {
   font-size: 14px !important;
   font-weight: 400;
   color: rgba(79, 79, 79, 1);
   width: 61px;
 }
 
-.community-icon{
+.community-icon {
   font-size: 16px;
 }
 
-.community-que-input::placeholder{
+.community-que-input::placeholder {
   color: rgba(167, 167, 167, 1) !important;
   font-size: 16px !important;
 }
 
-.community-que-input{
+.community-que-input {
   border: 1px solid rgba(86, 120, 233, 1) !important;
   box-shadow: 0px 0px 0px 3px rgba(209, 219, 255, 1);
 }
 
-.good-question-title{
+.good-question-title {
   color: rgba(79, 79, 79, 1);
   font-size: 20px;
   font-weight: 400;
 }
 
-.good-question-p{
+.good-question-p {
   font-weight: 400;
 }
 
 /* for responsive all page */
 
-.marginLeft{
-  margin-left: 300px;
+.marginLeft {
+  margin-left: 300px !important;
 }
 
 @media (max-width: 576px) {
-  .marginLeft{
-    margin-left: 0px;
+  .marginLeft {
+    margin-left: 0px !important;
   }
 }
 
 /* for responsive navbar */
 
-.navbar-marginLeft{
+.navbar-marginLeft {
   margin-left: 325px !important;
 }
 
 @media (max-width: 576px) {
-  .navbar-marginLeft{
+  .navbar-marginLeft {
     margin-left: 0px !important;
   }
 }
+
+/* announcement start */
+
+.announcement-type{
+  border: 1px solid rgba(211, 211, 211, 1) !important;
+  box-shadow: none !important; 
+  outline: none; 
+}
+
+.announcement-type:focus{
+  border: 1px solid red !important;
+}
+
+/* .border-card {
+  position: relative;
+}
+
+.border-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 2px;
+  height: 40px;
+  background-color: red;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px; 
+}
+
+.border-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 2px;
+  background-color: red; 
+  border-top-right-radius: 12px;
+} */
+

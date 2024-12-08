@@ -3,7 +3,7 @@ const bcryptjs = require("bcryptjs");
 const { generateTokenAndSetCookie } = require("../config/auth");
 const otpGenerator = require('otp-generator');
 const senData = require("../config/mailer"); // Adjust the path accordingly
-const jwt = require("jsonwebtoken")
+const jwt = require('jsonwebtoken');
 
 
 // Registration page
@@ -100,20 +100,20 @@ exports.Adminlogin = async (req, res) => {
     const isPasswordCorrect = await bcryptjs.compare(password, user.Password);
 
     if (!isPasswordCorrect) {
-      return res.status(400).json({ success: false, message: "Invalid credentials" });
+      return res.status(400).json({ success: false, message: "Password is incorrect" });
     }
 
     generateTokenAndSetCookie(user._id, res);
-    const token = jwt.sign({ _id: user._id , role:"admin"}, process.env.JWT_SECRET_OWNER, {
+    const token = jwt.sign({ _id: user._id , role:"admin"}, process.env.JWT_SECRET, {
       expiresIn: "15d",
     });
-    // res.cookie("Token",token)
+    res.cookie("admintoken",token)
     res.status(200).json({
       success: true,
       message: "Login successful! Welcome back.",
     })
   } catch (error) {
-    console.log("Error in login controller", error.message);
+
     res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
@@ -124,49 +124,12 @@ exports.logout = async (req, res) => {
     res.clearCookie("Society-Management-System");
     res.status(200).json({ success: true, message: "Logged out successfully" });
   } catch (error) {
-    console.log("Error in logout controller", error.message);
+
     res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
 
 // Reset Password
-// exports.resetPassword = async (req, res) => {
-//   try {
-//     const { email, newPassword, confirmPassword } = req.body;
-//     const id = req.params.id;
-
-//     if (!newPassword || !confirmPassword) {
-//       return res.status(400).json({ success: false, message: "All fields are required" });
-//     }
-
-//     // Find user by email
-//     const finddata = await User.findOne({ Email_Address: email });
-//     if (!finddata) {
-//       return res.status(404).json({ success: false, message: "User not found" });
-//     }
-
-//     if (newPassword !== confirmPassword) {
-//       return res.status(400).json({ success: false, message: "Passwords do not match" });
-//     }
-
-//     // Hash the new password
-//     const salt = await bcryptjs.genSalt(10);
-//     const hashedPassword = await bcryptjs.hash(newPassword, salt);
-
-//     // Update user's password
-//     finddata.Password = hashedPassword;
-//     await finddata.save();
-
-//     return res.status(200).json({
-//       success: true,
-//       message: "Password reset successfully",
-//     });
-//   } catch (error) {
-//     console.log("Error in reset password controller:", error.message);
-//     return res.status(500).json({ success: false, message: "Internal server error" });
-//   }
-// };
-
 exports.resetPassword = async (req, res) => {
   try {
     const { EmailOrPhone, newPassword, confirmPassword } = req.body;
@@ -198,7 +161,7 @@ exports.resetPassword = async (req, res) => {
       message: "Password reset successfully",
     });
   } catch (error) {
-    console.error("Error in reset password controller:", error.message);
+    console.log("Error in reset password controller:", error.message);
     return res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
@@ -278,7 +241,7 @@ exports.SendOtp = async (req, res) => {
     }
 
   } catch (error) {
-    console.log(error);
+ 
     return res.status(500).json({
       success: false,
       message: "Internal server error"
@@ -324,7 +287,7 @@ exports.verifyOtp = async (req, res) => {
     });
 
   } catch (error) {
-    console.log(error);
+   
     return res.status(500).json({
       success: false,
       message: "Internal server error"

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.js";
 import { Link, useLocation } from "react-router-dom";
 import { FaSignOutAlt, FaBars } from "react-icons/fa";
 import "../../style.css";
@@ -81,7 +82,7 @@ function SecuritySidebar() {
   return (
     <div style={{fontSize:'14px'}}>
       <button
-        className="btn btn-primary d-sm-none d-md-none d-lg-none"
+        className="btn d-sm-none d-md-none d-lg-none"
         onClick={() => setSidebarOpen(!isSidebarOpen)}
         style={{
           position: "fixed",

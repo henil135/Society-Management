@@ -36,7 +36,7 @@ exports.CreateSecurityGuard = async (req, res) => {
             });
         }
 
-        const existingUser = await Guard.findOne({ MailOrPhone });
+        const existingUser = await Guard.findOne({ Mail });
         if (existingUser) {
             return res.status(400).json({ success: false, message: "Email already exists" });
         }
@@ -50,12 +50,11 @@ exports.CreateSecurityGuard = async (req, res) => {
                 try {
                     const result = await cloudinary.uploader.upload(filePath);
                     fs.unlink(filePath, (err) => {
-                        if (err) console.error("Error deleting file from server:", err);
-                        else console.log("File deleted from server:", filePath);
+
                     });
                     return result.secure_url;
                 } catch (error) {
-                    console.error("Error uploading to Cloudinary:", error);
+
                     throw error;
                 }
             }
@@ -64,7 +63,7 @@ exports.CreateSecurityGuard = async (req, res) => {
         const profileimage = await uploadAndDeleteLocal(req.files?.profileimage);
         const adhar_card = await uploadAndDeleteLocal(req.files?.adhar_card);
 
-        if (!full_name || !MailOrPhone || !gender || !shift || !date || !time ) {
+        if (!full_name || !Mail|| !gender || !shift || !date || !time ) {
             return res.status(400).json({
                 success: false,
                 message: "All fields are required",
@@ -101,7 +100,7 @@ exports.CreateSecurityGuard = async (req, res) => {
         };
 
         // Check if the Email_address is defined and valid
-        if (!newOwner.MailOrPhone || typeof newOwner.MailOrPhone !== "string") {
+        if (!newOwner.Mail|| typeof newOwner.Mail!== "string") {
             throw new Error("Invalid or missing Email_address for the Owner.");
 
         }
@@ -142,23 +141,18 @@ exports.GuardLogin = async (req, res) => {
             return res.status(400).json({ success: false, message: "Invalid email or phone format" });
         }
 
-        console.log("Received Email:", Email);
-        console.log("Received Password:", password);
-
         const user = await Guard.findOne({
             MailOrPhone: { $regex: new RegExp(`^${Email}$`, 'i') }
         });
 
         if (!user) {
-            console.error("User not found for MailOrPhone:", Email);
             return res.status(404).json({ success: false, message: "Invalid credentials" });
         }
 
         const isPasswordCorrect = await bcryptjs.compare(password, user.password);
-        console.log("Password match:", isPasswordCorrect);
+
 
         if (!isPasswordCorrect) {
-            console.error("Incorrect password for user:", Email);
             return res.status(400).json({ success: false, message: "Invalid credentials" });
         }
 
@@ -173,7 +167,6 @@ exports.GuardLogin = async (req, res) => {
             message: "Login successful! Welcome back.",
         });
     } catch (error) {
-        console.error("Error in login controller", error.message);
         res.status(500).json({ success: false, message: "Internal server error" });
     }
 };
@@ -193,7 +186,7 @@ exports.GetSecurityGuard = async (req, res) => {
             Guard: find
         })
     } catch (error) {
-        console.error(error);
+        
         return res.status(500).json({
             success: false,
             message: "error in Announcement fetching"
@@ -214,7 +207,7 @@ exports.GetByIdGuard = async (req, res) => {
             Guard: find
         })
     } catch (error) {
-        console.error(error);
+        
         return res.status(500).json({
             success: false,
             message: "error in Announcement fetching"
@@ -235,7 +228,7 @@ exports.DeleteGuard = async (req, res) => {
             message: "Security Guard deleted"
         })
     } catch (error) {
-        console.error(error);
+       
         return res.status(500).json({
             success: false,
             message: "error in SecurityGuard Deleting"
@@ -279,11 +272,11 @@ exports.updateSecurityGuard = async (req, res) => {
                 try {
                     const result = await cloudinary.uploader.upload(filePath);
                     fs.unlink(filePath, (err) => {
-                        if (err) console.error("Error deleting file from server:", err);
+                        if (err) {}
                     });
                     return result.secure_url;
                 } catch (error) {
-                    console.error("Error uploading to Cloudinary:", error);
+                  
                     throw error;
                 }
             }
@@ -322,7 +315,7 @@ exports.updateSecurityGuard = async (req, res) => {
             message: "Security Guard details updated successfully",
         });
     } catch (error) {
-        console.error("Error updating Security Guard:", error);
+        
         return res.status(500).json({
             success: false,
             message: "An error occurred while updating Security Guard details",

@@ -1,22 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import { CiImageOn } from "react-icons/ci";
-import { IoEyeSharp } from "react-icons/io5";
 import { BiSolidFilePdf } from "react-icons/bi";
-import { RiDeleteBin5Fill } from "react-icons/ri";
 import { useForm } from 'react-hook-form';
 import { Button, Modal, Form, Spinner } from 'react-bootstrap';
-import { MdEditSquare } from "react-icons/md";
-import { FaEdit, FaPlusSquare } from "react-icons/fa";
 import Sidebar from "../component/layout/Sidebar";
 import axios from "axios"
-
-import { FaCamera, FaEye, FaTrash } from 'react-icons/fa6';
-
+import { FaCamera } from 'react-icons/fa6';
 import viewICon from '../Icons/view.png'
 import deleteIcon from '../Icons/delete.png'
 import editIcon from '../Icons/Edit.png'
-
+import addIcon from '../Icons/add-square.png'
+import addimageIcon from '../Icons/Add image.png'
 function FinancialManagementExp() {
 
   const [showViewModal, setShowViewModal] = useState(false);
@@ -26,6 +21,7 @@ function FinancialManagementExp() {
     setViewComplaint(exp[index]);
     setShowViewModal(true);
   };
+  
 
   const handleCloseViewModal = () => setShowViewModal(false);
 
@@ -201,7 +197,7 @@ function FinancialManagementExp() {
                       <h3 className=' mb-0  financial-income-title'>Add Expenses Details</h3>
 
                       <div>
-                        <button className='set-maintainance-btn d-flex align-items-center p-2' onClick={handleShow}> <FaPlusSquare className='me-2' /> Add New Expenses details</button>
+                        <button className='set-maintainance-btn d-flex align-items-center p-2' onClick={handleShow}> <img src={addIcon} className='me-2' /> Add New Expenses details</button>
                       </div>
                     </div>
 
@@ -330,61 +326,66 @@ function FinancialManagementExp() {
                             {errors.Amount?.message}
                           </Form.Control.Feedback>
                         </Form.Group>
+                        <Form.Group className="mb-3" controlId="formUploadBill">
+  <Form.Label className="Form-Label">Upload Bill</Form.Label>
+  <div
+    className="upload-container"
+    style={{
+      border: "2px dashed #ccc",
+      padding: "20px",
+      textAlign: "center",
+      borderRadius: "10px",
+      background: "#f9f9f9",
+    }}
+  >
+    <label
+      htmlFor="file-upload"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        cursor: "pointer",
+        color: "#007bff",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          
+        }}
+      >
+        {photo?.preview ? (
+          <img
+            src={photo.preview}
+            alt="Uploaded"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              borderRadius: "50%",
+            }}
+          />
+        ) : (
+          <img src={addimageIcon} style={{ color: "#fff", fontSize: "20px" }} />
+        )}
+      </div>
+      <div>Upload a file <span style={{color:"#4F4F4F"}}>or drag and drop</span></div>
+      <div style={{ fontSize: "12px", color: "#6c757d" }}>
+        PNG, JPG, GIF up to 10MB
+      </div>
+    </label>
+    <input
+      id="file-upload"
+      type="file"
+      onChange={handleFileChange}
+      accept="image/png, image/jpeg, image/gif"
+      style={{ display: "none" }}
+    />
+  </div>
+</Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formFormat">
-                          <Form.Label className="Form-Label">Upload Photo</Form.Label>
-                          <div className="text-start" style={{ display: "flex", marginBottom: "20px" }}>
-                            <label htmlFor="photo-upload" style={{ cursor: "pointer", textAlign: "center" }}>
-                              <div
-                                style={{
-                                  display: "flex",
-                                  flexDirection: "row",
-                                  alignItems: "center",
-                                  justifyContent: "center",
-                                  textAlign: "center",
-                                }}
-                              >
-                                <div
-                                  style={{
-                                    width: "50px",
-                                    height: "50px",
-                                    borderRadius: "50%",
-                                    background: "rgba(211, 211, 211, 1)",
-                                    overflow: "hidden",
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    border: "2px solid #ddd",
-                                    marginRight: "10px",
-                                  }}
-                                >
-                                  {photo?.preview ? (
-                                    <img
-                                      src={photo.preview}
-                                      alt="Uploaded"
-                                      style={{
-                                        width: "100%",
-                                        height: "100%",
-                                        objectFit: "cover",
-                                        borderRadius: "50%",
-                                      }}
-                                    />
-                                  ) : (
-                                    <FaCamera style={{ color: "rgba(255, 255, 255, 1)", fontSize: "16px" }} />
-                                  )}
-                                </div>
-                                <div style={{ color: "#007bff" }}>Add Photo</div>
-                              </div>
-                            </label>
-                            <input
-                              id="photo-upload"
-                              type="file"
-                              onChange={handleFileChange}
-                              accept="image/png, image/jpeg"
-                              style={{ display: "none" }}
-                            />
-                          </div>
-                        </Form.Group>
 
 
                         <div className="d-flex justify-content-between">

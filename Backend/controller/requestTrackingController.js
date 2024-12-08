@@ -20,6 +20,7 @@ exports.createRequest = async (req, res) => {
             Priority,
             Status,
             role,
+            createdBy:req.admin
         });
 
         await request.save();
@@ -32,7 +33,7 @@ exports.createRequest = async (req, res) => {
 // Get all requests
 exports.getAllRequests = async (req, res) => {
     try {
-        const requests = await Request.find();
+        const requests = await Request.find().populate("createdBy");
         res.status(200).json({ message: 'Requests retrieved successfully', requests });
     } catch (error) {
         res.status(500).json({ message: 'Error retrieving requests', error });

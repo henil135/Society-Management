@@ -120,10 +120,10 @@ function Complaintlist() {
         <div className='container-fluid py-2'>
             <div className='row px-4 '>
                 <div className='col-lg-9 bg-light rounded '>
-                    <div className="table-responsive Complaint-table rounded custom-scrollbar" >
+                    <div className="table-responsive Complaint-table rounded custom-scrollbar">
 
                         <div >
-                            <h5 className=' mb-0 py-3 ps-1  financial-income-title'>Maintenance  Details</h5>
+                            <p className=' mb-0 py-3 ps-1  financial-income-title'>Complaint List</p>
                             <div className=' financial-maintainance-table '>
 
                                 <table className="table">
@@ -350,14 +350,14 @@ function Complaintlist() {
                                         <div className='mb-4'>
                                             <strong className='view-strong'>Request Name</strong>
                                             <p>
-                                            Unethical Behavior
+                                                Unethical Behavior
                                             </p>
                                         </div>
 
                                         <div className='mb-4'>
                                             <strong className='view-strong'>Description</strong>
                                             <p>
-                                            Offering, giving, receiving, or soliciting  of value to influence the actions of an.
+                                                Offering, giving, receiving, or soliciting  of value to influence the actions of an.
                                             </p>
                                         </div>
 

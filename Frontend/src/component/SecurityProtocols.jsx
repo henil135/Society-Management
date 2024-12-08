@@ -59,8 +59,10 @@ function SecurityProtocols() {
   useEffect(() => {
     const fetchProtocols = async () => {
       try {
+        console.log('Fetching protocols...');
         const response = await axios.get('http://localhost:5000/api/v2/securityprotocol/');
         if (response.data.success) {
+          console.log('Fetched protocols successfully:', response.data.data);
           setProtocols(response.data.data); // Assuming data contains the list of protocols
         } else {
           console.error('Failed to fetch protocols:', response.data.message);
@@ -69,19 +71,28 @@ function SecurityProtocols() {
         console.error('Error fetching protocols:', error);
       }
     };
-
+  
     fetchProtocols();
-  }, []);
+  }, []); // Empty array ensures this runs only once when the component mounts
+  
 
   const handleSave = async () => {
     try {
+      let response;
+  
       if (isEdit) {
         // Update protocol
-        const response = await axios.put(`http://localhost:5000/api/v2/securityprotocol/update/${editProtocolId}`, protocolData);
+        response = await axios.put(
+          `http://localhost:5000/api/v2/securityprotocol/update/${editProtocolId}`,
+          protocolData
+        );
+  
         if (response.data.success) {
+          console.log('Protocol updated successfully:', response.data);
+          // Directly update the state with the new data
           setProtocols((prev) =>
             prev.map((protocol) =>
-              protocol.id === editProtocolId ? { ...protocol, ...protocolData } : protocol
+              protocol._id === editProtocolId ? { ...protocol, ...protocolData } : protocol
             )
           );
         } else {
@@ -89,9 +100,15 @@ function SecurityProtocols() {
         }
       } else {
         // Add new protocol
-        const response = await axios.post('http://localhost:5000/api/v2/securityprotocol/addsecurityprotocol', protocolData);
+        response = await axios.post(
+          'http://localhost:5000/api/v2/securityprotocol/addsecurityprotocol',
+          protocolData
+        );
+  
         if (response.data.success) {
-          setProtocols((prev) => [...prev, response.data.data]); // Assuming the new protocol is returned in data
+          console.log('Protocol added successfully:', response.data);
+          // Immediately add the new protocol to the state
+          setProtocols((prev) => [...prev, response.data.data]);
         } else {
           console.error('Error adding protocol:', response.data.message);
         }
@@ -99,10 +116,11 @@ function SecurityProtocols() {
     } catch (error) {
       console.error('Error saving protocol:', error);
     }
-
-    handleClose();
+  
+    handleClose(); // Close the modal after saving
   };
-
+  
+  
   const handleDelete = async () => {
     try {
       const response = await axios.delete(`http://localhost:5000/api/v2/securityprotocol/delete/${deleteProtocolId}`);
@@ -117,6 +135,7 @@ function SecurityProtocols() {
 
     handleClose();
   };
+  
   return (
     <div className="d-flex flex-column flex-md-row">
       <div className="flex-shrink-0" >
@@ -282,16 +301,7 @@ function SecurityProtocols() {
           <div className="table-responsive" style={{ border: "1px solid #ddd", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", overflow: "hidden", backgroundColor: "#fff", padding: "20px", marginTop: "20px" }}>
             <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3">
               <h4 className="mb-0" >Security Protocols</h4>
-              <Button className="btn mainColor2 d-flex align-items-center justify-content-center p-2" style={{ border:"none"}} onClick={handleShowCreate}><FaPlus
-                 style={{
-                  fontSize: "18px",
-                  borderRadius: "5px",
-                  background: "rgba(255, 255, 255, 1)",
-                  color: "#FE512E",
-                  marginRight: "8px",
-                }}
-              
-              />Create Protocols</Button>
+              <Button className="btn mainColor2 d-flex align-items-center justify-content-center p-2" style={{ border:"none"}} onClick={handleShowCreate}>Create Protocols</Button>
             </div>
             <Table  style={{ width: "1545px" }}>
               <thead style={{ background: "rgb(185, 198, 242)", color: "black" }}>

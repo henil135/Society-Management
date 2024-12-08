@@ -55,7 +55,6 @@ exports.getAllFacilities = async (req, res) => {
             facilities:facilities || [],
         });
     } catch (error) {
-        console.error("Error retrieving facilities:", error);
         return res.status(500).json({
             success: false,
             message: "Failed to retrieve facilities",
