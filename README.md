@@ -80,36 +80,18 @@ Admin will receive notifications for the following activities:
 - **Reset Password**: Residents can change their password anytime by resetting it.
 - **View Personal Details**: Residents can view their personal information, such as name, address, and contact details.
 
-### 2. **Maintenance & Payments**
-
-- **View Pending Maintenance**: Residents can view any pending maintenance activities.
-- **Pay Maintenance Fees**: Residents can pay the dues for pending maintenance services.
-- **Pay for Events**: Residents can participate in events and pay per person as required.
-
-### 3. **Event & Activity Management**
+### 2. **Event & Activity Management**
 
 - **View Event & Activity Announcements**: Residents can see announcements related to events and activities.
 - **Participate in Events & Activities**: Residents can participate for events and activities.
 - **View Event & Activity Participant List**: Residents can see who else is participating in the events and activities.
 
-### 4. **Complaint & Request Management**
+### 3. **Complaint & Request Management**
 
 - **Create Complaints**: Residents can submit complaints about issues in the society.
 - **Create Requests**: Residents can submit requests for services or other needs.
 
-### 5. **Community Engagement**
-
-- **Connect with the Society Community**: Residents can interact with other residents in the society.
-- **1-to-1 Chat**: Residents can message each other directly for personal or society-related conversations.
-- **Ask Questions & Give Answers**: Residents can ask questions to the community and provide answers to others' queries.
-- **Create Polls**: Residents can create polls to gather opinions or vote in other people's polls.
-
-### 6. **Payments**
-
-- **Payment Portal**: Residents can make payments through the dedicated online payment portal.
-- **Payment Methods**: Payments can be made online, or through cash (with admin approval required for cash payments).
-
-### 7. **Security**
+### 4. **Security**
 
 - **Security Alerts**: Residents receive notifications about security alerts.
 - **View Security Protocols**: Residents can view and follow security protocols set by the society.
@@ -126,27 +108,9 @@ The **Security Panel** offers the following features:
 - **Add Visitor Details**: Security can add details of visitors entering the society.
 - **View Visitor Records**: Security can view the list of all visitors and their details for tracking purposes.
 
-### 2. **Security Alerts**
-
-- **Send Security Alerts**: Security can send immediate alerts to both admins and residents in case of security issues or emergencies.
-- **Alert Notifications**: Security alerts are sent to ensure fast action and awareness.
-
-### 4. **Login to the Security Panel**
+### 2. **Login to the Security Panel**
 
 - First, security need to log in to the system using their credentials.
-
-**Managing Visitor Details**
-
-- **Add Visitor Information**:  
-  When a visitor enters the society, security can add the visitor's name, contact details, purpose of visit, and time of entry.
-- **View Visitor History**:  
-  Security can look at the visitor log and review previous entries for tracking and safety.
-
-- **Sending Security Alerts**
-
-- **Send Alerts to Admins & Residents**:  
-  In case of any suspicious activity or emergency, security can quickly send alerts to both admins and residents.  
-  Alerts include information about the security issue and may contain safety instructions.
 
 - **Receive and Follow Security Protocols**
 
