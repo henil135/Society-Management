@@ -6,7 +6,7 @@ import { Button, Modal } from 'react-bootstrap';
 import editIcon from '../Icons/Edit.png';
 import viewICon from '../Icons/view.png';
 import deleteIcon from '../Icons/delete.png';
-import { LuArrowDownSquare } from "react-icons/lu";
+
 import { jsPDF } from 'jspdf'; 
 
 const ViewInvoice = () => {
@@ -207,7 +207,7 @@ const ViewInvoice = () => {
                                                 {/* Download Button */}
                                                 <div className="text-center mt-2 mb-2">
                                                     <Button variant="warning" className="px-4 save maintainance-income-btn-bg w-100" onClick={handleDownloadInvoice}>
-                                                        <LuArrowDownSquare className='text-light me-1' />
+                                                       
                                                         Download Invoice
                                                     </Button>
                                                 </div>

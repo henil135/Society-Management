@@ -7,7 +7,6 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import visa from '../../assets/visa-logo.png'
 import mastercard from '../../assets/mastercard-logo.png'
 import cash from '../../assets/cash-logo.png'
-import { LuArrowDownSquare } from "react-icons/lu";
 import { jsPDF } from 'jspdf';
 
 
@@ -192,7 +191,7 @@ const OtherIncomeInvoices = () => {
 
                                                             <div className="text-center mt-2 mb-2">
                                                                 <Button variant="warning" className="px-4 save maintainance-income-btn-bg w-100" onClick={handleDownloadInvoice}>
-                                                                    <LuArrowDownSquare className='text-light me-1' />
+                                                                    
                                                                     Download Invoice
                                                                 </Button>
                                                             </div>
