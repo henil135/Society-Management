@@ -29,11 +29,11 @@ function ForgotPassword() {
         toast.success('OTP sent successfully. Please check your email or phone.');
         navigate('/enter-otp', { state: { EmailOrPhone: data.EmailOrPhone } });
       } else {
-        toast.error(response.data.message || 'An error occurred. Please try again.');
+        // toast.error(response.data.message || 'An error occurred. Please try again.');
       }
     } catch (error) {
-      console.error(error);
-      toast.error('An error occurred. Please try again.');
+      // console.error(error);
+      toast.error('An error occurred. Please try again.',error);
     }
   };
 

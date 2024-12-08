@@ -51,8 +51,7 @@ import { verifyOtp } from '../../services/authentication';
         toast.error(response.data.message || 'Invalid OTP. Please try again.');
       }
     } catch (error) {
-      console.error(error);
-      toast.error('An error occurred. Please try again.');
+      toast.error('An error occurred. Please try again.',error);
     }
   };
 
@@ -67,7 +66,6 @@ import { verifyOtp } from '../../services/authentication';
       const response = await verifyOtp({ EmailOrPhone });
       toast.success(response.data.message);
     } catch (error) {
-      console.log(error);
       toast.error(error.response?.data?.message || "Error sending OTP");
     }
   };
