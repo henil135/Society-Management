@@ -147,7 +147,7 @@ app.use("/api/v2/Polls", Poll);
 
 // Ask Qustion
 app.use("/api/v2/Question",questions);
-
+app.get("/", (req, res) => res.send("Hello World!"));
 app.listen(PORT, () => {
   console.log(`Server is running on port Number ${PORT}`);
 });
