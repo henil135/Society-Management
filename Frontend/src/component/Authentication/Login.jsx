@@ -13,7 +13,7 @@ function Login() {
 
   const onSubmit = async (data) => {
     try {
-      const response  = await axios.post("http://localhost:5000/api/v1/login",data);
+      const response  = await axios.post("https://society-management-b6tj.onrender.com/api/v1/login",data);
       console.log(response.data); // Log response data for debugging
 
       // Handle successful login

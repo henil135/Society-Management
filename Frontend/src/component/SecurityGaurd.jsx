@@ -109,7 +109,7 @@ function SecurityGaurd() {
       return;
     }
   
-    axios.delete(`http://localhost:5000/api/v2/security/deletesecurity/${deleteGuardId}`)
+    axios.delete(`https://society-management-b6tj.onrender.com/api/v2/security/deletesecurity/${deleteGuardId}`)
       .then(() => {
         setGuards((prevGuards) =>
           prevGuards.filter((guard) => guard._id !== deleteGuardId)
@@ -125,7 +125,7 @@ function SecurityGaurd() {
   };
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/v2/security/') // Replace with your API URL
+    axios.get('https://society-management-b6tj.onrender.com/api/v2/security/') // Replace with your API URL
       .then((response) => {
         if (Array.isArray(response.data.Guard)) {
           setGuards(response.data.Guard);
@@ -143,7 +143,7 @@ function SecurityGaurd() {
   const handleSave = () => {
     if (isEdit && editGuardId) {
       // Update existing guard
-      axios.put(`http://localhost:5000/api/v2/security/updatesecurity/${editGuardId}`, formData)
+      axios.put(`https://society-management-b6tj.onrender.com/api/v2/security/updatesecurity/${editGuardId}`, formData)
         .then((response) => {
           setGuards((prevGuards) =>
             prevGuards.map((guard) =>
@@ -155,7 +155,7 @@ function SecurityGaurd() {
         .catch((error) => console.error('Error updating guard:', error));
     } else {
       // Create new guard
-      axios.post("http://localhost:5000/api/v2/security/addsecurity", formData)
+      axios.post("https://society-management-b6tj.onrender.com/api/v2/security/addsecurity", formData)
         .then((response) => {
           setGuards((prevGuards) => [...prevGuards, response.data]);
           handleClose();

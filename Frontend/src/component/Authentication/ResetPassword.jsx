@@ -32,7 +32,7 @@ function ResetPassword() {
         confirmPassword: data.confirmPassword 
       };
   
-      const response = await axios.post("http://localhost:5000/api/v1/resetpassword", payload);
+      const response = await axios.post("https://society-management-b6tj.onrender.com/api/v1/resetpassword", payload);
   
       if (response.data.success) {
         toast.success('Password reset successful!');

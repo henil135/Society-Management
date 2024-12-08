@@ -61,7 +61,7 @@ function FinancialManagementExp() {
     //   setExp(updatedComplaint);
     // }
     try {
-      const response = await axios.delete(`http://localhost:5000/api/v2/expenses/${_id}`);
+      const response = await axios.delete(`https://society-management-b6tj.onrender.com/api/v2/expenses/${_id}`);
       console.log("Delete Response:", response.data); // Debug response
       if (response.data.message) {
         // Remove the deleted expense from the state
@@ -111,7 +111,7 @@ function FinancialManagementExp() {
         }
 
         const response = await axios.put(
-          `http://localhost:5000/api/v2/expenses/updateexpenses/${expenseId}`,
+          `https://society-management-b6tj.onrender.com/api/v2/expenses/updateexpenses/${expenseId}`,
           expenseData
         );
 
@@ -123,7 +123,7 @@ function FinancialManagementExp() {
         // Add new expense
         const formData = new FormData();
         Object.entries(expenseData).forEach(([key, value]) => formData.append(key, value));
-        const response = await axios.post(`http://localhost:5000/api/v2/expenses/addexpenses`, formData);
+        const response = await axios.post(`https://society-management-b6tj.onrender.com/api/v2/expenses/addexpenses`, formData);
         setExp( response.data.FormData);
         FetchExpenses()
       }
@@ -135,7 +135,7 @@ function FinancialManagementExp() {
 
   const FetchExpenses = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/v2/expenses/viewexpenses');
+      const response = await axios.get('https://society-management-b6tj.onrender.com/api/v2/expenses/viewexpenses');
       console.log("API Response:", response.data.Expense); // Debug response
       if (response.data && response.data.Expense) {
         setExp(response.data.Expense);

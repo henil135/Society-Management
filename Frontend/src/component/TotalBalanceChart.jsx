@@ -77,7 +77,7 @@ function TotalBalanceChart() {
 // Fetch contacts when the component mounts
 const ViewNumber = async () => {
     try {
-        const response = await axios.get("http://localhost:5000/api/v2/important-numbers/getnumber");
+        const response = await axios.get("https://society-management-b6tj.onrender.com/api/v2/important-numbers/getnumber");
 
         if (response.status === 200) {
             console.log("API Response:", response.data.data);
@@ -116,7 +116,7 @@ const onSubmit = async (data) => {
         if (editIndex !== null) {
             // Update existing contact
             const contactToEdit = contacts[editIndex];
-            const response = await axios.put(`http://localhost:5000/api/v2/important-numbers/${contactToEdit._id}`, data);
+            const response = await axios.put(`https://society-management-b6tj.onrender.com/api/v2/important-numbers/${contactToEdit._id}`, data);
 
             if (response.status === 200) {
                 // Optimistically update the UI with the edited contact
@@ -130,7 +130,7 @@ const onSubmit = async (data) => {
             }
         } else {
             // Add new contact
-            const response = await axios.post("http://localhost:5000/api/v2/important-numbers/create", data);
+            const response = await axios.post("https://society-management-b6tj.onrender.com/api/v2/important-numbers/create", data);
             if (response.status === 200) {
                 // Optimistically add the new contact to the state
                 setContacts([...contacts, response.data.data]);
@@ -177,7 +177,7 @@ const handleEdit = (index) => {
                 const contactToDelete = contacts[deleteIndex];
 
                 // API call to delete the contact
-                const response = await axios.delete(`http://localhost:5000/api/v2/important-numbers/${contactToDelete._id}`);
+                const response = await axios.delete(`https://society-management-b6tj.onrender.com/api/v2/important-numbers/${contactToDelete._id}`);
 
                 if (response.status === 200) {
                     console.log('Number deleted successfully:', response.data.message);

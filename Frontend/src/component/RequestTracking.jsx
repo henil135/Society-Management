@@ -50,7 +50,7 @@ function RequestTracking() {
     }
 
     try {
-      const response = await axios.put(`http://localhost:5000/api/v2/requests/updaterequest/${selectedRequest._id}`, selectedRequest);
+      const response = await axios.put(`https://society-management-b6tj.onrender.com/api/v2/requests/updaterequest/${selectedRequest._id}`, selectedRequest);
       setRequests((prevRequests) =>
         prevRequests.map((r) => (r._id === selectedRequest._id ? response.data.request : r)) // Assuming `request` is returned in the response
       );
@@ -102,7 +102,7 @@ function RequestTracking() {
   }, []);
   const fetchRequests = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/v2/requests/");
+      const response = await axios.get("https://society-management-b6tj.onrender.com/api/v2/requests/");
       setRequests(response.data.requests); // Assuming the API returns a `requests` array
     } catch (error) {
       console.error("Error fetching requests:", error);
@@ -117,7 +117,7 @@ function RequestTracking() {
     }
   
     try {
-      const response = await axios.post("http://localhost:5000/api/v2/requests/addrequest", newRequest);
+      const response = await axios.post("https://society-management-b6tj.onrender.com/api/v2/requests/addrequest", newRequest);
       if (response.status === 201) {
         // Re-fetch the data after adding a request
         fetchRequests(); // Assuming you have a `fetchRequests` function that fetches the latest requests
@@ -155,7 +155,7 @@ function RequestTracking() {
 
   const handleDelete = async (_id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/v2/requests/deleterequest/${_id}`);
+      await axios.delete(`https://society-management-b6tj.onrender.com/api/v2/requests/deleterequest/${_id}`);
       setRequests((prevRequests) => prevRequests.filter((request) => request._id !== _id));
       
     } catch (error) {

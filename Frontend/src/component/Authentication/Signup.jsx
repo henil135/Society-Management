@@ -73,7 +73,7 @@ export default function Signup() {
     // }
     const societySubmit = async (data) => {
         try {
-            const response = await axios.post('http://localhost:5000/api/v1/Registration', data);
+            const response = await axios.post('https://society-management-b6tj.onrender.com/api/v1/Registration', data);
             console.log(response.data);
             toast.success(response.data.message)
             Navigate("/login")
@@ -102,7 +102,7 @@ export default function Signup() {
 
     const handleNewSocietySubmit = async (newdata) => {
         try {
-            const res = await axios.post('http://localhost:5000/api/societies/create', newdata);
+            const res = await axios.post('https://society-management-b6tj.onrender.com/api/societies/create', newdata);
             console.log('Response:', res.data);
             toast.success(res.data.message)
             // Update societies list after successfully creating a new society
@@ -118,7 +118,7 @@ export default function Signup() {
     useEffect(() => {
         const fetchSocieties = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/societies/');
+                const response = await axios.get('https://society-management-b6tj.onrender.com/api/societies/');
                 if (response.data.success) {
                     setSocieties(response.data.data); // Extract the data array
                 } else {

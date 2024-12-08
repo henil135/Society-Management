@@ -16,7 +16,7 @@ function Announcement() {
     // Fetch the data when the component mounts
     const fetchData = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/api/v2/annoucement/getannouncement');
+            const response = await axios.get('https://society-management-b6tj.onrender.com/api/v2/annoucement/getannouncement');
             console.log(response.data.announcements);  // Check the data in console
             setNote(response.data.announcements);  // Set the state with fetched data
         } catch (error) {
@@ -46,7 +46,7 @@ function Announcement() {
     // Handle form submission
     const onSubmit = async (data) => {
         try {
-            const response = await axios.post("http://localhost:5000/api/v2/annoucement/addannouncement", data);
+            const response = await axios.post("https://society-management-b6tj.onrender.com/api/v2/annoucement/addannouncement", data);
             console.log(response.data);
     
             if (editIndex !== null) {
@@ -85,7 +85,7 @@ function Announcement() {
     // Confirm delete operation
     const confirmDelete = async (_id) => {
         try {
-            const response = await axios.delete(`http://localhost:5000/api/v2/annoucement/deleteannouncement/${_id}`);
+            const response = await axios.delete(`https://society-management-b6tj.onrender.com/api/v2/annoucement/deleteannouncement/${_id}`);
             console.log(response.message._id);
     
             const updatedNotes = note.filter((_, i) => i !== deleteIndex);  // Remove the deleted note

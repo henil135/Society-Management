@@ -65,7 +65,7 @@ function ComplaintTracking() {
     
       try {
         const response = await axios.put(
-          `http://localhost:5000/api/v2/complaint/updatecomplaint/${selectedComplaint._id}`,
+          `https://society-management-b6tj.onrender.com/api/v2/complaint/updatecomplaint/${selectedComplaint._id}`,
           selectedComplaint
         );
     
@@ -123,7 +123,7 @@ function ComplaintTracking() {
       }
 
       try {
-        const response = await axios.post("http://localhost:5000/api/v2/complaint/addcomplaint", newComplaint);
+        const response = await axios.post("https://society-management-b6tj.onrender.com/api/v2/complaint/addcomplaint", newComplaint);
         setComplaints(response.data.complaints); // Assuming response.data contains the created complaint
         setNewComplaint({ Complainer_name: "", Complaint_name: "", Description: "", Wing: "", Unit: "", Priority: "Medium", Status: "Open" });
         setShowCreateModal(false);
@@ -137,7 +137,7 @@ function ComplaintTracking() {
 
     const fetchComplaints = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/v2/complaint/");
+        const response = await axios.get("https://society-management-b6tj.onrender.com/api/v2/complaint/");
         console.log(response.data.complaints); // Log API response
         setComplaints(response.data.complaints); // Ensure it's an array
       } catch (error) {
@@ -177,7 +177,7 @@ function ComplaintTracking() {
 
     const handleDelete = async (id) => {
       try {
-        await axios.delete(`http://localhost:5000/api/v2/complaint/deletecomplaint/${id}`);
+        await axios.delete(`https://society-management-b6tj.onrender.com/api/v2/complaint/deletecomplaint/${id}`);
         
         // Update the local state after successful deletion
         setComplaints((prevComplaints) => prevComplaints.filter((complaint) => complaint.id !== id));

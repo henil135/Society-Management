@@ -22,7 +22,7 @@ function ForgotPassword() {
     try {
       localStorage.setItem('forgotPasswordEmailOrPhone', data.EmailOrPhone);
 
-      const response = await axios.post("http://localhost:5000/api/v1/send-otp",
+      const response = await axios.post("https://society-management-b6tj.onrender.com/api/v1/send-otp",
         data); // Replace with your API endpoint
 
       if (response.data.success) {

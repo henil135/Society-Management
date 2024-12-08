@@ -60,7 +60,7 @@ function SecurityProtocols() {
     const fetchProtocols = async () => {
       try {
         console.log('Fetching protocols...');
-        const response = await axios.get('http://localhost:5000/api/v2/securityprotocol/');
+        const response = await axios.get('https://society-management-b6tj.onrender.com/api/v2/securityprotocol/');
         if (response.data.success) {
           console.log('Fetched protocols successfully:', response.data.data);
           setProtocols(response.data.data); // Assuming data contains the list of protocols
@@ -83,7 +83,7 @@ function SecurityProtocols() {
       if (isEdit) {
         // Update protocol
         response = await axios.put(
-          `http://localhost:5000/api/v2/securityprotocol/update/${editProtocolId}`,
+          `https://society-management-b6tj.onrender.com/api/v2/securityprotocol/update/${editProtocolId}`,
           protocolData
         );
   
@@ -101,7 +101,7 @@ function SecurityProtocols() {
       } else {
         // Add new protocol
         response = await axios.post(
-          'http://localhost:5000/api/v2/securityprotocol/addsecurityprotocol',
+          'https://society-management-b6tj.onrender.com/api/v2/securityprotocol/addsecurityprotocol',
           protocolData
         );
   
@@ -123,7 +123,7 @@ function SecurityProtocols() {
   
   const handleDelete = async () => {
     try {
-      const response = await axios.delete(`http://localhost:5000/api/v2/securityprotocol/delete/${deleteProtocolId}`);
+      const response = await axios.delete(`https://society-management-b6tj.onrender.com/api/v2/securityprotocol/delete/${deleteProtocolId}`);
       if (response.data.success) {
         setProtocols((prev) => prev.filter((protocol) => protocol._id !== deleteProtocolId));
       } else {

@@ -91,12 +91,12 @@ function FinancialManagementOtherIncome() {
                 const updatedNote = { ...note[editIndex], ...formattedData };
                 const id = note[editIndex]._id || note[editIndex].id;
                 console.log("Updating Note ID:", id);
-                await axios.put(`http://localhost:5000/api/v2/income/update/${id}`, formattedData);
+                await axios.put(`https://society-management-b6tj.onrender.com/api/v2/income/update/${id}`, formattedData);
                 const updatedNotes = [...note];
                 updatedNotes[editIndex] = updatedNote;
                 setNote(updatedNotes);
             } else {
-                const response = await axios.post('http://localhost:5000/api/v2/income/addincome', formattedData);
+                const response = await axios.post('https://society-management-b6tj.onrender.com/api/v2/income/addincome', formattedData);
                 if (response.data && response.data.Income) {
                     setNote(prevNotes => [...prevNotes, response.data.Income]); // Update state with new data
                 }
@@ -116,7 +116,7 @@ function FinancialManagementOtherIncome() {
 
     const fetchNotes = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/api/v2/income/'); // Replace with actual API endpoint
+            const response = await axios.get('https://society-management-b6tj.onrender.com/api/v2/income/'); // Replace with actual API endpoint
             setNote(response.data.Income);
         } catch (error) {
             console.error("Error fetching notes:", error);

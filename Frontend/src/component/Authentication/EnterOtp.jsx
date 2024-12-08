@@ -38,7 +38,7 @@ import { verifyOtp } from '../../services/authentication';
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post("http://localhost:5000/api/v1/verify-otp", {
+      const response = await axios.post("https://society-management-b6tj.onrender.com/api/v1/verify-otp", {
         EmailOrPhone: state.EmailOrPhone,
         otp: data.otp.join(''),
       });

@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import Sidebar from "../component/layout/Sidebar";
 import axios from "axios"
 import toast from "react-hot-toast"
-import { Toaster } from 'react-hot-toast';
+// import { Toaster } from 'react-hot-toast';
 
 
 function FinancialManagementNote() {
@@ -46,7 +46,7 @@ function FinancialManagementNote() {
     try {
       if (editIndex !== null) {
         // Edit Note API Call
-        const response = await axios.patch(`http://localhost:5000/api/v2/note/updatenote/${note[editIndex]._id}`, data);
+        const response = await axios.patch(`https://society-management-b6tj.onrender.com/api/v2/note/updatenote/${note[editIndex]._id}`, data);
         if (response.status === 200) {
           const updatedNotes = [...note];
           // console.log(updatedNotes);
@@ -56,7 +56,7 @@ function FinancialManagementNote() {
         }
       } else {
         // Add Note API Call
-        const response = await axios.post("http://localhost:5000/api/v2/note/addnotes", data);
+        const response = await axios.post("https://society-management-b6tj.onrender.com/api/v2/note/addnotes", data);
         if (response.status === 201) {
           setNote([...note, response.data]); // Assume the API returns the new note
           toast.success(response.data.message)
@@ -73,7 +73,7 @@ function FinancialManagementNote() {
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/v2/note/");
+        const response = await axios.get("https://society-management-b6tj.onrender.com/api/v2/note/");
         if (response.status === 200 && Array.isArray(response.data.notes)) {
           setNote(response.data.notes); // Access the notes array
         } else {
