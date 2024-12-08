@@ -3,6 +3,7 @@ const bcryptjs = require("bcryptjs");
 const { generateTokenAndSetCookie } = require("../config/auth");
 const otpGenerator = require('otp-generator');
 const senData = require("../config/mailer"); // Adjust the path accordingly
+
 const jwt = require('jsonwebtoken');
 
 
