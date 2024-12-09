@@ -64,14 +64,14 @@ const PersonalDetail = () => {
                             <div className='container-fluid'>
 
                                 <div className="row card-row rounded mb-3">
-                                    <div className="p-0 bg-light d-flex flex-wrap align-items-center rounded">
+                                    <div className="p-3 p-lg-0 bg-light d-flex flex-wrap align-items-center rounded">
 
-                                        <div className="col-12 col-md-2 px-3 py-3 text-left text-md-center ">
+                                        <div className="col-12 col-lg-2 px-3 py-3 text-left text-lg-center ">
                                             <img src={residentprofile} alt="Resident Profile" className="img-fluid rounded-circle" />
                                         </div>
 
 
-                                        <div className="col-12 col-md-7 text-start px-3">
+                                        <div className="col-12 col-lg-7 text-start px-3">
                                             <div className="row">
                                                 <div className="col-6 col-sm-12 col-md-6 col-lg-3 mb-2">
                                                     <h6>Full Name</h6>
@@ -111,7 +111,7 @@ const PersonalDetail = () => {
                                         </div>
 
 
-                                        <div className="col-12 col-md-3 pt-3 d-flex justify-content-md-end justify-content-left justify-content-md-center">
+                                        <div className="col-12 col-lg-3 pt-3 d-flex justify-content-lg-end justify-content-left justify-content-md-start">
                                             <div>
                                                 <button
                                                     onClick={() => handleViewFile()}
@@ -155,7 +155,7 @@ const PersonalDetail = () => {
                                         </div>
                                         <div className="row  px-3">
                                             {note.map((val, index) => (
-                                                <div className="col-lg-3 mb-3" key={val.id}>
+                                                <div className="col-12  col-md-6 col-xl-3 mb-3" key={val.id}>
                                                     <div className="card">
                                                         <div className="card-header card-title text-light d-flex align-items-center justify-content-between p-3" style={{ background: "rgba(86, 120, 233, 1)" }}>
                                                             {val.title}
@@ -196,7 +196,7 @@ const PersonalDetail = () => {
                                         </div>
                                         <div className="row  px-3">
                                             {vehicle.map((val, index) => (
-                                                <div className="col-lg-3 mb-3 " key={val.id}>
+                                                <div className="col-12  col-md-6 col-xl-3 mb-3 " key={val.id}>
                                                     <div className="card">
                                                         <div className="card-header card-title text-light d-flex align-items-center justify-content-between py-3" style={{ background: "rgba(86, 120, 233, 1)" }}>
                                                             {val.title}
@@ -253,7 +253,7 @@ const PersonalDetail = () => {
                                         </div>
                                         <div className="row  px-3">
                                             {maintainace.map((val, index) => (
-                                                <div className="col-lg-3 mb-3 " key={val.id}>
+                                                <div className="col-12  col-md-6 col-xl-3 mb-3 " key={val.id}>
                                                     <div className="card">
                                                         <div className="card-header card-title text-light d-flex align-items-center justify-content-between py-3" style={{ background: "rgba(86, 120, 233, 1)" }}>
                                                             <h5 className="mb-0" style={{ fontSize: "14px" }}>
@@ -299,7 +299,7 @@ const PersonalDetail = () => {
                                         </div>
                                         <div className="row  px-3">
                                             {announcement.map((val, index) => (
-                                                <div className="col-lg-3 mb-3 " key={val.id}>
+                                                <div className="col-12  col-md-6 col-xl-3 mb-3 " key={val.id}>
                                                     <div className="card">
                                                         <div className="card-header card-title text-light d-flex align-items-center justify-content-between py-3" style={{ background: "rgba(86, 120, 233, 1)" }}>
                                                             {val.title}

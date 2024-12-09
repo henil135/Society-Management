@@ -140,7 +140,7 @@ const OwnerAdminTenantProtect = async (req, res, next) => {
     if (tenanttoken) {
         try {
             const decoded = jwt.verify(tenanttoken, process.env.JWT_SECRET);
-            req.chat = decoded.id; // Tenant ID
+            req.chat = decoded._id; // Tenant ID
             req.userType = 'Tenant'; // Set userType to Tenant
             console.log("Authenticated as Tenant:", decoded);
             return next();
@@ -157,7 +157,7 @@ const OwnerAdminTenantProtect = async (req, res, next) => {
             console.log("Authenticated as Admin:", decoded);
             return next();
         } catch (error) {
-            console.error("Owner token verification failed:", error);
+            console.error("Admin token verification failed:", error);
         }
     }
 

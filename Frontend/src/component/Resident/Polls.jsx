@@ -154,7 +154,7 @@ const Polls = () => {
 
                                     <div className="row px-3">
                                         {note.map((poll) => (
-                                            <div className="col-lg-3 pt-0" key={poll.id}>
+                                            <div className="col-12  col-md-6 col-lg-3 pt-0" key={poll.id}>
                                                 <div className="poll-card">
                                                     <div className="poll-card-header d-flex justify-content-between align-items-center">
                                                         <div className="d-flex">
