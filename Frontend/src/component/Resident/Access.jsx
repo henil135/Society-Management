@@ -64,7 +64,7 @@ const ChatLayout = () => {
       </div>
 
 
-      <div className="flex-grow-1 dashboard-bg">
+      <div className="flex-grow-1 dashboard-bg w-100">
 
         <Header />
 

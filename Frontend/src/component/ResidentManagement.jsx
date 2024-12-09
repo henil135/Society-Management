@@ -93,11 +93,11 @@ function ResidentManagement() {
       <div className="flex-grow-1  stickyHeader container-fluid" >
         <Header />
 
-        <div className="container-fluid custom-scrollbar" style={{ marginTop: "20px", marginLeft: "310px" , width: '1580px' }}>
+        <div className="container-fluid custom-scrollbar marginLeft" style={{ marginTop: "20px", width: '1600px' }}>
 
 
 
-          <div className="table-responsive" style={{ border: "1px solid #ddd", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", overflow: "hidden", backgroundColor: "#fff", padding: "20px", marginTop: "20px", marginLeft: "10px"}}>
+          <div className="table-responsive" style={{ border: "1px solid #ddd", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)",  backgroundColor: "#fff", padding: "20px", marginTop: "20px", marginLeft: "10px"}}>
             <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
 
               <h4 style={{marginTop:"10px"}}>Resident Tenant and Owner Details</h4>
