@@ -66,14 +66,14 @@ function FinancialManagementIncome() {
 
 
   return (
-    <div className="d-flex flex-column flex-md-row">
+    <div className="d-flex flex-column flex-md-row  w-100">
       <div className="flex-shrink-0" >
         <Sidebar />
       </div>
-      <div className='card-row dashboard-bg ' style={{ width: "1920px" }}>
+      <div className='card-row dashboard-bg w-100' >
         <Navbar />
 
-        <div className='stickyHeader' style={{ marginLeft: "290px" }}>
+        <div className='stickyHeader marginLeft'>
 
           <div className='container-fluid mt-2 p-3' style={{ marginLeft: "30px" }}>
 
@@ -85,7 +85,7 @@ function FinancialManagementIncome() {
                     <div className="card-body d-flex align-items-center">
                       <img src={incomeRactangle} width={8} className="me-2" alt="Icon" />
                       <div>
-                        <h6 className="card-subtitle mb-1">Maintenance Amount</h6>
+                        <h6 className="card-subtitle mb-1" style={{width:"190px"}}>Maintenance Amount</h6>
                         <p className="mb-0">₹ 0</p>
                       </div>
                     </div>
@@ -98,7 +98,7 @@ function FinancialManagementIncome() {
                     <div className="card-body d-flex align-items-center">
                       <img src={balanceRactangle} width={8} className="me-2" alt="Icon" />
                       <div>
-                        <h6 className="card-subtitle mb-1">Penalty Amount</h6>
+                        <h6 className="card-subtitle mb-1" style={{width:"190px"}}>Penalty Amount</h6>
                         <p className="mb-0">₹ 0</p>
                       </div>
                     </div>
@@ -200,7 +200,7 @@ function FinancialManagementIncome() {
           </div>
 
           <div className='row px-3 pb-3'  >
-            <div className="table-responsive ">
+            <div className="table-responsive custom-scrollbar">
 
               <Link to="/Financial-Maintenance" className="btn btn-sm maintainance-income-btn maintainance-income-btn-bg" style={{ marginLeft: "15px" }}>Maintenance</Link>
 

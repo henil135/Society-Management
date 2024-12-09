@@ -22,7 +22,7 @@ const SecurityProtocolsResident = () => {
   return (
     <div className="container-fluid d-flex flex-column dashboard-bg">
       {/* Header Section */}
-      <div className="bg-white border-bottom shadow-sm mb-4">
+      <div className="bg-white border-bottom shadow-sm mb-4 stickyHeader">
         <Header />
       </div>
 
@@ -35,37 +35,66 @@ const SecurityProtocolsResident = () => {
 
         {/* Main Content Area */}
 
-        <div className="p-3 flex-grow-1 stickyHeader marginLeft" style={{ marginRight: "15px"}}>
+        <div
+      className="container-fluid p-4 marginLeft"
+      style={{
+        
+        height: "100vh",
+      }}
+    >
+      <h3 className="mb-4">Security Protocols</h3>
 
-          <div className="row">
-            <div className="col-12">
-              <div className="table-responsive bg-white shadow-sm rounded p-3">
-                <h5 className="mb-4">Security Protocols</h5>
-                <table className="table" style={{ width: "100%" }}>
-                  <thead className="thead-dark" style={{ background: "rgb(185, 198, 242)" }}>
-                    <tr>
-                      <th className="align-middle" style={{ width: "25%" }}>Title</th>
-                      <th className="align-middle" style={{ width: "35%" }}>Description</th>
-                      <th className="align-middle text-center" style={{ width: "20%" }}>Date</th>
-                      <th className="align-middle text-center" style={{ width: "20%" }}>Time</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {protocols.map((protocol, index) => (
-                      <tr key={index}>
-                        <td className="text-wrap">{protocol.title}</td>
-                        <td className="text-wrap">{protocol.description}</td>
-                        <td className=" text-center">{protocol.date}</td>
-                        <td className=" text-center">
-                          <div style={{ width: "100px", padding: "5px ", borderRadius: "50px", background: "#F6F8FB", color: "#4F4F4F", display: "inline-block", }}> {protocol.time} </div></td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+      {/* Table Wrapper with Responsive Scrolling */}
+      <div
+        style={{
+          backgroundColor: "#fff",
+          padding: "20px",
+          borderRadius: "8px",
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        <div
+          className="table-responsive custom-scrollbar"
+          style={{
+            maxHeight: "500px",
+            overflowX: "auto",
+            whiteSpace: "nowrap",
+          }}
+        >
+          <table className="table  ">
+            <thead>
+              <tr style={{ backgroundColor: "#EAF0F6", fontWeight: "bold" }}>
+                <th style={{ minWidth: "200px" }}>Title</th>
+                <th style={{ minWidth: "300px" }}>Description</th>
+                <th style={{ minWidth: "150px" }}>Date</th>
+                <th style={{ minWidth: "150px" }}>Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              {protocols.map((protocol, index) => (
+                <tr key={index}>
+                  <td>{protocol.title}</td>
+                  <td>{protocol.description}</td>
+                  <td>{protocol.date}</td>
+                  <td>
+                    <span
+                      style={{
+                        padding: "5px 10px",
+                        borderRadius: "12px",
+                        backgroundColor: "#F4F6F9",
+                        display: "inline-block",
+                      }}
+                    >
+                      {protocol.time}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
+      </div>
+    </div>
 
       </div>
     </div>
