@@ -121,10 +121,10 @@ function FinancialManagementNote() {
         <Sidebar />
       </div>
 
-      <div className='dashboard-bg w-100 ' >
+      <div className='dashboard-bg' >
 
         <Navbar />
-        <div className='container-fluid stickyHeader' style={{ marginLeft: "310px", width: "1580px" }}>
+        <div className='container-fluid stickyHeader marginLeft'>
           <div className='row p-4'>
             <div className='p-0 bg-light' >
               <div className='d-flex justify-content-between align-items-center ps-2 pe-3 pt-1' style={{ marginLeft: "10px" }}>
@@ -136,7 +136,7 @@ function FinancialManagementNote() {
 
               <div className="row px-3 mt-5">
                 {Array.isArray(note) && note.map((val, index) => (
-                  <div className="col-lg-3 mb-3" key={val.id}>
+                  <div className="col-12 col-md-6 col-xl-3 mb-3" key={val.id}>
                     <div className="card">
                       <div className="card-header  text-light d-flex align-items-center justify-content-between" style={{ height: "54px", fontSize: "16px", fontWeight: "500", background: " rgba(86, 120, 233, 1)" }}>
                         {val?.title}

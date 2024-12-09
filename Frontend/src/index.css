@@ -8,7 +8,21 @@
 
 .signup-img {
   background-color: #F6F8FB;
-  width: auto;
+  width: 950px;
+}
+
+@media (max-width: 991px) {
+  .signup{
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .signup-img {
+    width: auto !important;
+  }
+  .signup-form {
+    width: auto !important;
+  }
 }
 
 .logo span {
@@ -26,6 +40,7 @@
   background-repeat: no-repeat;
   display: flex;
   justify-content: center;
+  width: 950px;
 }
 
 .signup-form button {
@@ -1243,4 +1258,5 @@ input:focus {
   background-color: red; 
   border-top-right-radius: 12px;
 } */
+
 

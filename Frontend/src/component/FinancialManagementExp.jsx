@@ -178,14 +178,14 @@ function FinancialManagementExp() {
 
 
   return (
-    <div className="d-flex flex-column flex-md-row">
+    <div className="d-flex flex-column flex-md-row w-100">
       <div className="flex-shrink-0" >
         <Sidebar />
       </div>
 
-      <div className='dashboard-bg ' style={{ width: "1920px" }}>
+      <div className='dashboard-bg w-100' >
         <Navbar />
-        <div className='stickyHeader' style={{ width: "1630px", marginLeft: "290px" }}>
+        <div className='stickyHeader marginLeft' >
           <div className='container-fluid income ' >
 
             <div className='row p-5 '>

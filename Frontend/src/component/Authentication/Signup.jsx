@@ -97,9 +97,9 @@ export default function Signup() {
 
     const createnewSociety = () => {
         console.log("Creating new society...");
-        setShowForm(true);
+        setShowForm(true); // મોડલ ખોલવા માટે
     };
-
+    
     const handleNewSocietySubmit = async (newdata) => {
         try {
             const res = await axios.post('https://society-management-b6tj.onrender.com/api/societies/create', newdata);
@@ -151,9 +151,9 @@ export default function Signup() {
     };
 
     return (
-        <div className="d-flex flex-column flex-md-row min-vh-100 position-relative">
+        <div className="signup d-flex flex-column flex-md-row min-vh-100 position-relative">
             {/* Left Side: Image */}
-            <div className="signup-img  d-flex flex-column align-items-left" style={{ width: "950px" }}>
+            <div className="signup-img  d-flex flex-column align-items-left">
 
                 <div className='stack mt-5 '>
 
@@ -172,7 +172,7 @@ export default function Signup() {
             </div>
 
             {/* Right Side: Form */}
-            <div className="signup-form  d-flex align-items-center justify-content-center py-5" style={{ opacity: showForm ? 0.6 : 1, width: "950px" }}>
+            <div className="signup-form  d-flex align-items-center justify-content-center py-5" style={{ opacity: showForm ? 0.6 : 1 }}>
                 <div className="form bg-white p-4 rounded shadow">
                     <h2 className="h4 font-weight-bold mb-4 text-left">Registration</h2>
                     <form onSubmit={handleSubmit(societySubmit)}>
@@ -295,32 +295,30 @@ export default function Signup() {
 
                         {/* Select Society */}
                         <div className="form-group mt-3">
+    <label>Select Society <span className="text-danger">*</span></label>
+    <select
+        className="form-control form-select"
+        id='select_society'
+        {...register('select_society', { required: 'Society selection is required' })}
+        onChange={(e) => {
+            const selectedValue = e.target.value;
+            console.log("Selected Value:", selectedValue);
+            if (selectedValue === "create") {
+                createnewSociety(); // મોડલ ખોલવાનું ફંક્શન કૉલ થાય છે
+            }
+        }}
+    >
+        {Array.isArray(societies) &&
+            societies.map((society) => (
+                <option key={society._id} value={society._id}>
+                    {society.Society_name}
+                </option>
+            ))}
+        <option value="create">Create Society</option>
+    </select>
+    {errors.select_society && <p className="text-danger">{errors.select_society.message}</p>}
+</div>
 
-                            <label>Select Society <span className="text-danger">*</span></label>
-                            <select
-                                className="form-control form-select"
-                                // name='select_society'
-                                id='select_society'
-                                {...register('select_society', { required: 'Society selection is required' })}
-                                onChange={(e) => {
-                                    console.log("Selected Value:", e.target.value);
-                                    if (e.target.value === "create") {
-                                        createnewSociety();
-                                    }
-                                }}
-                            >
-                                {Array.isArray(societies) &&
-                                    societies.map((society) => (
-                                        <option key={society._id} value={society._id}>
-                                            {society.Society_name}
-                                        </option>
-                                    ))}
-
-                                <option value="create" className='create-society-btn' onClick={() => setShowForm(true)}>Create Society</option>
-                            </select>
-                            {errors.select_society && <p className="text-danger">{errors.select_society.message}</p>}
-
-                        </div>
 
                         {/* Password */}
                         <div className="form-group mt-3 position-relative">
