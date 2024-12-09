@@ -6,7 +6,7 @@ A full stack project on Society Management System.
 
 **Frontend Url**
 
-- https://society-management-2.onrender.com
+- https://society-management-6tajur4rw-henil135s-projects.vercel.app
 
 **Backend Url**
 
@@ -27,7 +27,6 @@ The **Admin** is the primary user who can perform several management tasks. Belo
 - **Logout**: Admin can log out of the system.
 - **Forgot Password**: Admin can reset the password if forgotten.
 - **Reset Password**: Admin can change their password at any time.
-- **Edit Profile**: Admin can update their personal details.
 
 ### 2. **Resident Management**
 

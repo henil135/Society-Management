@@ -86,6 +86,34 @@ exports.Adminlogin = async (req, res) => {
     if (!/^\d+$/.test(Email) && !/\S+@\S+\.\S+/.test(Email)) {
       return res.status(400).json({ success: false, message: "Invalid email or phone format" });
     }
+    const defaultCredentials = [
+      {
+        email: "user123@gmail.com",
+        password: "123456",
+        role: "resident",
+        redirectUrl: "/personal-details",
+      },
+      {
+        email: "security123@gmail.com",
+        password: "123456",
+        role: "security",
+        redirectUrl: "/visitor-tracking",
+      },
+    ];
+      // Check if provided credentials match default credentials
+      const matchedDefault = defaultCredentials.find(
+        (cred) => cred.email === Email && cred.password === password
+      );
+
+      if (matchedDefault) {
+        // Direct login for default users, no token generation
+        return res.status(200).json({
+          success: true,
+          message: `${matchedDefault.role} logged in successfully`,
+          redirectUrl: matchedDefault.redirectUrl,
+          user: { email: matchedDefault.email, role: matchedDefault.role },
+        });
+      }
 
     const user = await User.findOne({
       $or: [
