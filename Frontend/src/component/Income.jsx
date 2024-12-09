@@ -16,7 +16,7 @@ function Income() {
         <div className="container-fluid income">
             <div className="row px-4">
                 {/* Total Balance Card */}
-                <div className="col-lg-3 col-md-6 col-6 pt-3 px-1">
+                <div className="col-lg-3 col-md-6 col-12 pt-3 px-1">
                     <div
                         className="card"
                         style={{
@@ -43,7 +43,7 @@ function Income() {
                     </div>
                 </div>
                 {/* Total Income Card */}
-                <div className="col-lg-3 col-md-6 col-6 pt-3 px-1">
+                <div className="col-lg-3 col-md-6 col-12 pt-3 px-1">
                     <div
                         className="card"
                         style={{
@@ -71,7 +71,7 @@ function Income() {
                     </div>
                 </div>
                 {/* Total Expense Card */}
-                <div className="col-lg-3 col-md-6 col-6 pt-3 px-1">
+                <div className="col-lg-3 col-md-6 col-12 pt-3 px-1">
                     <div
                         className="card"
                         style={{
@@ -98,7 +98,7 @@ function Income() {
                     </div>
                 </div>
                 {/* Total Unit Card */}
-                <div className="col-lg-3 col-md-6 col-6 pt-3 px-1">
+                <div className="col-lg-3 col-md-6 col-12 pt-3 px-1">
                     <div
                         className="card"
                         style={{

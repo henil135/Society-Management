@@ -151,9 +151,9 @@ export default function Signup() {
     };
 
     return (
-        <div className="d-flex flex-column flex-md-row min-vh-100 position-relative">
+        <div className="signup d-flex flex-column flex-md-row min-vh-100 position-relative">
             {/* Left Side: Image */}
-            <div className="signup-img  d-flex flex-column align-items-left" style={{ width: "950px" }}>
+            <div className="signup-img  d-flex flex-column align-items-left">
 
                 <div className='stack mt-5 '>
 
@@ -172,7 +172,7 @@ export default function Signup() {
             </div>
 
             {/* Right Side: Form */}
-            <div className="signup-form  d-flex align-items-center justify-content-center py-5" style={{ opacity: showForm ? 0.6 : 1, width: "950px" }}>
+            <div className="signup-form  d-flex align-items-center justify-content-center py-5" style={{ opacity: showForm ? 0.6 : 1 }}>
                 <div className="form bg-white p-4 rounded shadow">
                     <h2 className="h4 font-weight-bold mb-4 text-left">Registration</h2>
                     <form onSubmit={handleSubmit(societySubmit)}>
