@@ -123,7 +123,7 @@ function ComplaintTracking() {
       }
 
       try {
-        const response = await axios.post("https://society-management-b6tj.onrender.com/api/v2/complaint/addcomplaint", newComplaint);
+        const response = await axios.post("https://society-management-b6tj.onrender.com/api/v2/complaint/addcomplaint", complaints);
         setComplaints(response.data.complaints); // Assuming response.data contains the created complaint
         setNewComplaint({ Complainer_name: "", Complaint_name: "", Description: "", Wing: "", Unit: "", Priority: "Medium", Status: "Open" });
         setShowCreateModal(false);
