@@ -6,7 +6,7 @@ A full stack project on Society Management System.
 
 **Frontend Url**
 
-- society-management-git-main-henil135s-projects.vercel.app
+- https://society-management-git-main-henil135s-projects.vercel.app/
 
 **Backend Url**
 
