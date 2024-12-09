@@ -167,10 +167,10 @@ const FacilityManagement = () => {
             </div>
 
 
-            <div className="  dashboard-bg " style={{ width: "1900px" }}>
+            <div className="  dashboard-bg">
                 <Header />
 
-                <div className="container-fluid bg-white rounded shadow-sm p-2 " style={{ marginTop: "150px", marginLeft: "320px",width:"1565px" }}>
+                <div className="container-fluid bg-white rounded shadow-sm p-2 marginLeft" style={{ marginTop: "150px", width:"1565px" }}>
 
                     <div className="d-flex align-items-center justify-content-between">
                         <h4 className="mb-0" >Facility Management</h4>

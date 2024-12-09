@@ -172,12 +172,12 @@ function FinancialManagementOtherIncome() {
             <div className="flex-shrink-0" >
                 <Sidebar />
             </div>
-            <div className='dashboard-bg ' style={{ width: "1900px" }} >
+            <div className='dashboard-bg w-100' style={{overflowX:'hidden'}} >
                 <Navbar />
 
                 <div className='stickyHeader'>
 
-                    <div className='income' style={{ marginLeft: "300px", width: "1590px" }}>
+                    <div className='income marginLeft' >
 
                         <div className='row p-4'>
 
@@ -249,7 +249,7 @@ function FinancialManagementOtherIncome() {
                                     <div className="row card-row g-3 ps-3">
                                         {note && note.length > 0 ? (
                                             note.map((val, index) => (
-                                                <div className="col-lg-3 mb-3" key={val?.id}>
+                                                <div className="col-12 col-md-6 col-xl-3 mb-3" key={val?.id}>
                                                     <div className="card">
                                                         <div className="card-header card-title text-light d-flex align-items-center justify-content-between" style={{ background: "rgba(86, 120, 233, 1)" }}>
                                                             {val?.title}

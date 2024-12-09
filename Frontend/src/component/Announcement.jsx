@@ -137,14 +137,14 @@ function Announcement() {
             <div className="flex-shrink-0" >
                 <Sidebar />
             </div>
-            <div className='dashboard-bg' style={{ width: "1900px" }} >
+            <div className='dashboard-bg w-100' >
                 <Navbar />
-                <div className='stickyHeader p-2' style={{ marginLeft: "300px" }}>
+                <div className='stickyHeader p-2 marginLeft'>
                     <div className='container-fluid ' >
                         <div className='row ps-4 pe-4 pt-5'>
                             <div className='bg-light' style={{ borderRadius: "9px" }}>
                                 <div className='d-flex justify-content-between align-items-center     px-2'>
-                                    <h5 className=' mb-0  financial-income-title mt-2 pb-4' >Announcement</h5>
+                                    <h5 className=' mb-0  financial-income-title mt-2 pb-4 me-3' >Announcement</h5>
                                     <div className='pb-5 pt-2'>
                                         <Button className='set-maintainance-btn d-flex align-items-center other-income-btn p-2' style={{ marginRight: "10px", border: "none" }} onClick={handleShow}><FaPlus
 
@@ -214,7 +214,7 @@ function Announcement() {
 
 
                                     {Array.isArray(note) && note.map((val, index) => (
-                                        <div className="col-lg-3 mb-3" key={val._id}>
+                                        <div className="col-12 col-md-6 col-xl-3 mb-3" key={val._id}>
                                             <div className="card">
                                                 <div className="card-header card-title text-light d-flex align-items-center justify-content-between" style={{ height: "54px", fontSize: "16px", fontWeight: "500", background: " rgba(86, 120, 233, 1)" }}>
                                                     {val.Announcement_Title}
